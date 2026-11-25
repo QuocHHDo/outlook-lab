@@ -110,7 +110,13 @@ tbody tr { border-top: 1px solid var(--line-2); }
 .ev-title { font-weight: 600; }
 .ev-detail { font-size: 13px; color: var(--muted-2); }
 .tag.win { background: oklch(0.95 0.03 150); color: var(--ok); }
+.note summary { cursor: pointer; font-weight: 600; }
+.note[open] summary { margin-bottom: 8px; }
+.more { align-self: flex-start; font: inherit; font-size: 13px; font-weight: 500; color: var(--accent); background: transparent; border: 1px solid var(--line); border-radius: 6px; min-height: 34px; padding: 0 14px; cursor: pointer; }
+.more:hover { background: var(--panel); }
 @media (max-width: 900px) {
+  .horizon-pick { max-width: 100%; overflow-x: auto; }
+  .horizon-pick button { white-space: nowrap; flex: 0 0 auto; }
   .ev { grid-template-columns: 1fr; gap: 4px; }
   .hrow { grid-template-columns: 1fr; gap: 10px; }
   .cases { grid-template-columns: 1fr; }
@@ -142,7 +148,6 @@ tbody tr { border-top: 1px solid var(--line-2); }
         <h2 id="outlook-title">AI outlook</h2>
         <span class="chip">Prediction · the model's judgment, not a fact or advice</span>
       </div>
-      <p id="outlook-meta" class="meta"></p>
     </div>
     <p id="updated" class="muted" style="font-size:12px"></p>
   </div>
@@ -162,15 +167,17 @@ tbody tr { border-top: 1px solid var(--line-2); }
   <div class="section">
     <h3 class="eyebrow">The model's analysis</h3>
     <div id="horizon-pick" class="horizon-pick" role="group" aria-label="Horizon for the analysis" hidden></div>
+    <p id="outlook-meta" class="meta" style="margin-top:0"></p>
     <div id="cases" class="cases"></div>
     <div id="sources" class="sources"></div>
-    <p id="notes" class="note" hidden></p>
+    <details id="notes-wrap" class="note" hidden><summary>How this prediction was made</summary><p id="notes"></p></details>
   </div>
 
   <div id="events" class="section" hidden>
     <h3 class="eyebrow">Events that can move the market</h3>
     <div id="event-pick" class="horizon-pick" role="group" aria-label="Event list"></div>
     <ol id="event-list" class="timeline"></ol>
+    <button id="event-more" type="button" class="more" hidden></button>
     <p class="note">Scheduled dates come from official calendars (BLS, Federal Reserve, NYSE). Earnings dates come from Robinhood's calendar and can change. Recent shocks are context only: they do not show that these events predict price moves.</p>
   </div>
 
@@ -201,7 +208,7 @@ tbody tr { border-top: 1px solid var(--line-2); }
   var NAMES = { SPY: "SPDR S&P 500 ETF", QQQ: "Invesco QQQ Trust", SMH: "VanEck Semiconductor ETF" };
   var HLABEL = { "1w": "1 week", "1m": "1 month", "3m": "3 months", "6m": "6 months", "1y": "1 year", "5y": "5 years" };
   var HORDER = ["1w", "1m", "3m", "6m", "1y", "5y"];
-  var state = { preds: [], summary: null, prices: {}, events: [], symbol: null, horizon: null, evTab: "scheduled" };
+  var state = { preds: [], summary: null, prices: {}, events: [], symbol: null, horizon: null, evTab: "scheduled", evAll: false };
 
   function $(id) { return document.getElementById(id); }
   function el(tag, text, cls) {
@@ -290,10 +297,12 @@ tbody tr { border-top: 1px solid var(--line-2); }
     else { p.hidden = true; }
   }
 
+  function signed(v) { return (v >= 0 ? "+" : "\u2212") + Math.abs(v).toFixed(1) + "%"; }
+  function moveText(r, start) { return signed((r.low / start - 1) * 100) + " to " + signed((r.high / start - 1) * 100); }
+
   function renderRows(rows) {
     var host = $("rows");
     clear(host);
-    var sc = makeScale(rows);
     var anyClose = rows.some(function (p) { return p.result; });
     var legend = $("legend");
     clear(legend);
@@ -308,6 +317,7 @@ tbody tr { border-top: 1px solid var(--line-2); }
       });
 
     rows.forEach(function (p) {
+      var sc = makeScale([p]);
       var row = el("div", undefined, "hrow");
       var label = el("div", undefined, "hlabel");
       label.appendChild(el("b", HLABEL[p.horizon] || p.horizon));
@@ -333,6 +343,7 @@ tbody tr { border-top: 1px solid var(--line-2); }
       var nums = el("div", undefined, "nums");
       var l1 = el("span"); l1.appendChild(el("span", "AI", "ai-k")); l1.appendChild(document.createTextNode(" " + range(p.ai)));
       nums.appendChild(l1);
+      nums.appendChild(el("span", moveText(p.ai, p.price_at_prediction) + " from start", "sub"));
       nums.appendChild(el("span", "Baseline " + range(p.baseline), "alt"));
       row.appendChild(nums);
 
@@ -433,8 +444,8 @@ tbody tr { border-top: 1px solid var(--line-2); }
       src.appendChild(ol);
     }
 
-    var notes = $("notes");
-    if (cur.notes) { notes.textContent = "Note: " + cur.notes; notes.hidden = false; } else { notes.hidden = true; }
+    var notes = $("notes"), wrap = $("notes-wrap");
+    if (cur.notes) { notes.textContent = cur.notes; wrap.hidden = false; } else { wrap.hidden = true; }
 
     var meta = "Made " + fmtDate(cur.made_at) + " at " + money(cur.price_at_prediction) + " · " + claimCount + " claims · " + urls.length + " sources";
     $("outlook-meta").textContent = meta;
@@ -472,14 +483,15 @@ tbody tr { border-top: 1px solid var(--line-2); }
       var btn = el("button", pair[1]);
       btn.type = "button";
       btn.setAttribute("aria-pressed", pair[0] === state.evTab ? "true" : "false");
-      btn.addEventListener("click", function () { state.evTab = pair[0]; renderEvents(rows); });
+      btn.addEventListener("click", function () { state.evTab = pair[0]; state.evAll = false; renderEvents(rows); });
       pick.appendChild(btn);
     });
 
     clear(list);
     var items = state.evTab === "scheduled" ? upcoming : recent;
     if (!items.length) { var li0 = el("li", state.evTab === "scheduled" ? "No scheduled events listed." : "No recent shocks listed.", "muted"); list.appendChild(li0); return; }
-    items.forEach(function (e) {
+    var LIMIT = 5, shown = state.evAll ? items : items.slice(0, LIMIT);
+    shown.forEach(function (e) {
       var li = el("li", undefined, "ev");
       var d = el("div", undefined, "ev-date");
       d.appendChild(el("b", dateLabel(e)));
@@ -510,6 +522,12 @@ tbody tr { border-top: 1px solid var(--line-2); }
       li.appendChild(body);
       list.appendChild(li);
     });
+    var more = $("event-more");
+    if (items.length > LIMIT) {
+      more.hidden = false;
+      more.textContent = state.evAll ? "Show fewer" : "Show all " + items.length + " events";
+      more.onclick = function () { state.evAll = !state.evAll; renderEvents(rows); };
+    } else { more.hidden = true; }
   }
 
   function resultCell(r) {
