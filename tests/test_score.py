@@ -96,6 +96,16 @@ class ValidateTests(unittest.TestCase):
         self.assertTrue(any("low must be below" in e for e in errors))
         self.assertTrue(any("horizon" in e for e in errors))
 
+    def test_events_validation(self):
+        good = {"events": [{"type": "scheduled", "kind": "macro", "date": "2026-12-04",
+                            "title": "Jobs", "sources": [{"label": "BLS", "url": "https://www.bls.gov/"}]}]}
+        self.assertEqual(validate.validate_events(good), [])
+        bad = {"events": [{"type": "x", "kind": "macro", "date": "12/04", "title": "Jobs"}]}
+        errors = validate.validate_events(bad)
+        self.assertTrue(any("type" in e for e in errors))
+        self.assertTrue(any("date" in e for e in errors))
+        self.assertTrue(any("source" in e for e in errors))
+
     def test_duplicate_ids(self):
         errors = validate.validate([make_pred("x"), make_pred("x")])
         self.assertTrue(any("duplicate" in e for e in errors))
