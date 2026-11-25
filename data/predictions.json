@@ -6197,5 +6197,1970 @@
       "high": 245.06,
       "level": 0.8
     }
+  },
+  {
+    "id": "2026-11-25_AAPL_1w",
+    "symbol": "AAPL",
+    "made_at": "2026-11-25",
+    "horizon": "1w",
+    "resolves_on": "2026-12-04",
+    "price_at_prediction": 355.57,
+    "price_time": "2026-11-25T20:59:59Z",
+    "ai": {
+      "low": 337.35,
+      "high": 376.07,
+      "level": 0.8,
+      "prob_up": 0.52
+    },
+    "baseline": {
+      "method": "implied_vol",
+      "iv": 0.2558,
+      "iv_updated_at": "2026-11-25T20:59:59Z",
+      "low": 337.73,
+      "high": 374.35,
+      "level": 0.8
+    },
+    "catalysts": {
+      "bull": [
+        {
+          "text": "Apple has been a relative safe harbor in the AI-capex selloff since it spends less on AI data centers than the other megacaps (model view, not a sourced claim).",
+          "source": null,
+          "kind": "model_expectation"
+        },
+        {
+          "text": "Nvidia's CEO returning on Nov 23 lifted tech broadly, and a similar relief bounce can repeat if AI worries ease.",
+          "source": "https://stockanalysis.com/news/nvidia-gives-back-half-huang-rally/"
+        }
+      ],
+      "base": [
+        {
+          "text": "Dec 4, 8:30 AM ET: November jobs report; Dec 1: JOLTS.",
+          "source": "https://www.bls.gov/schedule/2026/12_sched_list.htm"
+        },
+        {
+          "text": "Apple's next quarterly report is expected around late January 2027 (date not confirmed in this run), which falls inside the 6m, 1y and 5y windows but not the 1w or 1m ones.",
+          "source": null,
+          "kind": "model_expectation"
+        }
+      ],
+      "bear": [
+        {
+          "text": "The Fed held on Oct 28 and a December hike was left on the table; higher rates pressure large-cap valuations.",
+          "source": "https://portfolio-adviser.com/warsh-sticks-to-the-script-as-fed-holds-rates-but-december-hike-highly-likely/"
+        },
+        {
+          "text": "New 20% tariffs and a hotter October PCE hit stocks on Nov 25; tariffs matter more for Apple than most megacaps given its supply chain (the link is a model view).",
+          "source": "https://stockanalysis.com/news/nvidia-gives-back-half-huang-rally/"
+        }
+      ]
+    },
+    "notes": "The AI range and chance of rising were written before any option data was viewed in this session, then copied here unchanged. This is NOT counted as blind because the public lock commit did not upload before the option data was pulled, so git cannot verify the order. Made after the close (last trade 2026-11-25 20:59:59Z). IV is the average of the call and put at the 355 strike (nearest the price) on the 2026-12-04 expiry. The baseline is zero-drift, a weak yardstick over long horizons. Single-stock ranges are driven by company news, so one result says little about skill.",
+    "status": "open",
+    "baseline_drift": {
+      "method": "implied_vol_drift",
+      "iv": 0.2558,
+      "low": 337.96,
+      "high": 374.6,
+      "level": 0.8
+    }
+  },
+  {
+    "id": "2026-11-25_AAPL_1m",
+    "symbol": "AAPL",
+    "made_at": "2026-11-25",
+    "horizon": "1m",
+    "resolves_on": "2026-12-24",
+    "price_at_prediction": 355.57,
+    "price_time": "2026-11-25T20:59:59Z",
+    "ai": {
+      "low": 324.33,
+      "high": 394.19,
+      "level": 0.8,
+      "prob_up": 0.55
+    },
+    "baseline": {
+      "method": "implied_vol",
+      "iv": 0.2488,
+      "iv_updated_at": "2026-11-25T20:59:59Z",
+      "low": 325.01,
+      "high": 389.01,
+      "level": 0.8
+    },
+    "catalysts": {
+      "bull": [
+        {
+          "text": "Apple has been a relative safe harbor in the AI-capex selloff since it spends less on AI data centers than the other megacaps (model view, not a sourced claim).",
+          "source": null,
+          "kind": "model_expectation"
+        },
+        {
+          "text": "Nvidia's CEO returning on Nov 23 lifted tech broadly, and a similar relief bounce can repeat if AI worries ease.",
+          "source": "https://stockanalysis.com/news/nvidia-gives-back-half-huang-rally/"
+        }
+      ],
+      "base": [
+        {
+          "text": "Dec 4, 8:30 AM ET: November jobs report; Dec 1: JOLTS.",
+          "source": "https://www.bls.gov/schedule/2026/12_sched_list.htm"
+        },
+        {
+          "text": "Apple's next quarterly report is expected around late January 2027 (date not confirmed in this run), which falls inside the 6m, 1y and 5y windows but not the 1w or 1m ones.",
+          "source": null,
+          "kind": "model_expectation"
+        }
+      ],
+      "bear": [
+        {
+          "text": "The Fed held on Oct 28 and a December hike was left on the table; higher rates pressure large-cap valuations.",
+          "source": "https://portfolio-adviser.com/warsh-sticks-to-the-script-as-fed-holds-rates-but-december-hike-highly-likely/"
+        },
+        {
+          "text": "New 20% tariffs and a hotter October PCE hit stocks on Nov 25; tariffs matter more for Apple than most megacaps given its supply chain (the link is a model view).",
+          "source": "https://stockanalysis.com/news/nvidia-gives-back-half-huang-rally/"
+        }
+      ]
+    },
+    "notes": "The AI range and chance of rising were written before any option data was viewed in this session, then copied here unchanged. This is NOT counted as blind because the public lock commit did not upload before the option data was pulled, so git cannot verify the order. Made after the close (last trade 2026-11-25 20:59:59Z). IV is the average of the call and put at the 355 strike (nearest the price) on the 2026-12-24 expiry. The baseline is zero-drift, a weak yardstick over long horizons. Single-stock ranges are driven by company news, so one result says little about skill.",
+    "status": "open",
+    "baseline_drift": {
+      "method": "implied_vol_drift",
+      "iv": 0.2488,
+      "low": 325.76,
+      "high": 389.91,
+      "level": 0.8
+    }
+  },
+  {
+    "id": "2026-11-25_AAPL_6m",
+    "symbol": "AAPL",
+    "made_at": "2026-11-25",
+    "horizon": "6m",
+    "resolves_on": "2027-06-17",
+    "price_at_prediction": 355.57,
+    "price_time": "2026-11-25T20:59:59Z",
+    "ai": {
+      "low": 290.64,
+      "high": 466.29,
+      "level": 0.8,
+      "prob_up": 0.6
+    },
+    "baseline": {
+      "method": "implied_vol",
+      "iv": 0.2787,
+      "iv_updated_at": "2026-11-25T20:59:59Z",
+      "low": 272.25,
+      "high": 464.4,
+      "level": 0.8
+    },
+    "catalysts": {
+      "bull": [
+        {
+          "text": "Apple has been a relative safe harbor in the AI-capex selloff since it spends less on AI data centers than the other megacaps (model view, not a sourced claim).",
+          "source": null,
+          "kind": "model_expectation"
+        },
+        {
+          "text": "Nvidia's CEO returning on Nov 23 lifted tech broadly, and a similar relief bounce can repeat if AI worries ease.",
+          "source": "https://stockanalysis.com/news/nvidia-gives-back-half-huang-rally/"
+        }
+      ],
+      "base": [
+        {
+          "text": "Dec 4, 8:30 AM ET: November jobs report; Dec 1: JOLTS.",
+          "source": "https://www.bls.gov/schedule/2026/12_sched_list.htm"
+        },
+        {
+          "text": "Apple's next quarterly report is expected around late January 2027 (date not confirmed in this run), which falls inside the 6m, 1y and 5y windows but not the 1w or 1m ones.",
+          "source": null,
+          "kind": "model_expectation"
+        }
+      ],
+      "bear": [
+        {
+          "text": "The Fed held on Oct 28 and a December hike was left on the table; higher rates pressure large-cap valuations.",
+          "source": "https://portfolio-adviser.com/warsh-sticks-to-the-script-as-fed-holds-rates-but-december-hike-highly-likely/"
+        },
+        {
+          "text": "New 20% tariffs and a hotter October PCE hit stocks on Nov 25; tariffs matter more for Apple than most megacaps given its supply chain (the link is a model view).",
+          "source": "https://stockanalysis.com/news/nvidia-gives-back-half-huang-rally/"
+        }
+      ]
+    },
+    "notes": "The AI range and chance of rising were written before any option data was viewed in this session, then copied here unchanged. This is NOT counted as blind because the public lock commit did not upload before the option data was pulled, so git cannot verify the order. Made after the close (last trade 2026-11-25 20:59:59Z). IV is the average of the call and put at the 360 strike (nearest the price) on the 2027-06-17 expiry; that is the nearest listed expiry to the horizon, not an exact match. The baseline is zero-drift, a weak yardstick over long horizons. Single-stock ranges are driven by company news, so one result says little about skill.",
+    "status": "open",
+    "baseline_drift": {
+      "method": "implied_vol_drift",
+      "iv": 0.2787,
+      "low": 275.48,
+      "high": 469.92,
+      "level": 0.8
+    }
+  },
+  {
+    "id": "2026-11-25_AAPL_1y",
+    "symbol": "AAPL",
+    "made_at": "2026-11-25",
+    "horizon": "1y",
+    "resolves_on": "2027-12-17",
+    "price_at_prediction": 355.57,
+    "price_time": "2026-11-25T20:59:59Z",
+    "ai": {
+      "low": 276.49,
+      "high": 525.79,
+      "level": 0.8,
+      "prob_up": 0.65
+    },
+    "baseline": {
+      "method": "implied_vol",
+      "iv": 0.2866,
+      "iv_updated_at": "2026-11-25T20:59:59Z",
+      "low": 243.6,
+      "high": 519.01,
+      "level": 0.8
+    },
+    "catalysts": {
+      "bull": [
+        {
+          "text": "Apple has been a relative safe harbor in the AI-capex selloff since it spends less on AI data centers than the other megacaps (model view, not a sourced claim).",
+          "source": null,
+          "kind": "model_expectation"
+        },
+        {
+          "text": "Nvidia's CEO returning on Nov 23 lifted tech broadly, and a similar relief bounce can repeat if AI worries ease.",
+          "source": "https://stockanalysis.com/news/nvidia-gives-back-half-huang-rally/"
+        }
+      ],
+      "base": [
+        {
+          "text": "Dec 4, 8:30 AM ET: November jobs report; Dec 1: JOLTS.",
+          "source": "https://www.bls.gov/schedule/2026/12_sched_list.htm"
+        },
+        {
+          "text": "Apple's next quarterly report is expected around late January 2027 (date not confirmed in this run), which falls inside the 6m, 1y and 5y windows but not the 1w or 1m ones.",
+          "source": null,
+          "kind": "model_expectation"
+        }
+      ],
+      "bear": [
+        {
+          "text": "The Fed held on Oct 28 and a December hike was left on the table; higher rates pressure large-cap valuations.",
+          "source": "https://portfolio-adviser.com/warsh-sticks-to-the-script-as-fed-holds-rates-but-december-hike-highly-likely/"
+        },
+        {
+          "text": "New 20% tariffs and a hotter October PCE hit stocks on Nov 25; tariffs matter more for Apple than most megacaps given its supply chain (the link is a model view).",
+          "source": "https://stockanalysis.com/news/nvidia-gives-back-half-huang-rally/"
+        }
+      ]
+    },
+    "notes": "The AI range and chance of rising were written before any option data was viewed in this session, then copied here unchanged. This is NOT counted as blind because the public lock commit did not upload before the option data was pulled, so git cannot verify the order. Made after the close (last trade 2026-11-25 20:59:59Z). IV is the average of the call and put at the 355 strike (nearest the price) on the 2027-12-17 expiry; that is the nearest listed expiry to the horizon, not an exact match. The baseline is zero-drift, a weak yardstick over long horizons. Single-stock ranges are driven by company news, so one result says little about skill.",
+    "status": "open",
+    "baseline_drift": {
+      "method": "implied_vol_drift",
+      "iv": 0.2866,
+      "low": 248.54,
+      "high": 529.53,
+      "level": 0.8
+    }
+  },
+  {
+    "id": "2026-11-25_AAPL_5y",
+    "symbol": "AAPL",
+    "made_at": "2026-11-25",
+    "horizon": "5y",
+    "resolves_on": "2029-01-19",
+    "price_at_prediction": 355.57,
+    "price_time": "2026-11-25T20:59:59Z",
+    "ai": {
+      "low": 261.4,
+      "high": 974.36,
+      "level": 0.8,
+      "prob_up": 0.78
+    },
+    "baseline": {
+      "method": "implied_vol",
+      "iv": 0.2807,
+      "iv_updated_at": "2026-11-25T20:59:59Z",
+      "low": 209.73,
+      "high": 602.82,
+      "level": 0.8
+    },
+    "catalysts": {
+      "bull": [
+        {
+          "text": "Apple has been a relative safe harbor in the AI-capex selloff since it spends less on AI data centers than the other megacaps (model view, not a sourced claim).",
+          "source": null,
+          "kind": "model_expectation"
+        },
+        {
+          "text": "Nvidia's CEO returning on Nov 23 lifted tech broadly, and a similar relief bounce can repeat if AI worries ease.",
+          "source": "https://stockanalysis.com/news/nvidia-gives-back-half-huang-rally/"
+        }
+      ],
+      "base": [
+        {
+          "text": "Dec 4, 8:30 AM ET: November jobs report; Dec 1: JOLTS.",
+          "source": "https://www.bls.gov/schedule/2026/12_sched_list.htm"
+        },
+        {
+          "text": "Apple's next quarterly report is expected around late January 2027 (date not confirmed in this run), which falls inside the 6m, 1y and 5y windows but not the 1w or 1m ones.",
+          "source": null,
+          "kind": "model_expectation"
+        }
+      ],
+      "bear": [
+        {
+          "text": "The Fed held on Oct 28 and a December hike was left on the table; higher rates pressure large-cap valuations.",
+          "source": "https://portfolio-adviser.com/warsh-sticks-to-the-script-as-fed-holds-rates-but-december-hike-highly-likely/"
+        },
+        {
+          "text": "New 20% tariffs and a hotter October PCE hit stocks on Nov 25; tariffs matter more for Apple than most megacaps given its supply chain (the link is a model view).",
+          "source": "https://stockanalysis.com/news/nvidia-gives-back-half-huang-rally/"
+        }
+      ]
+    },
+    "notes": "The AI range and chance of rising were written before any option data was viewed in this session, then copied here unchanged. This is NOT counted as blind because the public lock commit did not upload before the option data was pulled, so git cannot verify the order. Made after the close (last trade 2026-11-25 20:59:59Z). IV is the average of the call and put at the 360 strike (nearest the price) on the 2029-01-19 expiry; that is the nearest listed expiry to the horizon, not an exact match. The baseline is zero-drift, a weak yardstick over long horizons. Single-stock ranges are driven by company news, so one result says little about skill.",
+    "status": "open",
+    "baseline_drift": {
+      "method": "implied_vol_drift",
+      "iv": 0.2807,
+      "low": 219.25,
+      "high": 630.16,
+      "level": 0.8
+    }
+  },
+  {
+    "id": "2026-11-25_MSFT_1w",
+    "symbol": "MSFT",
+    "made_at": "2026-11-25",
+    "horizon": "1w",
+    "resolves_on": "2026-12-04",
+    "price_at_prediction": 489.92,
+    "price_time": "2026-11-25T20:59:59Z",
+    "ai": {
+      "low": 464.93,
+      "high": 518.3,
+      "level": 0.8,
+      "prob_up": 0.52
+    },
+    "baseline": {
+      "method": "implied_vol",
+      "iv": 0.3843,
+      "iv_updated_at": "2026-11-25T20:59:59Z",
+      "low": 453.46,
+      "high": 529.31,
+      "level": 0.8
+    },
+    "catalysts": {
+      "bull": [
+        {
+          "text": "JPMorgan and BofA reiterated bullish ratings with $625-$630 targets after Ignite, citing metered Copilot, in-house models and custom chips.",
+          "source": "https://www.benzinga.com/markets/tech/26/11/63404250/why-wall-street-remains-bullish-on-microsoft-copilot-credits-custom-ai-chips-and-cloud-margins"
+        },
+        {
+          "text": "A $677 billion backlog and accelerating Azure growth are the bull case after a 7% one-month slide.",
+          "source": "https://247wallst.com/investing/2026/11/24/microsoft-is-down-7-in-a-month-but-not-one-analyst-says-sell-wall-street-sees-630/"
+        }
+      ],
+      "base": [
+        {
+          "text": "Dec 4, 8:30 AM ET: November jobs report; Dec 1: JOLTS.",
+          "source": "https://www.bls.gov/schedule/2026/12_sched_list.htm"
+        },
+        {
+          "text": "Microsoft's next quarterly report is expected around late January 2027 (date not confirmed in this run).",
+          "source": null,
+          "kind": "model_expectation"
+        }
+      ],
+      "bear": [
+        {
+          "text": "Investors worry about a roughly $170 billion spending plan even after a seventh straight earnings beat.",
+          "source": "https://247wallst.com/investing/2026/11/24/microsoft-is-down-7-in-a-month-but-not-one-analyst-says-sell-wall-street-sees-630/"
+        },
+        {
+          "text": "The semiconductor index fell 7.2% on Nov 25, a seven-month low, on doubts that AI spending will pay off.",
+          "source": "https://stockanalysis.com/news/nvidia-gives-back-half-huang-rally/"
+        }
+      ]
+    },
+    "notes": "The AI range and chance of rising were written before any option data was viewed in this session, then copied here unchanged. This is NOT counted as blind because the public lock commit did not upload before the option data was pulled, so git cannot verify the order. Made after the close (last trade 2026-11-25 20:59:59Z). IV is the average of the call and put at the 490 strike (nearest the price) on the 2026-12-04 expiry. The baseline is zero-drift, a weak yardstick over long horizons. Single-stock ranges are driven by company news, so one result says little about skill.",
+    "status": "open",
+    "baseline_drift": {
+      "method": "implied_vol_drift",
+      "iv": 0.3843,
+      "low": 453.3,
+      "high": 529.13,
+      "level": 0.8
+    }
+  },
+  {
+    "id": "2026-11-25_MSFT_1m",
+    "symbol": "MSFT",
+    "made_at": "2026-11-25",
+    "horizon": "1m",
+    "resolves_on": "2026-12-24",
+    "price_at_prediction": 489.92,
+    "price_time": "2026-11-25T20:59:59Z",
+    "ai": {
+      "low": 447.22,
+      "high": 543.56,
+      "level": 0.8,
+      "prob_up": 0.55
+    },
+    "baseline": {
+      "method": "implied_vol",
+      "iv": 0.3594,
+      "iv_updated_at": "2026-11-25T20:59:59Z",
+      "low": 430.27,
+      "high": 557.84,
+      "level": 0.8
+    },
+    "catalysts": {
+      "bull": [
+        {
+          "text": "JPMorgan and BofA reiterated bullish ratings with $625-$630 targets after Ignite, citing metered Copilot, in-house models and custom chips.",
+          "source": "https://www.benzinga.com/markets/tech/26/11/63404250/why-wall-street-remains-bullish-on-microsoft-copilot-credits-custom-ai-chips-and-cloud-margins"
+        },
+        {
+          "text": "A $677 billion backlog and accelerating Azure growth are the bull case after a 7% one-month slide.",
+          "source": "https://247wallst.com/investing/2026/11/24/microsoft-is-down-7-in-a-month-but-not-one-analyst-says-sell-wall-street-sees-630/"
+        }
+      ],
+      "base": [
+        {
+          "text": "Dec 4, 8:30 AM ET: November jobs report; Dec 1: JOLTS.",
+          "source": "https://www.bls.gov/schedule/2026/12_sched_list.htm"
+        },
+        {
+          "text": "Microsoft's next quarterly report is expected around late January 2027 (date not confirmed in this run).",
+          "source": null,
+          "kind": "model_expectation"
+        }
+      ],
+      "bear": [
+        {
+          "text": "Investors worry about a roughly $170 billion spending plan even after a seventh straight earnings beat.",
+          "source": "https://247wallst.com/investing/2026/11/24/microsoft-is-down-7-in-a-month-but-not-one-analyst-says-sell-wall-street-sees-630/"
+        },
+        {
+          "text": "The semiconductor index fell 7.2% on Nov 25, a seven-month low, on doubts that AI spending will pay off.",
+          "source": "https://stockanalysis.com/news/nvidia-gives-back-half-huang-rally/"
+        }
+      ]
+    },
+    "notes": "The AI range and chance of rising were written before any option data was viewed in this session, then copied here unchanged. This is NOT counted as blind because the public lock commit did not upload before the option data was pulled, so git cannot verify the order. Made after the close (last trade 2026-11-25 20:59:59Z). IV is the average of the call and put at the 490 strike (nearest the price) on the 2026-12-24 expiry. The baseline is zero-drift, a weak yardstick over long horizons. Single-stock ranges are driven by company news, so one result says little about skill.",
+    "status": "open",
+    "baseline_drift": {
+      "method": "implied_vol_drift",
+      "iv": 0.3594,
+      "low": 430.11,
+      "high": 557.64,
+      "level": 0.8
+    }
+  },
+  {
+    "id": "2026-11-25_MSFT_6m",
+    "symbol": "MSFT",
+    "made_at": "2026-11-25",
+    "horizon": "6m",
+    "resolves_on": "2027-05-21",
+    "price_at_prediction": 489.92,
+    "price_time": "2026-11-25T20:59:59Z",
+    "ai": {
+      "low": 402.44,
+      "high": 645.66,
+      "level": 0.8,
+      "prob_up": 0.6
+    },
+    "baseline": {
+      "method": "implied_vol",
+      "iv": 0.3609,
+      "iv_updated_at": "2026-11-25T20:59:59Z",
+      "low": 355.02,
+      "high": 676.09,
+      "level": 0.8
+    },
+    "catalysts": {
+      "bull": [
+        {
+          "text": "JPMorgan and BofA reiterated bullish ratings with $625-$630 targets after Ignite, citing metered Copilot, in-house models and custom chips.",
+          "source": "https://www.benzinga.com/markets/tech/26/11/63404250/why-wall-street-remains-bullish-on-microsoft-copilot-credits-custom-ai-chips-and-cloud-margins"
+        },
+        {
+          "text": "A $677 billion backlog and accelerating Azure growth are the bull case after a 7% one-month slide.",
+          "source": "https://247wallst.com/investing/2026/11/24/microsoft-is-down-7-in-a-month-but-not-one-analyst-says-sell-wall-street-sees-630/"
+        }
+      ],
+      "base": [
+        {
+          "text": "Dec 4, 8:30 AM ET: November jobs report; Dec 1: JOLTS.",
+          "source": "https://www.bls.gov/schedule/2026/12_sched_list.htm"
+        },
+        {
+          "text": "Microsoft's next quarterly report is expected around late January 2027 (date not confirmed in this run).",
+          "source": null,
+          "kind": "model_expectation"
+        }
+      ],
+      "bear": [
+        {
+          "text": "Investors worry about a roughly $170 billion spending plan even after a seventh straight earnings beat.",
+          "source": "https://247wallst.com/investing/2026/11/24/microsoft-is-down-7-in-a-month-but-not-one-analyst-says-sell-wall-street-sees-630/"
+        },
+        {
+          "text": "The semiconductor index fell 7.2% on Nov 25, a seven-month low, on doubts that AI spending will pay off.",
+          "source": "https://stockanalysis.com/news/nvidia-gives-back-half-huang-rally/"
+        }
+      ]
+    },
+    "notes": "The AI range and chance of rising were written before any option data was viewed in this session, then copied here unchanged. This is NOT counted as blind because the public lock commit did not upload before the option data was pulled, so git cannot verify the order. Made after the close (last trade 2026-11-25 20:59:59Z). IV is the average of the call and put at the 490 strike (nearest the price) on the 2027-05-21 expiry; that is the nearest listed expiry to the horizon, not an exact match. The baseline is zero-drift, a weak yardstick over long horizons. Single-stock ranges are driven by company news, so one result says little about skill.",
+    "status": "open",
+    "baseline_drift": {
+      "method": "implied_vol_drift",
+      "iv": 0.3609,
+      "low": 354.13,
+      "high": 674.41,
+      "level": 0.8
+    }
+  },
+  {
+    "id": "2026-11-25_MSFT_1y",
+    "symbol": "MSFT",
+    "made_at": "2026-11-25",
+    "horizon": "1y",
+    "resolves_on": "2027-11-19",
+    "price_at_prediction": 489.92,
+    "price_time": "2026-11-25T20:59:59Z",
+    "ai": {
+      "low": 384.77,
+      "high": 731.72,
+      "level": 0.8,
+      "prob_up": 0.65
+    },
+    "baseline": {
+      "method": "implied_vol",
+      "iv": 0.3544,
+      "iv_updated_at": "2026-11-25T20:59:59Z",
+      "low": 312.25,
+      "high": 768.68,
+      "level": 0.8
+    },
+    "catalysts": {
+      "bull": [
+        {
+          "text": "JPMorgan and BofA reiterated bullish ratings with $625-$630 targets after Ignite, citing metered Copilot, in-house models and custom chips.",
+          "source": "https://www.benzinga.com/markets/tech/26/11/63404250/why-wall-street-remains-bullish-on-microsoft-copilot-credits-custom-ai-chips-and-cloud-margins"
+        },
+        {
+          "text": "A $677 billion backlog and accelerating Azure growth are the bull case after a 7% one-month slide.",
+          "source": "https://247wallst.com/investing/2026/11/24/microsoft-is-down-7-in-a-month-but-not-one-analyst-says-sell-wall-street-sees-630/"
+        }
+      ],
+      "base": [
+        {
+          "text": "Dec 4, 8:30 AM ET: November jobs report; Dec 1: JOLTS.",
+          "source": "https://www.bls.gov/schedule/2026/12_sched_list.htm"
+        },
+        {
+          "text": "Microsoft's next quarterly report is expected around late January 2027 (date not confirmed in this run).",
+          "source": null,
+          "kind": "model_expectation"
+        }
+      ],
+      "bear": [
+        {
+          "text": "Investors worry about a roughly $170 billion spending plan even after a seventh straight earnings beat.",
+          "source": "https://247wallst.com/investing/2026/11/24/microsoft-is-down-7-in-a-month-but-not-one-analyst-says-sell-wall-street-sees-630/"
+        },
+        {
+          "text": "The semiconductor index fell 7.2% on Nov 25, a seven-month low, on doubts that AI spending will pay off.",
+          "source": "https://stockanalysis.com/news/nvidia-gives-back-half-huang-rally/"
+        }
+      ]
+    },
+    "notes": "The AI range and chance of rising were written before any option data was viewed in this session, then copied here unchanged. This is NOT counted as blind because the public lock commit did not upload before the option data was pulled, so git cannot verify the order. Made after the close (last trade 2026-11-25 20:59:59Z). IV is the average of the call and put at the 490 strike (nearest the price) on the 2027-11-19 expiry; that is the nearest listed expiry to the horizon, not an exact match. The baseline is zero-drift, a weak yardstick over long horizons. Single-stock ranges are driven by company news, so one result says little about skill.",
+    "status": "open",
+    "baseline_drift": {
+      "method": "implied_vol_drift",
+      "iv": 0.3544,
+      "low": 311.39,
+      "high": 766.57,
+      "level": 0.8
+    }
+  },
+  {
+    "id": "2026-11-25_MSFT_5y",
+    "symbol": "MSFT",
+    "made_at": "2026-11-25",
+    "horizon": "5y",
+    "resolves_on": "2029-01-19",
+    "price_at_prediction": 489.92,
+    "price_time": "2026-11-25T20:59:59Z",
+    "ai": {
+      "low": 378.64,
+      "high": 1411,
+      "level": 0.8,
+      "prob_up": 0.78
+    },
+    "baseline": {
+      "method": "implied_vol",
+      "iv": 0.3477,
+      "iv_updated_at": "2026-11-25T20:59:59Z",
+      "low": 254.77,
+      "high": 942.12,
+      "level": 0.8
+    },
+    "catalysts": {
+      "bull": [
+        {
+          "text": "JPMorgan and BofA reiterated bullish ratings with $625-$630 targets after Ignite, citing metered Copilot, in-house models and custom chips.",
+          "source": "https://www.benzinga.com/markets/tech/26/11/63404250/why-wall-street-remains-bullish-on-microsoft-copilot-credits-custom-ai-chips-and-cloud-margins"
+        },
+        {
+          "text": "A $677 billion backlog and accelerating Azure growth are the bull case after a 7% one-month slide.",
+          "source": "https://247wallst.com/investing/2026/11/24/microsoft-is-down-7-in-a-month-but-not-one-analyst-says-sell-wall-street-sees-630/"
+        }
+      ],
+      "base": [
+        {
+          "text": "Dec 4, 8:30 AM ET: November jobs report; Dec 1: JOLTS.",
+          "source": "https://www.bls.gov/schedule/2026/12_sched_list.htm"
+        },
+        {
+          "text": "Microsoft's next quarterly report is expected around late January 2027 (date not confirmed in this run).",
+          "source": null,
+          "kind": "model_expectation"
+        }
+      ],
+      "bear": [
+        {
+          "text": "Investors worry about a roughly $170 billion spending plan even after a seventh straight earnings beat.",
+          "source": "https://247wallst.com/investing/2026/11/24/microsoft-is-down-7-in-a-month-but-not-one-analyst-says-sell-wall-street-sees-630/"
+        },
+        {
+          "text": "The semiconductor index fell 7.2% on Nov 25, a seven-month low, on doubts that AI spending will pay off.",
+          "source": "https://stockanalysis.com/news/nvidia-gives-back-half-huang-rally/"
+        }
+      ]
+    },
+    "notes": "The AI range and chance of rising were written before any option data was viewed in this session, then copied here unchanged. This is NOT counted as blind because the public lock commit did not upload before the option data was pulled, so git cannot verify the order. Made after the close (last trade 2026-11-25 20:59:59Z). IV is the average of the call and put at the 490 strike (nearest the price) on the 2029-01-19 expiry; that is the nearest listed expiry to the horizon, not an exact match. The baseline is zero-drift, a weak yardstick over long horizons. Single-stock ranges are driven by company news, so one result says little about skill.",
+    "status": "open",
+    "baseline_drift": {
+      "method": "implied_vol_drift",
+      "iv": 0.3477,
+      "low": 254.52,
+      "high": 941.21,
+      "level": 0.8
+    }
+  },
+  {
+    "id": "2026-11-25_NVDA_1w",
+    "symbol": "NVDA",
+    "made_at": "2026-11-25",
+    "horizon": "1w",
+    "resolves_on": "2026-12-04",
+    "price_at_prediction": 149.33,
+    "price_time": "2026-11-25T20:59:59Z",
+    "ai": {
+      "low": 134.01,
+      "high": 167.22,
+      "level": 0.8,
+      "prob_up": 0.5
+    },
+    "baseline": {
+      "method": "implied_vol",
+      "iv": 0.8845,
+      "iv_updated_at": "2026-11-25T20:59:59Z",
+      "low": 124.98,
+      "high": 178.42,
+      "level": 0.8
+    },
+    "catalysts": {
+      "bull": [
+        {
+          "text": "Jensen Huang returned as CEO on Nov 23 and the stock rose 31.5% in one day; analysts said it restored confidence in the AI spending cycle.",
+          "source": "https://stockanalysis.com/news/nvidia-gives-back-half-huang-rally/"
+        },
+        {
+          "text": "Options imply a very wide range, so a sharp snap-back toward the pre-turmoil level is within normal bounds (model view).",
+          "source": null,
+          "kind": "model_expectation"
+        }
+      ],
+      "base": [
+        {
+          "text": "Dec 4, 8:30 AM ET: November jobs report; Dec 1: JOLTS.",
+          "source": "https://www.bls.gov/schedule/2026/12_sched_list.htm"
+        },
+        {
+          "text": "Nvidia's next quarterly report is expected around late February 2027 (date not confirmed in this run), so it falls inside the 1y and 5y windows and probably outside the shorter ones.",
+          "source": null,
+          "kind": "model_expectation"
+        }
+      ],
+      "bear": [
+        {
+          "text": "Nvidia gave back about half of the Huang rally as chips fell again on Nov 25.",
+          "source": "https://stockanalysis.com/news/nvidia-gives-back-half-huang-rally/"
+        },
+        {
+          "text": "The semiconductor index fell 12.25% on Nov 5, its second-worst day on record; leadership turmoil, tariffs and AI-payoff doubts all remain open.",
+          "source": "https://247wallst.com/investing/2026/11/06/chip-stocks-just-had-their-second-worst-day-on-record/"
+        }
+      ]
+    },
+    "notes": "The AI range and chance of rising were written before any option data was viewed in this session, then copied here unchanged. This is NOT counted as blind because the public lock commit did not upload before the option data was pulled, so git cannot verify the order. Made after the close (last trade 2026-11-25 20:59:59Z). IV is the average of the call and put at the 150 strike (nearest the price) on the 2026-12-04 expiry. The baseline is zero-drift, a weak yardstick over long horizons. Single-stock ranges are driven by company news, so one result says little about skill.",
+    "status": "open",
+    "baseline_drift": {
+      "method": "implied_vol_drift",
+      "iv": 0.8845,
+      "low": 123.96,
+      "high": 176.97,
+      "level": 0.8
+    }
+  },
+  {
+    "id": "2026-11-25_NVDA_1m",
+    "symbol": "NVDA",
+    "made_at": "2026-11-25",
+    "horizon": "1m",
+    "resolves_on": "2026-12-24",
+    "price_at_prediction": 149.33,
+    "price_time": "2026-11-25T20:59:59Z",
+    "ai": {
+      "low": 123.4,
+      "high": 183.61,
+      "level": 0.8,
+      "prob_up": 0.53
+    },
+    "baseline": {
+      "method": "implied_vol",
+      "iv": 0.712,
+      "iv_updated_at": "2026-11-25T20:59:59Z",
+      "low": 115.46,
+      "high": 193.13,
+      "level": 0.8
+    },
+    "catalysts": {
+      "bull": [
+        {
+          "text": "Jensen Huang returned as CEO on Nov 23 and the stock rose 31.5% in one day; analysts said it restored confidence in the AI spending cycle.",
+          "source": "https://stockanalysis.com/news/nvidia-gives-back-half-huang-rally/"
+        },
+        {
+          "text": "Options imply a very wide range, so a sharp snap-back toward the pre-turmoil level is within normal bounds (model view).",
+          "source": null,
+          "kind": "model_expectation"
+        }
+      ],
+      "base": [
+        {
+          "text": "Dec 4, 8:30 AM ET: November jobs report; Dec 1: JOLTS.",
+          "source": "https://www.bls.gov/schedule/2026/12_sched_list.htm"
+        },
+        {
+          "text": "Nvidia's next quarterly report is expected around late February 2027 (date not confirmed in this run), so it falls inside the 1y and 5y windows and probably outside the shorter ones.",
+          "source": null,
+          "kind": "model_expectation"
+        }
+      ],
+      "bear": [
+        {
+          "text": "Nvidia gave back about half of the Huang rally as chips fell again on Nov 25.",
+          "source": "https://stockanalysis.com/news/nvidia-gives-back-half-huang-rally/"
+        },
+        {
+          "text": "The semiconductor index fell 12.25% on Nov 5, its second-worst day on record; leadership turmoil, tariffs and AI-payoff doubts all remain open.",
+          "source": "https://247wallst.com/investing/2026/11/06/chip-stocks-just-had-their-second-worst-day-on-record/"
+        }
+      ]
+    },
+    "notes": "The AI range and chance of rising were written before any option data was viewed in this session, then copied here unchanged. This is NOT counted as blind because the public lock commit did not upload before the option data was pulled, so git cannot verify the order. Made after the close (last trade 2026-11-25 20:59:59Z). IV is the average of the call and put at the 150 strike (nearest the price) on the 2026-12-24 expiry. The baseline is zero-drift, a weak yardstick over long horizons. Single-stock ranges are driven by company news, so one result says little about skill.",
+    "status": "open",
+    "baseline_drift": {
+      "method": "implied_vol_drift",
+      "iv": 0.712,
+      "low": 113.7,
+      "high": 190.18,
+      "level": 0.8
+    }
+  },
+  {
+    "id": "2026-11-25_NVDA_6m",
+    "symbol": "NVDA",
+    "made_at": "2026-11-25",
+    "horizon": "6m",
+    "resolves_on": "2027-05-21",
+    "price_at_prediction": 149.33,
+    "price_time": "2026-11-25T20:59:59Z",
+    "ai": {
+      "low": 96.96,
+      "high": 253.97,
+      "level": 0.8,
+      "prob_up": 0.6
+    },
+    "baseline": {
+      "method": "implied_vol",
+      "iv": 0.5525,
+      "iv_updated_at": "2026-11-25T20:59:59Z",
+      "low": 91.2,
+      "high": 244.5,
+      "level": 0.8
+    },
+    "catalysts": {
+      "bull": [
+        {
+          "text": "Jensen Huang returned as CEO on Nov 23 and the stock rose 31.5% in one day; analysts said it restored confidence in the AI spending cycle.",
+          "source": "https://stockanalysis.com/news/nvidia-gives-back-half-huang-rally/"
+        },
+        {
+          "text": "Options imply a very wide range, so a sharp snap-back toward the pre-turmoil level is within normal bounds (model view).",
+          "source": null,
+          "kind": "model_expectation"
+        }
+      ],
+      "base": [
+        {
+          "text": "Dec 4, 8:30 AM ET: November jobs report; Dec 1: JOLTS.",
+          "source": "https://www.bls.gov/schedule/2026/12_sched_list.htm"
+        },
+        {
+          "text": "Nvidia's next quarterly report is expected around late February 2027 (date not confirmed in this run), so it falls inside the 1y and 5y windows and probably outside the shorter ones.",
+          "source": null,
+          "kind": "model_expectation"
+        }
+      ],
+      "bear": [
+        {
+          "text": "Nvidia gave back about half of the Huang rally as chips fell again on Nov 25.",
+          "source": "https://stockanalysis.com/news/nvidia-gives-back-half-huang-rally/"
+        },
+        {
+          "text": "The semiconductor index fell 12.25% on Nov 5, its second-worst day on record; leadership turmoil, tariffs and AI-payoff doubts all remain open.",
+          "source": "https://247wallst.com/investing/2026/11/06/chip-stocks-just-had-their-second-worst-day-on-record/"
+        }
+      ]
+    },
+    "notes": "The AI range and chance of rising were written before any option data was viewed in this session, then copied here unchanged. This is NOT counted as blind because the public lock commit did not upload before the option data was pulled, so git cannot verify the order. Made after the close (last trade 2026-11-25 20:59:59Z). IV is the average of the call and put at the 150 strike (nearest the price) on the 2027-05-21 expiry; that is the nearest listed expiry to the horizon, not an exact match. The baseline is zero-drift, a weak yardstick over long horizons. Single-stock ranges are driven by company news, so one result says little about skill.",
+    "status": "open",
+    "baseline_drift": {
+      "method": "implied_vol_drift",
+      "iv": 0.5525,
+      "low": 87.2,
+      "high": 233.76,
+      "level": 0.8
+    }
+  },
+  {
+    "id": "2026-11-25_NVDA_1y",
+    "symbol": "NVDA",
+    "made_at": "2026-11-25",
+    "horizon": "1y",
+    "resolves_on": "2027-11-19",
+    "price_at_prediction": 149.33,
+    "price_time": "2026-11-25T20:59:59Z",
+    "ai": {
+      "low": 85.73,
+      "high": 317.51,
+      "level": 0.8,
+      "prob_up": 0.65
+    },
+    "baseline": {
+      "method": "implied_vol",
+      "iv": 0.527,
+      "iv_updated_at": "2026-11-25T20:59:59Z",
+      "low": 76.43,
+      "high": 291.77,
+      "level": 0.8
+    },
+    "catalysts": {
+      "bull": [
+        {
+          "text": "Jensen Huang returned as CEO on Nov 23 and the stock rose 31.5% in one day; analysts said it restored confidence in the AI spending cycle.",
+          "source": "https://stockanalysis.com/news/nvidia-gives-back-half-huang-rally/"
+        },
+        {
+          "text": "Options imply a very wide range, so a sharp snap-back toward the pre-turmoil level is within normal bounds (model view).",
+          "source": null,
+          "kind": "model_expectation"
+        }
+      ],
+      "base": [
+        {
+          "text": "Dec 4, 8:30 AM ET: November jobs report; Dec 1: JOLTS.",
+          "source": "https://www.bls.gov/schedule/2026/12_sched_list.htm"
+        },
+        {
+          "text": "Nvidia's next quarterly report is expected around late February 2027 (date not confirmed in this run), so it falls inside the 1y and 5y windows and probably outside the shorter ones.",
+          "source": null,
+          "kind": "model_expectation"
+        }
+      ],
+      "bear": [
+        {
+          "text": "Nvidia gave back about half of the Huang rally as chips fell again on Nov 25.",
+          "source": "https://stockanalysis.com/news/nvidia-gives-back-half-huang-rally/"
+        },
+        {
+          "text": "The semiconductor index fell 12.25% on Nov 5, its second-worst day on record; leadership turmoil, tariffs and AI-payoff doubts all remain open.",
+          "source": "https://247wallst.com/investing/2026/11/06/chip-stocks-just-had-their-second-worst-day-on-record/"
+        }
+      ]
+    },
+    "notes": "The AI range and chance of rising were written before any option data was viewed in this session, then copied here unchanged. This is NOT counted as blind because the public lock commit did not upload before the option data was pulled, so git cannot verify the order. Made after the close (last trade 2026-11-25 20:59:59Z). IV is the average of the call and put at the 150 strike (nearest the price) on the 2027-11-19 expiry; that is the nearest listed expiry to the horizon, not an exact match. The baseline is zero-drift, a weak yardstick over long horizons. Single-stock ranges are driven by company news, so one result says little about skill.",
+    "status": "open",
+    "baseline_drift": {
+      "method": "implied_vol_drift",
+      "iv": 0.527,
+      "low": 70.72,
+      "high": 269.99,
+      "level": 0.8
+    }
+  },
+  {
+    "id": "2026-11-25_NVDA_5y",
+    "symbol": "NVDA",
+    "made_at": "2026-11-25",
+    "horizon": "5y",
+    "resolves_on": "2029-01-19",
+    "price_at_prediction": 149.33,
+    "price_time": "2026-11-25T20:59:59Z",
+    "ai": {
+      "low": 64.48,
+      "high": 940.62,
+      "level": 0.8,
+      "prob_up": 0.78
+    },
+    "baseline": {
+      "method": "implied_vol",
+      "iv": 0.4839,
+      "iv_updated_at": "2026-11-25T20:59:59Z",
+      "low": 60.11,
+      "high": 371.0,
+      "level": 0.8
+    },
+    "catalysts": {
+      "bull": [
+        {
+          "text": "Jensen Huang returned as CEO on Nov 23 and the stock rose 31.5% in one day; analysts said it restored confidence in the AI spending cycle.",
+          "source": "https://stockanalysis.com/news/nvidia-gives-back-half-huang-rally/"
+        },
+        {
+          "text": "Options imply a very wide range, so a sharp snap-back toward the pre-turmoil level is within normal bounds (model view).",
+          "source": null,
+          "kind": "model_expectation"
+        }
+      ],
+      "base": [
+        {
+          "text": "Dec 4, 8:30 AM ET: November jobs report; Dec 1: JOLTS.",
+          "source": "https://www.bls.gov/schedule/2026/12_sched_list.htm"
+        },
+        {
+          "text": "Nvidia's next quarterly report is expected around late February 2027 (date not confirmed in this run), so it falls inside the 1y and 5y windows and probably outside the shorter ones.",
+          "source": null,
+          "kind": "model_expectation"
+        }
+      ],
+      "bear": [
+        {
+          "text": "Nvidia gave back about half of the Huang rally as chips fell again on Nov 25.",
+          "source": "https://stockanalysis.com/news/nvidia-gives-back-half-huang-rally/"
+        },
+        {
+          "text": "The semiconductor index fell 12.25% on Nov 5, its second-worst day on record; leadership turmoil, tariffs and AI-payoff doubts all remain open.",
+          "source": "https://247wallst.com/investing/2026/11/06/chip-stocks-just-had-their-second-worst-day-on-record/"
+        }
+      ]
+    },
+    "notes": "The AI range and chance of rising were written before any option data was viewed in this session, then copied here unchanged. This is NOT counted as blind because the public lock commit did not upload before the option data was pulled, so git cannot verify the order. Made after the close (last trade 2026-11-25 20:59:59Z). IV is the average of the call and put at the 150 strike (nearest the price) on the 2029-01-19 expiry; that is the nearest listed expiry to the horizon, not an exact match. The baseline is zero-drift, a weak yardstick over long horizons. Single-stock ranges are driven by company news, so one result says little about skill.",
+    "status": "open",
+    "baseline_drift": {
+      "method": "implied_vol_drift",
+      "iv": 0.4839,
+      "low": 53.15,
+      "high": 328.09,
+      "level": 0.8
+    }
+  },
+  {
+    "id": "2026-11-25_AMZN_1w",
+    "symbol": "AMZN",
+    "made_at": "2026-11-25",
+    "horizon": "1w",
+    "resolves_on": "2026-12-04",
+    "price_at_prediction": 244.37,
+    "price_time": "2026-11-25T20:59:59Z",
+    "ai": {
+      "low": 228.72,
+      "high": 262.26,
+      "level": 0.8,
+      "prob_up": 0.52
+    },
+    "baseline": {
+      "method": "implied_vol",
+      "iv": 0.4373,
+      "iv_updated_at": "2026-11-25T20:59:59Z",
+      "low": 223.78,
+      "high": 266.85,
+      "level": 0.8
+    },
+    "catalysts": {
+      "bull": [
+        {
+          "text": "AWS growth and retail margins are the usual drivers analysts cite; this run did not pull a dated source for them, so treat as a model view.",
+          "source": null,
+          "kind": "model_expectation"
+        },
+        {
+          "text": "JPMorgan added Amazon alongside Meta to its Analyst Focus List as a preferred internet pick (reported early November).",
+          "source": "https://www.tradingview.com/news/stockstory:127143f69094b:0-meta-meta-stock-is-up-what-you-need-to-know/"
+        }
+      ],
+      "base": [
+        {
+          "text": "Dec 4, 8:30 AM ET: November jobs report; Dec 1: JOLTS.",
+          "source": "https://www.bls.gov/schedule/2026/12_sched_list.htm"
+        },
+        {
+          "text": "Amazon's next quarterly report is expected around early February 2027 (date not confirmed in this run).",
+          "source": null,
+          "kind": "model_expectation"
+        }
+      ],
+      "bear": [
+        {
+          "text": "New 20% tariffs and a hotter October PCE hit stocks on Nov 25.",
+          "source": "https://stockanalysis.com/news/nvidia-gives-back-half-huang-rally/"
+        },
+        {
+          "text": "The Fed left a December hike on the table, which weighs on long-duration growth stocks.",
+          "source": "https://portfolio-adviser.com/warsh-sticks-to-the-script-as-fed-holds-rates-but-december-hike-highly-likely/"
+        }
+      ]
+    },
+    "notes": "The AI range and chance of rising were written before any option data was viewed in this session, then copied here unchanged. This is NOT counted as blind because the public lock commit did not upload before the option data was pulled, so git cannot verify the order. Made after the close (last trade 2026-11-25 20:59:59Z). IV is the average of the call and put at the 245 strike (nearest the price) on the 2026-12-04 expiry. The baseline is zero-drift, a weak yardstick over long horizons. Single-stock ranges are driven by company news, so one result says little about skill.",
+    "status": "open",
+    "baseline_drift": {
+      "method": "implied_vol_drift",
+      "iv": 0.4373,
+      "low": 223.59,
+      "high": 266.62,
+      "level": 0.8
+    }
+  },
+  {
+    "id": "2026-11-25_AMZN_1m",
+    "symbol": "AMZN",
+    "made_at": "2026-11-25",
+    "horizon": "1m",
+    "resolves_on": "2026-12-24",
+    "price_at_prediction": 244.37,
+    "price_time": "2026-11-25T20:59:59Z",
+    "ai": {
+      "low": 217.68,
+      "high": 278.29,
+      "level": 0.8,
+      "prob_up": 0.55
+    },
+    "baseline": {
+      "method": "implied_vol",
+      "iv": 0.4101,
+      "iv_updated_at": "2026-11-25T20:59:59Z",
+      "low": 210.72,
+      "high": 283.39,
+      "level": 0.8
+    },
+    "catalysts": {
+      "bull": [
+        {
+          "text": "AWS growth and retail margins are the usual drivers analysts cite; this run did not pull a dated source for them, so treat as a model view.",
+          "source": null,
+          "kind": "model_expectation"
+        },
+        {
+          "text": "JPMorgan added Amazon alongside Meta to its Analyst Focus List as a preferred internet pick (reported early November).",
+          "source": "https://www.tradingview.com/news/stockstory:127143f69094b:0-meta-meta-stock-is-up-what-you-need-to-know/"
+        }
+      ],
+      "base": [
+        {
+          "text": "Dec 4, 8:30 AM ET: November jobs report; Dec 1: JOLTS.",
+          "source": "https://www.bls.gov/schedule/2026/12_sched_list.htm"
+        },
+        {
+          "text": "Amazon's next quarterly report is expected around early February 2027 (date not confirmed in this run).",
+          "source": null,
+          "kind": "model_expectation"
+        }
+      ],
+      "bear": [
+        {
+          "text": "New 20% tariffs and a hotter October PCE hit stocks on Nov 25.",
+          "source": "https://stockanalysis.com/news/nvidia-gives-back-half-huang-rally/"
+        },
+        {
+          "text": "The Fed left a December hike on the table, which weighs on long-duration growth stocks.",
+          "source": "https://portfolio-adviser.com/warsh-sticks-to-the-script-as-fed-holds-rates-but-december-hike-highly-likely/"
+        }
+      ]
+    },
+    "notes": "The AI range and chance of rising were written before any option data was viewed in this session, then copied here unchanged. This is NOT counted as blind because the public lock commit did not upload before the option data was pulled, so git cannot verify the order. Made after the close (last trade 2026-11-25 20:59:59Z). IV is the average of the call and put at the 245 strike (nearest the price) on the 2026-12-24 expiry. The baseline is zero-drift, a weak yardstick over long horizons. Single-stock ranges are driven by company news, so one result says little about skill.",
+    "status": "open",
+    "baseline_drift": {
+      "method": "implied_vol_drift",
+      "iv": 0.4101,
+      "low": 210.32,
+      "high": 282.85,
+      "level": 0.8
+    }
+  },
+  {
+    "id": "2026-11-25_AMZN_6m",
+    "symbol": "AMZN",
+    "made_at": "2026-11-25",
+    "horizon": "6m",
+    "resolves_on": "2027-06-17",
+    "price_at_prediction": 244.37,
+    "price_time": "2026-11-25T20:59:59Z",
+    "ai": {
+      "low": 189.74,
+      "high": 344.11,
+      "level": 0.8,
+      "prob_up": 0.6
+    },
+    "baseline": {
+      "method": "implied_vol",
+      "iv": 0.408,
+      "iv_updated_at": "2026-11-25T20:59:59Z",
+      "low": 165.3,
+      "high": 361.25,
+      "level": 0.8
+    },
+    "catalysts": {
+      "bull": [
+        {
+          "text": "AWS growth and retail margins are the usual drivers analysts cite; this run did not pull a dated source for them, so treat as a model view.",
+          "source": null,
+          "kind": "model_expectation"
+        },
+        {
+          "text": "JPMorgan added Amazon alongside Meta to its Analyst Focus List as a preferred internet pick (reported early November).",
+          "source": "https://www.tradingview.com/news/stockstory:127143f69094b:0-meta-meta-stock-is-up-what-you-need-to-know/"
+        }
+      ],
+      "base": [
+        {
+          "text": "Dec 4, 8:30 AM ET: November jobs report; Dec 1: JOLTS.",
+          "source": "https://www.bls.gov/schedule/2026/12_sched_list.htm"
+        },
+        {
+          "text": "Amazon's next quarterly report is expected around early February 2027 (date not confirmed in this run).",
+          "source": null,
+          "kind": "model_expectation"
+        }
+      ],
+      "bear": [
+        {
+          "text": "New 20% tariffs and a hotter October PCE hit stocks on Nov 25.",
+          "source": "https://stockanalysis.com/news/nvidia-gives-back-half-huang-rally/"
+        },
+        {
+          "text": "The Fed left a December hike on the table, which weighs on long-duration growth stocks.",
+          "source": "https://portfolio-adviser.com/warsh-sticks-to-the-script-as-fed-holds-rates-but-december-hike-highly-likely/"
+        }
+      ]
+    },
+    "notes": "The AI range and chance of rising were written before any option data was viewed in this session, then copied here unchanged. This is NOT counted as blind because the public lock commit did not upload before the option data was pulled, so git cannot verify the order. Made after the close (last trade 2026-11-25 20:59:59Z). IV is the average of the call and put at the 245 strike (nearest the price) on the 2027-06-17 expiry; that is the nearest listed expiry to the horizon, not an exact match. The baseline is zero-drift, a weak yardstick over long horizons. Single-stock ranges are driven by company news, so one result says little about skill.",
+    "status": "open",
+    "baseline_drift": {
+      "method": "implied_vol_drift",
+      "iv": 0.408,
+      "low": 163.17,
+      "high": 356.59,
+      "level": 0.8
+    }
+  },
+  {
+    "id": "2026-11-25_AMZN_1y",
+    "symbol": "AMZN",
+    "made_at": "2026-11-25",
+    "horizon": "1y",
+    "resolves_on": "2027-11-19",
+    "price_at_prediction": 244.37,
+    "price_time": "2026-11-25T20:59:59Z",
+    "ai": {
+      "low": 178.35,
+      "high": 400.66,
+      "level": 0.8,
+      "prob_up": 0.65
+    },
+    "baseline": {
+      "method": "implied_vol",
+      "iv": 0.4035,
+      "iv_updated_at": "2026-11-25T20:59:59Z",
+      "low": 146.33,
+      "high": 408.1,
+      "level": 0.8
+    },
+    "catalysts": {
+      "bull": [
+        {
+          "text": "AWS growth and retail margins are the usual drivers analysts cite; this run did not pull a dated source for them, so treat as a model view.",
+          "source": null,
+          "kind": "model_expectation"
+        },
+        {
+          "text": "JPMorgan added Amazon alongside Meta to its Analyst Focus List as a preferred internet pick (reported early November).",
+          "source": "https://www.tradingview.com/news/stockstory:127143f69094b:0-meta-meta-stock-is-up-what-you-need-to-know/"
+        }
+      ],
+      "base": [
+        {
+          "text": "Dec 4, 8:30 AM ET: November jobs report; Dec 1: JOLTS.",
+          "source": "https://www.bls.gov/schedule/2026/12_sched_list.htm"
+        },
+        {
+          "text": "Amazon's next quarterly report is expected around early February 2027 (date not confirmed in this run).",
+          "source": null,
+          "kind": "model_expectation"
+        }
+      ],
+      "bear": [
+        {
+          "text": "New 20% tariffs and a hotter October PCE hit stocks on Nov 25.",
+          "source": "https://stockanalysis.com/news/nvidia-gives-back-half-huang-rally/"
+        },
+        {
+          "text": "The Fed left a December hike on the table, which weighs on long-duration growth stocks.",
+          "source": "https://portfolio-adviser.com/warsh-sticks-to-the-script-as-fed-holds-rates-but-december-hike-highly-likely/"
+        }
+      ]
+    },
+    "notes": "The AI range and chance of rising were written before any option data was viewed in this session, then copied here unchanged. This is NOT counted as blind because the public lock commit did not upload before the option data was pulled, so git cannot verify the order. Made after the close (last trade 2026-11-25 20:59:59Z). IV is the average of the call and put at the 245 strike (nearest the price) on the 2027-11-19 expiry; that is the nearest listed expiry to the horizon, not an exact match. The baseline is zero-drift, a weak yardstick over long horizons. Single-stock ranges are driven by company news, so one result says little about skill.",
+    "status": "open",
+    "baseline_drift": {
+      "method": "implied_vol_drift",
+      "iv": 0.4035,
+      "low": 143.28,
+      "high": 399.6,
+      "level": 0.8
+    }
+  },
+  {
+    "id": "2026-11-25_AMZN_5y",
+    "symbol": "AMZN",
+    "made_at": "2026-11-25",
+    "horizon": "5y",
+    "resolves_on": "2029-06-15",
+    "price_at_prediction": 244.37,
+    "price_time": "2026-11-25T20:59:59Z",
+    "ai": {
+      "low": 167.42,
+      "high": 877.75,
+      "level": 0.8,
+      "prob_up": 0.78
+    },
+    "baseline": {
+      "method": "implied_vol",
+      "iv": 0.3945,
+      "iv_updated_at": "2026-11-25T20:59:59Z",
+      "low": 108.89,
+      "high": 548.39,
+      "level": 0.8
+    },
+    "catalysts": {
+      "bull": [
+        {
+          "text": "AWS growth and retail margins are the usual drivers analysts cite; this run did not pull a dated source for them, so treat as a model view.",
+          "source": null,
+          "kind": "model_expectation"
+        },
+        {
+          "text": "JPMorgan added Amazon alongside Meta to its Analyst Focus List as a preferred internet pick (reported early November).",
+          "source": "https://www.tradingview.com/news/stockstory:127143f69094b:0-meta-meta-stock-is-up-what-you-need-to-know/"
+        }
+      ],
+      "base": [
+        {
+          "text": "Dec 4, 8:30 AM ET: November jobs report; Dec 1: JOLTS.",
+          "source": "https://www.bls.gov/schedule/2026/12_sched_list.htm"
+        },
+        {
+          "text": "Amazon's next quarterly report is expected around early February 2027 (date not confirmed in this run).",
+          "source": null,
+          "kind": "model_expectation"
+        }
+      ],
+      "bear": [
+        {
+          "text": "New 20% tariffs and a hotter October PCE hit stocks on Nov 25.",
+          "source": "https://stockanalysis.com/news/nvidia-gives-back-half-huang-rally/"
+        },
+        {
+          "text": "The Fed left a December hike on the table, which weighs on long-duration growth stocks.",
+          "source": "https://portfolio-adviser.com/warsh-sticks-to-the-script-as-fed-holds-rates-but-december-hike-highly-likely/"
+        }
+      ]
+    },
+    "notes": "The AI range and chance of rising were written before any option data was viewed in this session, then copied here unchanged. This is NOT counted as blind because the public lock commit did not upload before the option data was pulled, so git cannot verify the order. Made after the close (last trade 2026-11-25 20:59:59Z). IV is the average of the call and put at the 245 strike (nearest the price) on the 2029-06-15 expiry; that is the nearest listed expiry to the horizon, not an exact match. The baseline is zero-drift, a weak yardstick over long horizons. Single-stock ranges are driven by company news, so one result says little about skill.",
+    "status": "open",
+    "baseline_drift": {
+      "method": "implied_vol_drift",
+      "iv": 0.3945,
+      "low": 104.05,
+      "high": 523.98,
+      "level": 0.8
+    }
+  },
+  {
+    "id": "2026-11-25_GOOGL_1w",
+    "symbol": "GOOGL",
+    "made_at": "2026-11-25",
+    "horizon": "1w",
+    "resolves_on": "2026-12-04",
+    "price_at_prediction": 273.03,
+    "price_time": "2026-11-25T20:59:59Z",
+    "ai": {
+      "low": 254.51,
+      "high": 294.2,
+      "level": 0.8,
+      "prob_up": 0.52
+    },
+    "baseline": {
+      "method": "implied_vol",
+      "iv": 0.4461,
+      "iv_updated_at": "2026-11-25T20:59:59Z",
+      "low": 249.59,
+      "high": 298.67,
+      "level": 0.8
+    },
+    "catalysts": {
+      "bull": [
+        {
+          "text": "Fifty of 55 analysts rate Alphabet Buy or better with an average target near $412; the stock bounced 6.3% on Nov 23 from just above its 52-week low.",
+          "source": "https://www.marketbeat.com/articles/alphabets-most-tempting-valuation-signal-may-be-its-most-misleading/"
+        },
+        {
+          "text": "Evercore ISI (Nov 24), J.P. Morgan (Nov 20) and Morgan Stanley (Nov 18) kept Buy ratings with $375-$435 targets.",
+          "source": "https://www.google.com/finance/quote/GOOGL:NASDAQ"
+        }
+      ],
+      "base": [
+        {
+          "text": "Dec 4, 8:30 AM ET: November jobs report; Dec 1: JOLTS.",
+          "source": "https://www.bls.gov/schedule/2026/12_sched_list.htm"
+        },
+        {
+          "text": "Alphabet's next quarterly report is expected around early February 2027 (date not confirmed in this run).",
+          "source": null,
+          "kind": "model_expectation"
+        }
+      ],
+      "bear": [
+        {
+          "text": "Yahoo Finance showed Alphabet down about 5% in one session on rising financing risks tied to AI infrastructure.",
+          "source": "https://finance.yahoo.com/quote/GOOGL/"
+        },
+        {
+          "text": "UBS initiated at Hold with a $320 target on Nov 17-19, one of the few non-Buy views.",
+          "source": "https://www.google.com/finance/quote/GOOGL:NASDAQ"
+        }
+      ]
+    },
+    "notes": "The AI range and chance of rising were written before any option data was viewed in this session, then copied here unchanged. This is NOT counted as blind because the public lock commit did not upload before the option data was pulled, so git cannot verify the order. Made after the close (last trade 2026-11-25 20:59:59Z). IV is the average of the call and put at the 272.5 strike (nearest the price) on the 2026-12-04 expiry. The baseline is zero-drift, a weak yardstick over long horizons. Single-stock ranges are driven by company news, so one result says little about skill.",
+    "status": "open",
+    "baseline_drift": {
+      "method": "implied_vol_drift",
+      "iv": 0.4461,
+      "low": 249.34,
+      "high": 298.38,
+      "level": 0.8
+    }
+  },
+  {
+    "id": "2026-11-25_GOOGL_1m",
+    "symbol": "GOOGL",
+    "made_at": "2026-11-25",
+    "horizon": "1m",
+    "resolves_on": "2026-12-24",
+    "price_at_prediction": 273.03,
+    "price_time": "2026-11-25T20:59:59Z",
+    "ai": {
+      "low": 241.46,
+      "high": 313.18,
+      "level": 0.8,
+      "prob_up": 0.55
+    },
+    "baseline": {
+      "method": "implied_vol",
+      "iv": 0.4034,
+      "iv_updated_at": "2026-11-25T20:59:59Z",
+      "low": 236.01,
+      "high": 315.86,
+      "level": 0.8
+    },
+    "catalysts": {
+      "bull": [
+        {
+          "text": "Fifty of 55 analysts rate Alphabet Buy or better with an average target near $412; the stock bounced 6.3% on Nov 23 from just above its 52-week low.",
+          "source": "https://www.marketbeat.com/articles/alphabets-most-tempting-valuation-signal-may-be-its-most-misleading/"
+        },
+        {
+          "text": "Evercore ISI (Nov 24), J.P. Morgan (Nov 20) and Morgan Stanley (Nov 18) kept Buy ratings with $375-$435 targets.",
+          "source": "https://www.google.com/finance/quote/GOOGL:NASDAQ"
+        }
+      ],
+      "base": [
+        {
+          "text": "Dec 4, 8:30 AM ET: November jobs report; Dec 1: JOLTS.",
+          "source": "https://www.bls.gov/schedule/2026/12_sched_list.htm"
+        },
+        {
+          "text": "Alphabet's next quarterly report is expected around early February 2027 (date not confirmed in this run).",
+          "source": null,
+          "kind": "model_expectation"
+        }
+      ],
+      "bear": [
+        {
+          "text": "Yahoo Finance showed Alphabet down about 5% in one session on rising financing risks tied to AI infrastructure.",
+          "source": "https://finance.yahoo.com/quote/GOOGL/"
+        },
+        {
+          "text": "UBS initiated at Hold with a $320 target on Nov 17-19, one of the few non-Buy views.",
+          "source": "https://www.google.com/finance/quote/GOOGL:NASDAQ"
+        }
+      ]
+    },
+    "notes": "The AI range and chance of rising were written before any option data was viewed in this session, then copied here unchanged. This is NOT counted as blind because the public lock commit did not upload before the option data was pulled, so git cannot verify the order. Made after the close (last trade 2026-11-25 20:59:59Z). IV is the average of the call and put at the 275 strike (nearest the price) on the 2026-12-24 expiry. The baseline is zero-drift, a weak yardstick over long horizons. Single-stock ranges are driven by company news, so one result says little about skill.",
+    "status": "open",
+    "baseline_drift": {
+      "method": "implied_vol_drift",
+      "iv": 0.4034,
+      "low": 235.61,
+      "high": 315.33,
+      "level": 0.8
+    }
+  },
+  {
+    "id": "2026-11-25_GOOGL_6m",
+    "symbol": "GOOGL",
+    "made_at": "2026-11-25",
+    "horizon": "6m",
+    "resolves_on": "2027-05-21",
+    "price_at_prediction": 273.03,
+    "price_time": "2026-11-25T20:59:59Z",
+    "ai": {
+      "low": 208.32,
+      "high": 391.26,
+      "level": 0.8,
+      "prob_up": 0.6
+    },
+    "baseline": {
+      "method": "implied_vol",
+      "iv": 0.4111,
+      "iv_updated_at": "2026-11-25T20:59:59Z",
+      "low": 189.18,
+      "high": 394.04,
+      "level": 0.8
+    },
+    "catalysts": {
+      "bull": [
+        {
+          "text": "Fifty of 55 analysts rate Alphabet Buy or better with an average target near $412; the stock bounced 6.3% on Nov 23 from just above its 52-week low.",
+          "source": "https://www.marketbeat.com/articles/alphabets-most-tempting-valuation-signal-may-be-its-most-misleading/"
+        },
+        {
+          "text": "Evercore ISI (Nov 24), J.P. Morgan (Nov 20) and Morgan Stanley (Nov 18) kept Buy ratings with $375-$435 targets.",
+          "source": "https://www.google.com/finance/quote/GOOGL:NASDAQ"
+        }
+      ],
+      "base": [
+        {
+          "text": "Dec 4, 8:30 AM ET: November jobs report; Dec 1: JOLTS.",
+          "source": "https://www.bls.gov/schedule/2026/12_sched_list.htm"
+        },
+        {
+          "text": "Alphabet's next quarterly report is expected around early February 2027 (date not confirmed in this run).",
+          "source": null,
+          "kind": "model_expectation"
+        }
+      ],
+      "bear": [
+        {
+          "text": "Yahoo Finance showed Alphabet down about 5% in one session on rising financing risks tied to AI infrastructure.",
+          "source": "https://finance.yahoo.com/quote/GOOGL/"
+        },
+        {
+          "text": "UBS initiated at Hold with a $320 target on Nov 17-19, one of the few non-Buy views.",
+          "source": "https://www.google.com/finance/quote/GOOGL:NASDAQ"
+        }
+      ]
+    },
+    "notes": "The AI range and chance of rising were written before any option data was viewed in this session, then copied here unchanged. This is NOT counted as blind because the public lock commit did not upload before the option data was pulled, so git cannot verify the order. Made after the close (last trade 2026-11-25 20:59:59Z). IV is the average of the call and put at the 275 strike (nearest the price) on the 2027-05-21 expiry; that is the nearest listed expiry to the horizon, not an exact match. The baseline is zero-drift, a weak yardstick over long horizons. Single-stock ranges are driven by company news, so one result says little about skill.",
+    "status": "open",
+    "baseline_drift": {
+      "method": "implied_vol_drift",
+      "iv": 0.4111,
+      "low": 186.95,
+      "high": 389.39,
+      "level": 0.8
+    }
+  },
+  {
+    "id": "2026-11-25_GOOGL_1y",
+    "symbol": "GOOGL",
+    "made_at": "2026-11-25",
+    "horizon": "1y",
+    "resolves_on": "2027-11-19",
+    "price_at_prediction": 273.03,
+    "price_time": "2026-11-25T20:59:59Z",
+    "ai": {
+      "low": 194.58,
+      "high": 458.44,
+      "level": 0.8,
+      "prob_up": 0.65
+    },
+    "baseline": {
+      "method": "implied_vol",
+      "iv": 0.4002,
+      "iv_updated_at": "2026-11-25T20:59:59Z",
+      "low": 164.18,
+      "high": 454.06,
+      "level": 0.8
+    },
+    "catalysts": {
+      "bull": [
+        {
+          "text": "Fifty of 55 analysts rate Alphabet Buy or better with an average target near $412; the stock bounced 6.3% on Nov 23 from just above its 52-week low.",
+          "source": "https://www.marketbeat.com/articles/alphabets-most-tempting-valuation-signal-may-be-its-most-misleading/"
+        },
+        {
+          "text": "Evercore ISI (Nov 24), J.P. Morgan (Nov 20) and Morgan Stanley (Nov 18) kept Buy ratings with $375-$435 targets.",
+          "source": "https://www.google.com/finance/quote/GOOGL:NASDAQ"
+        }
+      ],
+      "base": [
+        {
+          "text": "Dec 4, 8:30 AM ET: November jobs report; Dec 1: JOLTS.",
+          "source": "https://www.bls.gov/schedule/2026/12_sched_list.htm"
+        },
+        {
+          "text": "Alphabet's next quarterly report is expected around early February 2027 (date not confirmed in this run).",
+          "source": null,
+          "kind": "model_expectation"
+        }
+      ],
+      "bear": [
+        {
+          "text": "Yahoo Finance showed Alphabet down about 5% in one session on rising financing risks tied to AI infrastructure.",
+          "source": "https://finance.yahoo.com/quote/GOOGL/"
+        },
+        {
+          "text": "UBS initiated at Hold with a $320 target on Nov 17-19, one of the few non-Buy views.",
+          "source": "https://www.google.com/finance/quote/GOOGL:NASDAQ"
+        }
+      ]
+    },
+    "notes": "The AI range and chance of rising were written before any option data was viewed in this session, then copied here unchanged. This is NOT counted as blind because the public lock commit did not upload before the option data was pulled, so git cannot verify the order. Made after the close (last trade 2026-11-25 20:59:59Z). IV is the average of the call and put at the 275 strike (nearest the price) on the 2027-11-19 expiry; that is the nearest listed expiry to the horizon, not an exact match. The baseline is zero-drift, a weak yardstick over long horizons. Single-stock ranges are driven by company news, so one result says little about skill.",
+    "status": "open",
+    "baseline_drift": {
+      "method": "implied_vol_drift",
+      "iv": 0.4002,
+      "low": 160.97,
+      "high": 445.18,
+      "level": 0.8
+    }
+  },
+  {
+    "id": "2026-11-25_GOOGL_5y",
+    "symbol": "GOOGL",
+    "made_at": "2026-11-25",
+    "horizon": "5y",
+    "resolves_on": "2029-01-19",
+    "price_at_prediction": 273.03,
+    "price_time": "2026-11-25T20:59:59Z",
+    "ai": {
+      "low": 178.16,
+      "high": 1030,
+      "level": 0.8,
+      "prob_up": 0.78
+    },
+    "baseline": {
+      "method": "implied_vol",
+      "iv": 0.3902,
+      "iv_updated_at": "2026-11-25T20:59:59Z",
+      "low": 131.07,
+      "high": 568.73,
+      "level": 0.8
+    },
+    "catalysts": {
+      "bull": [
+        {
+          "text": "Fifty of 55 analysts rate Alphabet Buy or better with an average target near $412; the stock bounced 6.3% on Nov 23 from just above its 52-week low.",
+          "source": "https://www.marketbeat.com/articles/alphabets-most-tempting-valuation-signal-may-be-its-most-misleading/"
+        },
+        {
+          "text": "Evercore ISI (Nov 24), J.P. Morgan (Nov 20) and Morgan Stanley (Nov 18) kept Buy ratings with $375-$435 targets.",
+          "source": "https://www.google.com/finance/quote/GOOGL:NASDAQ"
+        }
+      ],
+      "base": [
+        {
+          "text": "Dec 4, 8:30 AM ET: November jobs report; Dec 1: JOLTS.",
+          "source": "https://www.bls.gov/schedule/2026/12_sched_list.htm"
+        },
+        {
+          "text": "Alphabet's next quarterly report is expected around early February 2027 (date not confirmed in this run).",
+          "source": null,
+          "kind": "model_expectation"
+        }
+      ],
+      "bear": [
+        {
+          "text": "Yahoo Finance showed Alphabet down about 5% in one session on rising financing risks tied to AI infrastructure.",
+          "source": "https://finance.yahoo.com/quote/GOOGL/"
+        },
+        {
+          "text": "UBS initiated at Hold with a $320 target on Nov 17-19, one of the few non-Buy views.",
+          "source": "https://www.google.com/finance/quote/GOOGL:NASDAQ"
+        }
+      ]
+    },
+    "notes": "The AI range and chance of rising were written before any option data was viewed in this session, then copied here unchanged. This is NOT counted as blind because the public lock commit did not upload before the option data was pulled, so git cannot verify the order. Made after the close (last trade 2026-11-25 20:59:59Z). IV is the average of the call and put at the 275 strike (nearest the price) on the 2029-01-19 expiry; that is the nearest listed expiry to the horizon, not an exact match. The baseline is zero-drift, a weak yardstick over long horizons. Single-stock ranges are driven by company news, so one result says little about skill.",
+    "status": "open",
+    "baseline_drift": {
+      "method": "implied_vol_drift",
+      "iv": 0.3902,
+      "low": 126.6,
+      "high": 549.31,
+      "level": 0.8
+    }
+  },
+  {
+    "id": "2026-11-25_META_1w",
+    "symbol": "META",
+    "made_at": "2026-11-25",
+    "horizon": "1w",
+    "resolves_on": "2026-12-04",
+    "price_at_prediction": 609.99,
+    "price_time": "2026-11-25T20:59:59Z",
+    "ai": {
+      "low": 564.06,
+      "high": 662.59,
+      "level": 0.8,
+      "prob_up": 0.52
+    },
+    "baseline": {
+      "method": "implied_vol",
+      "iv": 0.5019,
+      "iv_updated_at": "2026-11-25T20:59:59Z",
+      "low": 551.39,
+      "high": 674.82,
+      "level": 0.8
+    },
+    "catalysts": {
+      "bull": [
+        {
+          "text": "Meta rose about 7% to $597.60 on Nov 23, and Goldman moved it to its \"Rising Stars\" group as hedge-fund holders rose by 30 to 279 in Q3.",
+          "source": "https://www.newsminimalist.com/articles/meta-shares-jump-7percent-as-hedge-funds-boost-ownership-a43b17ed"
+        },
+        {
+          "text": "Morgan Stanley still sees AI monetization and core advertising as catalysts despite cutting its target to $720 from $820.",
+          "source": "https://www.streetinsider.com/Investing/Meta+shares+jump+on+renewed+AI+optimism+after+Nvidia+news/27386103.html"
+        }
+      ],
+      "base": [
+        {
+          "text": "Dec 4, 8:30 AM ET: November jobs report; Dec 1: JOLTS.",
+          "source": "https://www.bls.gov/schedule/2026/12_sched_list.htm"
+        },
+        {
+          "text": "Meta's next quarterly report is expected around late January 2027 (date not confirmed in this run).",
+          "source": null,
+          "kind": "model_expectation"
+        }
+      ],
+      "bear": [
+        {
+          "text": "Meta fell more than 12% in the week before Nov 23 and was down about 19% over the month, below its 50-day and 200-day averages.",
+          "source": "https://www.newsminimalist.com/articles/meta-shares-jump-7percent-as-hedge-funds-boost-ownership-a43b17ed"
+        },
+        {
+          "text": "Morgan Stanley cut its price target to $720 from $820.",
+          "source": "https://www.streetinsider.com/Investing/Meta+shares+jump+on+renewed+AI+optimism+after+Nvidia+news/27386103.html"
+        }
+      ]
+    },
+    "notes": "The AI range and chance of rising were written before any option data was viewed in this session, then copied here unchanged. This is NOT counted as blind because the public lock commit did not upload before the option data was pulled, so git cannot verify the order. Made after the close (last trade 2026-11-25 20:59:59Z). IV is the average of the call and put at the 610 strike (nearest the price) on the 2026-12-04 expiry. The baseline is zero-drift, a weak yardstick over long horizons. Single-stock ranges are driven by company news, so one result says little about skill.",
+    "status": "open",
+    "baseline_drift": {
+      "method": "implied_vol_drift",
+      "iv": 0.5019,
+      "low": 550.49,
+      "high": 673.72,
+      "level": 0.8
+    }
+  },
+  {
+    "id": "2026-11-25_META_1m",
+    "symbol": "META",
+    "made_at": "2026-11-25",
+    "horizon": "1m",
+    "resolves_on": "2026-12-24",
+    "price_at_prediction": 609.99,
+    "price_time": "2026-11-25T20:59:59Z",
+    "ai": {
+      "low": 531.71,
+      "high": 709.88,
+      "level": 0.8,
+      "prob_up": 0.55
+    },
+    "baseline": {
+      "method": "implied_vol",
+      "iv": 0.4565,
+      "iv_updated_at": "2026-11-25T20:59:59Z",
+      "low": 517.26,
+      "high": 719.35,
+      "level": 0.8
+    },
+    "catalysts": {
+      "bull": [
+        {
+          "text": "Meta rose about 7% to $597.60 on Nov 23, and Goldman moved it to its \"Rising Stars\" group as hedge-fund holders rose by 30 to 279 in Q3.",
+          "source": "https://www.newsminimalist.com/articles/meta-shares-jump-7percent-as-hedge-funds-boost-ownership-a43b17ed"
+        },
+        {
+          "text": "Morgan Stanley still sees AI monetization and core advertising as catalysts despite cutting its target to $720 from $820.",
+          "source": "https://www.streetinsider.com/Investing/Meta+shares+jump+on+renewed+AI+optimism+after+Nvidia+news/27386103.html"
+        }
+      ],
+      "base": [
+        {
+          "text": "Dec 4, 8:30 AM ET: November jobs report; Dec 1: JOLTS.",
+          "source": "https://www.bls.gov/schedule/2026/12_sched_list.htm"
+        },
+        {
+          "text": "Meta's next quarterly report is expected around late January 2027 (date not confirmed in this run).",
+          "source": null,
+          "kind": "model_expectation"
+        }
+      ],
+      "bear": [
+        {
+          "text": "Meta fell more than 12% in the week before Nov 23 and was down about 19% over the month, below its 50-day and 200-day averages.",
+          "source": "https://www.newsminimalist.com/articles/meta-shares-jump-7percent-as-hedge-funds-boost-ownership-a43b17ed"
+        },
+        {
+          "text": "Morgan Stanley cut its price target to $720 from $820.",
+          "source": "https://www.streetinsider.com/Investing/Meta+shares+jump+on+renewed+AI+optimism+after+Nvidia+news/27386103.html"
+        }
+      ]
+    },
+    "notes": "The AI range and chance of rising were written before any option data was viewed in this session, then copied here unchanged. This is NOT counted as blind because the public lock commit did not upload before the option data was pulled, so git cannot verify the order. Made after the close (last trade 2026-11-25 20:59:59Z). IV is the average of the call and put at the 610 strike (nearest the price) on the 2026-12-24 expiry. The baseline is zero-drift, a weak yardstick over long horizons. Single-stock ranges are driven by company news, so one result says little about skill.",
+    "status": "open",
+    "baseline_drift": {
+      "method": "implied_vol_drift",
+      "iv": 0.4565,
+      "low": 515.44,
+      "high": 716.83,
+      "level": 0.8
+    }
+  },
+  {
+    "id": "2026-11-25_META_6m",
+    "symbol": "META",
+    "made_at": "2026-11-25",
+    "horizon": "6m",
+    "resolves_on": "2027-05-21",
+    "price_at_prediction": 609.99,
+    "price_time": "2026-11-25T20:59:59Z",
+    "ai": {
+      "low": 449.4,
+      "high": 905.28,
+      "level": 0.8,
+      "prob_up": 0.6
+    },
+    "baseline": {
+      "method": "implied_vol",
+      "iv": 0.4669,
+      "iv_updated_at": "2026-11-25T20:59:59Z",
+      "low": 402.13,
+      "high": 925.3,
+      "level": 0.8
+    },
+    "catalysts": {
+      "bull": [
+        {
+          "text": "Meta rose about 7% to $597.60 on Nov 23, and Goldman moved it to its \"Rising Stars\" group as hedge-fund holders rose by 30 to 279 in Q3.",
+          "source": "https://www.newsminimalist.com/articles/meta-shares-jump-7percent-as-hedge-funds-boost-ownership-a43b17ed"
+        },
+        {
+          "text": "Morgan Stanley still sees AI monetization and core advertising as catalysts despite cutting its target to $720 from $820.",
+          "source": "https://www.streetinsider.com/Investing/Meta+shares+jump+on+renewed+AI+optimism+after+Nvidia+news/27386103.html"
+        }
+      ],
+      "base": [
+        {
+          "text": "Dec 4, 8:30 AM ET: November jobs report; Dec 1: JOLTS.",
+          "source": "https://www.bls.gov/schedule/2026/12_sched_list.htm"
+        },
+        {
+          "text": "Meta's next quarterly report is expected around late January 2027 (date not confirmed in this run).",
+          "source": null,
+          "kind": "model_expectation"
+        }
+      ],
+      "bear": [
+        {
+          "text": "Meta fell more than 12% in the week before Nov 23 and was down about 19% over the month, below its 50-day and 200-day averages.",
+          "source": "https://www.newsminimalist.com/articles/meta-shares-jump-7percent-as-hedge-funds-boost-ownership-a43b17ed"
+        },
+        {
+          "text": "Morgan Stanley cut its price target to $720 from $820.",
+          "source": "https://www.streetinsider.com/Investing/Meta+shares+jump+on+renewed+AI+optimism+after+Nvidia+news/27386103.html"
+        }
+      ]
+    },
+    "notes": "The AI range and chance of rising were written before any option data was viewed in this session, then copied here unchanged. This is NOT counted as blind because the public lock commit did not upload before the option data was pulled, so git cannot verify the order. Made after the close (last trade 2026-11-25 20:59:59Z). IV is the average of the call and put at the 610 strike (nearest the price) on the 2027-05-21 expiry; that is the nearest listed expiry to the horizon, not an exact match. The baseline is zero-drift, a weak yardstick over long horizons. Single-stock ranges are driven by company news, so one result says little about skill.",
+    "status": "open",
+    "baseline_drift": {
+      "method": "implied_vol_drift",
+      "iv": 0.4669,
+      "low": 392.68,
+      "high": 903.58,
+      "level": 0.8
+    }
+  },
+  {
+    "id": "2026-11-25_META_1y",
+    "symbol": "META",
+    "made_at": "2026-11-25",
+    "horizon": "1y",
+    "resolves_on": "2027-12-17",
+    "price_at_prediction": 609.99,
+    "price_time": "2026-11-25T20:59:59Z",
+    "ai": {
+      "low": 414.51,
+      "high": 1074,
+      "level": 0.8,
+      "prob_up": 0.65
+    },
+    "baseline": {
+      "method": "implied_vol",
+      "iv": 0.4504,
+      "iv_updated_at": "2026-11-25T20:59:59Z",
+      "low": 336.67,
+      "high": 1105.21,
+      "level": 0.8
+    },
+    "catalysts": {
+      "bull": [
+        {
+          "text": "Meta rose about 7% to $597.60 on Nov 23, and Goldman moved it to its \"Rising Stars\" group as hedge-fund holders rose by 30 to 279 in Q3.",
+          "source": "https://www.newsminimalist.com/articles/meta-shares-jump-7percent-as-hedge-funds-boost-ownership-a43b17ed"
+        },
+        {
+          "text": "Morgan Stanley still sees AI monetization and core advertising as catalysts despite cutting its target to $720 from $820.",
+          "source": "https://www.streetinsider.com/Investing/Meta+shares+jump+on+renewed+AI+optimism+after+Nvidia+news/27386103.html"
+        }
+      ],
+      "base": [
+        {
+          "text": "Dec 4, 8:30 AM ET: November jobs report; Dec 1: JOLTS.",
+          "source": "https://www.bls.gov/schedule/2026/12_sched_list.htm"
+        },
+        {
+          "text": "Meta's next quarterly report is expected around late January 2027 (date not confirmed in this run).",
+          "source": null,
+          "kind": "model_expectation"
+        }
+      ],
+      "bear": [
+        {
+          "text": "Meta fell more than 12% in the week before Nov 23 and was down about 19% over the month, below its 50-day and 200-day averages.",
+          "source": "https://www.newsminimalist.com/articles/meta-shares-jump-7percent-as-hedge-funds-boost-ownership-a43b17ed"
+        },
+        {
+          "text": "Morgan Stanley cut its price target to $720 from $820.",
+          "source": "https://www.streetinsider.com/Investing/Meta+shares+jump+on+renewed+AI+optimism+after+Nvidia+news/27386103.html"
+        }
+      ]
+    },
+    "notes": "The AI range and chance of rising were written before any option data was viewed in this session, then copied here unchanged. This is NOT counted as blind because the public lock commit did not upload before the option data was pulled, so git cannot verify the order. Made after the close (last trade 2026-11-25 20:59:59Z). IV is the average of the call and put at the 610 strike (nearest the price) on the 2027-12-17 expiry; that is the nearest listed expiry to the horizon, not an exact match. The baseline is zero-drift, a weak yardstick over long horizons. Single-stock ranges are driven by company news, so one result says little about skill.",
+    "status": "open",
+    "baseline_drift": {
+      "method": "implied_vol_drift",
+      "iv": 0.4504,
+      "low": 322.2,
+      "high": 1057.72,
+      "level": 0.8
+    }
+  },
+  {
+    "id": "2026-11-25_META_5y",
+    "symbol": "META",
+    "made_at": "2026-11-25",
+    "horizon": "5y",
+    "resolves_on": "2029-01-19",
+    "price_at_prediction": 609.99,
+    "price_time": "2026-11-25T20:59:59Z",
+    "ai": {
+      "low": 361.07,
+      "high": 2536,
+      "level": 0.8,
+      "prob_up": 0.78
+    },
+    "baseline": {
+      "method": "implied_vol",
+      "iv": 0.4411,
+      "iv_updated_at": "2026-11-25T20:59:59Z",
+      "low": 266.11,
+      "high": 1398.26,
+      "level": 0.8
+    },
+    "catalysts": {
+      "bull": [
+        {
+          "text": "Meta rose about 7% to $597.60 on Nov 23, and Goldman moved it to its \"Rising Stars\" group as hedge-fund holders rose by 30 to 279 in Q3.",
+          "source": "https://www.newsminimalist.com/articles/meta-shares-jump-7percent-as-hedge-funds-boost-ownership-a43b17ed"
+        },
+        {
+          "text": "Morgan Stanley still sees AI monetization and core advertising as catalysts despite cutting its target to $720 from $820.",
+          "source": "https://www.streetinsider.com/Investing/Meta+shares+jump+on+renewed+AI+optimism+after+Nvidia+news/27386103.html"
+        }
+      ],
+      "base": [
+        {
+          "text": "Dec 4, 8:30 AM ET: November jobs report; Dec 1: JOLTS.",
+          "source": "https://www.bls.gov/schedule/2026/12_sched_list.htm"
+        },
+        {
+          "text": "Meta's next quarterly report is expected around late January 2027 (date not confirmed in this run).",
+          "source": null,
+          "kind": "model_expectation"
+        }
+      ],
+      "bear": [
+        {
+          "text": "Meta fell more than 12% in the week before Nov 23 and was down about 19% over the month, below its 50-day and 200-day averages.",
+          "source": "https://www.newsminimalist.com/articles/meta-shares-jump-7percent-as-hedge-funds-boost-ownership-a43b17ed"
+        },
+        {
+          "text": "Morgan Stanley cut its price target to $720 from $820.",
+          "source": "https://www.streetinsider.com/Investing/Meta+shares+jump+on+renewed+AI+optimism+after+Nvidia+news/27386103.html"
+        }
+      ]
+    },
+    "notes": "The AI range and chance of rising were written before any option data was viewed in this session, then copied here unchanged. This is NOT counted as blind because the public lock commit did not upload before the option data was pulled, so git cannot verify the order. Made after the close (last trade 2026-11-25 20:59:59Z). IV is the average of the call and put at the 610 strike (nearest the price) on the 2029-01-19 expiry; that is the nearest listed expiry to the horizon, not an exact match. The baseline is zero-drift, a weak yardstick over long horizons. Single-stock ranges are driven by company news, so one result says little about skill.",
+    "status": "open",
+    "baseline_drift": {
+      "method": "implied_vol_drift",
+      "iv": 0.4411,
+      "low": 245.58,
+      "high": 1290.38,
+      "level": 0.8
+    }
   }
 ]
