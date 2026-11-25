@@ -40,7 +40,7 @@ jobs:
       - name: Build site
         run: |
           mkdir _site
-          cp site/index.html _site/
+          cp -r site/. _site/
           cp -r data _site/data
       - uses: actions/upload-pages-artifact@v3
         with:
