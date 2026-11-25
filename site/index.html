@@ -23,6 +23,7 @@
   --ok: oklch(0.45 0.13 150);
   --bad: oklch(0.5 0.16 40);
 }
+[hidden] { display: none !important; }
 * { box-sizing: border-box; }
 body { margin: 0; }
 a { color: var(--accent); }
@@ -114,6 +115,26 @@ tbody tr { border-top: 1px solid var(--line-2); }
 .note[open] summary { margin-bottom: 8px; }
 .more { align-self: flex-start; font: inherit; font-size: 13px; font-weight: 500; color: var(--accent); background: transparent; border: 1px solid var(--line); border-radius: 6px; min-height: 34px; padding: 0 14px; cursor: pointer; }
 .more:hover { background: var(--panel); }
+.hgrid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
+.hcard { display: flex; flex-direction: column; gap: 10px; border: 1px solid var(--line); border-radius: 10px; padding: 16px; text-decoration: none; color: var(--ink); background: #fff; }
+.hcard:hover { border-color: var(--accent); box-shadow: 0 1px 6px oklch(0.47 0.18 264 / 0.12); color: var(--ink); }
+.hcard.hero { grid-column: 1 / -1; padding: 20px; gap: 14px; }
+.hc-top { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; }
+.hc-top b { font-size: 16px; font-weight: 700; }
+.hero .hc-top b { font-size: 22px; }
+.hc-top small { font-size: 12px; color: var(--muted); }
+.hc-name { font-size: 12px; color: var(--muted); margin-top: -6px; }
+.hc-nums { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 4px 12px; font-size: 13px; }
+.hc-nums .sub { font-size: 12px; color: var(--muted); }
+.hc-cases { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; font-size: 13px; }
+.hc-cases div { border-radius: 8px; padding: 10px 12px; background: var(--panel); }
+.hc-cases b { display: block; font-size: 12px; margin-bottom: 2px; }
+.up { color: var(--ok); } .down { color: var(--bad); }
+.mini-ev { list-style: none; margin: 0; padding: 0; }
+.mini-ev li { display: grid; grid-template-columns: 90px minmax(0,1fr); gap: 12px; padding: 9px 0; border-top: 1px solid var(--line-2); font-size: 13px; }
+.mini-ev b { font-weight: 600; }
+@media (max-width: 900px) { .hgrid { grid-template-columns: 1fr 1fr; } .hc-cases { grid-template-columns: 1fr; } }
+@media (max-width: 560px) { .hgrid { grid-template-columns: 1fr; } }
 @media (max-width: 900px) {
   .horizon-pick { max-width: 100%; overflow-x: auto; }
   .horizon-pick button { white-space: nowrap; flex: 0 0 auto; }
@@ -139,6 +160,24 @@ tbody tr { border-top: 1px solid var(--line-2); }
 <nav id="tabs" class="tabs" aria-label="Symbols"></nav>
 
 <p id="status" class="muted">Loading…</p>
+
+<section id="home" class="card" aria-label="Market overview" hidden>
+  <div class="card-head">
+    <div class="title-row"><h2>Market overview</h2><span class="chip">Predictions · the model's judgment, not advice</span></div>
+    <p id="home-updated" class="muted" style="font-size:12px"></p>
+  </div>
+  <div class="section">
+    <div id="home-pick" class="horizon-pick" role="group" aria-label="Horizon for the overview"></div>
+    <div class="legend"><span><i class="sw-ai"></i>AI 80% range</span><span><i class="sw-base"></i>Baseline range</span><span><i class="sw-today"></i>Price when predicted (0%)</span></div>
+    <div id="home-grid" class="hgrid"></div>
+    <p class="muted" style="font-size:12px">All cards share one scale for the chosen horizon, so ranges compare directly across symbols. Click a card for the full analysis.</p>
+  </div>
+  <div class="section">
+    <h3 class="eyebrow">Coming up, across the market</h3>
+    <ul id="home-events" class="mini-ev"></ul>
+  </div>
+  <div class="record"><p id="home-record"></p><a href="#all-predictions" id="home-all">Pick a symbol for scores →</a></div>
+</section>
 
 <section id="outlook" class="card" aria-labelledby="outlook-title" hidden>
   <div class="card-head">
@@ -273,6 +312,9 @@ tbody tr { border-top: 1px solid var(--line-2); }
   function renderTabs() {
     var nav = $("tabs");
     clear(nav);
+    var home = el("a", "Overview"); home.href = "#home";
+    if (!state.symbol) home.setAttribute("aria-current", "page");
+    nav.appendChild(home);
     symbols().forEach(function (s) {
       var a = el("a", s);
       a.href = "#" + s;
@@ -297,6 +339,78 @@ tbody tr { border-top: 1px solid var(--line-2); }
     else { p.hidden = true; }
   }
 
+
+  function hpct(sc, v) { return ((v - sc.lo) / (sc.hi - sc.lo) * 100).toFixed(2) + "%"; }
+  function homeCard(d, sc, hero) {
+    var p = d.p, st = p.price_at_prediction;
+    var a = el("a", undefined, "hcard" + (hero ? " hero" : ""));
+    a.href = "#" + d.s;
+    a.addEventListener("click", function () { state.fromHome = state.homeH; });
+    var top = el("div", undefined, "hc-top");
+    top.appendChild(el("b", d.s));
+    top.appendChild(el("small", "from " + money(st)));
+    a.appendChild(top);
+    a.appendChild(el("div", NAMES[d.s] || "", "hc-name"));
+    var bars = el("div", undefined, "bars");
+    var lo = p.ai.low / st - 1, hi = p.ai.high / st - 1, bl = p.baseline.low / st - 1, bh = p.baseline.high / st - 1;
+    var b1 = el("div", undefined, "bar-base"); b1.style.left = hpct(sc, bl); b1.style.width = ((bh - bl) / (sc.hi - sc.lo) * 100).toFixed(2) + "%";
+    var b2 = el("div", undefined, "bar-ai"); b2.style.left = hpct(sc, lo); b2.style.width = ((hi - lo) / (sc.hi - sc.lo) * 100).toFixed(2) + "%";
+    var z = el("div", undefined, "mark-today"); z.style.left = hpct(sc, 0);
+    bars.appendChild(b1); bars.appendChild(b2); bars.appendChild(z);
+    a.appendChild(bars);
+    var nums = el("div", undefined, "hc-nums");
+    var l = el("span"); var k = el("span", moveText(p.ai, st), "ai-k"); l.appendChild(k); l.appendChild(el("span", "  AI", "sub")); nums.appendChild(l);
+    var up = p.ai.prob_up;
+    if (up != null) nums.appendChild(el("span", pct(up) + " chance up", up >= 0.5 ? "up" : "down"));
+    a.appendChild(nums);
+    nums.appendChild(el("span", "Baseline " + moveText(p.baseline, st), "sub"));
+    if (hero) {
+      var cs = el("div", undefined, "hc-cases");
+      [["bull", "Bull case", "up"], ["bear", "Bear case", "down"]].forEach(function (c) {
+        var it = (p.catalysts && p.catalysts[c[0]] || [])[0];
+        if (!it) return;
+        var box = el("div"); box.appendChild(el("b", c[1], c[2])); box.appendChild(document.createTextNode(it.text)); cs.appendChild(box);
+      });
+      if (cs.childNodes.length) a.appendChild(cs);
+    }
+    return a;
+  }
+  function renderHome() {
+    var syms = symbols();
+    var per = syms.map(function (s) { return { s: s, rows: latestByHorizon(forSymbol(s)) }; });
+    var hs = HORDER.filter(function (h) { return per.some(function (d) { return d.rows.some(function (r) { return r.horizon === h; }); }); });
+    if (hs.indexOf(state.homeH) < 0) state.homeH = hs.indexOf("1m") >= 0 ? "1m" : hs[0];
+    var pick = $("home-pick"); clear(pick);
+    hs.forEach(function (h) {
+      var b = el("button", HLABEL[h]); b.type = "button";
+      b.setAttribute("aria-pressed", h === state.homeH ? "true" : "false");
+      b.addEventListener("click", function () { state.homeH = h; renderHome(); });
+      pick.appendChild(b);
+    });
+    var data = per.map(function (d) { return { s: d.s, p: d.rows.filter(function (r) { return r.horizon === state.homeH; })[0] }; })
+      .filter(function (d) { return d.p; });
+    var vals = [0];
+    data.forEach(function (d) { var st = d.p.price_at_prediction; vals.push(d.p.ai.low / st - 1, d.p.ai.high / st - 1, d.p.baseline.low / st - 1, d.p.baseline.high / st - 1); });
+    var lo = Math.min.apply(null, vals), hi = Math.max.apply(null, vals), pad = (hi - lo) * 0.06;
+    var sc = { lo: lo - pad, hi: hi + pad };
+    var grid = $("home-grid"); clear(grid);
+    data.sort(function (x, y) { return (x.s === "SPY" ? 0 : 1) - (y.s === "SPY" ? 0 : 1); });
+    data.forEach(function (d) { grid.appendChild(homeCard(d, sc, d.s === "SPY")); });
+    var today = todayIso();
+    var ev = (state.events || []).filter(function (e) { return e.type === "scheduled" && (e.end_date || e.date) >= today; })
+      .sort(function (a, b) { return a.date < b.date ? -1 : a.date > b.date ? 1 : 0; }).slice(0, 5);
+    var ul = $("home-events"); clear(ul);
+    ev.forEach(function (e) {
+      var li = el("li"); li.appendChild(el("b", dateLabel(e)));
+      var t = el("span", e.title); t.appendChild(el("small", "  " + (e.symbols ? e.symbols.join(", ") : "Whole market"), "muted"));
+      li.appendChild(t); ul.appendChild(li);
+    });
+    if (!ev.length) ul.appendChild(el("li", "No scheduled events listed.", "muted"));
+    var s = state.summary, r = $("home-record"); clear(r);
+    r.appendChild(el("strong", "Track record:"));
+    r.appendChild(document.createTextNode(s && s.n_total ? " " + s.n_resolved + " of " + s.n_total + " predictions have resolved." + (s.comparison_ready ? "" : " Too few to compare with the baseline yet.") : " no predictions yet."));
+    $("home-updated").textContent = s && s.generated_at ? "Scores updated " + fmtDate(s.generated_at.slice(0, 10)) : "";
+  }
   function signed(v) { return (v >= 0 ? "+" : "\u2212") + Math.abs(v).toFixed(1) + "%"; }
   function moveText(r, start) { return signed((r.low / start - 1) * 100) + " to " + signed((r.high / start - 1) * 100); }
 
@@ -565,7 +679,18 @@ tbody tr { border-top: 1px solid var(--line-2); }
       return;
     }
     var wanted = decodeURIComponent((location.hash || "").replace("#", ""));
-    state.symbol = syms.indexOf(wanted) >= 0 ? wanted : (syms.indexOf(state.symbol) >= 0 ? state.symbol : syms[0]);
+    if (syms.indexOf(wanted) < 0) {
+      state.symbol = null;
+      status.hidden = true; outlook.hidden = true; $("home").hidden = false;
+      renderTabs();
+      $("sym-title").textContent = "Outlook Lab";
+      $("sym-name").textContent = "AI forecast ranges scored against a no-view volatility baseline";
+      $("sym-price").hidden = true;
+      renderHome();
+      return;
+    }
+    $("home").hidden = true;
+    state.symbol = wanted;
     var list = forSymbol(state.symbol);
     var rows = latestByHorizon(list);
     status.hidden = true; outlook.hidden = false;
@@ -580,11 +705,12 @@ tbody tr { border-top: 1px solid var(--line-2); }
     up.textContent = state.summary && state.summary.generated_at ? "Scores updated " + fmtDate(state.summary.generated_at.slice(0, 10)) : "";
   }
 
+  $("home-all").addEventListener("click", function (e) { e.preventDefault(); location.hash = "#SPY"; });
   $("all-link").addEventListener("click", function (e) {
     e.preventDefault();
     $("all").scrollIntoView({ behavior: "smooth", block: "start" });
   });
-  window.addEventListener("hashchange", function () { state.horizon = null; render(); });
+  window.addEventListener("hashchange", function () { state.horizon = state.fromHome || null; state.fromHome = null; render(); window.scrollTo(0, 0); });
 
   Promise.all([
     load("data/predictions.json"),
