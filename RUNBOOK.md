@@ -41,3 +41,12 @@ Run once a week, in Claude, with the Robinhood MCP connected. Do the steps in or
 ## Long horizons (6m, 1y, 5y)
 
 The baseline is zero-drift (median = today's price), which is a weak yardstick over years because stocks tend to drift up. A long-horizon range that tilts upward can beat it without any skill. Read long-horizon results with that in mind, and note that 6m resolves in 2027 and 5y in 2031, so these add nothing to the track record soon.
+
+
+## Gathering news (bull and bear)
+
+1. **Search each side separately.** Run at least one search aimed at the bull case and one at the bear case for each symbol, so the cards do not just mirror that day's headlines.
+2. **Aim for at least two sourced items per case.** If a side has fewer, say so in `notes` (for example "bull case is thin: only one sourced item") rather than filling it with reasoning. Items with no link must carry `kind: "model_expectation"` or a `note`.
+3. **Prefer hard data over commentary:** earnings guidance and revisions, rate-futures pricing, positioning, and official calendars.
+4. **Never edit catalysts after a prediction is committed.** Adding news afterward would rationalize a range that is already locked and would undermine the scoring.
+5. **Update `data/events.json`** (upcoming events and recent shocks). A change to that file alone does not trigger a rebuild, so commit it together with `data/predictions.json` or start the workflow by hand.
