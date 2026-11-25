@@ -366,6 +366,9 @@ th { font-weight: 700; font-size: 12.5px; color: var(--muted-2); }
 .chartwrap .startlab { paint-order: stroke; stroke: var(--card); stroke-width: 4px; font-size: 12px; }
 .chartwrap .endlab { paint-order: stroke; stroke: var(--card); stroke-width: 4px; }
 .horizon-pick .logtoggle { margin-left: 10px; }
+.chartwrap { position: relative; padding: 0; overflow: hidden; }
+.chartwrap .tvbox { width: 100%; }
+.chartwrap .tvlegend { position: absolute; left: 12px; top: 8px; z-index: 3; font-size: 12.5px; font-weight: 600; color: var(--ink); background: color-mix(in oklab, var(--card) 82%, transparent); padding: 2px 6px; border-radius: 4px; pointer-events: none; font-variant-numeric: tabular-nums; max-width: calc(100% - 24px); }
 @media (prefers-reduced-motion: reduce) { .tile.enter { animation: none; } }
 @media (max-width: 560px) { .tmap { height: 560px; } .head h1 { font-size: 36px; } }
 </style>
@@ -438,7 +441,7 @@ th { font-weight: 700; font-size: 12.5px; color: var(--muted-2); }
     <h3 class="eyebrow">Where the price could go</h3>
     <div id="chart-pick" class="horizon-pick" role="group" aria-label="Chart window"></div>
     <div id="chart" class="chartwrap"></div>
-    <p class="muted" style="font-size:12px;margin-top:6px">Black line: daily closes. Blue band: the AI's 80% range; gray band: the volatility baseline; dashed lines: the drift baseline. The dots are the stored horizon ranges (1 week, 1 month and so on); the curve between them is a smooth guide that widens with the square root of time, not a separate forecast.</p>
+    <p class="muted" style="font-size:12px;margin-top:6px">Dark line: daily closes. Blue band: the AI's 80% range; gray dashed band: the volatility baseline (no view). Dots mark the stored horizon ranges (1 week, 1 month and so on); the curve between them is a smooth guide that widens with the square root of time, not a separate forecast. Hover for exact values, scroll or pinch to zoom, drag to pan. Chart by TradingView Lightweight Charts.</p>
   </div>
 
   <div class="section">
@@ -495,6 +498,7 @@ th { font-weight: 700; font-size: 12.5px; color: var(--muted-2); }
 </div>
 </div>
 
+<script src="lightweight-charts.js"></script>
 <script>
 (function () {
   var NAMES = { SPY: "SPDR S&P 500 ETF", QQQ: "Invesco QQQ Trust", SMH: "VanEck Semiconductor ETF", IWM: "iShares Russell 2000 ETF", XLF: "Financial Select Sector SPDR", XLE: "Energy Select Sector SPDR", XLV: "Health Care Select Sector SPDR", TLT: "iShares 20+ Year Treasury Bond ETF", GLD: "SPDR Gold Shares", XLK: "Technology Select Sector SPDR", XLY: "Consumer Discretionary Select Sector SPDR", XLP: "Consumer Staples Select Sector SPDR", XLI: "Industrial Select Sector SPDR", XLB: "Materials Select Sector SPDR", XLU: "Utilities Select Sector SPDR", XLRE: "Real Estate Select Sector SPDR", XLC: "Communication Services Select Sector SPDR", AAPL: "Apple", MSFT: "Microsoft", NVDA: "NVIDIA", AMZN: "Amazon", GOOGL: "Alphabet (Class A)", META: "Meta Platforms" };
@@ -513,6 +517,7 @@ th { font-weight: 700; font-size: 12.5px; color: var(--muted-2); }
     document.documentElement.setAttribute("data-theme", next);
     try { localStorage.setItem("ol-theme", next); } catch (e) {}
     syncTheme();
+    if (state.lastRows && state.tv) renderChart(state.lastRows);
   });
   syncTheme();
   function $(id) { return document.getElementById(id); }
@@ -736,7 +741,131 @@ th { font-weight: 700; font-size: 12.5px; color: var(--muted-2); }
     for (var v = Math.ceil(lo / step) * step; v <= hi + 1e-9; v += step) out.push(v);
     return out;
   }
+  var SHORT = { "1w": "1W", "1m": "1M", "3m": "3M", "6m": "6M", "1y": "1Y", "5y": "5Y" };
+  function cssRgb(name, a) {
+    var probe = document.createElement("span"); probe.style.color = "var(" + name + ")"; document.body.appendChild(probe);
+    var col = getComputedStyle(probe).color; document.body.removeChild(probe);
+    var c = document.createElement("canvas"); c.width = c.height = 1;
+    var x = c.getContext("2d", { willReadFrequently: true }); x.fillStyle = col; x.fillRect(0, 0, 1, 1);
+    var d = x.getImageData(0, 0, 1, 1).data;
+    return "rgba(" + d[0] + "," + d[1] + "," + d[2] + "," + (a == null ? 1 : a) + ")";
+  }
+  function isoOf(d) { return new Date(d * 86400000).toISOString().slice(0, 10); }
+  function BandPrimitive(chart, hiSeries, loSeries, hiPts, loPts, fill) {
+    var self = this;
+    this._views = [{
+      zOrder: function () { return "bottom"; },
+      renderer: function () {
+        return { draw: function (target) {
+          target.useMediaCoordinateSpace(function (scope) {
+            var ctx = scope.context, ts = chart.timeScale(), up = [], dn = [], i, x, y;
+            for (i = 0; i < hiPts.length; i++) {
+              x = ts.timeToCoordinate(hiPts[i].time); y = hiSeries.priceToCoordinate(hiPts[i].value);
+              if (x === null || y === null) continue; up.push([x, y]);
+              y = loSeries.priceToCoordinate(loPts[i].value); if (y !== null) dn.push([x, y]);
+            }
+            if (up.length < 2 || dn.length < 2) return;
+            ctx.beginPath(); ctx.moveTo(up[0][0], up[0][1]);
+            for (i = 1; i < up.length; i++) ctx.lineTo(up[i][0], up[i][1]);
+            for (i = dn.length - 1; i >= 0; i--) ctx.lineTo(dn[i][0], dn[i][1]);
+            ctx.closePath(); ctx.fillStyle = fill; ctx.fill();
+          });
+        } };
+      }
+    }];
+  }
+  BandPrimitive.prototype.paneViews = function () { return this._views; };
+  BandPrimitive.prototype.updateAllViews = function () {};
+
   function renderChart(rows) {
+    if (!window.LightweightCharts) { renderChartSvg(rows); return; }
+    state.lastRows = rows;
+    var LW = window.LightweightCharts;
+    seg2($("chart-pick"), [["1m", "1 month"], ["6m", "6 months"], ["1y", "1 year"], ["5y", "5 years"]], "chartWin", function () { renderChart(rows); });
+    var lg = el("button", "Log scale"); lg.type = "button"; lg.className = "logtoggle";
+    lg.setAttribute("aria-pressed", state.chartLog ? "true" : "false");
+    lg.addEventListener("click", function () { state.chartLog = !state.chartLog; renderChart(rows); });
+    $("chart-pick").appendChild(lg);
+    var host = $("chart"); clear(host);
+    if (state.tv) { try { state.tv.remove(); } catch (e) {} state.tv = null; }
+    var maxH = { "1m": 31, "6m": 190, "1y": 366, "5y": 1830 }[state.chartWin] || 31;
+    var cone = rows.filter(function (p) { return dayNum(p.resolves_on) - dayNum(p.made_at) <= maxH + 1; })
+      .sort(function (a, b) { return a.resolves_on < b.resolves_on ? -1 : 1; });
+    if (!cone.length) return;
+    var base = cone[0], t0 = dayNum(base.made_at), s0 = base.price_at_prediction;
+    var span = dayNum(cone[cone.length - 1].resolves_on) - t0;
+    var back = Math.max(45, Math.round(span * (state.chartWin === "1m" ? 2.2 : 0.9)));
+    var series = state.prices[state.symbol] || {}, keys = Object.keys(series).sort();
+    var histData = keys.filter(function (d) { return dayNum(d) >= t0 - back && d <= base.made_at; }).map(function (d) { return { time: d, value: series[d] }; });
+    var afterData = keys.filter(function (d) { return d > base.made_at; }).map(function (d) { return { time: d, value: series[d] }; });
+    if (!histData.length || histData[histData.length - 1].time !== base.made_at) histData.push({ time: base.made_at, value: s0 });
+    function curveAt(get, d) {
+      var anchors = [[0, 0]].concat(cone.map(function (p) { return [Math.sqrt(dayNum(p.resolves_on) - t0), Math.log(get(p) / s0)]; }));
+      var r = Math.sqrt(d), k = 1;
+      while (k < anchors.length - 1 && r > anchors[k][0]) k++;
+      var a0 = anchors[k - 1], a1 = anchors[k], u = a1[0] === a0[0] ? 0 : (r - a0[0]) / (a1[0] - a0[0]);
+      return s0 * Math.exp(a0[1] + (a1[1] - a0[1]) * u);
+    }
+    var days = [0], dd;
+    for (dd = 1; dd <= span; dd++) { var wd = new Date((t0 + dd) * 86400000).getUTCDay(); if (wd !== 0 && wd !== 6) days.push(dd); }
+    if (days[days.length - 1] !== span) days.push(span);
+    function build(get) { return days.map(function (d) { return { time: isoOf(t0 + d), value: Math.round(curveAt(get, d) * 100) / 100 }; }); }
+    var aiHi = build(function (p) { return p.ai.high; }), aiLo = build(function (p) { return p.ai.low; });
+    var bHi = build(function (p) { return p.baseline.high; }), bLo = build(function (p) { return p.baseline.low; });
+
+    var ink = cssRgb("--ink"), muted = cssRgb("--muted"), card = cssRgb("--card"), accent = cssRgb("--accent"), line = cssRgb("--line-2");
+    var box = document.createElement("div"); box.className = "tvbox";
+    box.style.height = (host.clientWidth < 560 ? 320 : 420) + "px";
+    var legend = document.createElement("div"); legend.className = "tvlegend";
+    host.appendChild(box); host.appendChild(legend);
+    var chart = LW.createChart(box, {
+      autoSize: true,
+      layout: { background: { type: "solid", color: card }, textColor: muted, fontFamily: getComputedStyle(document.body).fontFamily, fontSize: 12 },
+      grid: { vertLines: { visible: false }, horzLines: { color: line } },
+      rightPriceScale: { borderVisible: false, mode: state.chartLog ? LW.PriceScaleMode.Logarithmic : LW.PriceScaleMode.Normal, scaleMargins: { top: 0.1, bottom: 0.1 } },
+      timeScale: { borderVisible: false, rightOffset: 2, timeVisible: false },
+      crosshair: { mode: LW.CrosshairMode.Normal, vertLine: { color: muted, style: 3, width: 1, labelBackgroundColor: ink }, horzLine: { color: muted, style: 3, width: 1, labelBackgroundColor: ink } }
+    });
+    state.tv = chart;
+    function lineOpts(color, width, style, last) {
+      return { color: color, lineWidth: width, lineStyle: style, lastValueVisible: !!last, priceLineVisible: false, crosshairMarkerVisible: false };
+    }
+    var sBHi = chart.addSeries(LW.LineSeries, lineOpts(cssRgb("--muted", 0.75), 1, 2, false));
+    var sBLo = chart.addSeries(LW.LineSeries, lineOpts(cssRgb("--muted", 0.75), 1, 2, false));
+    var sHi = chart.addSeries(LW.LineSeries, lineOpts(accent, 2, 0, true));
+    var sLo = chart.addSeries(LW.LineSeries, lineOpts(accent, 2, 0, true));
+    var sHist = chart.addSeries(LW.AreaSeries, { lineColor: ink, lineWidth: 2, topColor: cssRgb("--ink", 0.16), bottomColor: cssRgb("--ink", 0.0), priceLineVisible: true, priceLineStyle: 3, priceLineColor: muted, crosshairMarkerRadius: 4 });
+    sBHi.setData(bHi); sBLo.setData(bLo); sHi.setData(aiHi); sLo.setData(aiLo);
+    sHist.setData(histData.concat(afterData));
+    sBHi.attachPrimitive(new BandPrimitive(chart, sBHi, sBLo, bHi, bLo, cssRgb("--muted", 0.16)));
+    sHi.attachPrimitive(new BandPrimitive(chart, sHi, sLo, aiHi, aiLo, cssRgb("--accent", 0.28)));
+    var dotsHi = [], dotsLo = [];
+    cone.forEach(function (p) {
+      dotsHi.push({ time: p.resolves_on, position: "inBar", shape: "circle", color: accent, size: 0.7 });
+      dotsLo.push({ time: p.resolves_on, position: "inBar", shape: "circle", color: accent, size: 0.7 });
+    });
+    LW.createSeriesMarkers(sHi, dotsHi); LW.createSeriesMarkers(sLo, dotsLo);
+    var padDays = Math.max(6, Math.round(span * 0.06)), pad = [];
+    for (dd = 1; dd <= padDays; dd++) { var w2 = new Date((t0 + span + dd) * 86400000).getUTCDay(); if (w2 !== 0 && w2 !== 6) pad.push({ time: isoOf(t0 + span + dd) }); }
+    sHi.setData(aiHi.concat(pad));
+    chart.timeScale().setVisibleRange({ from: histData[0].time, to: pad.length ? pad[pad.length - 1].time : aiHi[aiHi.length - 1].time });
+
+    var mapOf = function (arr) { var m = {}; arr.forEach(function (q) { m[q.time] = q.value; }); return m; };
+    var mHist = mapOf(histData.concat(afterData)), mAiHi = mapOf(aiHi), mAiLo = mapOf(aiLo), mBHi = mapOf(bHi), mBLo = mapOf(bLo);
+    var rangeTxt = function (a, b) { return "$" + a.toFixed(2) + " – $" + b.toFixed(2); };
+    function setLegend(t) {
+      var out = state.symbol + " · ";
+      if (!t) { legend.textContent = out + "predicted " + fmtDate(base.made_at) + " at $" + s0.toFixed(2); return; }
+      out += fmtDate(t);
+      if (mHist[t] !== undefined && t <= base.made_at) out += " · close $" + mHist[t].toFixed(2);
+      else if (mAiHi[t] !== undefined) out += " · AI " + rangeTxt(mAiLo[t], mAiHi[t]) + " · baseline " + rangeTxt(mBLo[t], mBHi[t]) + (mHist[t] !== undefined ? " · actual $" + mHist[t].toFixed(2) : "");
+      legend.textContent = out;
+    }
+    setLegend(null);
+    chart.subscribeCrosshairMove(function (param) { setLegend(param && param.time ? String(param.time) : null); });
+  }
+
+  function renderChartSvg(rows) {
     seg2($("chart-pick"), [["1m", "1 month"], ["6m", "6 months"], ["1y", "1 year"], ["5y", "5 years"]], "chartWin", function () { renderChart(rows); });
     var lg = el("button", "Log scale"); lg.type = "button"; lg.className = "logtoggle";
     lg.setAttribute("aria-pressed", state.chartLog ? "true" : "false");
