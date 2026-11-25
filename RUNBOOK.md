@@ -9,7 +9,7 @@ Run once a week, in Claude, with the Robinhood MCP connected. Do the steps in or
 - **Sources for every catalyst claim.** If a claim has no source, mark it as the model's expectation or leave it out.
 - **Write the AI range before looking at the baseline you compute**, so the comparison stays honest.
 
-## Steps (per symbol: SPY, QQQ, SMH, IWM, XLF, XLE, XLV, TLT, GLD; horizons 1w, 1m, 6m, 1y, 5y)
+## Steps (per symbol: SPY, QQQ, SMH, IWM, XLK, XLF, XLE, XLV, XLY, XLP, XLI, XLB, XLU, XLRE, XLC, TLT, GLD; horizons 1w, 1m, 6m, 1y, 5y)
 
 1. **Pull the quote.** Record the last trade price and its timestamp (`price_at_prediction`).
 2. **Pick the expiry** closest to the horizon (about 7 days for `1w`, 30 for `1m`). For `6m`, `1y` and `5y`, set `resolves_on` to the target trading day and take implied vol from the nearest listed expiry (for `5y` the longest listed one, since no 5-year options exist); say so in `notes`. For short horizons set `resolves_on` to the expiry date.
@@ -56,4 +56,6 @@ The baseline is zero-drift (median = today's price), which is a weak yardstick o
 
 - **TLT and GLD** are priced in raw closes. TLT pays a monthly dividend (roughly 0.4%), which drops the raw price on the ex-date, so a 1-week or 1-month range that spans an ex-date should account for it.
 - **TLT** option quotes sometimes return a usable implied vol for only one side (call or put) at far expiries; use the side that has one and say so in `notes`.
+- **XLRE** lists only four expiries (nothing past May 2027): use Dec 18 for 1w/1m and May 21 for the longer horizons, and say so in the notes.
+- **XLY, XLU** long-dated chains can miss the strike nearest the price: use the closest listed strike and note it.
 - **XLE, XLV, XLF** long-dated chains list fewer strikes; if the strike nearest the price is missing, use the closest listed one and note it.

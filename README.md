@@ -1,6 +1,6 @@
 # Outlook Lab
 
-Scored AI forecast ranges for S&P 500, QQQ, SMH, IWM, XLF, XLE, XLV, TLT and GLD, compared against a no-view volatility baseline. Every prediction is kept and scored when it comes due, including misses.
+Scored AI forecast ranges for S&P 500, QQQ, SMH, IWM, all eleven SPDR sector ETFs (XLK, XLF, XLE, XLV, XLY, XLP, XLI, XLB, XLU, XLRE, XLC), TLT and GLD, compared against a no-view volatility baseline. Every prediction is kept and scored when it comes due, including misses.
 
 This is an evaluation project, not a trading signal and not financial advice.
 
