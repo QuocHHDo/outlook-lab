@@ -8,7 +8,7 @@ DATA = ROOT / "data"
 
 # Horizon labels the project uses. Calendar days are only a guide: each
 # prediction stores its own resolves_on date (e.g. the matching option expiry).
-HORIZONS = {"1w": 7, "1m": 30, "3m": 91, "1y": 365}
+HORIZONS = {"1w": 7, "1m": 30, "3m": 91, "6m": 182, "1y": 365, "5y": 1826}
 
 DEFAULT_SYMBOLS = ["SPY", "QQQ", "SMH"]
 
