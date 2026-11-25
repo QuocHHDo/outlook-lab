@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Outlook Lab: scored market forecasts</title>
+<style>
+  :root { --ink:#1a1a1a; --muted:#5a5f6b; --line:#dfe2e8; --bg:#f6f7f9; --card:#fff; --accent:#2b4ccf; --ok:#1b6e3c; --bad:#a8420f; }
+  * { box-sizing: border-box; }
+  body { margin:0; background:var(--bg); color:var(--ink); font:15px/1.5 system-ui, -apple-system, "Segoe UI", sans-serif; }
+  main { max-width: 1040px; margin: 0 auto; padding: 32px 20px 64px; display:flex; flex-direction:column; gap:20px; }
+  h1 { margin:0; font-size:26px; }
+  h2 { margin:0 0 10px; font-size:13px; letter-spacing:.05em; text-transform:uppercase; color:var(--muted); }
+  p { margin:0; }
+  .muted { color:var(--muted); font-size:13px; }
+  .card { background:var(--card); border:1px solid var(--line); border-radius:10px; padding:18px 20px; }
+  .banner { background:#fff6e0; border:1px solid #e8d49a; border-radius:8px; padding:10px 14px; font-size:13px; color:#5c4a10; }
+  .grid { display:grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap:14px; }
+  .stat b { display:block; font-size:24px; }
+  .tablewrap { overflow-x:auto; }
+  table { width:100%; min-width:760px; border-collapse:collapse; font-size:13px; }
+  th, td { text-align:left; padding:9px 12px; border-top:1px solid var(--line); white-space:nowrap; }
+  thead th { border-top:0; background:#f0f2f6; font-weight:600; }
+  .held { color:var(--ok); font-weight:600; }
+  .missed { color:var(--bad); font-weight:600; }
+  .open { color:var(--muted); }
+</style>
+</head>
+<body>
+<main>
+  <header>
+    <h1>Outlook Lab</h1>
+    <p class="muted">AI forecast ranges for index and sector ETFs, scored against a no-view volatility baseline.</p>
+  </header>
+
+  <p class="banner">Predictions by an AI model are its judgment, not facts and not financial advice. Every prediction is kept and scored when it comes due, including the misses.</p>
+
+  <section class="card" aria-labelledby="record-title">
+    <h2 id="record-title">Track record</h2>
+    <p id="record-note" class="muted">Loading…</p>
+    <div id="record-stats" class="grid" style="margin-top:12px"></div>
+  </section>
+
+  <section class="card" aria-labelledby="preds-title">
+    <h2 id="preds-title">All predictions</h2>
+    <div class="tablewrap">
+      <table>
+        <thead>
+          <tr>
+            <th scope="col">Made</th><th scope="col">Symbol</th><th scope="col">Horizon</th>
+            <th scope="col">Start</th><th scope="col">AI range</th><th scope="col">Baseline range</th>
+            <th scope="col">Close</th><th scope="col">AI</th><th scope="col">Baseline</th>
+          </tr>
+        </thead>
+        <tbody id="rows"></tbody>
+      </table>
+    </div>
+    <p id="empty" class="muted" hidden>No predictions yet.</p>
+  </section>
+
+  <section class="card">
+    <h2>How scoring works</h2>
+    <p class="muted">Coverage is how often the close landed inside the range. An 80% range should cover about 80% over many predictions: far higher means it is too wide to be useful, far lower means it is overconfident. The interval score rewards narrow ranges that still hold (lower is better). Comparisons with the baseline are shown only after enough predictions have resolved.</p>
+  </section>
+</main>
+
+<script>
+(function () {
+  function el(tag, text, cls) {
+    var n = document.createElement(tag);
+    if (text !== undefined) n.textContent = text;
+    if (cls) n.className = cls;
+    return n;
+  }
+  function money(v) { return v == null ? "" : "$" + Number(v).toFixed(2); }
+  function range(r) { return r ? money(r.low) + " – " + money(r.high) : ""; }
+  function pct(v) { return v == null ? "n/a" : Math.round(v * 100) + "%"; }
+  function num(v) { return v == null ? "n/a" : Number(v).toFixed(4); }
+  function label(r) {
+    if (!r) return ["Open", "open"];
+    if (r === "held") return ["Held", "held"];
+    return [r === "missed_above" ? "Missed (above)" : "Missed (below)", "missed"];
+  }
+  function load(path) {
+    return fetch(path, { cache: "no-store" }).then(function (r) {
+      if (!r.ok) throw new Error(path + " " + r.status);
+      return r.json();
+    });
+  }
+
+  function renderRecord(s) {
+    var note = document.getElementById("record-note");
+    var box = document.getElementById("record-stats");
+    if (!s || !s.n_total) { note.textContent = "No predictions yet."; return; }
+    note.textContent = s.n_resolved + " of " + s.n_total + " predictions have resolved. " +
+      (s.comparison_ready
+        ? "Enough to compare, but still a small sample."
+        : "Too few to judge; the comparison with the baseline shows from " + s.min_resolved_for_comparison + ".");
+    if (!s.comparison_ready) return;
+    var o = s.overall;
+    [
+      ["AI coverage", pct(o.ai.coverage)],
+      ["Baseline coverage", pct(o.baseline.coverage)],
+      ["AI interval score", num(o.ai.mean_interval_score)],
+      ["Baseline interval score", num(o.baseline.mean_interval_score)]
+    ].forEach(function (pair) {
+      var c = el("div", undefined, "stat");
+      c.appendChild(el("span", pair[0], "muted"));
+      c.appendChild(el("b", pair[1]));
+      box.appendChild(c);
+    });
+  }
+
+  function renderRows(preds) {
+    var body = document.getElementById("rows");
+    if (!preds.length) { document.getElementById("empty").hidden = false; return; }
+    preds.slice().sort(function (a, b) { return a.made_at < b.made_at ? 1 : -1; }).forEach(function (p) {
+      var res = p.result || null;
+      var ai = label(res && res.ai.result), bl = label(res && res.baseline.result);
+      var tr = document.createElement("tr");
+      [p.made_at, p.symbol, p.horizon, money(p.price_at_prediction), range(p.ai), range(p.baseline),
+       res ? money(res.close) + " (" + res.close_date + ")" : "Due " + p.resolves_on].forEach(function (t) {
+        tr.appendChild(el("td", t));
+      });
+      tr.appendChild(el("td", ai[0], ai[1]));
+      tr.appendChild(el("td", bl[0], bl[1]));
+      body.appendChild(tr);
+    });
+  }
+
+  Promise.all([load("data/summary.json").catch(function () { return null; }),
+               load("data/predictions.json").catch(function () { return []; })])
+    .then(function (r) { renderRecord(r[0]); renderRows(r[1]); });
+})();
+</script>
+</body>
+</html>

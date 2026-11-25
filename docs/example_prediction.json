@@ -1,0 +1,25 @@
+{
+  "_note": "EXAMPLE ONLY. The AI range, probability and catalysts below are made up to show the shape; this is not a real forecast. The baseline numbers come from SPY quotes on 2026-11-25.",
+  "id": "2026-11-25_SPY_1w",
+  "symbol": "SPY",
+  "made_at": "2026-11-25",
+  "horizon": "1w",
+  "resolves_on": "2026-12-04",
+  "price_at_prediction": 711.23,
+  "price_time": "2026-11-25T17:51:28Z",
+  "ai": { "low": 690.0, "high": 735.0, "level": 0.8, "prob_up": 0.55 },
+  "baseline": {
+    "method": "implied_vol",
+    "iv": 0.272,
+    "iv_updated_at": "2026-11-25T17:52:44Z",
+    "low": 673.35,
+    "high": 751.25,
+    "level": 0.8
+  },
+  "catalysts": {
+    "bull": [{ "text": "Example bull point", "source": "https://example.com/source" }],
+    "base": [{ "text": "Example base point", "source": "https://example.com/source" }],
+    "bear": [{ "text": "Example bear point", "source": "https://example.com/source" }]
+  },
+  "status": "open"
+}

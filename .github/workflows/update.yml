@@ -1,0 +1,60 @@
+name: Update scores and deploy site
+
+on:
+  schedule:
+    - cron: "30 22 * * 1-5"   # weekdays 22:30 UTC, after the US close
+  push:
+    branches: [main]
+    paths: ["data/predictions.json", "site/**", "scripts/**"]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: update
+  cancel-in-progress: false
+
+jobs:
+  score:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install yfinance
+      - name: Validate predictions
+        run: python scripts/validate.py
+      - name: Fetch closes (free, best effort)
+        run: python scripts/fetch_prices.py
+      - name: Score predictions that are due
+        run: python scripts/score.py
+      - name: Commit updated data
+        run: |
+          git config user.name "outlook-lab bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add data/
+          git diff --cached --quiet || git commit -m "Update prices and scores"
+          git push
+      - name: Build site
+        run: |
+          mkdir _site
+          cp site/index.html _site/
+          cp -r data _site/data
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+  deploy:
+    needs: score
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

@@ -1,0 +1,28 @@
+{
+  "generated_at": "2026-11-25T17:56:00Z",
+  "latest_price_date": null,
+  "n_total": 0,
+  "n_open": 0,
+  "n_resolved": 0,
+  "min_resolved_for_comparison": 10,
+  "comparison_ready": false,
+  "overall": {
+    "n": 0,
+    "ai": {
+      "coverage": null,
+      "mean_width_pct": null,
+      "mean_interval_score": null,
+      "mean_brier_up": null,
+      "n_brier": 0
+    },
+    "baseline": {
+      "coverage": null,
+      "mean_width_pct": null,
+      "mean_interval_score": null,
+      "mean_brier_up": null,
+      "n_brier": 0
+    }
+  },
+  "by_horizon": {},
+  "needs_price": []
+}
