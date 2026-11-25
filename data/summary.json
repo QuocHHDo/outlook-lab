@@ -1,28 +1,52 @@
 {
-  "generated_at": "2026-11-25T20:38:43Z",
+  "generated_at": "2026-11-25T21:40:06Z",
   "latest_price_date": "2026-11-25",
   "n_total": 85,
   "n_open": 85,
   "n_resolved": 0,
   "min_resolved_for_comparison": 10,
   "comparison_ready": false,
+  "n_blind": 0,
   "overall": {
-    "n": 0,
-    "ai": {
-      "coverage": null,
-      "mean_width_pct": null,
-      "mean_interval_score": null,
-      "mean_brier_up": null,
-      "n_brier": 0
-    },
-    "baseline": {
-      "coverage": null,
-      "mean_width_pct": null,
-      "mean_interval_score": null,
-      "mean_brier_up": null,
-      "n_brier": 0
-    }
+    "n": 0
   },
+  "calibration": [
+    {
+      "lo": 0.0,
+      "hi": 0.4,
+      "n": 0,
+      "mean_prob": null,
+      "freq_up": null
+    },
+    {
+      "lo": 0.4,
+      "hi": 0.5,
+      "n": 0,
+      "mean_prob": null,
+      "freq_up": null
+    },
+    {
+      "lo": 0.5,
+      "hi": 0.6,
+      "n": 0,
+      "mean_prob": null,
+      "freq_up": null
+    },
+    {
+      "lo": 0.6,
+      "hi": 0.7,
+      "n": 0,
+      "mean_prob": null,
+      "freq_up": null
+    },
+    {
+      "lo": 0.7,
+      "hi": 1.0,
+      "n": 0,
+      "mean_prob": null,
+      "freq_up": null
+    }
+  ],
   "by_horizon": {},
   "needs_price": []
 }

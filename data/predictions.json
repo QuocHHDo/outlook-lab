@@ -60,7 +60,14 @@
       ]
     },
     "notes": "Made intraday (about 12:35 PM CT), not at a close. The AI range was written before computing the baseline, but a similar baseline had been seen earlier in the same session, so the comparison is not fully blind.",
-    "status": "open"
+    "status": "open",
+    "baseline_drift": {
+      "method": "implied_vol_drift",
+      "iv": 0.2683,
+      "low": 676.81,
+      "high": 753.98,
+      "level": 0.8
+    }
   },
   {
     "id": "2026-11-25_SPY_1m",
@@ -127,7 +134,14 @@
       ]
     },
     "notes": "Made intraday (about 12:35 PM CT), not at a close. The AI range was written before computing the baseline, but a similar baseline had been seen earlier in the same session, so the comparison is not fully blind.",
-    "status": "open"
+    "status": "open",
+    "baseline_drift": {
+      "method": "implied_vol_drift",
+      "iv": 0.2397,
+      "low": 656.34,
+      "high": 780.44,
+      "level": 0.8
+    }
   },
   {
     "id": "2026-11-25_QQQ_1w",
@@ -198,7 +212,14 @@
       ]
     },
     "notes": "Made intraday (about 1:12 PM CT), not at a close. Prices and implied vol are from Robinhood read-only quotes (IV is the average of the at-the-money call and put at the nearest strike). I ran the baseline calculator before writing the AI range, so this prediction is NOT blind to the baseline. Catalyst items without a link come from Robinhood's earnings calendar or are the model's own reasoning. The 1-week implied vol includes the Dec 4 jobs report.",
-    "status": "open"
+    "status": "open",
+    "baseline_drift": {
+      "method": "implied_vol_drift",
+      "iv": 0.3968,
+      "low": 585.2,
+      "high": 686.54,
+      "level": 0.8
+    }
   },
   {
     "id": "2026-11-25_QQQ_1m",
@@ -273,7 +294,14 @@
       ]
     },
     "notes": "Made intraday (about 1:12 PM CT), not at a close. Prices and implied vol are from Robinhood read-only quotes (IV is the average of the at-the-money call and put at the nearest strike). I ran the baseline calculator before writing the AI range, so this prediction is NOT blind to the baseline. Catalyst items without a link come from Robinhood's earnings calendar or are the model's own reasoning.",
-    "status": "open"
+    "status": "open",
+    "baseline_drift": {
+      "method": "implied_vol_drift",
+      "iv": 0.3462,
+      "low": 559.6,
+      "high": 718.62,
+      "level": 0.8
+    }
   },
   {
     "id": "2026-11-25_SMH_1w",
@@ -344,7 +372,14 @@
       ]
     },
     "notes": "Made intraday (about 1:12 PM CT), not at a close. Prices and implied vol are from Robinhood read-only quotes (IV is the average of the at-the-money call and put at the nearest strike). I ran the baseline calculator before writing the AI range, so this prediction is NOT blind to the baseline. Catalyst items without a link come from Robinhood's earnings calendar or are the model's own reasoning.",
-    "status": "open"
+    "status": "open",
+    "baseline_drift": {
+      "method": "implied_vol_drift",
+      "iv": 0.7515,
+      "low": 359.65,
+      "high": 486.67,
+      "level": 0.8
+    }
   },
   {
     "id": "2026-11-25_SMH_1m",
@@ -415,7 +450,14 @@
       ]
     },
     "notes": "Made intraday (about 1:12 PM CT), not at a close. Prices and implied vol are from Robinhood read-only quotes (IV is the average of the at-the-money call and put at the nearest strike). I ran the baseline calculator before writing the AI range, so this prediction is NOT blind to the baseline. Catalyst items without a link come from Robinhood's earnings calendar or are the model's own reasoning.",
-    "status": "open"
+    "status": "open",
+    "baseline_drift": {
+      "method": "implied_vol_drift",
+      "iv": 0.6574,
+      "low": 327.66,
+      "high": 526.85,
+      "level": 0.8
+    }
   },
   {
     "id": "2026-11-25_SPY_6m",
@@ -476,7 +518,14 @@
       ]
     },
     "notes": "Made intraday (about 1:17 PM CT), not at a close. Price and implied vol are Robinhood read-only quotes (IV is the average of the at-the-money call and put at the nearest strike, taken from the 2027-06-17 expiry). I ran the baseline calculator before writing the AI range, so this is NOT blind to the baseline. The 6-month prediction resolves around May 25, 2027. The baseline is zero-drift (median = today's price); over long horizons stocks tend to drift up, so an upward-tilted range can beat it without skill. Catalyst items without a link are the model's own reasoning.",
-    "status": "open"
+    "status": "open",
+    "baseline_drift": {
+      "method": "implied_vol_drift",
+      "iv": 0.2128,
+      "low": 603.24,
+      "high": 885.72,
+      "level": 0.8
+    }
   },
   {
     "id": "2026-11-25_SPY_1y",
@@ -536,7 +585,14 @@
       ]
     },
     "notes": "Made intraday (about 1:17 PM CT), not at a close. Price and implied vol are Robinhood read-only quotes (IV is the average of the at-the-money call and put at the nearest strike, taken from the 2027-12-17 expiry). I ran the baseline calculator before writing the AI range, so this is NOT blind to the baseline. The 1-year prediction resolves around Nov 24, 2027. The baseline is zero-drift (median = today's price); over long horizons stocks tend to drift up, so an upward-tilted range can beat it without skill. Catalyst items without a link are the model's own reasoning.",
-    "status": "open"
+    "status": "open",
+    "baseline_drift": {
+      "method": "implied_vol_drift",
+      "iv": 0.2093,
+      "low": 570.18,
+      "high": 974.26,
+      "level": 0.8
+    }
   },
   {
     "id": "2026-11-25_SPY_5y",
@@ -597,7 +653,14 @@
       ]
     },
     "notes": "Made intraday (about 1:17 PM CT), not at a close. Price and implied vol are Robinhood read-only quotes (IV is the average of the at-the-money call and put at the nearest strike, taken from the 2029-01-19 expiry). I ran the baseline calculator before writing the AI range, so this is NOT blind to the baseline. The 5-year prediction resolves around Nov 25, 2031, so it will not affect the track record for years. The baseline is zero-drift (median = today's price); over long horizons stocks tend to drift up, so an upward-tilted range can beat it without skill. Catalyst items without a link are the model's own reasoning.",
-    "status": "open"
+    "status": "open",
+    "baseline_drift": {
+      "method": "implied_vol_drift",
+      "iv": 0.2056,
+      "low": 483.44,
+      "high": 1571.2,
+      "level": 0.8
+    }
   },
   {
     "id": "2026-11-25_QQQ_6m",
@@ -661,7 +724,14 @@
       ]
     },
     "notes": "Made intraday (about 1:17 PM CT), not at a close. Price and implied vol are Robinhood read-only quotes (IV is the average of the at-the-money call and put at the nearest strike, taken from the 2027-05-21 expiry). I ran the baseline calculator before writing the AI range, so this is NOT blind to the baseline. The 6-month prediction resolves around May 25, 2027. The baseline is zero-drift (median = today's price); over long horizons stocks tend to drift up, so an upward-tilted range can beat it without skill. Catalyst items without a link are the model's own reasoning.",
-    "status": "open"
+    "status": "open",
+    "baseline_drift": {
+      "method": "implied_vol_drift",
+      "iv": 0.2897,
+      "low": 492.4,
+      "high": 830.63,
+      "level": 0.8
+    }
   },
   {
     "id": "2026-11-25_QQQ_1y",
@@ -724,7 +794,14 @@
       ]
     },
     "notes": "Made intraday (about 1:17 PM CT), not at a close. Price and implied vol are Robinhood read-only quotes (IV is the average of the at-the-money call and put at the nearest strike, taken from the 2027-12-17 expiry). I ran the baseline calculator before writing the AI range, so this is NOT blind to the baseline. The 1-year prediction resolves around Nov 24, 2027. The baseline is zero-drift (median = today's price); over long horizons stocks tend to drift up, so an upward-tilted range can beat it without skill. Catalyst items without a link are the model's own reasoning.",
-    "status": "open"
+    "status": "open",
+    "baseline_drift": {
+      "method": "implied_vol_drift",
+      "iv": 0.2747,
+      "low": 455.98,
+      "high": 921.1,
+      "level": 0.8
+    }
   },
   {
     "id": "2026-11-25_QQQ_5y",
@@ -788,7 +865,14 @@
       ]
     },
     "notes": "Made intraday (about 1:17 PM CT), not at a close. Price and implied vol are Robinhood read-only quotes (IV is the average of the at-the-money call and put at the nearest strike, taken from the 2029-01-19 expiry). I ran the baseline calculator before writing the AI range, so this is NOT blind to the baseline. The 5-year prediction resolves around Nov 25, 2031, so it will not affect the track record for years. The baseline is zero-drift (median = today's price); over long horizons stocks tend to drift up, so an upward-tilted range can beat it without skill. Catalyst items without a link are the model's own reasoning.",
-    "status": "open"
+    "status": "open",
+    "baseline_drift": {
+      "method": "implied_vol_drift",
+      "iv": 0.2643,
+      "low": 336.85,
+      "high": 1532.76,
+      "level": 0.8
+    }
   },
   {
     "id": "2026-11-25_SMH_6m",
@@ -856,7 +940,14 @@
       ]
     },
     "notes": "Made intraday (about 1:17 PM CT), not at a close. Price and implied vol are Robinhood read-only quotes (IV is the average of the at-the-money call and put at the nearest strike, taken from the 2027-05-21 expiry). I ran the baseline calculator before writing the AI range, so this is NOT blind to the baseline. The 6-month prediction resolves around May 25, 2027. The baseline is zero-drift (median = today's price); over long horizons stocks tend to drift up, so an upward-tilted range can beat it without skill. Catalyst items without a link are the model's own reasoning.",
-    "status": "open"
+    "status": "open",
+    "baseline_drift": {
+      "method": "implied_vol_drift",
+      "iv": 0.5122,
+      "low": 255.3,
+      "high": 643.5,
+      "level": 0.8
+    }
   },
   {
     "id": "2026-11-25_SMH_1y",
@@ -923,7 +1014,14 @@
       ]
     },
     "notes": "Made intraday (about 1:17 PM CT), not at a close. Price and implied vol are Robinhood read-only quotes (IV is the average of the at-the-money call and put at the nearest strike, taken from the 2027-12-17 expiry). I ran the baseline calculator before writing the AI range, so this is NOT blind to the baseline. The 1-year prediction resolves around Nov 24, 2027. The baseline is zero-drift (median = today's price); over long horizons stocks tend to drift up, so an upward-tilted range can beat it without skill. Catalyst items without a link are the model's own reasoning.",
-    "status": "open"
+    "status": "open",
+    "baseline_drift": {
+      "method": "implied_vol_drift",
+      "iv": 0.4759,
+      "low": 216.55,
+      "high": 732.11,
+      "level": 0.8
+    }
   },
   {
     "id": "2026-11-25_SMH_5y",
@@ -991,7 +1089,14 @@
       ]
     },
     "notes": "Made intraday (about 1:17 PM CT), not at a close. Price and implied vol are Robinhood read-only quotes (IV is the average of the at-the-money call and put at the nearest strike, taken from the 2029-01-19 expiry). I ran the baseline calculator before writing the AI range, so this is NOT blind to the baseline. The 5-year prediction resolves around Nov 25, 2031, so it will not affect the track record for years. The baseline is zero-drift (median = today's price); over long horizons stocks tend to drift up, so an upward-tilted range can beat it without skill. Catalyst items without a link are the model's own reasoning.",
-    "status": "open"
+    "status": "open",
+    "baseline_drift": {
+      "method": "implied_vol_drift",
+      "iv": 0.4456,
+      "low": 96.18,
+      "high": 1237.37,
+      "level": 0.8
+    }
   },
   {
     "id": "2026-11-25_IWM_1w",
@@ -1058,7 +1163,14 @@
       ]
     },
     "notes": "Made intraday (about 2:00 PM CT), not at a close. The AI range was written AFTER seeing the baseline, so the comparison is not blind. IV is the average of the call and put at the strike nearest the price on the 2026-12-04 expiry.",
-    "status": "open"
+    "status": "open",
+    "baseline_drift": {
+      "method": "implied_vol_drift",
+      "iv": 0.2425,
+      "low": 256.24,
+      "high": 282.51,
+      "level": 0.8
+    }
   },
   {
     "id": "2026-11-25_IWM_1m",
@@ -1129,7 +1241,14 @@
       ]
     },
     "notes": "Made intraday (about 2:00 PM CT), not at a close. The AI range was written AFTER seeing the baseline, so the comparison is not blind. IV is the average of the call and put at the strike nearest the price on the 2026-12-24 expiry.",
-    "status": "open"
+    "status": "open",
+    "baseline_drift": {
+      "method": "implied_vol_drift",
+      "iv": 0.2401,
+      "low": 247.13,
+      "high": 293.94,
+      "level": 0.8
+    }
   },
   {
     "id": "2026-11-25_IWM_6m",
@@ -1192,7 +1311,14 @@
       ]
     },
     "notes": "Made intraday (about 2:00 PM CT), not at a close. The AI range was written AFTER seeing the baseline, so the comparison is not blind. IV is the average of the call and put at the strike nearest the price on the 2027-05-21 expiry; the horizon has no listed expiry of its own, so this is the nearest listed one (for 5y the longest listed). The baseline is zero-drift, a weak yardstick over long horizons.",
-    "status": "open"
+    "status": "open",
+    "baseline_drift": {
+      "method": "implied_vol_drift",
+      "iv": 0.2293,
+      "low": 222.28,
+      "high": 336.23,
+      "level": 0.8
+    }
   },
   {
     "id": "2026-11-25_IWM_1y",
@@ -1255,7 +1381,14 @@
       ]
     },
     "notes": "Made intraday (about 2:00 PM CT), not at a close. The AI range was written AFTER seeing the baseline, so the comparison is not blind. IV is the average of the call and put at the strike nearest the price on the 2027-12-17 expiry; the horizon has no listed expiry of its own, so this is the nearest listed one (for 5y the longest listed). The baseline is zero-drift, a weak yardstick over long horizons.",
-    "status": "open"
+    "status": "open",
+    "baseline_drift": {
+      "method": "implied_vol_drift",
+      "iv": 0.2263,
+      "low": 208.27,
+      "high": 371.69,
+      "level": 0.8
+    }
   },
   {
     "id": "2026-11-25_IWM_5y",
@@ -1318,7 +1451,14 @@
       ]
     },
     "notes": "Made intraday (about 2:00 PM CT), not at a close. The AI range was written AFTER seeing the baseline, so the comparison is not blind. IV is the average of the call and put at the strike nearest the price on the 2029-01-19 expiry; the horizon has no listed expiry of its own, so this is the nearest listed one (for 5y the longest listed). The baseline is zero-drift, a weak yardstick over long horizons.",
-    "status": "open"
+    "status": "open",
+    "baseline_drift": {
+      "method": "implied_vol_drift",
+      "iv": 0.219,
+      "low": 171.85,
+      "high": 603.11,
+      "level": 0.8
+    }
   },
   {
     "id": "2026-11-25_XLF_1w",
@@ -1385,7 +1525,14 @@
       ]
     },
     "notes": "Made intraday (about 2:00 PM CT), not at a close. The AI range was written AFTER seeing the baseline, so the comparison is not blind. IV is the average of the call and put at the strike nearest the price on the 2026-12-04 expiry.",
-    "status": "open"
+    "status": "open",
+    "baseline_drift": {
+      "method": "implied_vol_drift",
+      "iv": 0.2051,
+      "low": 54.3,
+      "high": 58.97,
+      "level": 0.8
+    }
   },
   {
     "id": "2026-11-25_XLF_1m",
@@ -1456,7 +1603,14 @@
       ]
     },
     "notes": "Made intraday (about 2:00 PM CT), not at a close. The AI range was written AFTER seeing the baseline, so the comparison is not blind. IV is the average of the call and put at the strike nearest the price on the 2026-12-24 expiry.",
-    "status": "open"
+    "status": "open",
+    "baseline_drift": {
+      "method": "implied_vol_drift",
+      "iv": 0.2089,
+      "low": 52.58,
+      "high": 61.15,
+      "level": 0.8
+    }
   },
   {
     "id": "2026-11-25_XLF_6m",
@@ -1519,7 +1673,14 @@
       ]
     },
     "notes": "Made intraday (about 2:00 PM CT), not at a close. The AI range was written AFTER seeing the baseline, so the comparison is not blind. IV is the average of the call and put at the strike nearest the price on the 2027-06-17 expiry; the horizon has no listed expiry of its own, so this is the nearest listed one (for 5y the longest listed). The baseline is zero-drift, a weak yardstick over long horizons.",
-    "status": "open"
+    "status": "open",
+    "baseline_drift": {
+      "method": "implied_vol_drift",
+      "iv": 0.1939,
+      "low": 48.43,
+      "high": 68.73,
+      "level": 0.8
+    }
   },
   {
     "id": "2026-11-25_XLF_1y",
@@ -1582,7 +1743,14 @@
       ]
     },
     "notes": "Made intraday (about 2:00 PM CT), not at a close. The AI range was written AFTER seeing the baseline, so the comparison is not blind. IV is the average of the call and put at the strike nearest the price on the 2027-12-17 expiry; the horizon has no listed expiry of its own, so this is the nearest listed one (for 5y the longest listed). The baseline is zero-drift, a weak yardstick over long horizons.",
-    "status": "open"
+    "status": "open",
+    "baseline_drift": {
+      "method": "implied_vol_drift",
+      "iv": 0.1984,
+      "low": 45.65,
+      "high": 75.86,
+      "level": 0.8
+    }
   },
   {
     "id": "2026-11-25_XLF_5y",
@@ -1645,7 +1813,14 @@
       ]
     },
     "notes": "Made intraday (about 2:00 PM CT), not at a close. The AI range was written AFTER seeing the baseline, so the comparison is not blind. IV is the average of the call and put at the strike nearest the price on the 2029-01-19 expiry; the horizon has no listed expiry of its own, so this is the nearest listed one (for 5y the longest listed). The baseline is zero-drift, a weak yardstick over long horizons.",
-    "status": "open"
+    "status": "open",
+    "baseline_drift": {
+      "method": "implied_vol_drift",
+      "iv": 0.1865,
+      "low": 40.99,
+      "high": 119.4,
+      "level": 0.8
+    }
   },
   {
     "id": "2026-11-25_XLE_1w",
@@ -1715,7 +1890,14 @@
       ]
     },
     "notes": "Made intraday (about 2:00 PM CT), not at a close. The AI range was written AFTER seeing the baseline, so the comparison is not blind. IV is the average of the call and put at the strike nearest the price on the 2026-12-04 expiry.",
-    "status": "open"
+    "status": "open",
+    "baseline_drift": {
+      "method": "implied_vol_drift",
+      "iv": 0.2775,
+      "low": 57.76,
+      "high": 64.59,
+      "level": 0.8
+    }
   },
   {
     "id": "2026-11-25_XLE_1m",
@@ -1789,7 +1971,14 @@
       ]
     },
     "notes": "Made intraday (about 2:00 PM CT), not at a close. The AI range was written AFTER seeing the baseline, so the comparison is not blind. IV is the average of the call and put at the strike nearest the price on the 2026-12-24 expiry.",
-    "status": "open"
+    "status": "open",
+    "baseline_drift": {
+      "method": "implied_vol_drift",
+      "iv": 0.2798,
+      "low": 55.27,
+      "high": 67.66,
+      "level": 0.8
+    }
   },
   {
     "id": "2026-11-25_XLE_6m",
@@ -1851,7 +2040,14 @@
       ]
     },
     "notes": "Made intraday (about 2:00 PM CT), not at a close. The AI range was written AFTER seeing the baseline, so the comparison is not blind. IV is the average of the call and put at the strike nearest the price on the 2027-06-17 expiry; the horizon has no listed expiry of its own, so this is the nearest listed one (for 5y the longest listed). The baseline is zero-drift, a weak yardstick over long horizons.",
-    "status": "open"
+    "status": "open",
+    "baseline_drift": {
+      "method": "implied_vol_drift",
+      "iv": 0.256,
+      "low": 49.12,
+      "high": 77.96,
+      "level": 0.8
+    }
   },
   {
     "id": "2026-11-25_XLE_1y",
@@ -1913,7 +2109,14 @@
       ]
     },
     "notes": "Made intraday (about 2:00 PM CT), not at a close. The AI range was written AFTER seeing the baseline, so the comparison is not blind. IV is the average of the call and put at the strike nearest the price on the 2027-12-17 expiry; the horizon has no listed expiry of its own, so this is the nearest listed one (for 5y the longest listed). The baseline is zero-drift, a weak yardstick over long horizons. The 61 strike was not listed on this expiry, so the 60 strike was used.",
-    "status": "open"
+    "status": "open",
+    "baseline_drift": {
+      "method": "implied_vol_drift",
+      "iv": 0.2549,
+      "low": 45.28,
+      "high": 86.95,
+      "level": 0.8
+    }
   },
   {
     "id": "2026-11-25_XLE_5y",
@@ -1975,7 +2178,14 @@
       ]
     },
     "notes": "Made intraday (about 2:00 PM CT), not at a close. The AI range was written AFTER seeing the baseline, so the comparison is not blind. IV is the average of the call and put at the strike nearest the price on the 2029-01-19 expiry; the horizon has no listed expiry of its own, so this is the nearest listed one (for 5y the longest listed). The baseline is zero-drift, a weak yardstick over long horizons.",
-    "status": "open"
+    "status": "open",
+    "baseline_drift": {
+      "method": "implied_vol_drift",
+      "iv": 0.2474,
+      "low": 34.8,
+      "high": 143.73,
+      "level": 0.8
+    }
   },
   {
     "id": "2026-11-25_XLV_1w",
@@ -2043,7 +2253,14 @@
       ]
     },
     "notes": "Made intraday (about 2:00 PM CT), not at a close. The AI range was written AFTER seeing the baseline, so the comparison is not blind. IV is the average of the call and put at the strike nearest the price on the 2026-12-04 expiry. Bull and bear sourcing is thin for XLV.",
-    "status": "open"
+    "status": "open",
+    "baseline_drift": {
+      "method": "implied_vol_drift",
+      "iv": 0.236,
+      "low": 175.53,
+      "high": 193.02,
+      "level": 0.8
+    }
   },
   {
     "id": "2026-11-25_XLV_1m",
@@ -2115,7 +2332,14 @@
       ]
     },
     "notes": "Made intraday (about 2:00 PM CT), not at a close. The AI range was written AFTER seeing the baseline, so the comparison is not blind. IV is the average of the call and put at the strike nearest the price on the 2026-12-24 expiry. Bull and bear sourcing is thin for XLV.",
-    "status": "open"
+    "status": "open",
+    "baseline_drift": {
+      "method": "implied_vol_drift",
+      "iv": 0.2383,
+      "low": 169.17,
+      "high": 200.96,
+      "level": 0.8
+    }
   },
   {
     "id": "2026-11-25_XLV_6m",
@@ -2179,7 +2403,14 @@
       ]
     },
     "notes": "Made intraday (about 2:00 PM CT), not at a close. The AI range was written AFTER seeing the baseline, so the comparison is not blind. IV is the average of the call and put at the strike nearest the price on the 2027-06-17 expiry; the horizon has no listed expiry of its own, so this is the nearest listed one (for 5y the longest listed). The baseline is zero-drift, a weak yardstick over long horizons. Bull and bear sourcing is thin for XLV.",
-    "status": "open"
+    "status": "open",
+    "baseline_drift": {
+      "method": "implied_vol_drift",
+      "iv": 0.2149,
+      "low": 154.29,
+      "high": 227.41,
+      "level": 0.8
+    }
   },
   {
     "id": "2026-11-25_XLV_1y",
@@ -2243,7 +2474,14 @@
       ]
     },
     "notes": "Made intraday (about 2:00 PM CT), not at a close. The AI range was written AFTER seeing the baseline, so the comparison is not blind. IV is the average of the call and put at the strike nearest the price on the 2028-01-21 expiry; the horizon has no listed expiry of its own, so this is the nearest listed one (for 5y the longest listed). The baseline is zero-drift, a weak yardstick over long horizons. Bull and bear sourcing is thin for XLV.",
-    "status": "open"
+    "status": "open",
+    "baseline_drift": {
+      "method": "implied_vol_drift",
+      "iv": 0.2063,
+      "low": 146.8,
+      "high": 248.92,
+      "level": 0.8
+    }
   },
   {
     "id": "2026-11-25_XLV_5y",
@@ -2307,7 +2545,14 @@
       ]
     },
     "notes": "Made intraday (about 2:00 PM CT), not at a close. The AI range was written AFTER seeing the baseline, so the comparison is not blind. IV is the average of the call and put at the strike nearest the price on the 2029-01-19 expiry; the horizon has no listed expiry of its own, so this is the nearest listed one (for 5y the longest listed). The baseline is zero-drift, a weak yardstick over long horizons. Bull and bear sourcing is thin for XLV.",
-    "status": "open"
+    "status": "open",
+    "baseline_drift": {
+      "method": "implied_vol_drift",
+      "iv": 0.1991,
+      "low": 127.08,
+      "high": 397.91,
+      "level": 0.8
+    }
   },
   {
     "id": "2026-11-25_TLT_1w",
@@ -2374,7 +2619,14 @@
       ]
     },
     "notes": "Made intraday (about 2:00 PM CT), not at a close. The AI range was written AFTER seeing the baseline, so the comparison is not blind. IV is the average of the call and put at the strike nearest the price on the 2026-12-04 expiry.",
-    "status": "open"
+    "status": "open",
+    "baseline_drift": {
+      "method": "implied_vol_drift",
+      "iv": 0.1121,
+      "low": 80.68,
+      "high": 84.4,
+      "level": 0.8
+    }
   },
   {
     "id": "2026-11-25_TLT_1m",
@@ -2445,7 +2697,14 @@
       ]
     },
     "notes": "Made intraday (about 2:00 PM CT), not at a close. The AI range was written AFTER seeing the baseline, so the comparison is not blind. IV is the average of the call and put at the strike nearest the price on the 2026-12-24 expiry.",
-    "status": "open"
+    "status": "open",
+    "baseline_drift": {
+      "method": "implied_vol_drift",
+      "iv": 0.1159,
+      "low": 79.37,
+      "high": 86.3,
+      "level": 0.8
+    }
   },
   {
     "id": "2026-11-25_TLT_6m",
@@ -2508,7 +2767,14 @@
       ]
     },
     "notes": "Made intraday (about 2:00 PM CT), not at a close. The AI range was written AFTER seeing the baseline, so the comparison is not blind. IV is the average of the call and put at the strike nearest the price on the 2027-05-21 expiry; the horizon has no listed expiry of its own, so this is the nearest listed one (for 5y the longest listed). The baseline is zero-drift, a weak yardstick over long horizons.",
-    "status": "open"
+    "status": "open",
+    "baseline_drift": {
+      "method": "implied_vol_drift",
+      "iv": 0.1189,
+      "low": 75.99,
+      "high": 94.18,
+      "level": 0.8
+    }
   },
   {
     "id": "2026-11-25_TLT_1y",
@@ -2571,7 +2837,14 @@
       ]
     },
     "notes": "Made intraday (about 2:00 PM CT), not at a close. The AI range was written AFTER seeing the baseline, so the comparison is not blind. IV is the average of the call and put at the strike nearest the price on the 2027-11-19 expiry; the horizon has no listed expiry of its own, so this is the nearest listed one (for 5y the longest listed). The baseline is zero-drift, a weak yardstick over long horizons.",
-    "status": "open"
+    "status": "open",
+    "baseline_drift": {
+      "method": "implied_vol_drift",
+      "iv": 0.1113,
+      "low": 75.41,
+      "high": 100.26,
+      "level": 0.8
+    }
   },
   {
     "id": "2026-11-25_TLT_5y",
@@ -2634,7 +2907,14 @@
       ]
     },
     "notes": "Made intraday (about 2:00 PM CT), not at a close. The AI range was written AFTER seeing the baseline, so the comparison is not blind. IV is the average of the call and put at the strike nearest the price on the 2029-01-19 expiry; the horizon has no listed expiry of its own, so this is the nearest listed one (for 5y the longest listed). The baseline is zero-drift, a weak yardstick over long horizons. Only the put had a usable implied vol for this expiry, so that single value is used.",
-    "status": "open"
+    "status": "open",
+    "baseline_drift": {
+      "method": "implied_vol_drift",
+      "iv": 0.1802,
+      "low": 61.2,
+      "high": 171.95,
+      "level": 0.8
+    }
   },
   {
     "id": "2026-11-25_GLD_1w",
@@ -2701,7 +2981,14 @@
       ]
     },
     "notes": "Made intraday (about 2:00 PM CT), not at a close. The AI range was written AFTER seeing the baseline, so the comparison is not blind. IV is the average of the call and put at the strike nearest the price on the 2026-12-04 expiry.",
-    "status": "open"
+    "status": "open",
+    "baseline_drift": {
+      "method": "implied_vol_drift",
+      "iv": 0.3553,
+      "low": 302.73,
+      "high": 349.27,
+      "level": 0.8
+    }
   },
   {
     "id": "2026-11-25_GLD_1m",
@@ -2772,7 +3059,14 @@
       ]
     },
     "notes": "Made intraday (about 2:00 PM CT), not at a close. The AI range was written AFTER seeing the baseline, so the comparison is not blind. IV is the average of the call and put at the strike nearest the price on the 2026-12-24 expiry.",
-    "status": "open"
+    "status": "open",
+    "baseline_drift": {
+      "method": "implied_vol_drift",
+      "iv": 0.3263,
+      "low": 289.19,
+      "high": 366.07,
+      "level": 0.8
+    }
   },
   {
     "id": "2026-11-25_GLD_6m",
@@ -2835,7 +3129,14 @@
       ]
     },
     "notes": "Made intraday (about 2:00 PM CT), not at a close. The AI range was written AFTER seeing the baseline, so the comparison is not blind. IV is the average of the call and put at the strike nearest the price on the 2027-06-17 expiry; the horizon has no listed expiry of its own, so this is the nearest listed one (for 5y the longest listed). The baseline is zero-drift, a weak yardstick over long horizons.",
-    "status": "open"
+    "status": "open",
+    "baseline_drift": {
+      "method": "implied_vol_drift",
+      "iv": 0.2748,
+      "low": 256.58,
+      "high": 421.34,
+      "level": 0.8
+    }
   },
   {
     "id": "2026-11-25_GLD_1y",
@@ -2898,7 +3199,14 @@
       ]
     },
     "notes": "Made intraday (about 2:00 PM CT), not at a close. The AI range was written AFTER seeing the baseline, so the comparison is not blind. IV is the average of the call and put at the strike nearest the price on the 2027-11-19 expiry; the horizon has no listed expiry of its own, so this is the nearest listed one (for 5y the longest listed). The baseline is zero-drift, a weak yardstick over long horizons.",
-    "status": "open"
+    "status": "open",
+    "baseline_drift": {
+      "method": "implied_vol_drift",
+      "iv": 0.2614,
+      "low": 238.8,
+      "high": 466.25,
+      "level": 0.8
+    }
   },
   {
     "id": "2026-11-25_GLD_5y",
@@ -2961,7 +3269,14 @@
       ]
     },
     "notes": "Made intraday (about 2:00 PM CT), not at a close. The AI range was written AFTER seeing the baseline, so the comparison is not blind. IV is the average of the call and put at the strike nearest the price on the 2029-01-19 expiry; the horizon has no listed expiry of its own, so this is the nearest listed one (for 5y the longest listed). The baseline is zero-drift, a weak yardstick over long horizons.",
-    "status": "open"
+    "status": "open",
+    "baseline_drift": {
+      "method": "implied_vol_drift",
+      "iv": 0.262,
+      "low": 174.49,
+      "high": 783.58,
+      "level": 0.8
+    }
   },
   {
     "id": "2026-11-25_XLK_1w",
@@ -3027,7 +3342,14 @@
       ]
     },
     "notes": "Made intraday (about 2:25 PM CT), not at a close. The AI range was written AFTER seeing the baseline, so the comparison is not blind. IV is the average of the call and put at the 155 strike (nearest the price) on the 2026-12-04 expiry. XLK implied vol is unusually high after a 17% one-month drop, so the baseline is wide.",
-    "status": "open"
+    "status": "open",
+    "baseline_drift": {
+      "method": "implied_vol_drift",
+      "iv": 0.4751,
+      "low": 140.87,
+      "high": 170.56,
+      "level": 0.8
+    }
   },
   {
     "id": "2026-11-25_XLK_1m",
@@ -3106,7 +3428,14 @@
       ]
     },
     "notes": "Made intraday (about 2:25 PM CT), not at a close. The AI range was written AFTER seeing the baseline, so the comparison is not blind. IV is the average of the call and put at the 155 strike (nearest the price) on the 2026-12-24 expiry. XLK implied vol is unusually high after a 17% one-month drop, so the baseline is wide.",
-    "status": "open"
+    "status": "open",
+    "baseline_drift": {
+      "method": "implied_vol_drift",
+      "iv": 0.414,
+      "low": 133.38,
+      "high": 179.88,
+      "level": 0.8
+    }
   },
   {
     "id": "2026-11-25_XLK_6m",
@@ -3168,7 +3497,14 @@
       ]
     },
     "notes": "Made intraday (about 2:25 PM CT), not at a close. The AI range was written AFTER seeing the baseline, so the comparison is not blind. IV is the average of the call and put at the 155 strike (nearest the price) on the 2027-06-17 expiry; the horizon has no listed expiry of its own, so this is the nearest listed one (for 5y the longest listed). The baseline is zero-drift, a weak yardstick over long horizons. XLK implied vol is unusually high after a 17% one-month drop, so the baseline is wide.",
-    "status": "open"
+    "status": "open",
+    "baseline_drift": {
+      "method": "implied_vol_drift",
+      "iv": 0.3551,
+      "low": 112.48,
+      "high": 213.52,
+      "level": 0.8
+    }
   },
   {
     "id": "2026-11-25_XLK_1y",
@@ -3230,7 +3566,14 @@
       ]
     },
     "notes": "Made intraday (about 2:25 PM CT), not at a close. The AI range was written AFTER seeing the baseline, so the comparison is not blind. IV is the average of the call and put at the 155 strike (nearest the price) on the 2027-12-17 expiry; the horizon has no listed expiry of its own, so this is the nearest listed one (for 5y the longest listed). The baseline is zero-drift, a weak yardstick over long horizons. XLK implied vol is unusually high after a 17% one-month drop, so the baseline is wide.",
-    "status": "open"
+    "status": "open",
+    "baseline_drift": {
+      "method": "implied_vol_drift",
+      "iv": 0.3325,
+      "low": 101.9,
+      "high": 238.66,
+      "level": 0.8
+    }
   },
   {
     "id": "2026-11-25_XLK_5y",
@@ -3292,7 +3635,14 @@
       ]
     },
     "notes": "Made intraday (about 2:25 PM CT), not at a close. The AI range was written AFTER seeing the baseline, so the comparison is not blind. IV is the average of the call and put at the 155 strike (nearest the price) on the 2029-01-19 expiry; the horizon has no listed expiry of its own, so this is the nearest listed one (for 5y the longest listed). The baseline is zero-drift, a weak yardstick over long horizons. XLK implied vol is unusually high after a 17% one-month drop, so the baseline is wide.",
-    "status": "open"
+    "status": "open",
+    "baseline_drift": {
+      "method": "implied_vol_drift",
+      "iv": 0.3194,
+      "low": 64.99,
+      "high": 405.57,
+      "level": 0.8
+    }
   },
   {
     "id": "2026-11-25_XLY_1w",
@@ -3358,7 +3708,14 @@
       ]
     },
     "notes": "Made intraday (about 2:25 PM CT), not at a close. The AI range was written AFTER seeing the baseline, so the comparison is not blind. IV is the average of the call and put at the 118 strike (nearest the price) on the 2026-12-04 expiry.",
-    "status": "open"
+    "status": "open",
+    "baseline_drift": {
+      "method": "implied_vol_drift",
+      "iv": 0.2973,
+      "low": 110.96,
+      "high": 125.07,
+      "level": 0.8
+    }
   },
   {
     "id": "2026-11-25_XLY_1m",
@@ -3433,7 +3790,14 @@
       ]
     },
     "notes": "Made intraday (about 2:25 PM CT), not at a close. The AI range was written AFTER seeing the baseline, so the comparison is not blind. IV is the average of the call and put at the 118 strike (nearest the price) on the 2026-12-24 expiry.",
-    "status": "open"
+    "status": "open",
+    "baseline_drift": {
+      "method": "implied_vol_drift",
+      "iv": 0.2872,
+      "low": 106.31,
+      "high": 130.83,
+      "level": 0.8
+    }
   },
   {
     "id": "2026-11-25_XLY_6m",
@@ -3495,7 +3859,14 @@
       ]
     },
     "notes": "Made intraday (about 2:25 PM CT), not at a close. The AI range was written AFTER seeing the baseline, so the comparison is not blind. IV is the average of the call and put at the 118 strike (nearest the price) on the 2027-06-17 expiry; the horizon has no listed expiry of its own, so this is the nearest listed one (for 5y the longest listed). The baseline is zero-drift, a weak yardstick over long horizons.",
-    "status": "open"
+    "status": "open",
+    "baseline_drift": {
+      "method": "implied_vol_drift",
+      "iv": 0.2553,
+      "low": 94.81,
+      "high": 150.3,
+      "level": 0.8
+    }
   },
   {
     "id": "2026-11-25_XLY_1y",
@@ -3557,7 +3928,14 @@
       ]
     },
     "notes": "Made intraday (about 2:25 PM CT), not at a close. The AI range was written AFTER seeing the baseline, so the comparison is not blind. IV is the average of the call and put at the 118 strike (nearest the price) on the 2028-01-21 expiry; the horizon has no listed expiry of its own, so this is the nearest listed one (for 5y the longest listed). The baseline is zero-drift, a weak yardstick over long horizons. The 118 strike was not listed on this expiry, so the 120 strike was used.",
-    "status": "open"
+    "status": "open",
+    "baseline_drift": {
+      "method": "implied_vol_drift",
+      "iv": 0.245,
+      "low": 88.68,
+      "high": 166.02,
+      "level": 0.8
+    }
   },
   {
     "id": "2026-11-25_XLY_5y",
@@ -3619,7 +3997,14 @@
       ]
     },
     "notes": "Made intraday (about 2:25 PM CT), not at a close. The AI range was written AFTER seeing the baseline, so the comparison is not blind. IV is the average of the call and put at the 118 strike (nearest the price) on the 2029-01-19 expiry; the horizon has no listed expiry of its own, so this is the nearest listed one (for 5y the longest listed). The baseline is zero-drift, a weak yardstick over long horizons.",
-    "status": "open"
+    "status": "open",
+    "baseline_drift": {
+      "method": "implied_vol_drift",
+      "iv": 0.2447,
+      "low": 67.87,
+      "high": 276.01,
+      "level": 0.8
+    }
   },
   {
     "id": "2026-11-25_XLP_1w",
@@ -3687,7 +4072,14 @@
       ]
     },
     "notes": "Made intraday (about 2:25 PM CT), not at a close. The AI range was written AFTER seeing the baseline, so the comparison is not blind. IV is the average of the call and put at the 92 strike (nearest the price) on the 2026-12-04 expiry.",
-    "status": "open"
+    "status": "open",
+    "baseline_drift": {
+      "method": "implied_vol_drift",
+      "iv": 0.2101,
+      "low": 88.62,
+      "high": 96.44,
+      "level": 0.8
+    }
   },
   {
     "id": "2026-11-25_XLP_1m",
@@ -3764,7 +4156,14 @@
       ]
     },
     "notes": "Made intraday (about 2:25 PM CT), not at a close. The AI range was written AFTER seeing the baseline, so the comparison is not blind. IV is the average of the call and put at the 92 strike (nearest the price) on the 2026-12-24 expiry.",
-    "status": "open"
+    "status": "open",
+    "baseline_drift": {
+      "method": "implied_vol_drift",
+      "iv": 0.2154,
+      "low": 85.7,
+      "high": 100.13,
+      "level": 0.8
+    }
   },
   {
     "id": "2026-11-25_XLP_6m",
@@ -3828,7 +4227,14 @@
       ]
     },
     "notes": "Made intraday (about 2:25 PM CT), not at a close. The AI range was written AFTER seeing the baseline, so the comparison is not blind. IV is the average of the call and put at the 92 strike (nearest the price) on the 2027-06-17 expiry; the horizon has no listed expiry of its own, so this is the nearest listed one (for 5y the longest listed). The baseline is zero-drift, a weak yardstick over long horizons.",
-    "status": "open"
+    "status": "open",
+    "baseline_drift": {
+      "method": "implied_vol_drift",
+      "iv": 0.1914,
+      "low": 79.33,
+      "high": 112.07,
+      "level": 0.8
+    }
   },
   {
     "id": "2026-11-25_XLP_1y",
@@ -3892,7 +4298,14 @@
       ]
     },
     "notes": "Made intraday (about 2:25 PM CT), not at a close. The AI range was written AFTER seeing the baseline, so the comparison is not blind. IV is the average of the call and put at the 92 strike (nearest the price) on the 2028-01-21 expiry; the horizon has no listed expiry of its own, so this is the nearest listed one (for 5y the longest listed). The baseline is zero-drift, a weak yardstick over long horizons.",
-    "status": "open"
+    "status": "open",
+    "baseline_drift": {
+      "method": "implied_vol_drift",
+      "iv": 0.1649,
+      "low": 78.33,
+      "high": 119.46,
+      "level": 0.8
+    }
   },
   {
     "id": "2026-11-25_XLP_5y",
@@ -3956,7 +4369,14 @@
       ]
     },
     "notes": "Made intraday (about 2:25 PM CT), not at a close. The AI range was written AFTER seeing the baseline, so the comparison is not blind. IV is the average of the call and put at the 92 strike (nearest the price) on the 2029-01-19 expiry; the horizon has no listed expiry of its own, so this is the nearest listed one (for 5y the longest listed). The baseline is zero-drift, a weak yardstick over long horizons.",
-    "status": "open"
+    "status": "open",
+    "baseline_drift": {
+      "method": "implied_vol_drift",
+      "iv": 0.1575,
+      "low": 74.62,
+      "high": 184.06,
+      "level": 0.8
+    }
   },
   {
     "id": "2026-11-25_XLI_1w",
@@ -4022,7 +4442,14 @@
       ]
     },
     "notes": "Made intraday (about 2:25 PM CT), not at a close. The AI range was written AFTER seeing the baseline, so the comparison is not blind. IV is the average of the call and put at the 163 strike (nearest the price) on the 2026-12-04 expiry.",
-    "status": "open"
+    "status": "open",
+    "baseline_drift": {
+      "method": "implied_vol_drift",
+      "iv": 0.2703,
+      "low": 154.4,
+      "high": 172.15,
+      "level": 0.8
+    }
   },
   {
     "id": "2026-11-25_XLI_1m",
@@ -4097,7 +4524,14 @@
       ]
     },
     "notes": "Made intraday (about 2:25 PM CT), not at a close. The AI range was written AFTER seeing the baseline, so the comparison is not blind. IV is the average of the call and put at the 163 strike (nearest the price) on the 2026-12-24 expiry.",
-    "status": "open"
+    "status": "open",
+    "baseline_drift": {
+      "method": "implied_vol_drift",
+      "iv": 0.2803,
+      "low": 147.49,
+      "high": 180.6,
+      "level": 0.8
+    }
   },
   {
     "id": "2026-11-25_XLI_6m",
@@ -4159,7 +4593,14 @@
       ]
     },
     "notes": "Made intraday (about 2:25 PM CT), not at a close. The AI range was written AFTER seeing the baseline, so the comparison is not blind. IV is the average of the call and put at the 163 strike (nearest the price) on the 2027-06-17 expiry; the horizon has no listed expiry of its own, so this is the nearest listed one (for 5y the longest listed). The baseline is zero-drift, a weak yardstick over long horizons.",
-    "status": "open"
+    "status": "open",
+    "baseline_drift": {
+      "method": "implied_vol_drift",
+      "iv": 0.238,
+      "low": 133.53,
+      "high": 205.18,
+      "level": 0.8
+    }
   },
   {
     "id": "2026-11-25_XLI_1y",
@@ -4221,7 +4662,14 @@
       ]
     },
     "notes": "Made intraday (about 2:25 PM CT), not at a close. The AI range was written AFTER seeing the baseline, so the comparison is not blind. IV is the average of the call and put at the 163 strike (nearest the price) on the 2028-01-21 expiry; the horizon has no listed expiry of its own, so this is the nearest listed one (for 5y the longest listed). The baseline is zero-drift, a weak yardstick over long horizons.",
-    "status": "open"
+    "status": "open",
+    "baseline_drift": {
+      "method": "implied_vol_drift",
+      "iv": 0.2308,
+      "low": 125.37,
+      "high": 226.34,
+      "level": 0.8
+    }
   },
   {
     "id": "2026-11-25_XLI_5y",
@@ -4283,7 +4731,14 @@
       ]
     },
     "notes": "Made intraday (about 2:25 PM CT), not at a close. The AI range was written AFTER seeing the baseline, so the comparison is not blind. IV is the average of the call and put at the 163 strike (nearest the price) on the 2029-01-19 expiry; the horizon has no listed expiry of its own, so this is the nearest listed one (for 5y the longest listed). The baseline is zero-drift, a weak yardstick over long horizons.",
-    "status": "open"
+    "status": "open",
+    "baseline_drift": {
+      "method": "implied_vol_drift",
+      "iv": 0.2281,
+      "low": 100.44,
+      "high": 371.38,
+      "level": 0.8
+    }
   },
   {
     "id": "2026-11-25_XLB_1w",
@@ -4350,7 +4805,14 @@
       ]
     },
     "notes": "Made intraday (about 2:25 PM CT), not at a close. The AI range was written AFTER seeing the baseline, so the comparison is not blind. IV is the average of the call and put at the 51 strike (nearest the price) on the 2026-12-04 expiry.",
-    "status": "open"
+    "status": "open",
+    "baseline_drift": {
+      "method": "implied_vol_drift",
+      "iv": 0.2543,
+      "low": 48.79,
+      "high": 54.05,
+      "level": 0.8
+    }
   },
   {
     "id": "2026-11-25_XLB_1m",
@@ -4426,7 +4888,14 @@
       ]
     },
     "notes": "Made intraday (about 2:25 PM CT), not at a close. The AI range was written AFTER seeing the baseline, so the comparison is not blind. IV is the average of the call and put at the 51 strike (nearest the price) on the 2026-12-24 expiry.",
-    "status": "open"
+    "status": "open",
+    "baseline_drift": {
+      "method": "implied_vol_drift",
+      "iv": 0.2345,
+      "low": 47.27,
+      "high": 56.0,
+      "level": 0.8
+    }
   },
   {
     "id": "2026-11-25_XLB_6m",
@@ -4489,7 +4958,14 @@
       ]
     },
     "notes": "Made intraday (about 2:25 PM CT), not at a close. The AI range was written AFTER seeing the baseline, so the comparison is not blind. IV is the average of the call and put at the 51 strike (nearest the price) on the 2027-06-17 expiry; the horizon has no listed expiry of its own, so this is the nearest listed one (for 5y the longest listed). The baseline is zero-drift, a weak yardstick over long horizons.",
-    "status": "open"
+    "status": "open",
+    "baseline_drift": {
+      "method": "implied_vol_drift",
+      "iv": 0.2207,
+      "low": 42.8,
+      "high": 63.75,
+      "level": 0.8
+    }
   },
   {
     "id": "2026-11-25_XLB_1y",
@@ -4552,7 +5028,14 @@
       ]
     },
     "notes": "Made intraday (about 2:25 PM CT), not at a close. The AI range was written AFTER seeing the baseline, so the comparison is not blind. IV is the average of the call and put at the 51 strike (nearest the price) on the 2028-01-21 expiry; the horizon has no listed expiry of its own, so this is the nearest listed one (for 5y the longest listed). The baseline is zero-drift, a weak yardstick over long horizons.",
-    "status": "open"
+    "status": "open",
+    "baseline_drift": {
+      "method": "implied_vol_drift",
+      "iv": 0.2006,
+      "low": 41.31,
+      "high": 69.03,
+      "level": 0.8
+    }
   },
   {
     "id": "2026-11-25_XLB_5y",
@@ -4615,7 +5098,14 @@
       ]
     },
     "notes": "Made intraday (about 2:25 PM CT), not at a close. The AI range was written AFTER seeing the baseline, so the comparison is not blind. IV is the average of the call and put at the 51 strike (nearest the price) on the 2029-01-19 expiry; the horizon has no listed expiry of its own, so this is the nearest listed one (for 5y the longest listed). The baseline is zero-drift, a weak yardstick over long horizons.",
-    "status": "open"
+    "status": "open",
+    "baseline_drift": {
+      "method": "implied_vol_drift",
+      "iv": 0.2018,
+      "low": 35.09,
+      "high": 111.59,
+      "level": 0.8
+    }
   },
   {
     "id": "2026-11-25_XLU_1w",
@@ -4681,7 +5171,14 @@
       ]
     },
     "notes": "Made intraday (about 2:25 PM CT), not at a close. The AI range was written AFTER seeing the baseline, so the comparison is not blind. IV is the average of the call and put at the 44 strike (nearest the price) on the 2026-12-04 expiry.",
-    "status": "open"
+    "status": "open",
+    "baseline_drift": {
+      "method": "implied_vol_drift",
+      "iv": 0.1806,
+      "low": 42.16,
+      "high": 45.34,
+      "level": 0.8
+    }
   },
   {
     "id": "2026-11-25_XLU_1m",
@@ -4756,7 +5253,14 @@
       ]
     },
     "notes": "Made intraday (about 2:25 PM CT), not at a close. The AI range was written AFTER seeing the baseline, so the comparison is not blind. IV is the average of the call and put at the 44 strike (nearest the price) on the 2026-12-24 expiry.",
-    "status": "open"
+    "status": "open",
+    "baseline_drift": {
+      "method": "implied_vol_drift",
+      "iv": 0.181,
+      "low": 41.05,
+      "high": 46.78,
+      "level": 0.8
+    }
   },
   {
     "id": "2026-11-25_XLU_6m",
@@ -4818,7 +5322,14 @@
       ]
     },
     "notes": "Made intraday (about 2:25 PM CT), not at a close. The AI range was written AFTER seeing the baseline, so the comparison is not blind. IV is the average of the call and put at the 44 strike (nearest the price) on the 2027-06-17 expiry; the horizon has no listed expiry of its own, so this is the nearest listed one (for 5y the longest listed). The baseline is zero-drift, a weak yardstick over long horizons.",
-    "status": "open"
+    "status": "open",
+    "baseline_drift": {
+      "method": "implied_vol_drift",
+      "iv": 0.1768,
+      "low": 38.06,
+      "high": 52.36,
+      "level": 0.8
+    }
   },
   {
     "id": "2026-11-25_XLU_1y",
@@ -4880,7 +5391,14 @@
       ]
     },
     "notes": "Made intraday (about 2:25 PM CT), not at a close. The AI range was written AFTER seeing the baseline, so the comparison is not blind. IV is the average of the call and put at the 44 strike (nearest the price) on the 2027-12-17 expiry; the horizon has no listed expiry of its own, so this is the nearest listed one (for 5y the longest listed). The baseline is zero-drift, a weak yardstick over long horizons. The 44 strike was not listed on this expiry, so the 45 strike was used.",
-    "status": "open"
+    "status": "open",
+    "baseline_drift": {
+      "method": "implied_vol_drift",
+      "iv": 0.1743,
+      "low": 36.54,
+      "high": 57.08,
+      "level": 0.8
+    }
   },
   {
     "id": "2026-11-25_XLU_5y",
@@ -4942,7 +5460,14 @@
       ]
     },
     "notes": "Made intraday (about 2:25 PM CT), not at a close. The AI range was written AFTER seeing the baseline, so the comparison is not blind. IV is the average of the call and put at the 44 strike (nearest the price) on the 2029-01-19 expiry; the horizon has no listed expiry of its own, so this is the nearest listed one (for 5y the longest listed). The baseline is zero-drift, a weak yardstick over long horizons.",
-    "status": "open"
+    "status": "open",
+    "baseline_drift": {
+      "method": "implied_vol_drift",
+      "iv": 0.1593,
+      "low": 35.05,
+      "high": 87.35,
+      "level": 0.8
+    }
   },
   {
     "id": "2026-11-25_XLRE_1w",
@@ -5008,7 +5533,14 @@
       ]
     },
     "notes": "Made intraday (about 2:25 PM CT), not at a close. The AI range was written AFTER seeing the baseline, so the comparison is not blind. IV is the average of the call and put at the 44 strike (nearest the price) on the 2026-12-18 expiry; XLRE lists only four expiries (Dec 18, Jan 15, Feb 19, May 21), so the Dec 18 expiry (23 days out) stands in for the 1-week and 1-month horizons and the May 21 expiry for 6 months, 1 year and 5 years. The baseline is zero-drift, a weak yardstick over long horizons.",
-    "status": "open"
+    "status": "open",
+    "baseline_drift": {
+      "method": "implied_vol_drift",
+      "iv": 0.1756,
+      "low": 42.47,
+      "high": 45.58,
+      "level": 0.8
+    }
   },
   {
     "id": "2026-11-25_XLRE_1m",
@@ -5083,7 +5615,14 @@
       ]
     },
     "notes": "Made intraday (about 2:25 PM CT), not at a close. The AI range was written AFTER seeing the baseline, so the comparison is not blind. IV is the average of the call and put at the 44 strike (nearest the price) on the 2026-12-18 expiry; XLRE lists only four expiries (Dec 18, Jan 15, Feb 19, May 21), so the Dec 18 expiry (23 days out) stands in for the 1-week and 1-month horizons and the May 21 expiry for 6 months, 1 year and 5 years. The baseline is zero-drift, a weak yardstick over long horizons.",
-    "status": "open"
+    "status": "open",
+    "baseline_drift": {
+      "method": "implied_vol_drift",
+      "iv": 0.1756,
+      "low": 41.4,
+      "high": 46.99,
+      "level": 0.8
+    }
   },
   {
     "id": "2026-11-25_XLRE_6m",
@@ -5145,7 +5684,14 @@
       ]
     },
     "notes": "Made intraday (about 2:25 PM CT), not at a close. The AI range was written AFTER seeing the baseline, so the comparison is not blind. IV is the average of the call and put at the 44 strike (nearest the price) on the 2027-05-21 expiry; XLRE lists only four expiries (Dec 18, Jan 15, Feb 19, May 21), so the Dec 18 expiry (23 days out) stands in for the 1-week and 1-month horizons and the May 21 expiry for 6 months, 1 year and 5 years. The baseline is zero-drift, a weak yardstick over long horizons.",
-    "status": "open"
+    "status": "open",
+    "baseline_drift": {
+      "method": "implied_vol_drift",
+      "iv": 0.1723,
+      "low": 38.47,
+      "high": 52.51,
+      "level": 0.8
+    }
   },
   {
     "id": "2026-11-25_XLRE_1y",
@@ -5207,7 +5753,14 @@
       ]
     },
     "notes": "Made intraday (about 2:25 PM CT), not at a close. The AI range was written AFTER seeing the baseline, so the comparison is not blind. IV is the average of the call and put at the 44 strike (nearest the price) on the 2027-05-21 expiry; XLRE lists only four expiries (Dec 18, Jan 15, Feb 19, May 21), so the Dec 18 expiry (23 days out) stands in for the 1-week and 1-month horizons and the May 21 expiry for 6 months, 1 year and 5 years. The baseline is zero-drift, a weak yardstick over long horizons.",
-    "status": "open"
+    "status": "open",
+    "baseline_drift": {
+      "method": "implied_vol_drift",
+      "iv": 0.1723,
+      "low": 36.88,
+      "high": 57.32,
+      "level": 0.8
+    }
   },
   {
     "id": "2026-11-25_XLRE_5y",
@@ -5269,7 +5822,14 @@
       ]
     },
     "notes": "Made intraday (about 2:25 PM CT), not at a close. The AI range was written AFTER seeing the baseline, so the comparison is not blind. IV is the average of the call and put at the 44 strike (nearest the price) on the 2027-05-21 expiry; XLRE lists only four expiries (Dec 18, Jan 15, Feb 19, May 21), so the Dec 18 expiry (23 days out) stands in for the 1-week and 1-month horizons and the May 21 expiry for 6 months, 1 year and 5 years. The baseline is zero-drift, a weak yardstick over long horizons.",
-    "status": "open"
+    "status": "open",
+    "baseline_drift": {
+      "method": "implied_vol_drift",
+      "iv": 0.1723,
+      "low": 33.62,
+      "high": 90.27,
+      "level": 0.8
+    }
   },
   {
     "id": "2026-11-25_XLC_1w",
@@ -5336,7 +5896,14 @@
       ]
     },
     "notes": "Made intraday (about 2:25 PM CT), not at a close. The AI range was written AFTER seeing the baseline, so the comparison is not blind. IV is the average of the call and put at the 105 strike (nearest the price) on the 2026-12-04 expiry.",
-    "status": "open"
+    "status": "open",
+    "baseline_drift": {
+      "method": "implied_vol_drift",
+      "iv": 0.3599,
+      "low": 97.93,
+      "high": 113.2,
+      "level": 0.8
+    }
   },
   {
     "id": "2026-11-25_XLC_1m",
@@ -5412,7 +5979,14 @@
       ]
     },
     "notes": "Made intraday (about 2:25 PM CT), not at a close. The AI range was written AFTER seeing the baseline, so the comparison is not blind. IV is the average of the call and put at the 105 strike (nearest the price) on the 2026-12-24 expiry.",
-    "status": "open"
+    "status": "open",
+    "baseline_drift": {
+      "method": "implied_vol_drift",
+      "iv": 0.3002,
+      "low": 94.59,
+      "high": 117.5,
+      "level": 0.8
+    }
   },
   {
     "id": "2026-11-25_XLC_6m",
@@ -5475,7 +6049,14 @@
       ]
     },
     "notes": "Made intraday (about 2:25 PM CT), not at a close. The AI range was written AFTER seeing the baseline, so the comparison is not blind. IV is the average of the call and put at the 105 strike (nearest the price) on the 2027-06-17 expiry; the horizon has no listed expiry of its own, so this is the nearest listed one (for 5y the longest listed). The baseline is zero-drift, a weak yardstick over long horizons.",
-    "status": "open"
+    "status": "open",
+    "baseline_drift": {
+      "method": "implied_vol_drift",
+      "iv": 0.2553,
+      "low": 84.78,
+      "high": 134.4,
+      "level": 0.8
+    }
   },
   {
     "id": "2026-11-25_XLC_1y",
@@ -5538,7 +6119,14 @@
       ]
     },
     "notes": "Made intraday (about 2:25 PM CT), not at a close. The AI range was written AFTER seeing the baseline, so the comparison is not blind. IV is the average of the call and put at the 105 strike (nearest the price) on the 2028-01-21 expiry; the horizon has no listed expiry of its own, so this is the nearest listed one (for 5y the longest listed). The baseline is zero-drift, a weak yardstick over long horizons.",
-    "status": "open"
+    "status": "open",
+    "baseline_drift": {
+      "method": "implied_vol_drift",
+      "iv": 0.2352,
+      "low": 80.48,
+      "high": 146.95,
+      "level": 0.8
+    }
   },
   {
     "id": "2026-11-25_XLC_5y",
@@ -5601,6 +6189,13 @@
       ]
     },
     "notes": "Made intraday (about 2:25 PM CT), not at a close. The AI range was written AFTER seeing the baseline, so the comparison is not blind. IV is the average of the call and put at the 105 strike (nearest the price) on the 2029-01-19 expiry; the horizon has no listed expiry of its own, so this is the nearest listed one (for 5y the longest listed). The baseline is zero-drift, a weak yardstick over long horizons.",
-    "status": "open"
+    "status": "open",
+    "baseline_drift": {
+      "method": "implied_vol_drift",
+      "iv": 0.2404,
+      "low": 61.76,
+      "high": 245.06,
+      "level": 0.8
+    }
   }
 ]
