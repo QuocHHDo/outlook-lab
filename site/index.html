@@ -4,6 +4,13 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Outlook Lab: scored market forecasts</title>
+<meta name="description" content="AI 80% forecast ranges for 17 ETFs, scored against a no-view volatility baseline. Every prediction is kept and graded when it comes due.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Outlook Lab: scored market forecasts">
+<meta property="og:description" content="AI forecast ranges for 17 ETFs, scored in public against a no-view volatility baseline.">
+<meta property="og:url" content="https://quochhdo.github.io/outlook-lab/">
+<meta property="og:image" content="https://quochhdo.github.io/outlook-lab/og.png">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
 <script>
@@ -169,6 +176,31 @@ tbody tr { border-top: 1px solid var(--line-2); }
 .scalebar { display: inline-flex; align-items: center; gap: 6px; }
 .scalebar i { display: inline-block; width: 110px; height: 10px; border-radius: 5px; background: linear-gradient(90deg, oklch(0.5 0.17 25), oklch(0.4 0.01 264), oklch(0.5 0.15 150)); }
 @media (max-width: 560px) { .tmap { height: 520px; } }
+.chartwrap svg { width: 100%; height: auto; display: block; }
+.chartwrap .axis { stroke: var(--line); stroke-width: 1; }
+.chartwrap text { fill: var(--muted); font-size: 11px; font-family: inherit; }
+.chartwrap .hist { fill: none; stroke: var(--ink); stroke-width: 1.6; }
+.chartwrap .cone-ai { fill: var(--ai-fill); stroke: var(--accent); stroke-width: 1.2; }
+.chartwrap .cone-base { fill: var(--base-fill); stroke: none; opacity: .75; }
+.chartwrap .cone-drift { fill: none; stroke: var(--muted); stroke-width: 1; stroke-dasharray: 4 3; }
+.chartwrap .start { fill: var(--ink); }
+.chartwrap .gridl { stroke: var(--line-2); stroke-width: 1; }
+.cal { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; margin: 8px 0 6px; }
+.cal > div { background: var(--panel); border-radius: 10px; padding: 10px 12px; font-size: 13px; }
+.cal b { display: block; font-size: 18px; margin-bottom: 2px; }
+.cal small { color: var(--muted); display: block; font-size: 11.5px; }
+.covbar { position: relative; height: 8px; background: var(--line-2); border-radius: 4px; margin: 6px 0 4px; }
+.covbar i { position: absolute; left: 0; top: 0; bottom: 0; background: var(--accent); border-radius: 4px; }
+.covbar u { position: absolute; top: -3px; bottom: -3px; width: 2px; background: var(--ink); }
+.changes { list-style: none; margin: 6px 0 0; padding: 0; font-size: 13px; }
+.changes li { padding: 6px 0; border-top: 1px solid var(--line-2); display: flex; gap: 12px; }
+.changes li b { min-width: 64px; }
+.filters { display: flex; flex-wrap: wrap; gap: 8px 18px; margin: 4px 0 10px; }
+.filters .horizon-pick { margin: 0; }
+.blind-tag { display: inline-block; font-size: 11px; padding: 1px 7px; border-radius: 999px; background: var(--tag-win-bg); color: var(--ok); margin-left: 6px; }
+.seen-tag { display: inline-block; font-size: 11px; padding: 1px 7px; border-radius: 999px; background: var(--tag-bg); color: var(--muted); margin-left: 6px; }
+.sitefoot { font-size: 12px; color: var(--muted); margin: 18px 0 6px; text-align: center; }
+.sitefoot a { color: var(--accent-ink); }
 .hgrid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
 .hcard { display: flex; flex-direction: column; gap: 10px; border: 1px solid var(--line); border-radius: 10px; padding: 16px; text-decoration: none; color: var(--ink); background: var(--card); }
 .hcard:hover { border-color: var(--accent); box-shadow: 0 1px 6px oklch(0.5 0.15 264 / 0.2); color: var(--ink); }
@@ -231,9 +263,21 @@ tbody tr { border-top: 1px solid var(--line-2); }
       <div id="home-size" class="horizon-pick" role="group" aria-label="Tile size"></div>
       <span class="scalebar" id="home-scale">Chance up: 30%<i></i>70%</span>
     </div>
+    <div class="filters">
+      <div id="home-group" class="horizon-pick" role="group" aria-label="Which symbols"></div>
+      <div id="home-sort" class="horizon-pick" role="group" aria-label="Sort cards"></div>
+    </div>
     <div id="home-map" class="tmap" role="img" aria-label="Treemap of AI chance of going up, by symbol"></div>
     <div id="home-grid" class="hgrid"></div>
     <p class="muted" style="font-size:12px">Map: color is the AI's chance of finishing up (green above 50%, red below, gray near 50%). Tile size is the AI's range width, a measure of how uncertain the forecast is; it is not market cap. Cards: all share one scale, so ranges compare directly. Click any tile or card for the full analysis.</p>
+  </div>
+  <div class="section">
+    <h3 class="eyebrow">What changed</h3>
+    <div id="home-changes"></div>
+  </div>
+  <div class="section">
+    <h3 class="eyebrow">Calibration: are the ranges honest?</h3>
+    <div id="home-cal"></div>
   </div>
   <div class="section">
     <h3 class="eyebrow">Coming up, across the market</h3>
@@ -260,6 +304,10 @@ tbody tr { border-top: 1px solid var(--line-2); }
       <div id="legend" class="legend"></div>
     </div>
     <div id="rows"></div>
+    <h3 class="eyebrow" style="margin-top:18px">Price history and forecast range</h3>
+    <div id="chart-pick" class="horizon-pick" role="group" aria-label="Chart window"></div>
+    <div id="chart" class="chartwrap"></div>
+    <p class="muted" style="font-size:12px;margin-top:6px">Line: daily closes. Blue band: the AI 80% range; gray band: the volatility baseline; dashed lines: the drift baseline. Bands join the horizon ranges with straight lines, so the shape between horizons is only a guide.</p>
     <div class="record">
       <p id="record-text"></p>
       <a id="all-link" href="#all">All predictions and scores →</a>
@@ -302,6 +350,8 @@ tbody tr { border-top: 1px solid var(--line-2); }
   <p class="foot">This is a prediction by an AI model: its best judgment, not a fact and not advice. Every prediction is kept and scored when it comes due. Coverage is how often the close lands inside the range; an 80% range should cover about 80% over many predictions.</p>
 </section>
 
+<p class="sitefoot"><a href="methodology.html">How this works and what it can't tell you</a> · <a href="https://github.com/QuocHHDo/outlook-lab">Source and data</a></p>
+
 </div>
 </div>
 
@@ -310,7 +360,7 @@ tbody tr { border-top: 1px solid var(--line-2); }
   var NAMES = { SPY: "SPDR S&P 500 ETF", QQQ: "Invesco QQQ Trust", SMH: "VanEck Semiconductor ETF", IWM: "iShares Russell 2000 ETF", XLF: "Financial Select Sector SPDR", XLE: "Energy Select Sector SPDR", XLV: "Health Care Select Sector SPDR", TLT: "iShares 20+ Year Treasury Bond ETF", GLD: "SPDR Gold Shares", XLK: "Technology Select Sector SPDR", XLY: "Consumer Discretionary Select Sector SPDR", XLP: "Consumer Staples Select Sector SPDR", XLI: "Industrial Select Sector SPDR", XLB: "Materials Select Sector SPDR", XLU: "Utilities Select Sector SPDR", XLRE: "Real Estate Select Sector SPDR", XLC: "Communication Services Select Sector SPDR" };
   var HLABEL = { "1w": "1 week", "1m": "1 month", "3m": "3 months", "6m": "6 months", "1y": "1 year", "5y": "5 years" };
   var HORDER = ["1w", "1m", "3m", "6m", "1y", "5y"];
-  var state = { preds: [], summary: null, prices: {}, events: [], symbol: null, horizon: null, evTab: "scheduled", evAll: false };
+  var state = { preds: [], summary: null, prices: {}, events: [], symbol: null, horizon: null, evTab: "scheduled", evAll: false, homeGroup: "all", homeSort: "default", chartWin: "1m" };
 
   function syncTheme() {
     var d = document.documentElement.getAttribute("data-theme") === "dark";
@@ -502,6 +552,155 @@ tbody tr { border-top: 1px solid var(--line-2); }
       host.appendChild(a);
     });
   }
+
+  function groupOf(s) {
+    if (s === "SPY" || s === "QQQ" || s === "IWM") return "index";
+    if (/^XL/.test(s) || s === "SMH") return "sector";
+    if (s === "TLT" || s === "GLD") return "other";
+    return "stock";
+  }
+  function seg2(host, opts, key, after) {
+    clear(host);
+    opts.forEach(function (o) {
+      var b = el("button", o[1]); b.type = "button";
+      b.setAttribute("aria-pressed", state[key] === o[0] ? "true" : "false");
+      b.addEventListener("click", function () { state[key] = o[0]; after(); });
+      host.appendChild(b);
+    });
+  }
+  function svgEl(name, attrs, cls) {
+    var n = document.createElementNS("http://www.w3.org/2000/svg", name);
+    for (var k in attrs) n.setAttribute(k, attrs[k]);
+    if (cls) n.setAttribute("class", cls);
+    return n;
+  }
+  function dayNum(iso) { return Math.round(Date.parse(iso + "T00:00:00Z") / 86400000); }
+  function renderChart(rows) {
+    seg2($("chart-pick"), [["1m", "Out to 1 month"], ["1y", "Out to 1 year"]], "chartWin", function () { renderChart(rows); });
+    var host = $("chart"); clear(host);
+    var maxH = state.chartWin === "1y" ? 365 : 31;
+    var cone = rows.filter(function (p) { return p.horizon !== "5y" && dayNum(p.resolves_on) - dayNum(p.made_at) <= maxH + 1; })
+      .sort(function (a, b) { return a.resolves_on < b.resolves_on ? -1 : 1; });
+    if (!cone.length) return;
+    var base = cone[0], t0 = dayNum(base.made_at), s0 = base.price_at_prediction;
+    var series = state.prices[state.symbol] || {};
+    var hist = Object.keys(series).sort().filter(function (d) { return dayNum(d) >= t0 - (state.chartWin === "1y" ? 120 : 62) && d <= base.made_at; })
+      .map(function (d) { return [dayNum(d), series[d]]; });
+    var after = Object.keys(series).sort().filter(function (d) { return d > base.made_at; }).map(function (d) { return [dayNum(d), series[d]]; });
+    var x0 = hist.length ? Math.min(hist[0][0], t0) : t0 - 20, x1 = dayNum(cone[cone.length - 1].resolves_on) + 2;
+    var all = [s0];
+    cone.forEach(function (p) { all.push(p.ai.low, p.ai.high, p.baseline.low, p.baseline.high); });
+    hist.concat(after).forEach(function (pt) { all.push(pt[1]); });
+    var lo = Math.min.apply(null, all), hi = Math.max.apply(null, all), pad = (hi - lo) * 0.08; lo -= pad; hi += pad;
+    var W = 720, H = 280, L = 52, R = 12, T = 12, B = 28;
+    function X(d) { return L + (d - x0) / (x1 - x0) * (W - L - R); }
+    function Y(v) { return T + (hi - v) / (hi - lo) * (H - T - B); }
+    var svg = svgEl("svg", { viewBox: "0 0 " + W + " " + H, role: "img" });
+    svg.setAttribute("aria-label", state.symbol + " price history with the AI forecast range out to " + (state.chartWin === "1y" ? "one year" : "one month"));
+    for (var i = 0; i <= 4; i++) {
+      var v = lo + (hi - lo) * i / 4, y = Y(v);
+      svg.appendChild(svgEl("line", { x1: L, x2: W - R, y1: y, y2: y }, "gridl"));
+      var tx = svgEl("text", { x: L - 6, y: y + 4, "text-anchor": "end" }); tx.textContent = "$" + (v >= 100 ? v.toFixed(0) : v.toFixed(1)); svg.appendChild(tx);
+    }
+    function poly(key, field) {
+      var up = [[t0, s0]], dn = [];
+      cone.forEach(function (p) { var d = dayNum(p.resolves_on); up.push([d, p[key][field === "ai" ? "high" : "high"]]); dn.unshift([d, p[key].low]); });
+      dn.push([t0, s0]);
+      return up.concat(dn).map(function (pt) { return X(pt[0]).toFixed(1) + "," + Y(pt[1]).toFixed(1); }).join(" ");
+    }
+    svg.appendChild(svgEl("polygon", { points: poly("baseline") }, "cone-base"));
+    svg.appendChild(svgEl("polygon", { points: poly("ai") }, "cone-ai"));
+    var drift = cone.filter(function (p) { return p.baseline_drift; });
+    if (drift.length) {
+      ["high", "low"].forEach(function (k) {
+        var pts = [[t0, s0]].concat(drift.map(function (p) { return [dayNum(p.resolves_on), p.baseline_drift[k]]; }));
+        svg.appendChild(svgEl("polyline", { points: pts.map(function (pt) { return X(pt[0]).toFixed(1) + "," + Y(pt[1]).toFixed(1); }).join(" ") }, "cone-drift"));
+      });
+    }
+    var line = hist.concat(after);
+    if (line.length > 1) svg.appendChild(svgEl("polyline", { points: line.map(function (pt) { return X(pt[0]).toFixed(1) + "," + Y(pt[1]).toFixed(1); }).join(" ") }, "hist"));
+    svg.appendChild(svgEl("circle", { cx: X(t0), cy: Y(s0), r: 3.5 }, "start"));
+    cone.forEach(function (p) {
+      var d = dayNum(p.resolves_on);
+      if (X(d) - X(t0) > 110) { var tx2 = svgEl("text", { x: X(d), y: H - 8, "text-anchor": "end" }); tx2.textContent = HLABEL[p.horizon] || p.horizon; svg.appendChild(tx2); }
+      svg.appendChild(svgEl("line", { x1: X(d), x2: X(d), y1: Y(p.ai.low), y2: Y(p.ai.high) }, "axis"));
+    });
+    var tn = svgEl("text", { x: X(t0), y: H - 8, "text-anchor": "start" }); tn.textContent = "Predicted " + fmtDate(base.made_at); svg.appendChild(tn);
+    host.appendChild(svg);
+  }
+
+  function renderCalibration() {
+    var host = $("home-cal"); clear(host);
+    var s = state.summary || {};
+    var open = state.preds.filter(function (p) { return p.status !== "resolved"; });
+    var nRes = s.n_resolved || 0, nTot = state.preds.length;
+    var due = open.map(function (p) { return p.resolves_on; }).sort()[0];
+    var intro = el("p", nRes
+      ? nRes + " of " + nTot + " predictions have resolved. An honest 80% range should hold about 80% of the time; far below means overconfident, far above means too wide to be useful."
+      : "Nothing has resolved yet, so there is nothing to grade. " + nTot + " predictions are open; the first ones (1 week) come due " + (due ? fmtDate(due) : "soon") + ". Results appear here as they resolve, and the comparison with the baselines unlocks at " + (s.min_resolved_for_comparison || 10) + " resolved predictions.");
+    intro.style.fontSize = "13px"; intro.style.margin = "0 0 8px";
+    host.appendChild(intro);
+    var wrap = el("div", undefined, "cal");
+    var bh = s.by_horizon || {};
+    HORDER.forEach(function (h) {
+      var g = bh[h], total = state.preds.filter(function (p) { return p.horizon === h; }).length;
+      if (!total) return;
+      var box = el("div");
+      box.appendChild(el("b", g && g.ai.coverage != null ? pct(g.ai.coverage) : "\u2014"));
+      box.appendChild(el("span", HLABEL[h] + " coverage"));
+      var bar = el("div", undefined, "covbar");
+      if (g && g.ai.coverage != null) { var f = el("i"); f.style.width = (g.ai.coverage * 100) + "%"; bar.appendChild(f); }
+      var tgt = el("u"); tgt.style.left = "80%"; bar.appendChild(tgt);
+      box.appendChild(bar);
+      box.appendChild(el("small", g ? g.n + " resolved of " + total + " (line = 80% target)" : "0 resolved of " + total + " (line = 80% target)"));
+      wrap.appendChild(box);
+    });
+    host.appendChild(wrap);
+    var cal = (s.calibration || []).filter(function (b) { return b.n; });
+    if (cal.length) {
+      var t = el("p", "Chance-up calibration: " + cal.map(function (b) { return "when the AI said " + Math.round(b.lo * 100) + "\u2013" + Math.round(b.hi * 100) + "%, price finished up " + pct(b.freq_up) + " of the time (" + b.n + ")"; }).join("; ") + ".");
+      t.style.fontSize = "12.5px"; t.className = "muted"; host.appendChild(t);
+    }
+    var nb = s.n_blind || 0;
+    var b2 = el("p", nb ? nb + " of " + nTot + " predictions were locked in a public commit before the baseline was computed (blind). The rest were written after seeing a baseline, so beating it counts for less."
+      : "None of the current predictions are blind: they were written after seeing the baseline, so beating it counts for less. From the next update the AI range is committed before the baseline is computed.");
+    b2.style.fontSize = "12.5px"; b2.className = "muted"; host.appendChild(b2);
+  }
+
+  function renderChanges() {
+    var host = $("home-changes"); clear(host);
+    var dates = {}; state.preds.forEach(function (p) { dates[p.made_at] = true; });
+    var ds = Object.keys(dates).sort(), last = ds[ds.length - 1], prev = ds[ds.length - 2];
+    if (!last) return;
+    var batch = state.preds.filter(function (p) { return p.made_at === last; });
+    var syms = {}; batch.forEach(function (p) { syms[p.symbol] = true; });
+    var p1 = el("p", "Latest update " + fmtDate(last) + ": " + batch.length + " predictions across " + Object.keys(syms).length + " symbols." + (prev ? "" : " This is the first batch, so week-over-week changes will show here after the next update."));
+    p1.style.fontSize = "13px"; p1.style.margin = "0 0 6px"; host.appendChild(p1);
+    if (prev) {
+      var ch = [];
+      Object.keys(syms).forEach(function (sym) {
+        var a = state.preds.filter(function (p) { return p.symbol === sym && p.made_at === last && p.horizon === "1m"; })[0];
+        var b = state.preds.filter(function (p) { return p.symbol === sym && p.made_at === prev && p.horizon === "1m"; })[0];
+        if (a && b) ch.push({ s: sym, d: ((a.ai.low + a.ai.high) / 2 / a.price_at_prediction) - ((b.ai.low + b.ai.high) / 2 / b.price_at_prediction), du: (a.ai.prob_up != null && b.ai.prob_up != null) ? a.ai.prob_up - b.ai.prob_up : 0 });
+      });
+      ch.sort(function (x, y) { return Math.abs(y.du) - Math.abs(x.du); });
+      var ul = el("ul", undefined, "changes");
+      ch.slice(0, 5).forEach(function (c) {
+        var li = el("li"); li.appendChild(el("b", c.s));
+        li.appendChild(el("span", "1-month chance up " + (c.du >= 0 ? "raised" : "cut") + " by " + Math.abs(Math.round(c.du * 100)) + " points; AI range midpoint moved " + signed(c.d * 100) + " vs last update"));
+        ul.appendChild(li);
+      });
+      host.appendChild(ul);
+    }
+    var cut = new Date(Date.now() - 14 * 86400000).toISOString().slice(0, 10);
+    var shocks = (state.events || []).filter(function (e) { return e.type === "shock" && e.date >= cut; }).sort(function (a, b) { return a.date < b.date ? 1 : -1; }).slice(0, 3);
+    if (shocks.length) {
+      var h = el("p", "Recent market shocks logged:"); h.style.fontSize = "13px"; h.style.margin = "8px 0 0"; host.appendChild(h);
+      var ul2 = el("ul", undefined, "changes");
+      shocks.forEach(function (e) { var li = el("li"); li.appendChild(el("b", dateLabel(e))); li.appendChild(el("span", e.title)); ul2.appendChild(li); });
+      host.appendChild(ul2);
+    }
+  }
   function renderHome() {
     var syms = symbols();
     var per = syms.map(function (s) { return { s: s, rows: latestByHorizon(forSymbol(s)) }; });
@@ -529,7 +728,11 @@ tbody tr { border-top: 1px solid var(--line-2); }
     if (!state.homeSize) state.homeSize = "width";
     seg($("home-view"), [["map", "Map"], ["cards", "Cards"]], "homeView");
     seg($("home-size"), [["width", "Size: AI range width"], ["equal", "Size: equal"]], "homeSize");
+    seg2($("home-group"), [["all", "All"], ["index", "Broad indexes"], ["sector", "Sectors"], ["other", "Bonds & gold"]].concat(per.some(function (d) { return groupOf(d.s) === "stock"; }) ? [["stock", "Stocks"]] : []), "homeGroup", renderHome);
+    seg2($("home-sort"), [["default", "Sort: default"], ["up", "Sort: chance up"], ["width", "Sort: widest range"]], "homeSort", renderHome);
+    if (state.homeGroup !== "all") data = data.filter(function (d) { return groupOf(d.s) === state.homeGroup; });
     var isMap = state.homeView === "map";
+    $("home-sort").hidden = isMap;
     $("home-map").hidden = !isMap; $("home-scale").hidden = !isMap; $("home-size").hidden = !isMap;
     $("home-grid").hidden = isMap;
     if (isMap) renderMap(data);
@@ -538,8 +741,13 @@ tbody tr { border-top: 1px solid var(--line-2); }
     var lo = Math.min.apply(null, vals), hi = Math.max.apply(null, vals), pad = (hi - lo) * 0.06;
     var sc = { lo: lo - pad, hi: hi + pad };
     var grid = $("home-grid"); clear(grid);
-    data.sort(function (x, y) { return (x.s === "SPY" ? 0 : 1) - (y.s === "SPY" ? 0 : 1); });
-    data.forEach(function (d) { grid.appendChild(homeCard(d, sc, d.s === "SPY")); });
+    function wd(d) { return (d.p.ai.high - d.p.ai.low) / d.p.price_at_prediction; }
+    if (state.homeSort === "up") data.sort(function (x, y) { return (y.p.ai.prob_up || 0) - (x.p.ai.prob_up || 0); });
+    else if (state.homeSort === "width") data.sort(function (x, y) { return wd(y) - wd(x); });
+    else data.sort(function (x, y) { return (x.s === "SPY" ? 0 : 1) - (y.s === "SPY" ? 0 : 1); });
+    var heroOn = state.homeSort === "default";
+    data.forEach(function (d) { grid.appendChild(homeCard(d, sc, heroOn && d.s === "SPY")); });
+    renderChanges(); renderCalibration();
     var today = todayIso();
     var ev = (state.events || []).filter(function (e) { return e.type === "scheduled" && (e.end_date || e.date) >= today; })
       .sort(function (a, b) { return a.date < b.date ? -1 : a.date > b.date ? 1 : 0; }).slice(0, 5);
@@ -603,6 +811,7 @@ tbody tr { border-top: 1px solid var(--line-2); }
       nums.appendChild(l1);
       nums.appendChild(el("span", moveText(p.ai, p.price_at_prediction) + " from start", "sub"));
       nums.appendChild(el("span", "Baseline " + range(p.baseline), "alt"));
+      if (p.baseline_drift) nums.appendChild(el("span", "Drift baseline " + range(p.baseline_drift), "alt"));
       row.appendChild(nums);
 
       var up = el("div", undefined, "nums");
@@ -626,7 +835,7 @@ tbody tr { border-top: 1px solid var(--line-2); }
     if (!s || !s.n_total) { t.appendChild(document.createTextNode(" no predictions yet.")); return; }
     var msg = " " + s.n_resolved + " of " + s.n_total + " predictions have resolved. ";
     if (s.comparison_ready) {
-      msg += "AI range held " + pct(s.overall.ai.coverage) + " of the time, baseline " + pct(s.overall.baseline.coverage) + ". Still a small sample.";
+      msg += "AI range held " + pct(s.overall.ai.coverage) + " of the time, baseline " + pct(s.overall.baseline.coverage) + (s.overall.baseline_drift ? ", drift baseline " + pct(s.overall.baseline_drift.coverage) : "") + ". Still a small sample.";
     } else {
       msg += "Too few to judge; the comparison with the baseline shows from " + s.min_resolved_for_comparison + ".";
     }
@@ -706,7 +915,8 @@ tbody tr { border-top: 1px solid var(--line-2); }
     if (cur.notes) { notes.textContent = cur.notes; wrap.hidden = false; } else { wrap.hidden = true; }
 
     var meta = "Made " + fmtDate(cur.made_at) + " at " + money(cur.price_at_prediction) + " · " + claimCount + " claims · " + urls.length + " sources";
-    $("outlook-meta").textContent = meta;
+    var om = $("outlook-meta"); om.textContent = meta;
+    om.appendChild(el("span", cur.blind ? "Blind: range locked before the baseline" : "Written after seeing the baseline", cur.blind ? "blind-tag" : "seen-tag"));
   }
 
   var KIND = { fed: "Fed", macro: "Economic data", earnings: "Earnings", market: "Market hours", shock: "Market move", politics: "Politics" };
@@ -841,6 +1051,7 @@ tbody tr { border-top: 1px solid var(--line-2); }
     renderTabs();
     renderHeader(rows);
     renderRows(rows);
+    renderChart(rows);
     renderRecord();
     renderAnalysis(rows);
     renderEvents(rows);

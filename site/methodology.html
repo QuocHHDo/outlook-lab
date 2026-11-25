@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>How Outlook Lab works</title>
+<meta name="description" content="How the forecast ranges are made, scored, and what the project can and cannot tell you.">
+<meta property="og:title" content="How Outlook Lab works">
+<meta property="og:image" content="https://quochhdo.github.io/outlook-lab/og.png">
+<script>
+(function () {
+  var t = null;
+  try { t = localStorage.getItem("ol-theme"); } catch (e) {}
+  if (t !== "dark" && t !== "light") t = window.matchMedia && matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+  document.documentElement.setAttribute("data-theme", t);
+})();
+</script>
+<style>
+:root { --ink: #16181d; --muted: #5b6070; --line: #e3e5ec; --bg: #f5f6fa; --card: #fff; --accent: #2a45b8; --panel: #eef0f6; --warn-bg: #fdf3dc; --warn-ink: #6b4a0d; color-scheme: light; }
+:root[data-theme="dark"] { --ink: #eceef4; --muted: #a3a9ba; --line: #2b2f3b; --bg: #14161c; --card: #1b1e26; --accent: #8fa6ff; --panel: #232733; --warn-bg: #3a3118; --warn-ink: #f1d58a; color-scheme: dark; }
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--ink); font: 16px/1.6 -apple-system, "Segoe UI", Inter, system-ui, sans-serif; }
+main { max-width: 760px; margin: 0 auto; padding: 28px 18px 60px; }
+a { color: var(--accent); }
+h1 { font-size: 30px; margin: 10px 0 6px; }
+h2 { font-size: 20px; margin: 34px 0 8px; }
+p, li { color: var(--ink); }
+.lede { color: var(--muted); margin-top: 0; }
+.card { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 4px 22px 22px; }
+.warn { background: var(--warn-bg); color: var(--warn-ink); border-radius: 10px; padding: 12px 14px; font-size: 14.5px; margin: 14px 0; }
+code { background: var(--panel); padding: 1px 6px; border-radius: 5px; font-size: 14px; }
+table { border-collapse: collapse; width: 100%; font-size: 14.5px; margin: 8px 0; }
+th, td { text-align: left; padding: 7px 10px; border-bottom: 1px solid var(--line); vertical-align: top; }
+th { color: var(--muted); font-weight: 600; }
+</style>
+</head>
+<body>
+<main>
+<p><a href="./">&larr; Back to Outlook Lab</a></p>
+<h1>How Outlook Lab works</h1>
+<p class="lede">A public experiment: can an AI's forecast ranges beat a forecast that has no opinion? Every prediction is kept, and graded when its date arrives.</p>
+
+<div class="card">
+
+<h2>What a prediction is</h2>
+<p>For each ETF and each horizon (1 week, 1 month, 6 months, 1 year, 5 years) the model writes an <strong>80% range</strong>: a low and high price it expects the close to land between, plus the <strong>chance the price finishes above where it started</strong>. An honest 80% range should hold about 80% of the time. Ranges that hold far less are overconfident; ranges that hold far more are too wide to be useful.</p>
+<p>Each prediction also lists bull, base and bear catalysts with source links. The catalysts explain the model's reasoning; they are not scored on their own.</p>
+
+<h2>What it is scored against</h2>
+<p>Scoring a forecast alone says little. It needs something to beat, so every prediction is stored next to forecasts that have <em>no view</em>:</p>
+<table>
+<tr><th>Baseline</th><th>How it is built</th></tr>
+<tr><td><strong>Volatility baseline</strong></td><td>Uses the average of call and put implied volatility at the strike nearest the price, from the option expiry closest to the horizon. The range is log-normal with the median at today's price: low = price &times; exp(&minus;1.2816&sigma;), high = price &times; exp(+1.2816&sigma;), where &sigma; = IV &times; &radic;(days / 365).</td></tr>
+<tr><td><strong>Drift baseline</strong></td><td>Same volatility, but the middle moves up with an assumed 6% a year price return, the same for every symbol. It exists to check whether the AI only looks good because markets tend to rise. It is crude, especially for bonds and gold.</td></tr>
+</table>
+<p>The weakness of both: at 1 year and 5 years the options market has little data behind the implied volatility, and the volatility baseline ignores drift entirely, so it is easy to beat on the upside. Treat long-horizon comparisons with suspicion.</p>
+
+<h2>How results are graded</h2>
+<ul>
+<li><strong>Coverage:</strong> how often the close landed inside the range.</li>
+<li><strong>Interval score (Winkler):</strong> the range width plus a penalty for every dollar the close lands outside it. Lower is better. It rewards narrow ranges that still hold, and stops anyone winning by making ranges enormous.</li>
+<li><strong>Brier score:</strong> squared error of the chance-up number. The baselines have no view and use 50%.</li>
+</ul>
+<p>Closes are raw, unadjusted prices, because the starting price is a raw quote. ETFs that pay a dividend inside the window will drop by the dividend on the ex-date, which slightly favors ranges centered lower. Comparisons against the baselines only appear after 10 predictions have resolved. Before that the sample is too small to mean anything, and the site says so.</p>
+
+<h2>Blind and non-blind predictions</h2>
+<p>The most obvious way to cheat, even by accident, is to write the AI range after seeing the baseline. The first 85 predictions were <strong>not blind</strong>: the baseline was visible when the ranges were written, and each one says so. From the next update the process is:</p>
+<ol>
+<li>Pull prices only (no implied volatility).</li>
+<li>Write the AI ranges and chances, and commit them to <code>data/locks.json</code>.</li>
+<li>Only then pull implied volatility, compute the baselines, and commit <code>data/predictions.json</code>.</li>
+</ol>
+<p>A prediction marked blind must match its lock exactly, or the validation step fails. The two commits and their timestamps are public in the repository history.</p>
+
+<h2>Where the data comes from</h2>
+<ul>
+<li>Prices, quotes and option implied volatility: read-only access through Robinhood's MCP connection.</li>
+<li>Daily closes for scoring: Yahoo Finance via the free <code>yfinance</code> library, fetched on a weekday schedule by GitHub Actions. It is an unofficial source and can lag or break; predictions that cannot be scored are listed rather than hidden.</li>
+<li>News and catalysts: public web pages, linked from each prediction. Some are undated or headline-only, and the notes say so.</li>
+<li>Scheduled events: BLS, the Federal Reserve, NYSE, and company earnings dates from Robinhood's calendar (which can change).</li>
+</ul>
+
+<h2>What this cannot tell you</h2>
+<div class="warn"><strong>Not investment advice.</strong> These are an AI model's judgments, kept for evaluation. One week of data, or even a few months, cannot separate skill from luck. Forecasts for different symbols on the same date are strongly correlated (a market-wide drop misses many ranges at once), so 85 predictions are far fewer than 85 independent tests.</div>
+<ul>
+<li>Several of the sector ranges were made intraday, not at a close, and the notes state the time.</li>
+<li>The model's forecasts are subjective and unrepeatable: asking again could give different ranges.</li>
+<li>Past predictions are never edited. Corrections are made as new predictions.</li>
+</ul>
+
+<h2>Cost and upkeep</h2>
+<p>The site is static files on GitHub Pages, so visiting it costs nothing and uses no AI. The weekly update is run manually in a Claude chat on Mondays. Scoring and deployment run automatically on a weekday schedule.</p>
+
+<p><a href="https://github.com/QuocHHDo/outlook-lab">Read the code and the data</a></p>
+</div>
+</main>
+</body>
+</html>
