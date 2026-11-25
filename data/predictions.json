@@ -416,5 +416,581 @@
     },
     "notes": "Made intraday (about 1:12 PM CT), not at a close. Prices and implied vol are from Robinhood read-only quotes (IV is the average of the at-the-money call and put at the nearest strike). I ran the baseline calculator before writing the AI range, so this prediction is NOT blind to the baseline. Catalyst items without a link come from Robinhood's earnings calendar or are the model's own reasoning.",
     "status": "open"
+  },
+  {
+    "id": "2026-11-25_SPY_6m",
+    "symbol": "SPY",
+    "made_at": "2026-11-25",
+    "horizon": "6m",
+    "resolves_on": "2027-05-25",
+    "price_at_prediction": 717.54,
+    "price_time": "2026-11-25T19:16:59Z",
+    "ai": {
+      "low": 610.0,
+      "high": 850.0,
+      "level": 0.8,
+      "prob_up": 0.58
+    },
+    "baseline": {
+      "method": "implied_vol",
+      "iv": 0.2128,
+      "iv_updated_at": "2026-11-25T19:17:10Z",
+      "low": 592.17,
+      "high": 869.45,
+      "level": 0.8
+    },
+    "catalysts": {
+      "bull": [
+        {
+          "text": "Long-horizon returns are driven mostly by earnings growth and starting valuation, not this week's headlines. The model's range tilts upward for typical equity drift.",
+          "source": null,
+          "kind": "model_expectation"
+        },
+        {
+          "text": "The model sees no information advantage over the options market on index direction at this horizon.",
+          "source": null,
+          "kind": "model_expectation"
+        }
+      ],
+      "base": [
+        {
+          "text": "Implied vol for the longest expiries is about 21%, so the baseline range is wide; the AI range is narrower because implied vol usually runs above realized.",
+          "source": null,
+          "kind": "model_expectation"
+        },
+        {
+          "text": "Fed meetings and the Dec 4 jobs report come first; the 6-month window includes the full earnings cycles for Q4 2026 and Q1 2027.",
+          "source": null,
+          "kind": "model_expectation"
+        }
+      ],
+      "bear": [
+        {
+          "text": "New 20% tariffs were announced and the October PCE report showed price increases picked up.",
+          "source": "https://finance.yahoo.com/markets/live/stock-market-today-wednesday-november-25-dow-sp-500-nasdaq-pce-inflation-data-091428237.html"
+        },
+        {
+          "text": "The Fed was priced for an 85% chance of a December hike as of Nov 13, with the funds rate upper bound at 4.00%; a tightening cycle that lasts longer would weigh on valuations.",
+          "source": "https://247wallst.com/investing/2026/11/13/kevin-warshs-fed-will-vote-on-rates-only-7-times-in-2027/"
+        }
+      ]
+    },
+    "notes": "Made intraday (about 1:17 PM CT), not at a close. Price and implied vol are Robinhood read-only quotes (IV is the average of the at-the-money call and put at the nearest strike, taken from the 2027-06-17 expiry). I ran the baseline calculator before writing the AI range, so this is NOT blind to the baseline. The 6-month prediction resolves around May 25, 2027. The baseline is zero-drift (median = today's price); over long horizons stocks tend to drift up, so an upward-tilted range can beat it without skill. Catalyst items without a link are the model's own reasoning.",
+    "status": "open"
+  },
+  {
+    "id": "2026-11-25_SPY_1y",
+    "symbol": "SPY",
+    "made_at": "2026-11-25",
+    "horizon": "1y",
+    "resolves_on": "2027-11-24",
+    "price_at_prediction": 717.54,
+    "price_time": "2026-11-25T19:16:59Z",
+    "ai": {
+      "low": 585.0,
+      "high": 915.0,
+      "level": 0.8,
+      "prob_up": 0.62
+    },
+    "baseline": {
+      "method": "implied_vol",
+      "iv": 0.2093,
+      "iv_updated_at": "2026-11-25T19:17:10Z",
+      "low": 548.94,
+      "high": 937.93,
+      "level": 0.8
+    },
+    "catalysts": {
+      "bull": [
+        {
+          "text": "Long-horizon returns are driven mostly by earnings growth and starting valuation, not this week's headlines. The model's range tilts upward for typical equity drift.",
+          "source": null,
+          "kind": "model_expectation"
+        },
+        {
+          "text": "The model sees no information advantage over the options market on index direction at this horizon.",
+          "source": null,
+          "kind": "model_expectation"
+        }
+      ],
+      "base": [
+        {
+          "text": "Implied vol for the longest expiries is about 21%, so the baseline range is wide; the AI range is narrower because implied vol usually runs above realized.",
+          "source": null,
+          "kind": "model_expectation"
+        },
+        {
+          "text": "The 1-year window spans the 2027 Fed calendar, which Warsh has cut to seven rate-setting meetings.",
+          "source": "https://247wallst.com/investing/2026/11/13/kevin-warshs-fed-will-vote-on-rates-only-7-times-in-2027/"
+        }
+      ],
+      "bear": [
+        {
+          "text": "New 20% tariffs were announced and the October PCE report showed price increases picked up.",
+          "source": "https://finance.yahoo.com/markets/live/stock-market-today-wednesday-november-25-dow-sp-500-nasdaq-pce-inflation-data-091428237.html"
+        },
+        {
+          "text": "The Fed was priced for an 85% chance of a December hike as of Nov 13, with the funds rate upper bound at 4.00%; a tightening cycle that lasts longer would weigh on valuations.",
+          "source": "https://247wallst.com/investing/2026/11/13/kevin-warshs-fed-will-vote-on-rates-only-7-times-in-2027/"
+        }
+      ]
+    },
+    "notes": "Made intraday (about 1:17 PM CT), not at a close. Price and implied vol are Robinhood read-only quotes (IV is the average of the at-the-money call and put at the nearest strike, taken from the 2027-12-17 expiry). I ran the baseline calculator before writing the AI range, so this is NOT blind to the baseline. The 1-year prediction resolves around Nov 24, 2027. The baseline is zero-drift (median = today's price); over long horizons stocks tend to drift up, so an upward-tilted range can beat it without skill. Catalyst items without a link are the model's own reasoning.",
+    "status": "open"
+  },
+  {
+    "id": "2026-11-25_SPY_5y",
+    "symbol": "SPY",
+    "made_at": "2026-11-25",
+    "horizon": "5y",
+    "resolves_on": "2031-11-25",
+    "price_at_prediction": 717.54,
+    "price_time": "2026-11-25T19:16:59Z",
+    "ai": {
+      "low": 540.0,
+      "high": 1420.0,
+      "level": 0.8,
+      "prob_up": 0.75
+    },
+    "baseline": {
+      "method": "implied_vol",
+      "iv": 0.2056,
+      "iv_updated_at": "2026-11-25T19:17:10Z",
+      "low": 397.98,
+      "high": 1293.71,
+      "level": 0.8
+    },
+    "catalysts": {
+      "bull": [
+        {
+          "text": "Long-horizon returns are driven mostly by earnings growth and starting valuation, not this week's headlines. The model's range tilts upward for typical equity drift.",
+          "source": null,
+          "kind": "model_expectation"
+        },
+        {
+          "text": "The model sees no information advantage over the options market on index direction at this horizon.",
+          "source": null,
+          "kind": "model_expectation"
+        }
+      ],
+      "base": [
+        {
+          "text": "Implied vol for the longest expiries is about 21%, so the baseline range is wide; the AI range is narrower because implied vol usually runs above realized.",
+          "source": null,
+          "kind": "model_expectation"
+        },
+        {
+          "text": "No 5-year options exist, so the baseline uses implied vol from the longest listed expiry (Jan 2029) as a proxy.",
+          "source": null,
+          "kind": "model_expectation"
+        }
+      ],
+      "bear": [
+        {
+          "text": "New 20% tariffs were announced and the October PCE report showed price increases picked up.",
+          "source": "https://finance.yahoo.com/markets/live/stock-market-today-wednesday-november-25-dow-sp-500-nasdaq-pce-inflation-data-091428237.html"
+        },
+        {
+          "text": "The Fed was priced for an 85% chance of a December hike as of Nov 13, with the funds rate upper bound at 4.00%; a tightening cycle that lasts longer would weigh on valuations.",
+          "source": "https://247wallst.com/investing/2026/11/13/kevin-warshs-fed-will-vote-on-rates-only-7-times-in-2027/"
+        }
+      ]
+    },
+    "notes": "Made intraday (about 1:17 PM CT), not at a close. Price and implied vol are Robinhood read-only quotes (IV is the average of the at-the-money call and put at the nearest strike, taken from the 2029-01-19 expiry). I ran the baseline calculator before writing the AI range, so this is NOT blind to the baseline. The 5-year prediction resolves around Nov 25, 2031, so it will not affect the track record for years. The baseline is zero-drift (median = today's price); over long horizons stocks tend to drift up, so an upward-tilted range can beat it without skill. Catalyst items without a link are the model's own reasoning.",
+    "status": "open"
+  },
+  {
+    "id": "2026-11-25_QQQ_6m",
+    "symbol": "QQQ",
+    "made_at": "2026-11-25",
+    "horizon": "6m",
+    "resolves_on": "2027-05-25",
+    "price_at_prediction": 633.84,
+    "price_time": "2026-11-25T19:16:59Z",
+    "ai": {
+      "low": 510.0,
+      "high": 800.0,
+      "level": 0.8,
+      "prob_up": 0.58
+    },
+    "baseline": {
+      "method": "implied_vol",
+      "iv": 0.2897,
+      "iv_updated_at": "2026-11-25T19:17:10Z",
+      "low": 488.03,
+      "high": 823.22,
+      "level": 0.8
+    },
+    "catalysts": {
+      "bull": [
+        {
+          "text": "Long-horizon returns are driven mostly by earnings growth and starting valuation, not this week's headlines. The model's range tilts upward for typical equity drift.",
+          "source": null,
+          "kind": "model_expectation"
+        },
+        {
+          "text": "The Nasdaq 100 rebounded 3.54% on Nov 9 after the early-November sell-off, showing buyers return quickly.",
+          "source": "https://247wallst.com/investing/2026/11/10/the-nasdaq-100-just-had-its-best-day-since-march-without-nvidias-help/"
+        }
+      ],
+      "base": [
+        {
+          "text": "Implied vol for the longest expiries is about 26-29%, so the baseline range is wide; the AI range is somewhat narrower.",
+          "source": null,
+          "kind": "model_expectation"
+        },
+        {
+          "text": "Fed meetings and the Dec 4 jobs report come first; the 6-month window includes the full earnings cycles for Q4 2026 and Q1 2027.",
+          "source": null,
+          "kind": "model_expectation"
+        }
+      ],
+      "bear": [
+        {
+          "text": "New 20% tariffs were announced and the October PCE report showed price increases picked up.",
+          "source": "https://finance.yahoo.com/markets/live/stock-market-today-wednesday-november-25-dow-sp-500-nasdaq-pce-inflation-data-091428237.html"
+        },
+        {
+          "text": "The Fed was priced for an 85% chance of a December hike as of Nov 13, with the funds rate upper bound at 4.00%; a tightening cycle that lasts longer would weigh on valuations.",
+          "source": "https://247wallst.com/investing/2026/11/13/kevin-warshs-fed-will-vote-on-rates-only-7-times-in-2027/"
+        },
+        {
+          "text": "Doubts that heavy AI spending will pay off hit AI-linked stocks that carry much of the index; the PHLX Semiconductor Index fell 7.2% Wednesday.",
+          "source": "https://stockanalysis.com/news/nvidia-gives-back-half-huang-rally/"
+        }
+      ]
+    },
+    "notes": "Made intraday (about 1:17 PM CT), not at a close. Price and implied vol are Robinhood read-only quotes (IV is the average of the at-the-money call and put at the nearest strike, taken from the 2027-05-21 expiry). I ran the baseline calculator before writing the AI range, so this is NOT blind to the baseline. The 6-month prediction resolves around May 25, 2027. The baseline is zero-drift (median = today's price); over long horizons stocks tend to drift up, so an upward-tilted range can beat it without skill. Catalyst items without a link are the model's own reasoning.",
+    "status": "open"
+  },
+  {
+    "id": "2026-11-25_QQQ_1y",
+    "symbol": "QQQ",
+    "made_at": "2026-11-25",
+    "horizon": "1y",
+    "resolves_on": "2027-11-24",
+    "price_at_prediction": 633.84,
+    "price_time": "2026-11-25T19:16:59Z",
+    "ai": {
+      "low": 480.0,
+      "high": 880.0,
+      "level": 0.8,
+      "prob_up": 0.6
+    },
+    "baseline": {
+      "method": "implied_vol",
+      "iv": 0.2747,
+      "iv_updated_at": "2026-11-25T19:17:10Z",
+      "low": 445.96,
+      "high": 900.87,
+      "level": 0.8
+    },
+    "catalysts": {
+      "bull": [
+        {
+          "text": "Long-horizon returns are driven mostly by earnings growth and starting valuation, not this week's headlines. The model's range tilts upward for typical equity drift.",
+          "source": null,
+          "kind": "model_expectation"
+        },
+        {
+          "text": "The Nasdaq 100 rebounded 3.54% on Nov 9 after the early-November sell-off, showing buyers return quickly.",
+          "source": "https://247wallst.com/investing/2026/11/10/the-nasdaq-100-just-had-its-best-day-since-march-without-nvidias-help/"
+        }
+      ],
+      "base": [
+        {
+          "text": "Implied vol for the longest expiries is about 26-29%, so the baseline range is wide; the AI range is somewhat narrower.",
+          "source": null,
+          "kind": "model_expectation"
+        },
+        {
+          "text": "The 1-year window spans the 2027 Fed calendar, which Warsh has cut to seven rate-setting meetings.",
+          "source": "https://247wallst.com/investing/2026/11/13/kevin-warshs-fed-will-vote-on-rates-only-7-times-in-2027/"
+        }
+      ],
+      "bear": [
+        {
+          "text": "New 20% tariffs were announced and the October PCE report showed price increases picked up.",
+          "source": "https://finance.yahoo.com/markets/live/stock-market-today-wednesday-november-25-dow-sp-500-nasdaq-pce-inflation-data-091428237.html"
+        },
+        {
+          "text": "The Fed was priced for an 85% chance of a December hike as of Nov 13, with the funds rate upper bound at 4.00%; a tightening cycle that lasts longer would weigh on valuations.",
+          "source": "https://247wallst.com/investing/2026/11/13/kevin-warshs-fed-will-vote-on-rates-only-7-times-in-2027/"
+        },
+        {
+          "text": "Doubts that heavy AI spending will pay off hit AI-linked stocks that carry much of the index; the PHLX Semiconductor Index fell 7.2% Wednesday.",
+          "source": "https://stockanalysis.com/news/nvidia-gives-back-half-huang-rally/"
+        }
+      ]
+    },
+    "notes": "Made intraday (about 1:17 PM CT), not at a close. Price and implied vol are Robinhood read-only quotes (IV is the average of the at-the-money call and put at the nearest strike, taken from the 2027-12-17 expiry). I ran the baseline calculator before writing the AI range, so this is NOT blind to the baseline. The 1-year prediction resolves around Nov 24, 2027. The baseline is zero-drift (median = today's price); over long horizons stocks tend to drift up, so an upward-tilted range can beat it without skill. Catalyst items without a link are the model's own reasoning.",
+    "status": "open"
+  },
+  {
+    "id": "2026-11-25_QQQ_5y",
+    "symbol": "QQQ",
+    "made_at": "2026-11-25",
+    "horizon": "5y",
+    "resolves_on": "2031-11-25",
+    "price_at_prediction": 633.84,
+    "price_time": "2026-11-25T19:16:59Z",
+    "ai": {
+      "low": 420.0,
+      "high": 1500.0,
+      "level": 0.8,
+      "prob_up": 0.72
+    },
+    "baseline": {
+      "method": "implied_vol",
+      "iv": 0.2643,
+      "iv_updated_at": "2026-11-25T19:17:10Z",
+      "low": 297.1,
+      "high": 1352.25,
+      "level": 0.8
+    },
+    "catalysts": {
+      "bull": [
+        {
+          "text": "Long-horizon returns are driven mostly by earnings growth and starting valuation, not this week's headlines. The model's range tilts upward for typical equity drift.",
+          "source": null,
+          "kind": "model_expectation"
+        },
+        {
+          "text": "The Nasdaq 100 rebounded 3.54% on Nov 9 after the early-November sell-off, showing buyers return quickly.",
+          "source": "https://247wallst.com/investing/2026/11/10/the-nasdaq-100-just-had-its-best-day-since-march-without-nvidias-help/"
+        }
+      ],
+      "base": [
+        {
+          "text": "Implied vol for the longest expiries is about 26-29%, so the baseline range is wide; the AI range is somewhat narrower.",
+          "source": null,
+          "kind": "model_expectation"
+        },
+        {
+          "text": "No 5-year options exist, so the baseline uses implied vol from the longest listed expiry (Jan 2029) as a proxy.",
+          "source": null,
+          "kind": "model_expectation"
+        }
+      ],
+      "bear": [
+        {
+          "text": "New 20% tariffs were announced and the October PCE report showed price increases picked up.",
+          "source": "https://finance.yahoo.com/markets/live/stock-market-today-wednesday-november-25-dow-sp-500-nasdaq-pce-inflation-data-091428237.html"
+        },
+        {
+          "text": "The Fed was priced for an 85% chance of a December hike as of Nov 13, with the funds rate upper bound at 4.00%; a tightening cycle that lasts longer would weigh on valuations.",
+          "source": "https://247wallst.com/investing/2026/11/13/kevin-warshs-fed-will-vote-on-rates-only-7-times-in-2027/"
+        },
+        {
+          "text": "Doubts that heavy AI spending will pay off hit AI-linked stocks that carry much of the index; the PHLX Semiconductor Index fell 7.2% Wednesday.",
+          "source": "https://stockanalysis.com/news/nvidia-gives-back-half-huang-rally/"
+        }
+      ]
+    },
+    "notes": "Made intraday (about 1:17 PM CT), not at a close. Price and implied vol are Robinhood read-only quotes (IV is the average of the at-the-money call and put at the nearest strike, taken from the 2029-01-19 expiry). I ran the baseline calculator before writing the AI range, so this is NOT blind to the baseline. The 5-year prediction resolves around Nov 25, 2031, so it will not affect the track record for years. The baseline is zero-drift (median = today's price); over long horizons stocks tend to drift up, so an upward-tilted range can beat it without skill. Catalyst items without a link are the model's own reasoning.",
+    "status": "open"
+  },
+  {
+    "id": "2026-11-25_SMH_6m",
+    "symbol": "SMH",
+    "made_at": "2026-11-25",
+    "horizon": "6m",
+    "resolves_on": "2027-05-25",
+    "price_at_prediction": 419.88,
+    "price_time": "2026-11-25T19:16:59Z",
+    "ai": {
+      "low": 290.0,
+      "high": 640.0,
+      "level": 0.8,
+      "prob_up": 0.55
+    },
+    "baseline": {
+      "method": "implied_vol",
+      "iv": 0.5122,
+      "iv_updated_at": "2026-11-25T19:17:10Z",
+      "low": 264.46,
+      "high": 666.63,
+      "level": 0.8
+    },
+    "catalysts": {
+      "bull": [
+        {
+          "text": "Long-horizon returns are driven mostly by earnings growth and starting valuation, not this week's headlines. The model's range tilts upward for typical equity drift.",
+          "source": null,
+          "kind": "model_expectation"
+        },
+        {
+          "text": "The PHLX Semiconductor Index is down more than 43% from its June record, so the starting point is far below the peak.",
+          "source": "https://stockanalysis.com/news/nvidia-gives-back-half-huang-rally/"
+        }
+      ],
+      "base": [
+        {
+          "text": "Implied vol for the longest expiries is 45-51%, so the baseline range is extremely wide; the AI range is modestly narrower.",
+          "source": null,
+          "kind": "model_expectation"
+        },
+        {
+          "text": "Fed meetings and the Dec 4 jobs report come first; the 6-month window includes the full earnings cycles for Q4 2026 and Q1 2027.",
+          "source": null,
+          "kind": "model_expectation"
+        }
+      ],
+      "bear": [
+        {
+          "text": "New 20% tariffs were announced and the October PCE report showed price increases picked up.",
+          "source": "https://finance.yahoo.com/markets/live/stock-market-today-wednesday-november-25-dow-sp-500-nasdaq-pce-inflation-data-091428237.html"
+        },
+        {
+          "text": "The Fed was priced for an 85% chance of a December hike as of Nov 13, with the funds rate upper bound at 4.00%; a tightening cycle that lasts longer would weigh on valuations.",
+          "source": "https://247wallst.com/investing/2026/11/13/kevin-warshs-fed-will-vote-on-rates-only-7-times-in-2027/"
+        },
+        {
+          "text": "Micron fell 11.3%, Intel and AMD 9.0%, Marvell 8.9%, TSMC 6.7% and Broadcom 6.1% on Wednesday on doubts about AI spending returns.",
+          "source": "https://stockanalysis.com/news/nvidia-gives-back-half-huang-rally/"
+        },
+        {
+          "text": "SMH fell 11.2% to $447.73 on Nov 5 and now trades below that level; semiconductors are cyclical and can fall much further.",
+          "source": "https://247wallst.com/investing/2026/11/06/chip-stocks-just-had-their-second-worst-day-on-record/"
+        }
+      ]
+    },
+    "notes": "Made intraday (about 1:17 PM CT), not at a close. Price and implied vol are Robinhood read-only quotes (IV is the average of the at-the-money call and put at the nearest strike, taken from the 2027-05-21 expiry). I ran the baseline calculator before writing the AI range, so this is NOT blind to the baseline. The 6-month prediction resolves around May 25, 2027. The baseline is zero-drift (median = today's price); over long horizons stocks tend to drift up, so an upward-tilted range can beat it without skill. Catalyst items without a link are the model's own reasoning.",
+    "status": "open"
+  },
+  {
+    "id": "2026-11-25_SMH_1y",
+    "symbol": "SMH",
+    "made_at": "2026-11-25",
+    "horizon": "1y",
+    "resolves_on": "2027-11-24",
+    "price_at_prediction": 419.88,
+    "price_time": "2026-11-25T19:16:59Z",
+    "ai": {
+      "low": 260.0,
+      "high": 740.0,
+      "level": 0.8,
+      "prob_up": 0.56
+    },
+    "baseline": {
+      "method": "implied_vol",
+      "iv": 0.4759,
+      "iv_updated_at": "2026-11-25T19:17:10Z",
+      "low": 228.35,
+      "high": 772.07,
+      "level": 0.8
+    },
+    "catalysts": {
+      "bull": [
+        {
+          "text": "Long-horizon returns are driven mostly by earnings growth and starting valuation, not this week's headlines. The model's range tilts upward for typical equity drift.",
+          "source": null,
+          "kind": "model_expectation"
+        },
+        {
+          "text": "The PHLX Semiconductor Index is down more than 43% from its June record, so the starting point is far below the peak.",
+          "source": "https://stockanalysis.com/news/nvidia-gives-back-half-huang-rally/"
+        }
+      ],
+      "base": [
+        {
+          "text": "Implied vol for the longest expiries is 45-51%, so the baseline range is extremely wide; the AI range is modestly narrower.",
+          "source": null,
+          "kind": "model_expectation"
+        },
+        {
+          "text": "The 1-year window spans the 2027 Fed calendar, which Warsh has cut to seven rate-setting meetings.",
+          "source": "https://247wallst.com/investing/2026/11/13/kevin-warshs-fed-will-vote-on-rates-only-7-times-in-2027/"
+        }
+      ],
+      "bear": [
+        {
+          "text": "New 20% tariffs were announced and the October PCE report showed price increases picked up.",
+          "source": "https://finance.yahoo.com/markets/live/stock-market-today-wednesday-november-25-dow-sp-500-nasdaq-pce-inflation-data-091428237.html"
+        },
+        {
+          "text": "The Fed was priced for an 85% chance of a December hike as of Nov 13, with the funds rate upper bound at 4.00%; a tightening cycle that lasts longer would weigh on valuations.",
+          "source": "https://247wallst.com/investing/2026/11/13/kevin-warshs-fed-will-vote-on-rates-only-7-times-in-2027/"
+        },
+        {
+          "text": "Micron fell 11.3%, Intel and AMD 9.0%, Marvell 8.9%, TSMC 6.7% and Broadcom 6.1% on Wednesday on doubts about AI spending returns.",
+          "source": "https://stockanalysis.com/news/nvidia-gives-back-half-huang-rally/"
+        },
+        {
+          "text": "SMH fell 11.2% to $447.73 on Nov 5 and now trades below that level; semiconductors are cyclical and can fall much further.",
+          "source": "https://247wallst.com/investing/2026/11/06/chip-stocks-just-had-their-second-worst-day-on-record/"
+        }
+      ]
+    },
+    "notes": "Made intraday (about 1:17 PM CT), not at a close. Price and implied vol are Robinhood read-only quotes (IV is the average of the at-the-money call and put at the nearest strike, taken from the 2027-12-17 expiry). I ran the baseline calculator before writing the AI range, so this is NOT blind to the baseline. The 1-year prediction resolves around Nov 24, 2027. The baseline is zero-drift (median = today's price); over long horizons stocks tend to drift up, so an upward-tilted range can beat it without skill. Catalyst items without a link are the model's own reasoning.",
+    "status": "open"
+  },
+  {
+    "id": "2026-11-25_SMH_5y",
+    "symbol": "SMH",
+    "made_at": "2026-11-25",
+    "horizon": "5y",
+    "resolves_on": "2031-11-25",
+    "price_at_prediction": 419.88,
+    "price_time": "2026-11-25T19:16:59Z",
+    "ai": {
+      "low": 180.0,
+      "high": 1400.0,
+      "level": 0.8,
+      "prob_up": 0.65
+    },
+    "baseline": {
+      "method": "implied_vol",
+      "iv": 0.4456,
+      "iv_updated_at": "2026-11-25T19:17:10Z",
+      "low": 117.05,
+      "high": 1506.13,
+      "level": 0.8
+    },
+    "catalysts": {
+      "bull": [
+        {
+          "text": "Long-horizon returns are driven mostly by earnings growth and starting valuation, not this week's headlines. The model's range tilts upward for typical equity drift.",
+          "source": null,
+          "kind": "model_expectation"
+        },
+        {
+          "text": "The PHLX Semiconductor Index is down more than 43% from its June record, so the starting point is far below the peak.",
+          "source": "https://stockanalysis.com/news/nvidia-gives-back-half-huang-rally/"
+        }
+      ],
+      "base": [
+        {
+          "text": "Implied vol for the longest expiries is 45-51%, so the baseline range is extremely wide; the AI range is modestly narrower.",
+          "source": null,
+          "kind": "model_expectation"
+        },
+        {
+          "text": "No 5-year options exist, so the baseline uses implied vol from the longest listed expiry (Jan 2029) as a proxy.",
+          "source": null,
+          "kind": "model_expectation"
+        }
+      ],
+      "bear": [
+        {
+          "text": "New 20% tariffs were announced and the October PCE report showed price increases picked up.",
+          "source": "https://finance.yahoo.com/markets/live/stock-market-today-wednesday-november-25-dow-sp-500-nasdaq-pce-inflation-data-091428237.html"
+        },
+        {
+          "text": "The Fed was priced for an 85% chance of a December hike as of Nov 13, with the funds rate upper bound at 4.00%; a tightening cycle that lasts longer would weigh on valuations.",
+          "source": "https://247wallst.com/investing/2026/11/13/kevin-warshs-fed-will-vote-on-rates-only-7-times-in-2027/"
+        },
+        {
+          "text": "Micron fell 11.3%, Intel and AMD 9.0%, Marvell 8.9%, TSMC 6.7% and Broadcom 6.1% on Wednesday on doubts about AI spending returns.",
+          "source": "https://stockanalysis.com/news/nvidia-gives-back-half-huang-rally/"
+        },
+        {
+          "text": "SMH fell 11.2% to $447.73 on Nov 5 and now trades below that level; semiconductors are cyclical and can fall much further.",
+          "source": "https://247wallst.com/investing/2026/11/06/chip-stocks-just-had-their-second-worst-day-on-record/"
+        }
+      ]
+    },
+    "notes": "Made intraday (about 1:17 PM CT), not at a close. Price and implied vol are Robinhood read-only quotes (IV is the average of the at-the-money call and put at the nearest strike, taken from the 2029-01-19 expiry). I ran the baseline calculator before writing the AI range, so this is NOT blind to the baseline. The 5-year prediction resolves around Nov 25, 2031, so it will not affect the track record for years. The baseline is zero-drift (median = today's price); over long horizons stocks tend to drift up, so an upward-tilted range can beat it without skill. Catalyst items without a link are the model's own reasoning.",
+    "status": "open"
   }
 ]
