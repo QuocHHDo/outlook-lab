@@ -7,21 +7,28 @@ Run once a week, in Claude, with the Robinhood MCP connected. Do the steps in or
 - **Read-only.** Use only data tools: quotes, historicals, option chains, option instruments, option quotes, earnings calendar. Never call order, watchlist-changing, or account tools for this project.
 - **Nothing from your account goes in the repo or on the site:** no positions, balances, or orders.
 - **Sources for every catalyst claim.** If a claim has no source, mark it as the model's expectation or leave it out.
-- **Write the AI range before looking at the baseline you compute**, so the comparison stays honest.
+- **Blind process.** The AI range is written and committed to `data/locks.json` *before* any implied volatility or baseline is looked at. Predictions made this way get `"blind": true`; `validate.py` fails if a blind prediction has no matching lock. Anything written after seeing a baseline must leave `blind` out and say so in `notes`.
 
-## Steps (per symbol: SPY, QQQ, SMH, IWM, XLK, XLF, XLE, XLV, XLY, XLP, XLI, XLB, XLU, XLRE, XLC, TLT, GLD; horizons 1w, 1m, 6m, 1y, 5y)
+## Steps (per symbol: SPY, QQQ, SMH, IWM, XLK, XLF, XLE, XLV, XLY, XLP, XLI, XLB, XLU, XLRE, XLC, TLT, GLD, plus any large-cap stocks listed in `scripts/common.py`; horizons 1w, 1m, 6m, 1y, 5y)
 
-1. **Pull the quote.** Record the last trade price and its timestamp (`price_at_prediction`).
-2. **Pick the expiry** closest to the horizon (about 7 days for `1w`, 30 for `1m`). For `6m`, `1y` and `5y`, set `resolves_on` to the target trading day and take implied vol from the nearest listed expiry (for `5y` the longest listed one, since no 5-year options exist); say so in `notes`. For short horizons set `resolves_on` to the expiry date.
-3. **Read implied vol.** List contracts for that expiry at the strike nearest the current price (calls and puts), fetch their quotes, and average the two `implied_volatility` values. Record the `updated_at` time.
-4. **Compute the baseline:**
+**Phase 1: lock the AI view (no option data yet)**
+
+1. **Pull the quote.** Record the last trade price and its timestamp (`price_at_prediction`). Do not open option chains yet.
+2. **Gather catalysts.** Check recent news and the earnings calendar. Write bull, base, and bear points with sources.
+3. **Write the AI range** (`low`, `high`, `level` 0.8) and `prob_up` for every symbol and horizon.
+4. **Commit the locks.** Add one entry per prediction id to `data/locks.json`: `{"<id>": {"low": ..., "high": ..., "prob_up": ..., "locked_at": "<ISO time>"}}`. Commit it on its own. It does not trigger the workflow.
+
+**Phase 2: baseline and publish**
+
+5. **Pick the expiry** closest to the horizon (about 7 days for `1w`, 30 for `1m`). For `6m`, `1y` and `5y`, set `resolves_on` to the target trading day and take implied vol from the nearest listed expiry (for `5y` the longest listed one, since no 5-year options exist); say so in `notes`. For short horizons set `resolves_on` to the expiry date.
+6. **Read implied vol.** List contracts for that expiry at the strike nearest the current price (calls and puts), fetch their quotes, and average the two `implied_volatility` values. Record the `updated_at` time.
+7. **Compute the baseline:**
    ```
    python scripts/baseline.py --price <price> --vol <iv> --days <calendar days to resolves_on> --level 0.8
    ```
-5. **Gather catalysts.** Check recent news and the earnings calendar. Write bull, base, and bear points with sources.
-6. **Write the AI range** (`low`, `high`, `level` 0.8) and `prob_up` (probability the close beats the starting price).
-7. **Append the prediction** to `data/predictions.json` using the shape in `docs/example_prediction.json`. Use the id `YYYY-MM-DD_SYMBOL_horizon`.
-8. **Validate and commit:**
+   The drift baseline (`baseline_drift`) is added automatically by `score.py` from the stored IV.
+8. **Append the predictions** to `data/predictions.json` using the shape in `docs/example_prediction.json`, copying the AI numbers exactly from the locks and setting `"blind": true`. Use the id `YYYY-MM-DD_SYMBOL_horizon`.
+9. **Validate and commit:**
    ```
    python scripts/validate.py
    git add data/predictions.json && git commit -m "Predictions <date>" && git push
@@ -40,7 +47,7 @@ Run once a week, in Claude, with the Robinhood MCP connected. Do the steps in or
 
 ## Long horizons (6m, 1y, 5y)
 
-The baseline is zero-drift (median = today's price), which is a weak yardstick over years because stocks tend to drift up. A long-horizon range that tilts upward can beat it without any skill. Read long-horizon results with that in mind, and note that 6m resolves in 2027 and 5y in 2031, so these add nothing to the track record soon.
+The volatility baseline is zero-drift (median = today's price), which is a weak yardstick over years because stocks tend to drift up. A long-horizon range that tilts upward can beat it without any skill. The drift baseline (6% a year, same for every symbol) is the fairer comparison there. Read long-horizon results with that in mind, and note that 6m resolves in 2027 and 5y in 2031, so these add nothing to the track record soon.
 
 
 ## Gathering news (bull and bear)

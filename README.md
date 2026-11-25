@@ -29,6 +29,12 @@ GitHub Actions, weekdays after the close (free)
 
 Running cost: $0. The model step is run by you inside Claude on your own subscription and its output is committed; nothing in the pipeline calls a paid API.
 
+## What the site shows
+
+Overview: a treemap of every symbol (color is the AI chance of finishing up, size is range width), a card view with sorting and filters, what changed since the last update, and a calibration panel. Each symbol page has the ranges, a price chart with the forecast cone, catalysts with sources, events, and the full list of past predictions. `site/methodology.html` explains the method and its limits.
+
+Two baselines are scored: the zero-drift volatility baseline and a drift baseline (6% a year). Predictions marked blind were locked in `data/locks.json` before any baseline was computed.
+
 ## Setup
 
 1. Create a GitHub repo (public is fine; Pages on private repos needs a paid plan) and push this folder to `main`.
