@@ -59,7 +59,7 @@
       "date": "2026-12-08",
       "end_date": "2026-12-09",
       "title": "Fed meeting with new economic projections",
-      "detail": "Futures priced about an 85% chance of a quarter-point hike as of Nov 13. That figure is old and may have changed.",
+      "detail": "Futures priced a 96% chance of a quarter-point hike as of Nov 17 (CME FedWatch via Khaleej Times). That figure may have changed.",
       "sources": [
         {
           "label": "Federal Reserve",
@@ -68,6 +68,10 @@
         {
           "label": "Hike odds (247WallSt, Nov 13)",
           "url": "https://247wallst.com/investing/2026/11/13/kevin-warshs-fed-will-vote-on-rates-only-7-times-in-2027/"
+        },
+        {
+          "label": "Hike odds (Khaleej Times, Nov 17)",
+          "url": "https://www.khaleejtimes.com/business/gold-inches-up-from-over-one-year-low-fed-outlook-caps-gains"
         }
       ]
     },
@@ -272,6 +276,49 @@
         {
           "label": "Yahoo Finance",
           "url": "https://finance.yahoo.com/markets/live/stock-market-today-wednesday-november-25-dow-sp-500-nasdaq-pce-inflation-data-091428237.html"
+        }
+      ]
+    },
+    {
+      "type": "scheduled",
+      "kind": "macro",
+      "date": "2026-11-29",
+      "title": "OPEC+ ministerial meeting on the 2027 production framework",
+      "detail": "Rystad called it the much more important test than the December quota decision.",
+      "symbols": [
+        "XLE",
+        "SPY"
+      ],
+      "sources": [
+        {
+          "label": "Reuters via Star-Advertiser",
+          "url": "https://www.staradvertiser.com/2026/11/01/breaking-news/opec-keeps-december-oil-output-targets-steady-as-iran-war-disrupt-flows/"
+        }
+      ]
+    },
+    {
+      "type": "shock",
+      "kind": "shock",
+      "date": "2026-11-13",
+      "title": "10-year Treasury yield jumped nearly 30 bp to 5.14% in a week",
+      "detail": "Hotter inflation and hawkish Fed talk; the 2-year rose 35 bp, its biggest weekly jump in over two years.",
+      "sources": [
+        {
+          "label": "StockTwits",
+          "url": "https://stocktwits.com/news-articles/markets/equity/what-shaped-us-treasury-yields-and-the-dollar-in-week-ended-november-13/cNb2sojR9Qd"
+        }
+      ]
+    },
+    {
+      "type": "shock",
+      "kind": "shock",
+      "date": "2026-11-18",
+      "title": "Gold fell to a 14-month low near $3,720",
+      "detail": "The dollar hit a 19-month high and yields rose on expectations of more rate hikes.",
+      "sources": [
+        {
+          "label": "Nation Thailand (Reuters)",
+          "url": "https://www.nationthailand.com/business/trading-investment/40073658"
         }
       ]
     }

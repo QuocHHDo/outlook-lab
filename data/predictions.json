@@ -992,5 +992,1975 @@
     },
     "notes": "Made intraday (about 1:17 PM CT), not at a close. Price and implied vol are Robinhood read-only quotes (IV is the average of the at-the-money call and put at the nearest strike, taken from the 2029-01-19 expiry). I ran the baseline calculator before writing the AI range, so this is NOT blind to the baseline. The 5-year prediction resolves around Nov 25, 2031, so it will not affect the track record for years. The baseline is zero-drift (median = today's price); over long horizons stocks tend to drift up, so an upward-tilted range can beat it without skill. Catalyst items without a link are the model's own reasoning.",
     "status": "open"
+  },
+  {
+    "id": "2026-11-25_IWM_1w",
+    "symbol": "IWM",
+    "made_at": "2026-11-25",
+    "horizon": "1w",
+    "resolves_on": "2026-12-04",
+    "price_at_prediction": 268.85,
+    "price_time": "2026-11-25T20:01:00Z",
+    "ai": {
+      "low": 258.0,
+      "high": 279.0,
+      "level": 0.8,
+      "prob_up": 0.52
+    },
+    "baseline": {
+      "method": "implied_vol",
+      "iv": 0.2425,
+      "iv_updated_at": "2026-11-25T20:01:49Z",
+      "low": 256.05,
+      "high": 282.3,
+      "level": 0.8
+    },
+    "catalysts": {
+      "bull": [
+        {
+          "text": "Aberdeen's small-cap note cites expected 2026 earnings growth of 19% for the Russell 2000 versus 13% for the S&P 500 (an earlier-in-the-year estimate).",
+          "source": "https://www.aberdeeninvestments.com/en-nl/institutional/insights-and-research/us-small-caps-a-tale-of-two-halves-emea"
+        },
+        {
+          "text": "E-mini Russell 2000 futures led US indexes on Nov 18 after touching a new cycle low early in the session.",
+          "source": "https://www.cmegroup.com/videos/2026/11/18/e-mini-russell-2000-futures-rebound-from-cycle-low-after-fed-min.html"
+        },
+        {
+          "text": "IWM rose about 0.6% today while the Nasdaq-100 sold off, so rotation out of crowded AI names could help it, but one day is not a trend.",
+          "source": null,
+          "kind": "model_expectation"
+        }
+      ],
+      "base": [
+        {
+          "text": "Dec 1: JOLTS (October). Dec 4, 8:30 AM ET: November jobs report, so the Dec 4 close includes its reaction.",
+          "source": "https://www.bls.gov/schedule/2026/12_sched_list.htm"
+        },
+        {
+          "text": "The range is a bit narrower than the options-implied one at the edges, since implied vol usually runs above realized.",
+          "source": null,
+          "kind": "model_expectation"
+        }
+      ],
+      "bear": [
+        {
+          "text": "Futures priced a 96% chance of a 25 bp Fed hike in December as of Nov 17, which raises borrowing costs for small caps.",
+          "source": "https://www.khaleejtimes.com/business/gold-inches-up-from-over-one-year-low-fed-outlook-caps-gains"
+        },
+        {
+          "text": "The 10-year yield jumped nearly 30 bp to 5.14% in the week ended Nov 13 on hot inflation and hawkish Fed talk.",
+          "source": "https://stocktwits.com/news-articles/markets/equity/what-shaped-us-treasury-yields-and-the-dollar-in-week-ended-november-13/cNb2sojR9Qd"
+        },
+        {
+          "text": "A May 2026 Motley Fool piece noted it looked increasingly unlikely the Fed could cut rates, removing a key small-cap bull argument.",
+          "source": "https://www.fool.com/investing/2026/05/31/is-iwm-etf-still-a-buy-after-its-recent-run-up/"
+        }
+      ]
+    },
+    "notes": "Made intraday (about 2:00 PM CT), not at a close. The AI range was written AFTER seeing the baseline, so the comparison is not blind. IV is the average of the call and put at the strike nearest the price on the 2026-12-04 expiry.",
+    "status": "open"
+  },
+  {
+    "id": "2026-11-25_IWM_1m",
+    "symbol": "IWM",
+    "made_at": "2026-11-25",
+    "horizon": "1m",
+    "resolves_on": "2026-12-24",
+    "price_at_prediction": 268.85,
+    "price_time": "2026-11-25T20:01:00Z",
+    "ai": {
+      "low": 250.0,
+      "high": 288.0,
+      "level": 0.8,
+      "prob_up": 0.52
+    },
+    "baseline": {
+      "method": "implied_vol",
+      "iv": 0.2401,
+      "iv_updated_at": "2026-11-25T20:01:49Z",
+      "low": 246.51,
+      "high": 293.21,
+      "level": 0.8
+    },
+    "catalysts": {
+      "bull": [
+        {
+          "text": "Aberdeen's small-cap note cites expected 2026 earnings growth of 19% for the Russell 2000 versus 13% for the S&P 500 (an earlier-in-the-year estimate).",
+          "source": "https://www.aberdeeninvestments.com/en-nl/institutional/insights-and-research/us-small-caps-a-tale-of-two-halves-emea"
+        },
+        {
+          "text": "E-mini Russell 2000 futures led US indexes on Nov 18 after touching a new cycle low early in the session.",
+          "source": "https://www.cmegroup.com/videos/2026/11/18/e-mini-russell-2000-futures-rebound-from-cycle-low-after-fed-min.html"
+        },
+        {
+          "text": "IWM rose about 0.6% today while the Nasdaq-100 sold off, so rotation out of crowded AI names could help it, but one day is not a trend.",
+          "source": null,
+          "kind": "model_expectation"
+        }
+      ],
+      "base": [
+        {
+          "text": "The Dec 8-9 FOMC meeting (with new projections) falls inside this window, with a hike heavily priced as of mid-November.",
+          "source": "https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm"
+        },
+        {
+          "text": "Dec 4 jobs report and Dec 10 CPI also fall inside the window.",
+          "source": "https://www.bls.gov/schedule/2026/12_sched_list.htm"
+        },
+        {
+          "text": "The range is a bit narrower than the options-implied one at the edges, since implied vol usually runs above realized.",
+          "source": null,
+          "kind": "model_expectation"
+        }
+      ],
+      "bear": [
+        {
+          "text": "Futures priced a 96% chance of a 25 bp Fed hike in December as of Nov 17, which raises borrowing costs for small caps.",
+          "source": "https://www.khaleejtimes.com/business/gold-inches-up-from-over-one-year-low-fed-outlook-caps-gains"
+        },
+        {
+          "text": "The 10-year yield jumped nearly 30 bp to 5.14% in the week ended Nov 13 on hot inflation and hawkish Fed talk.",
+          "source": "https://stocktwits.com/news-articles/markets/equity/what-shaped-us-treasury-yields-and-the-dollar-in-week-ended-november-13/cNb2sojR9Qd"
+        },
+        {
+          "text": "A May 2026 Motley Fool piece noted it looked increasingly unlikely the Fed could cut rates, removing a key small-cap bull argument.",
+          "source": "https://www.fool.com/investing/2026/05/31/is-iwm-etf-still-a-buy-after-its-recent-run-up/"
+        }
+      ]
+    },
+    "notes": "Made intraday (about 2:00 PM CT), not at a close. The AI range was written AFTER seeing the baseline, so the comparison is not blind. IV is the average of the call and put at the strike nearest the price on the 2026-12-24 expiry.",
+    "status": "open"
+  },
+  {
+    "id": "2026-11-25_IWM_6m",
+    "symbol": "IWM",
+    "made_at": "2026-11-25",
+    "horizon": "6m",
+    "resolves_on": "2027-05-25",
+    "price_at_prediction": 268.85,
+    "price_time": "2026-11-25T20:01:00Z",
+    "ai": {
+      "low": 225.0,
+      "high": 315.0,
+      "level": 0.8,
+      "prob_up": 0.56
+    },
+    "baseline": {
+      "method": "implied_vol",
+      "iv": 0.2293,
+      "iv_updated_at": "2026-11-25T20:01:49Z",
+      "low": 218.59,
+      "high": 330.66,
+      "level": 0.8
+    },
+    "catalysts": {
+      "bull": [
+        {
+          "text": "Aberdeen's small-cap note cites expected 2026 earnings growth of 19% for the Russell 2000 versus 13% for the S&P 500 (an earlier-in-the-year estimate).",
+          "source": "https://www.aberdeeninvestments.com/en-nl/institutional/insights-and-research/us-small-caps-a-tale-of-two-halves-emea"
+        },
+        {
+          "text": "E-mini Russell 2000 futures led US indexes on Nov 18 after touching a new cycle low early in the session.",
+          "source": "https://www.cmegroup.com/videos/2026/11/18/e-mini-russell-2000-futures-rebound-from-cycle-low-after-fed-min.html"
+        },
+        {
+          "text": "IWM rose about 0.6% today while the Nasdaq-100 sold off, so rotation out of crowded AI names could help it, but one day is not a trend.",
+          "source": null,
+          "kind": "model_expectation"
+        }
+      ],
+      "base": [
+        {
+          "text": "Beyond a few months the range is driven by the macro regime and the zero-drift options baseline, not by scheduled events.",
+          "source": null,
+          "kind": "model_expectation"
+        }
+      ],
+      "bear": [
+        {
+          "text": "Futures priced a 96% chance of a 25 bp Fed hike in December as of Nov 17, which raises borrowing costs for small caps.",
+          "source": "https://www.khaleejtimes.com/business/gold-inches-up-from-over-one-year-low-fed-outlook-caps-gains"
+        },
+        {
+          "text": "The 10-year yield jumped nearly 30 bp to 5.14% in the week ended Nov 13 on hot inflation and hawkish Fed talk.",
+          "source": "https://stocktwits.com/news-articles/markets/equity/what-shaped-us-treasury-yields-and-the-dollar-in-week-ended-november-13/cNb2sojR9Qd"
+        },
+        {
+          "text": "A May 2026 Motley Fool piece noted it looked increasingly unlikely the Fed could cut rates, removing a key small-cap bull argument.",
+          "source": "https://www.fool.com/investing/2026/05/31/is-iwm-etf-still-a-buy-after-its-recent-run-up/"
+        }
+      ]
+    },
+    "notes": "Made intraday (about 2:00 PM CT), not at a close. The AI range was written AFTER seeing the baseline, so the comparison is not blind. IV is the average of the call and put at the strike nearest the price on the 2027-05-21 expiry; the horizon has no listed expiry of its own, so this is the nearest listed one (for 5y the longest listed). The baseline is zero-drift, a weak yardstick over long horizons.",
+    "status": "open"
+  },
+  {
+    "id": "2026-11-25_IWM_1y",
+    "symbol": "IWM",
+    "made_at": "2026-11-25",
+    "horizon": "1y",
+    "resolves_on": "2027-11-24",
+    "price_at_prediction": 268.85,
+    "price_time": "2026-11-25T20:01:00Z",
+    "ai": {
+      "low": 210.0,
+      "high": 340.0,
+      "level": 0.8,
+      "prob_up": 0.58
+    },
+    "baseline": {
+      "method": "implied_vol",
+      "iv": 0.2263,
+      "iv_updated_at": "2026-11-25T20:01:49Z",
+      "low": 201.25,
+      "high": 359.16,
+      "level": 0.8
+    },
+    "catalysts": {
+      "bull": [
+        {
+          "text": "Aberdeen's small-cap note cites expected 2026 earnings growth of 19% for the Russell 2000 versus 13% for the S&P 500 (an earlier-in-the-year estimate).",
+          "source": "https://www.aberdeeninvestments.com/en-nl/institutional/insights-and-research/us-small-caps-a-tale-of-two-halves-emea"
+        },
+        {
+          "text": "E-mini Russell 2000 futures led US indexes on Nov 18 after touching a new cycle low early in the session.",
+          "source": "https://www.cmegroup.com/videos/2026/11/18/e-mini-russell-2000-futures-rebound-from-cycle-low-after-fed-min.html"
+        },
+        {
+          "text": "IWM rose about 0.6% today while the Nasdaq-100 sold off, so rotation out of crowded AI names could help it, but one day is not a trend.",
+          "source": null,
+          "kind": "model_expectation"
+        }
+      ],
+      "base": [
+        {
+          "text": "Beyond a few months the range is driven by the macro regime and the zero-drift options baseline, not by scheduled events.",
+          "source": null,
+          "kind": "model_expectation"
+        }
+      ],
+      "bear": [
+        {
+          "text": "Futures priced a 96% chance of a 25 bp Fed hike in December as of Nov 17, which raises borrowing costs for small caps.",
+          "source": "https://www.khaleejtimes.com/business/gold-inches-up-from-over-one-year-low-fed-outlook-caps-gains"
+        },
+        {
+          "text": "The 10-year yield jumped nearly 30 bp to 5.14% in the week ended Nov 13 on hot inflation and hawkish Fed talk.",
+          "source": "https://stocktwits.com/news-articles/markets/equity/what-shaped-us-treasury-yields-and-the-dollar-in-week-ended-november-13/cNb2sojR9Qd"
+        },
+        {
+          "text": "A May 2026 Motley Fool piece noted it looked increasingly unlikely the Fed could cut rates, removing a key small-cap bull argument.",
+          "source": "https://www.fool.com/investing/2026/05/31/is-iwm-etf-still-a-buy-after-its-recent-run-up/"
+        }
+      ]
+    },
+    "notes": "Made intraday (about 2:00 PM CT), not at a close. The AI range was written AFTER seeing the baseline, so the comparison is not blind. IV is the average of the call and put at the strike nearest the price on the 2027-12-17 expiry; the horizon has no listed expiry of its own, so this is the nearest listed one (for 5y the longest listed). The baseline is zero-drift, a weak yardstick over long horizons.",
+    "status": "open"
+  },
+  {
+    "id": "2026-11-25_IWM_5y",
+    "symbol": "IWM",
+    "made_at": "2026-11-25",
+    "horizon": "5y",
+    "resolves_on": "2031-11-25",
+    "price_at_prediction": 268.85,
+    "price_time": "2026-11-25T20:01:00Z",
+    "ai": {
+      "low": 185.0,
+      "high": 560.0,
+      "level": 0.8,
+      "prob_up": 0.7
+    },
+    "baseline": {
+      "method": "implied_vol",
+      "iv": 0.219,
+      "iv_updated_at": "2026-11-25T20:01:49Z",
+      "low": 143.51,
+      "high": 503.66,
+      "level": 0.8
+    },
+    "catalysts": {
+      "bull": [
+        {
+          "text": "Aberdeen's small-cap note cites expected 2026 earnings growth of 19% for the Russell 2000 versus 13% for the S&P 500 (an earlier-in-the-year estimate).",
+          "source": "https://www.aberdeeninvestments.com/en-nl/institutional/insights-and-research/us-small-caps-a-tale-of-two-halves-emea"
+        },
+        {
+          "text": "E-mini Russell 2000 futures led US indexes on Nov 18 after touching a new cycle low early in the session.",
+          "source": "https://www.cmegroup.com/videos/2026/11/18/e-mini-russell-2000-futures-rebound-from-cycle-low-after-fed-min.html"
+        },
+        {
+          "text": "IWM rose about 0.6% today while the Nasdaq-100 sold off, so rotation out of crowded AI names could help it, but one day is not a trend.",
+          "source": null,
+          "kind": "model_expectation"
+        }
+      ],
+      "base": [
+        {
+          "text": "Beyond a few months the range is driven by the macro regime and the zero-drift options baseline, not by scheduled events.",
+          "source": null,
+          "kind": "model_expectation"
+        }
+      ],
+      "bear": [
+        {
+          "text": "Futures priced a 96% chance of a 25 bp Fed hike in December as of Nov 17, which raises borrowing costs for small caps.",
+          "source": "https://www.khaleejtimes.com/business/gold-inches-up-from-over-one-year-low-fed-outlook-caps-gains"
+        },
+        {
+          "text": "The 10-year yield jumped nearly 30 bp to 5.14% in the week ended Nov 13 on hot inflation and hawkish Fed talk.",
+          "source": "https://stocktwits.com/news-articles/markets/equity/what-shaped-us-treasury-yields-and-the-dollar-in-week-ended-november-13/cNb2sojR9Qd"
+        },
+        {
+          "text": "A May 2026 Motley Fool piece noted it looked increasingly unlikely the Fed could cut rates, removing a key small-cap bull argument.",
+          "source": "https://www.fool.com/investing/2026/05/31/is-iwm-etf-still-a-buy-after-its-recent-run-up/"
+        }
+      ]
+    },
+    "notes": "Made intraday (about 2:00 PM CT), not at a close. The AI range was written AFTER seeing the baseline, so the comparison is not blind. IV is the average of the call and put at the strike nearest the price on the 2029-01-19 expiry; the horizon has no listed expiry of its own, so this is the nearest listed one (for 5y the longest listed). The baseline is zero-drift, a weak yardstick over long horizons.",
+    "status": "open"
+  },
+  {
+    "id": "2026-11-25_XLF_1w",
+    "symbol": "XLF",
+    "made_at": "2026-11-25",
+    "horizon": "1w",
+    "resolves_on": "2026-12-04",
+    "price_at_prediction": 56.53,
+    "price_time": "2026-11-25T20:01:00Z",
+    "ai": {
+      "low": 54.7,
+      "high": 58.4,
+      "level": 0.8,
+      "prob_up": 0.53
+    },
+    "baseline": {
+      "method": "implied_vol",
+      "iv": 0.2051,
+      "iv_updated_at": "2026-11-25T20:01:49Z",
+      "low": 54.24,
+      "high": 58.91,
+      "level": 0.8
+    },
+    "catalysts": {
+      "bull": [
+        {
+          "text": "Strong bank earnings with growing fee income, investment-banking and net interest income, and a benign credit environment.",
+          "source": "https://gfmag.com/?p=77412"
+        },
+        {
+          "text": "XLF set a record close of $57.60 in August on strong earnings and fading private-credit worries.",
+          "source": "https://www.morningstar.com/news/marketwatch/202608024/investors-are-rotating-into-financial-stocks-the-feds-next-move-could-determine-how-far-the-rally-runs"
+        },
+        {
+          "text": "Higher short rates and a steeper curve can lift bank net interest income, though a hike also raises credit risk.",
+          "source": null,
+          "kind": "model_expectation"
+        }
+      ],
+      "base": [
+        {
+          "text": "Dec 1: JOLTS (October). Dec 4, 8:30 AM ET: November jobs report, so the Dec 4 close includes its reaction.",
+          "source": "https://www.bls.gov/schedule/2026/12_sched_list.htm"
+        },
+        {
+          "text": "The range is a bit narrower than the options-implied one at the edges, since implied vol usually runs above realized.",
+          "source": null,
+          "kind": "model_expectation"
+        }
+      ],
+      "bear": [
+        {
+          "text": "Analysts see a less rosy 2027 for banks as revenue growth normalizes and risks tied to certain debt rise.",
+          "source": "https://www.americanbanker.com/news/why-analysts-have-a-less-rosy-outlook-for-banks-in-2027"
+        },
+        {
+          "text": "The OCC warned that data-center financing structures have limited performance under stress, tying bank risk to the AI build-out.",
+          "source": "https://www.americanbanker.com/news/why-analysts-have-a-less-rosy-outlook-for-banks-in-2027"
+        },
+        {
+          "text": "Financials faced risks from renewed rate hikes and persistently elevated inflation.",
+          "source": "https://www.morningstar.com/news/marketwatch/202608024/investors-are-rotating-into-financial-stocks-the-feds-next-move-could-determine-how-far-the-rally-runs"
+        }
+      ]
+    },
+    "notes": "Made intraday (about 2:00 PM CT), not at a close. The AI range was written AFTER seeing the baseline, so the comparison is not blind. IV is the average of the call and put at the strike nearest the price on the 2026-12-04 expiry.",
+    "status": "open"
+  },
+  {
+    "id": "2026-11-25_XLF_1m",
+    "symbol": "XLF",
+    "made_at": "2026-11-25",
+    "horizon": "1m",
+    "resolves_on": "2026-12-24",
+    "price_at_prediction": 56.53,
+    "price_time": "2026-11-25T20:01:00Z",
+    "ai": {
+      "low": 53.0,
+      "high": 60.2,
+      "level": 0.8,
+      "prob_up": 0.53
+    },
+    "baseline": {
+      "method": "implied_vol",
+      "iv": 0.2089,
+      "iv_updated_at": "2026-11-25T20:01:49Z",
+      "low": 52.42,
+      "high": 60.96,
+      "level": 0.8
+    },
+    "catalysts": {
+      "bull": [
+        {
+          "text": "Strong bank earnings with growing fee income, investment-banking and net interest income, and a benign credit environment.",
+          "source": "https://gfmag.com/?p=77412"
+        },
+        {
+          "text": "XLF set a record close of $57.60 in August on strong earnings and fading private-credit worries.",
+          "source": "https://www.morningstar.com/news/marketwatch/202608024/investors-are-rotating-into-financial-stocks-the-feds-next-move-could-determine-how-far-the-rally-runs"
+        },
+        {
+          "text": "Higher short rates and a steeper curve can lift bank net interest income, though a hike also raises credit risk.",
+          "source": null,
+          "kind": "model_expectation"
+        }
+      ],
+      "base": [
+        {
+          "text": "The Dec 8-9 FOMC meeting (with new projections) falls inside this window, with a hike heavily priced as of mid-November.",
+          "source": "https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm"
+        },
+        {
+          "text": "Dec 4 jobs report and Dec 10 CPI also fall inside the window.",
+          "source": "https://www.bls.gov/schedule/2026/12_sched_list.htm"
+        },
+        {
+          "text": "The range is a bit narrower than the options-implied one at the edges, since implied vol usually runs above realized.",
+          "source": null,
+          "kind": "model_expectation"
+        }
+      ],
+      "bear": [
+        {
+          "text": "Analysts see a less rosy 2027 for banks as revenue growth normalizes and risks tied to certain debt rise.",
+          "source": "https://www.americanbanker.com/news/why-analysts-have-a-less-rosy-outlook-for-banks-in-2027"
+        },
+        {
+          "text": "The OCC warned that data-center financing structures have limited performance under stress, tying bank risk to the AI build-out.",
+          "source": "https://www.americanbanker.com/news/why-analysts-have-a-less-rosy-outlook-for-banks-in-2027"
+        },
+        {
+          "text": "Financials faced risks from renewed rate hikes and persistently elevated inflation.",
+          "source": "https://www.morningstar.com/news/marketwatch/202608024/investors-are-rotating-into-financial-stocks-the-feds-next-move-could-determine-how-far-the-rally-runs"
+        }
+      ]
+    },
+    "notes": "Made intraday (about 2:00 PM CT), not at a close. The AI range was written AFTER seeing the baseline, so the comparison is not blind. IV is the average of the call and put at the strike nearest the price on the 2026-12-24 expiry.",
+    "status": "open"
+  },
+  {
+    "id": "2026-11-25_XLF_6m",
+    "symbol": "XLF",
+    "made_at": "2026-11-25",
+    "horizon": "6m",
+    "resolves_on": "2027-05-25",
+    "price_at_prediction": 56.53,
+    "price_time": "2026-11-25T20:01:00Z",
+    "ai": {
+      "low": 48.5,
+      "high": 65.5,
+      "level": 0.8,
+      "prob_up": 0.57
+    },
+    "baseline": {
+      "method": "implied_vol",
+      "iv": 0.1939,
+      "iv_updated_at": "2026-11-25T20:01:49Z",
+      "low": 47.46,
+      "high": 67.34,
+      "level": 0.8
+    },
+    "catalysts": {
+      "bull": [
+        {
+          "text": "Strong bank earnings with growing fee income, investment-banking and net interest income, and a benign credit environment.",
+          "source": "https://gfmag.com/?p=77412"
+        },
+        {
+          "text": "XLF set a record close of $57.60 in August on strong earnings and fading private-credit worries.",
+          "source": "https://www.morningstar.com/news/marketwatch/202608024/investors-are-rotating-into-financial-stocks-the-feds-next-move-could-determine-how-far-the-rally-runs"
+        },
+        {
+          "text": "Higher short rates and a steeper curve can lift bank net interest income, though a hike also raises credit risk.",
+          "source": null,
+          "kind": "model_expectation"
+        }
+      ],
+      "base": [
+        {
+          "text": "Beyond a few months the range is driven by the macro regime and the zero-drift options baseline, not by scheduled events.",
+          "source": null,
+          "kind": "model_expectation"
+        }
+      ],
+      "bear": [
+        {
+          "text": "Analysts see a less rosy 2027 for banks as revenue growth normalizes and risks tied to certain debt rise.",
+          "source": "https://www.americanbanker.com/news/why-analysts-have-a-less-rosy-outlook-for-banks-in-2027"
+        },
+        {
+          "text": "The OCC warned that data-center financing structures have limited performance under stress, tying bank risk to the AI build-out.",
+          "source": "https://www.americanbanker.com/news/why-analysts-have-a-less-rosy-outlook-for-banks-in-2027"
+        },
+        {
+          "text": "Financials faced risks from renewed rate hikes and persistently elevated inflation.",
+          "source": "https://www.morningstar.com/news/marketwatch/202608024/investors-are-rotating-into-financial-stocks-the-feds-next-move-could-determine-how-far-the-rally-runs"
+        }
+      ]
+    },
+    "notes": "Made intraday (about 2:00 PM CT), not at a close. The AI range was written AFTER seeing the baseline, so the comparison is not blind. IV is the average of the call and put at the strike nearest the price on the 2027-06-17 expiry; the horizon has no listed expiry of its own, so this is the nearest listed one (for 5y the longest listed). The baseline is zero-drift, a weak yardstick over long horizons.",
+    "status": "open"
+  },
+  {
+    "id": "2026-11-25_XLF_1y",
+    "symbol": "XLF",
+    "made_at": "2026-11-25",
+    "horizon": "1y",
+    "resolves_on": "2027-11-24",
+    "price_at_prediction": 56.53,
+    "price_time": "2026-11-25T20:01:00Z",
+    "ai": {
+      "low": 45.0,
+      "high": 71.0,
+      "level": 0.8,
+      "prob_up": 0.6
+    },
+    "baseline": {
+      "method": "implied_vol",
+      "iv": 0.1984,
+      "iv_updated_at": "2026-11-25T20:01:49Z",
+      "low": 43.85,
+      "high": 72.87,
+      "level": 0.8
+    },
+    "catalysts": {
+      "bull": [
+        {
+          "text": "Strong bank earnings with growing fee income, investment-banking and net interest income, and a benign credit environment.",
+          "source": "https://gfmag.com/?p=77412"
+        },
+        {
+          "text": "XLF set a record close of $57.60 in August on strong earnings and fading private-credit worries.",
+          "source": "https://www.morningstar.com/news/marketwatch/202608024/investors-are-rotating-into-financial-stocks-the-feds-next-move-could-determine-how-far-the-rally-runs"
+        },
+        {
+          "text": "Higher short rates and a steeper curve can lift bank net interest income, though a hike also raises credit risk.",
+          "source": null,
+          "kind": "model_expectation"
+        }
+      ],
+      "base": [
+        {
+          "text": "Beyond a few months the range is driven by the macro regime and the zero-drift options baseline, not by scheduled events.",
+          "source": null,
+          "kind": "model_expectation"
+        }
+      ],
+      "bear": [
+        {
+          "text": "Analysts see a less rosy 2027 for banks as revenue growth normalizes and risks tied to certain debt rise.",
+          "source": "https://www.americanbanker.com/news/why-analysts-have-a-less-rosy-outlook-for-banks-in-2027"
+        },
+        {
+          "text": "The OCC warned that data-center financing structures have limited performance under stress, tying bank risk to the AI build-out.",
+          "source": "https://www.americanbanker.com/news/why-analysts-have-a-less-rosy-outlook-for-banks-in-2027"
+        },
+        {
+          "text": "Financials faced risks from renewed rate hikes and persistently elevated inflation.",
+          "source": "https://www.morningstar.com/news/marketwatch/202608024/investors-are-rotating-into-financial-stocks-the-feds-next-move-could-determine-how-far-the-rally-runs"
+        }
+      ]
+    },
+    "notes": "Made intraday (about 2:00 PM CT), not at a close. The AI range was written AFTER seeing the baseline, so the comparison is not blind. IV is the average of the call and put at the strike nearest the price on the 2027-12-17 expiry; the horizon has no listed expiry of its own, so this is the nearest listed one (for 5y the longest listed). The baseline is zero-drift, a weak yardstick over long horizons.",
+    "status": "open"
+  },
+  {
+    "id": "2026-11-25_XLF_5y",
+    "symbol": "XLF",
+    "made_at": "2026-11-25",
+    "horizon": "5y",
+    "resolves_on": "2031-11-25",
+    "price_at_prediction": 56.53,
+    "price_time": "2026-11-25T20:01:00Z",
+    "ai": {
+      "low": 38.0,
+      "high": 90.0,
+      "level": 0.8,
+      "prob_up": 0.75
+    },
+    "baseline": {
+      "method": "implied_vol",
+      "iv": 0.1865,
+      "iv_updated_at": "2026-11-25T20:01:49Z",
+      "low": 33.12,
+      "high": 96.48,
+      "level": 0.8
+    },
+    "catalysts": {
+      "bull": [
+        {
+          "text": "Strong bank earnings with growing fee income, investment-banking and net interest income, and a benign credit environment.",
+          "source": "https://gfmag.com/?p=77412"
+        },
+        {
+          "text": "XLF set a record close of $57.60 in August on strong earnings and fading private-credit worries.",
+          "source": "https://www.morningstar.com/news/marketwatch/202608024/investors-are-rotating-into-financial-stocks-the-feds-next-move-could-determine-how-far-the-rally-runs"
+        },
+        {
+          "text": "Higher short rates and a steeper curve can lift bank net interest income, though a hike also raises credit risk.",
+          "source": null,
+          "kind": "model_expectation"
+        }
+      ],
+      "base": [
+        {
+          "text": "Beyond a few months the range is driven by the macro regime and the zero-drift options baseline, not by scheduled events.",
+          "source": null,
+          "kind": "model_expectation"
+        }
+      ],
+      "bear": [
+        {
+          "text": "Analysts see a less rosy 2027 for banks as revenue growth normalizes and risks tied to certain debt rise.",
+          "source": "https://www.americanbanker.com/news/why-analysts-have-a-less-rosy-outlook-for-banks-in-2027"
+        },
+        {
+          "text": "The OCC warned that data-center financing structures have limited performance under stress, tying bank risk to the AI build-out.",
+          "source": "https://www.americanbanker.com/news/why-analysts-have-a-less-rosy-outlook-for-banks-in-2027"
+        },
+        {
+          "text": "Financials faced risks from renewed rate hikes and persistently elevated inflation.",
+          "source": "https://www.morningstar.com/news/marketwatch/202608024/investors-are-rotating-into-financial-stocks-the-feds-next-move-could-determine-how-far-the-rally-runs"
+        }
+      ]
+    },
+    "notes": "Made intraday (about 2:00 PM CT), not at a close. The AI range was written AFTER seeing the baseline, so the comparison is not blind. IV is the average of the call and put at the strike nearest the price on the 2029-01-19 expiry; the horizon has no listed expiry of its own, so this is the nearest listed one (for 5y the longest listed). The baseline is zero-drift, a weak yardstick over long horizons.",
+    "status": "open"
+  },
+  {
+    "id": "2026-11-25_XLE_1w",
+    "symbol": "XLE",
+    "made_at": "2026-11-25",
+    "horizon": "1w",
+    "resolves_on": "2026-12-04",
+    "price_at_prediction": 61.05,
+    "price_time": "2026-11-25T20:01:00Z",
+    "ai": {
+      "low": 58.2,
+      "high": 64.0,
+      "level": 0.8,
+      "prob_up": 0.5
+    },
+    "baseline": {
+      "method": "implied_vol",
+      "iv": 0.2775,
+      "iv_updated_at": "2026-11-25T20:01:49Z",
+      "low": 57.73,
+      "high": 64.56,
+      "level": 0.8
+    },
+    "catalysts": {
+      "bull": [
+        {
+          "text": "Brent was holding near $93 as Strait of Hormuz tanker attacks offset rising Gulf exports (Nov 17).",
+          "source": "https://oilprice.com/Energy/Energy-General/Brent-Stuck-Near-93-as-Hormuz-Tanker-Attacks-Offset-Gulf-Export-Surge.html"
+        },
+        {
+          "text": "The EIA's November outlook saw Brent near $100 for the rest of the year.",
+          "source": "https://finviz.com/news/420887/eia-sees-brent-near-100-for-the-rest-of-the-year-as-crude-futures-ease-again"
+        },
+        {
+          "text": "OPEC+ decides its 2027 production framework at a Nov 29 ministerial meeting, a possible supply-discipline catalyst.",
+          "source": "https://www.staradvertiser.com/2026/11/01/breaking-news/opec-keeps-december-oil-output-targets-steady-as-iran-war-disrupt-flows/"
+        }
+      ],
+      "base": [
+        {
+          "text": "Dec 1: JOLTS (October). Dec 4, 8:30 AM ET: November jobs report, so the Dec 4 close includes its reaction.",
+          "source": "https://www.bls.gov/schedule/2026/12_sched_list.htm"
+        },
+        {
+          "text": "OPEC+ ministerial meeting on Nov 29 (a Sunday) sets the 2027 production framework and lands inside this window.",
+          "source": "https://www.staradvertiser.com/2026/11/01/breaking-news/opec-keeps-december-oil-output-targets-steady-as-iran-war-disrupt-flows/"
+        },
+        {
+          "text": "The range is a bit narrower than the options-implied one at the edges, since implied vol usually runs above realized.",
+          "source": null,
+          "kind": "model_expectation"
+        }
+      ],
+      "bear": [
+        {
+          "text": "WTI fell 3.2% to $83.26 on Nov 18, its lowest close since Aug 26, after a larger-than-expected rise in US crude and fuel stocks.",
+          "source": "https://www.nationthailand.com/news/world/40073656"
+        },
+        {
+          "text": "The IEA and other forecasters warn of excess supply in 2027 if Gulf flows return to normal.",
+          "source": "https://engineeringnews.co.za/article/opec-keeps-december-oil-output-targets-steady-ahead-of-tougher-call-for-2027-2026-11-02"
+        },
+        {
+          "text": "New 20% tariffs and a hotter PCE reading add growth and rate worries that can weigh on energy demand expectations.",
+          "source": "https://finance.yahoo.com/markets/live/stock-market-today-wednesday-november-25-dow-sp-500-nasdaq-pce-inflation-data-091428237.html"
+        }
+      ]
+    },
+    "notes": "Made intraday (about 2:00 PM CT), not at a close. The AI range was written AFTER seeing the baseline, so the comparison is not blind. IV is the average of the call and put at the strike nearest the price on the 2026-12-04 expiry.",
+    "status": "open"
+  },
+  {
+    "id": "2026-11-25_XLE_1m",
+    "symbol": "XLE",
+    "made_at": "2026-11-25",
+    "horizon": "1m",
+    "resolves_on": "2026-12-24",
+    "price_at_prediction": 61.05,
+    "price_time": "2026-11-25T20:01:00Z",
+    "ai": {
+      "low": 55.8,
+      "high": 66.8,
+      "level": 0.8,
+      "prob_up": 0.5
+    },
+    "baseline": {
+      "method": "implied_vol",
+      "iv": 0.2798,
+      "iv_updated_at": "2026-11-25T20:01:49Z",
+      "low": 55.18,
+      "high": 67.54,
+      "level": 0.8
+    },
+    "catalysts": {
+      "bull": [
+        {
+          "text": "Brent was holding near $93 as Strait of Hormuz tanker attacks offset rising Gulf exports (Nov 17).",
+          "source": "https://oilprice.com/Energy/Energy-General/Brent-Stuck-Near-93-as-Hormuz-Tanker-Attacks-Offset-Gulf-Export-Surge.html"
+        },
+        {
+          "text": "The EIA's November outlook saw Brent near $100 for the rest of the year.",
+          "source": "https://finviz.com/news/420887/eia-sees-brent-near-100-for-the-rest-of-the-year-as-crude-futures-ease-again"
+        },
+        {
+          "text": "OPEC+ decides its 2027 production framework at a Nov 29 ministerial meeting, a possible supply-discipline catalyst.",
+          "source": "https://www.staradvertiser.com/2026/11/01/breaking-news/opec-keeps-december-oil-output-targets-steady-as-iran-war-disrupt-flows/"
+        }
+      ],
+      "base": [
+        {
+          "text": "The Dec 8-9 FOMC meeting (with new projections) falls inside this window, with a hike heavily priced as of mid-November.",
+          "source": "https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm"
+        },
+        {
+          "text": "Dec 4 jobs report and Dec 10 CPI also fall inside the window.",
+          "source": "https://www.bls.gov/schedule/2026/12_sched_list.htm"
+        },
+        {
+          "text": "OPEC+ meets Nov 29 on its 2027 production framework.",
+          "source": "https://www.staradvertiser.com/2026/11/01/breaking-news/opec-keeps-december-oil-output-targets-steady-as-iran-war-disrupt-flows/"
+        },
+        {
+          "text": "The range is a bit narrower than the options-implied one at the edges, since implied vol usually runs above realized.",
+          "source": null,
+          "kind": "model_expectation"
+        }
+      ],
+      "bear": [
+        {
+          "text": "WTI fell 3.2% to $83.26 on Nov 18, its lowest close since Aug 26, after a larger-than-expected rise in US crude and fuel stocks.",
+          "source": "https://www.nationthailand.com/news/world/40073656"
+        },
+        {
+          "text": "The IEA and other forecasters warn of excess supply in 2027 if Gulf flows return to normal.",
+          "source": "https://engineeringnews.co.za/article/opec-keeps-december-oil-output-targets-steady-ahead-of-tougher-call-for-2027-2026-11-02"
+        },
+        {
+          "text": "New 20% tariffs and a hotter PCE reading add growth and rate worries that can weigh on energy demand expectations.",
+          "source": "https://finance.yahoo.com/markets/live/stock-market-today-wednesday-november-25-dow-sp-500-nasdaq-pce-inflation-data-091428237.html"
+        }
+      ]
+    },
+    "notes": "Made intraday (about 2:00 PM CT), not at a close. The AI range was written AFTER seeing the baseline, so the comparison is not blind. IV is the average of the call and put at the strike nearest the price on the 2026-12-24 expiry.",
+    "status": "open"
+  },
+  {
+    "id": "2026-11-25_XLE_6m",
+    "symbol": "XLE",
+    "made_at": "2026-11-25",
+    "horizon": "6m",
+    "resolves_on": "2027-05-25",
+    "price_at_prediction": 61.05,
+    "price_time": "2026-11-25T20:01:00Z",
+    "ai": {
+      "low": 49.5,
+      "high": 75.0,
+      "level": 0.8,
+      "prob_up": 0.52
+    },
+    "baseline": {
+      "method": "implied_vol",
+      "iv": 0.256,
+      "iv_updated_at": "2026-11-25T20:01:49Z",
+      "low": 48.46,
+      "high": 76.92,
+      "level": 0.8
+    },
+    "catalysts": {
+      "bull": [
+        {
+          "text": "Brent was holding near $93 as Strait of Hormuz tanker attacks offset rising Gulf exports (Nov 17).",
+          "source": "https://oilprice.com/Energy/Energy-General/Brent-Stuck-Near-93-as-Hormuz-Tanker-Attacks-Offset-Gulf-Export-Surge.html"
+        },
+        {
+          "text": "The EIA's November outlook saw Brent near $100 for the rest of the year.",
+          "source": "https://finviz.com/news/420887/eia-sees-brent-near-100-for-the-rest-of-the-year-as-crude-futures-ease-again"
+        },
+        {
+          "text": "OPEC+ decides its 2027 production framework at a Nov 29 ministerial meeting, a possible supply-discipline catalyst.",
+          "source": "https://www.staradvertiser.com/2026/11/01/breaking-news/opec-keeps-december-oil-output-targets-steady-as-iran-war-disrupt-flows/"
+        }
+      ],
+      "base": [
+        {
+          "text": "Beyond a few months the range is driven by the macro regime and the zero-drift options baseline, not by scheduled events.",
+          "source": null,
+          "kind": "model_expectation"
+        }
+      ],
+      "bear": [
+        {
+          "text": "WTI fell 3.2% to $83.26 on Nov 18, its lowest close since Aug 26, after a larger-than-expected rise in US crude and fuel stocks.",
+          "source": "https://www.nationthailand.com/news/world/40073656"
+        },
+        {
+          "text": "The IEA and other forecasters warn of excess supply in 2027 if Gulf flows return to normal.",
+          "source": "https://engineeringnews.co.za/article/opec-keeps-december-oil-output-targets-steady-ahead-of-tougher-call-for-2027-2026-11-02"
+        },
+        {
+          "text": "New 20% tariffs and a hotter PCE reading add growth and rate worries that can weigh on energy demand expectations.",
+          "source": "https://finance.yahoo.com/markets/live/stock-market-today-wednesday-november-25-dow-sp-500-nasdaq-pce-inflation-data-091428237.html"
+        }
+      ]
+    },
+    "notes": "Made intraday (about 2:00 PM CT), not at a close. The AI range was written AFTER seeing the baseline, so the comparison is not blind. IV is the average of the call and put at the strike nearest the price on the 2027-06-17 expiry; the horizon has no listed expiry of its own, so this is the nearest listed one (for 5y the longest listed). The baseline is zero-drift, a weak yardstick over long horizons.",
+    "status": "open"
+  },
+  {
+    "id": "2026-11-25_XLE_1y",
+    "symbol": "XLE",
+    "made_at": "2026-11-25",
+    "horizon": "1y",
+    "resolves_on": "2027-11-24",
+    "price_at_prediction": 61.05,
+    "price_time": "2026-11-25T20:01:00Z",
+    "ai": {
+      "low": 45.0,
+      "high": 82.0,
+      "level": 0.8,
+      "prob_up": 0.53
+    },
+    "baseline": {
+      "method": "implied_vol",
+      "iv": 0.2549,
+      "iv_updated_at": "2026-11-25T20:01:49Z",
+      "low": 44.06,
+      "high": 84.6,
+      "level": 0.8
+    },
+    "catalysts": {
+      "bull": [
+        {
+          "text": "Brent was holding near $93 as Strait of Hormuz tanker attacks offset rising Gulf exports (Nov 17).",
+          "source": "https://oilprice.com/Energy/Energy-General/Brent-Stuck-Near-93-as-Hormuz-Tanker-Attacks-Offset-Gulf-Export-Surge.html"
+        },
+        {
+          "text": "The EIA's November outlook saw Brent near $100 for the rest of the year.",
+          "source": "https://finviz.com/news/420887/eia-sees-brent-near-100-for-the-rest-of-the-year-as-crude-futures-ease-again"
+        },
+        {
+          "text": "OPEC+ decides its 2027 production framework at a Nov 29 ministerial meeting, a possible supply-discipline catalyst.",
+          "source": "https://www.staradvertiser.com/2026/11/01/breaking-news/opec-keeps-december-oil-output-targets-steady-as-iran-war-disrupt-flows/"
+        }
+      ],
+      "base": [
+        {
+          "text": "Beyond a few months the range is driven by the macro regime and the zero-drift options baseline, not by scheduled events.",
+          "source": null,
+          "kind": "model_expectation"
+        }
+      ],
+      "bear": [
+        {
+          "text": "WTI fell 3.2% to $83.26 on Nov 18, its lowest close since Aug 26, after a larger-than-expected rise in US crude and fuel stocks.",
+          "source": "https://www.nationthailand.com/news/world/40073656"
+        },
+        {
+          "text": "The IEA and other forecasters warn of excess supply in 2027 if Gulf flows return to normal.",
+          "source": "https://engineeringnews.co.za/article/opec-keeps-december-oil-output-targets-steady-ahead-of-tougher-call-for-2027-2026-11-02"
+        },
+        {
+          "text": "New 20% tariffs and a hotter PCE reading add growth and rate worries that can weigh on energy demand expectations.",
+          "source": "https://finance.yahoo.com/markets/live/stock-market-today-wednesday-november-25-dow-sp-500-nasdaq-pce-inflation-data-091428237.html"
+        }
+      ]
+    },
+    "notes": "Made intraday (about 2:00 PM CT), not at a close. The AI range was written AFTER seeing the baseline, so the comparison is not blind. IV is the average of the call and put at the strike nearest the price on the 2027-12-17 expiry; the horizon has no listed expiry of its own, so this is the nearest listed one (for 5y the longest listed). The baseline is zero-drift, a weak yardstick over long horizons. The 61 strike was not listed on this expiry, so the 60 strike was used.",
+    "status": "open"
+  },
+  {
+    "id": "2026-11-25_XLE_5y",
+    "symbol": "XLE",
+    "made_at": "2026-11-25",
+    "horizon": "5y",
+    "resolves_on": "2031-11-25",
+    "price_at_prediction": 61.05,
+    "price_time": "2026-11-25T20:01:00Z",
+    "ai": {
+      "low": 33.0,
+      "high": 115.0,
+      "level": 0.8,
+      "prob_up": 0.62
+    },
+    "baseline": {
+      "method": "implied_vol",
+      "iv": 0.2474,
+      "iv_updated_at": "2026-11-25T20:01:49Z",
+      "low": 30.04,
+      "high": 124.07,
+      "level": 0.8
+    },
+    "catalysts": {
+      "bull": [
+        {
+          "text": "Brent was holding near $93 as Strait of Hormuz tanker attacks offset rising Gulf exports (Nov 17).",
+          "source": "https://oilprice.com/Energy/Energy-General/Brent-Stuck-Near-93-as-Hormuz-Tanker-Attacks-Offset-Gulf-Export-Surge.html"
+        },
+        {
+          "text": "The EIA's November outlook saw Brent near $100 for the rest of the year.",
+          "source": "https://finviz.com/news/420887/eia-sees-brent-near-100-for-the-rest-of-the-year-as-crude-futures-ease-again"
+        },
+        {
+          "text": "OPEC+ decides its 2027 production framework at a Nov 29 ministerial meeting, a possible supply-discipline catalyst.",
+          "source": "https://www.staradvertiser.com/2026/11/01/breaking-news/opec-keeps-december-oil-output-targets-steady-as-iran-war-disrupt-flows/"
+        }
+      ],
+      "base": [
+        {
+          "text": "Beyond a few months the range is driven by the macro regime and the zero-drift options baseline, not by scheduled events.",
+          "source": null,
+          "kind": "model_expectation"
+        }
+      ],
+      "bear": [
+        {
+          "text": "WTI fell 3.2% to $83.26 on Nov 18, its lowest close since Aug 26, after a larger-than-expected rise in US crude and fuel stocks.",
+          "source": "https://www.nationthailand.com/news/world/40073656"
+        },
+        {
+          "text": "The IEA and other forecasters warn of excess supply in 2027 if Gulf flows return to normal.",
+          "source": "https://engineeringnews.co.za/article/opec-keeps-december-oil-output-targets-steady-ahead-of-tougher-call-for-2027-2026-11-02"
+        },
+        {
+          "text": "New 20% tariffs and a hotter PCE reading add growth and rate worries that can weigh on energy demand expectations.",
+          "source": "https://finance.yahoo.com/markets/live/stock-market-today-wednesday-november-25-dow-sp-500-nasdaq-pce-inflation-data-091428237.html"
+        }
+      ]
+    },
+    "notes": "Made intraday (about 2:00 PM CT), not at a close. The AI range was written AFTER seeing the baseline, so the comparison is not blind. IV is the average of the call and put at the strike nearest the price on the 2029-01-19 expiry; the horizon has no listed expiry of its own, so this is the nearest listed one (for 5y the longest listed). The baseline is zero-drift, a weak yardstick over long horizons.",
+    "status": "open"
+  },
+  {
+    "id": "2026-11-25_XLV_1w",
+    "symbol": "XLV",
+    "made_at": "2026-11-25",
+    "horizon": "1w",
+    "resolves_on": "2026-12-04",
+    "price_at_prediction": 183.92,
+    "price_time": "2026-11-25T20:01:00Z",
+    "ai": {
+      "low": 176.5,
+      "high": 191.5,
+      "level": 0.8,
+      "prob_up": 0.51
+    },
+    "baseline": {
+      "method": "implied_vol",
+      "iv": 0.236,
+      "iv_updated_at": "2026-11-25T20:01:49Z",
+      "low": 175.39,
+      "high": 192.87,
+      "level": 0.8
+    },
+    "catalysts": {
+      "bull": [
+        {
+          "text": "Eli Lilly's Q3 2026 revenue rose 39% to $24.4B on obesity drugs, as of mid-November.",
+          "source": "https://stock3.com/news/gesundheitsaktien-nach-der-rally-5-aktien-und-2-etfs-im-check-17395429"
+        },
+        {
+          "text": "Morningstar says clarity on drug-pricing headwinds is improving after big drugmakers signed agreements with the administration.",
+          "source": "https://www.morningstar.com/stocks/healthcare-stocks-had-mixed-q2-defensive-nature-innovation-look-attractive"
+        },
+        {
+          "text": "A defensive sector can hold up better if the Nasdaq sell-off continues, but XLV fell about 0.4% today so the hedge is not guaranteed.",
+          "source": null,
+          "kind": "model_expectation"
+        }
+      ],
+      "base": [
+        {
+          "text": "Dec 1: JOLTS (October). Dec 4, 8:30 AM ET: November jobs report, so the Dec 4 close includes its reaction.",
+          "source": "https://www.bls.gov/schedule/2026/12_sched_list.htm"
+        },
+        {
+          "text": "The range is a bit narrower than the options-implied one at the edges, since implied vol usually runs above realized.",
+          "source": null,
+          "kind": "model_expectation"
+        }
+      ],
+      "bear": [
+        {
+          "text": "A June 2026 analysis said Lilly's obesity drugs drove most of its revenue and that a reversal of pharma tariff caps would hit Merck and AbbVie hardest.",
+          "source": "https://247wallst.com/investing/2026/06/21/the-2-factors-that-will-decide-whether-xlv-finally-catches-the-sp-500-in-2026/?.tsrc=rss"
+        },
+        {
+          "text": "Morningstar flags near-term challenges for healthcare plans and some life-science names.",
+          "source": "https://www.morningstar.com/stocks/healthcare-stocks-had-mixed-q2-defensive-nature-innovation-look-attractive"
+        },
+        {
+          "text": "Bull and bear sourcing for healthcare is thin: the newest sourced items are about Lilly, and the sector has few dated catalysts in the window.",
+          "source": null,
+          "kind": "model_expectation"
+        }
+      ]
+    },
+    "notes": "Made intraday (about 2:00 PM CT), not at a close. The AI range was written AFTER seeing the baseline, so the comparison is not blind. IV is the average of the call and put at the strike nearest the price on the 2026-12-04 expiry. Bull and bear sourcing is thin for XLV.",
+    "status": "open"
+  },
+  {
+    "id": "2026-11-25_XLV_1m",
+    "symbol": "XLV",
+    "made_at": "2026-11-25",
+    "horizon": "1m",
+    "resolves_on": "2026-12-24",
+    "price_at_prediction": 183.92,
+    "price_time": "2026-11-25T20:01:00Z",
+    "ai": {
+      "low": 170.0,
+      "high": 198.0,
+      "level": 0.8,
+      "prob_up": 0.53
+    },
+    "baseline": {
+      "method": "implied_vol",
+      "iv": 0.2383,
+      "iv_updated_at": "2026-11-25T20:01:49Z",
+      "low": 168.75,
+      "high": 200.45,
+      "level": 0.8
+    },
+    "catalysts": {
+      "bull": [
+        {
+          "text": "Eli Lilly's Q3 2026 revenue rose 39% to $24.4B on obesity drugs, as of mid-November.",
+          "source": "https://stock3.com/news/gesundheitsaktien-nach-der-rally-5-aktien-und-2-etfs-im-check-17395429"
+        },
+        {
+          "text": "Morningstar says clarity on drug-pricing headwinds is improving after big drugmakers signed agreements with the administration.",
+          "source": "https://www.morningstar.com/stocks/healthcare-stocks-had-mixed-q2-defensive-nature-innovation-look-attractive"
+        },
+        {
+          "text": "A defensive sector can hold up better if the Nasdaq sell-off continues, but XLV fell about 0.4% today so the hedge is not guaranteed.",
+          "source": null,
+          "kind": "model_expectation"
+        }
+      ],
+      "base": [
+        {
+          "text": "The Dec 8-9 FOMC meeting (with new projections) falls inside this window, with a hike heavily priced as of mid-November.",
+          "source": "https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm"
+        },
+        {
+          "text": "Dec 4 jobs report and Dec 10 CPI also fall inside the window.",
+          "source": "https://www.bls.gov/schedule/2026/12_sched_list.htm"
+        },
+        {
+          "text": "The range is a bit narrower than the options-implied one at the edges, since implied vol usually runs above realized.",
+          "source": null,
+          "kind": "model_expectation"
+        }
+      ],
+      "bear": [
+        {
+          "text": "A June 2026 analysis said Lilly's obesity drugs drove most of its revenue and that a reversal of pharma tariff caps would hit Merck and AbbVie hardest.",
+          "source": "https://247wallst.com/investing/2026/06/21/the-2-factors-that-will-decide-whether-xlv-finally-catches-the-sp-500-in-2026/?.tsrc=rss"
+        },
+        {
+          "text": "Morningstar flags near-term challenges for healthcare plans and some life-science names.",
+          "source": "https://www.morningstar.com/stocks/healthcare-stocks-had-mixed-q2-defensive-nature-innovation-look-attractive"
+        },
+        {
+          "text": "Bull and bear sourcing for healthcare is thin: the newest sourced items are about Lilly, and the sector has few dated catalysts in the window.",
+          "source": null,
+          "kind": "model_expectation"
+        }
+      ]
+    },
+    "notes": "Made intraday (about 2:00 PM CT), not at a close. The AI range was written AFTER seeing the baseline, so the comparison is not blind. IV is the average of the call and put at the strike nearest the price on the 2026-12-24 expiry. Bull and bear sourcing is thin for XLV.",
+    "status": "open"
+  },
+  {
+    "id": "2026-11-25_XLV_6m",
+    "symbol": "XLV",
+    "made_at": "2026-11-25",
+    "horizon": "6m",
+    "resolves_on": "2027-05-25",
+    "price_at_prediction": 183.92,
+    "price_time": "2026-11-25T20:01:00Z",
+    "ai": {
+      "low": 153.0,
+      "high": 220.0,
+      "level": 0.8,
+      "prob_up": 0.58
+    },
+    "baseline": {
+      "method": "implied_vol",
+      "iv": 0.2149,
+      "iv_updated_at": "2026-11-25T20:01:49Z",
+      "low": 151.5,
+      "high": 223.28,
+      "level": 0.8
+    },
+    "catalysts": {
+      "bull": [
+        {
+          "text": "Eli Lilly's Q3 2026 revenue rose 39% to $24.4B on obesity drugs, as of mid-November.",
+          "source": "https://stock3.com/news/gesundheitsaktien-nach-der-rally-5-aktien-und-2-etfs-im-check-17395429"
+        },
+        {
+          "text": "Morningstar says clarity on drug-pricing headwinds is improving after big drugmakers signed agreements with the administration.",
+          "source": "https://www.morningstar.com/stocks/healthcare-stocks-had-mixed-q2-defensive-nature-innovation-look-attractive"
+        },
+        {
+          "text": "A defensive sector can hold up better if the Nasdaq sell-off continues, but XLV fell about 0.4% today so the hedge is not guaranteed.",
+          "source": null,
+          "kind": "model_expectation"
+        }
+      ],
+      "base": [
+        {
+          "text": "Beyond a few months the range is driven by the macro regime and the zero-drift options baseline, not by scheduled events.",
+          "source": null,
+          "kind": "model_expectation"
+        }
+      ],
+      "bear": [
+        {
+          "text": "A June 2026 analysis said Lilly's obesity drugs drove most of its revenue and that a reversal of pharma tariff caps would hit Merck and AbbVie hardest.",
+          "source": "https://247wallst.com/investing/2026/06/21/the-2-factors-that-will-decide-whether-xlv-finally-catches-the-sp-500-in-2026/?.tsrc=rss"
+        },
+        {
+          "text": "Morningstar flags near-term challenges for healthcare plans and some life-science names.",
+          "source": "https://www.morningstar.com/stocks/healthcare-stocks-had-mixed-q2-defensive-nature-innovation-look-attractive"
+        },
+        {
+          "text": "Bull and bear sourcing for healthcare is thin: the newest sourced items are about Lilly, and the sector has few dated catalysts in the window.",
+          "source": null,
+          "kind": "model_expectation"
+        }
+      ]
+    },
+    "notes": "Made intraday (about 2:00 PM CT), not at a close. The AI range was written AFTER seeing the baseline, so the comparison is not blind. IV is the average of the call and put at the strike nearest the price on the 2027-06-17 expiry; the horizon has no listed expiry of its own, so this is the nearest listed one (for 5y the longest listed). The baseline is zero-drift, a weak yardstick over long horizons. Bull and bear sourcing is thin for XLV.",
+    "status": "open"
+  },
+  {
+    "id": "2026-11-25_XLV_1y",
+    "symbol": "XLV",
+    "made_at": "2026-11-25",
+    "horizon": "1y",
+    "resolves_on": "2027-11-24",
+    "price_at_prediction": 183.92,
+    "price_time": "2026-11-25T20:01:00Z",
+    "ai": {
+      "low": 145.0,
+      "high": 235.0,
+      "level": 0.8,
+      "prob_up": 0.6
+    },
+    "baseline": {
+      "method": "implied_vol",
+      "iv": 0.2063,
+      "iv_updated_at": "2026-11-25T20:01:49Z",
+      "low": 141.24,
+      "high": 239.49,
+      "level": 0.8
+    },
+    "catalysts": {
+      "bull": [
+        {
+          "text": "Eli Lilly's Q3 2026 revenue rose 39% to $24.4B on obesity drugs, as of mid-November.",
+          "source": "https://stock3.com/news/gesundheitsaktien-nach-der-rally-5-aktien-und-2-etfs-im-check-17395429"
+        },
+        {
+          "text": "Morningstar says clarity on drug-pricing headwinds is improving after big drugmakers signed agreements with the administration.",
+          "source": "https://www.morningstar.com/stocks/healthcare-stocks-had-mixed-q2-defensive-nature-innovation-look-attractive"
+        },
+        {
+          "text": "A defensive sector can hold up better if the Nasdaq sell-off continues, but XLV fell about 0.4% today so the hedge is not guaranteed.",
+          "source": null,
+          "kind": "model_expectation"
+        }
+      ],
+      "base": [
+        {
+          "text": "Beyond a few months the range is driven by the macro regime and the zero-drift options baseline, not by scheduled events.",
+          "source": null,
+          "kind": "model_expectation"
+        }
+      ],
+      "bear": [
+        {
+          "text": "A June 2026 analysis said Lilly's obesity drugs drove most of its revenue and that a reversal of pharma tariff caps would hit Merck and AbbVie hardest.",
+          "source": "https://247wallst.com/investing/2026/06/21/the-2-factors-that-will-decide-whether-xlv-finally-catches-the-sp-500-in-2026/?.tsrc=rss"
+        },
+        {
+          "text": "Morningstar flags near-term challenges for healthcare plans and some life-science names.",
+          "source": "https://www.morningstar.com/stocks/healthcare-stocks-had-mixed-q2-defensive-nature-innovation-look-attractive"
+        },
+        {
+          "text": "Bull and bear sourcing for healthcare is thin: the newest sourced items are about Lilly, and the sector has few dated catalysts in the window.",
+          "source": null,
+          "kind": "model_expectation"
+        }
+      ]
+    },
+    "notes": "Made intraday (about 2:00 PM CT), not at a close. The AI range was written AFTER seeing the baseline, so the comparison is not blind. IV is the average of the call and put at the strike nearest the price on the 2028-01-21 expiry; the horizon has no listed expiry of its own, so this is the nearest listed one (for 5y the longest listed). The baseline is zero-drift, a weak yardstick over long horizons. Bull and bear sourcing is thin for XLV.",
+    "status": "open"
+  },
+  {
+    "id": "2026-11-25_XLV_5y",
+    "symbol": "XLV",
+    "made_at": "2026-11-25",
+    "horizon": "5y",
+    "resolves_on": "2031-11-25",
+    "price_at_prediction": 183.92,
+    "price_time": "2026-11-25T20:01:00Z",
+    "ai": {
+      "low": 112.0,
+      "high": 310.0,
+      "level": 0.8,
+      "prob_up": 0.74
+    },
+    "baseline": {
+      "method": "implied_vol",
+      "iv": 0.1991,
+      "iv_updated_at": "2026-11-25T20:01:49Z",
+      "low": 103.94,
+      "high": 325.45,
+      "level": 0.8
+    },
+    "catalysts": {
+      "bull": [
+        {
+          "text": "Eli Lilly's Q3 2026 revenue rose 39% to $24.4B on obesity drugs, as of mid-November.",
+          "source": "https://stock3.com/news/gesundheitsaktien-nach-der-rally-5-aktien-und-2-etfs-im-check-17395429"
+        },
+        {
+          "text": "Morningstar says clarity on drug-pricing headwinds is improving after big drugmakers signed agreements with the administration.",
+          "source": "https://www.morningstar.com/stocks/healthcare-stocks-had-mixed-q2-defensive-nature-innovation-look-attractive"
+        },
+        {
+          "text": "A defensive sector can hold up better if the Nasdaq sell-off continues, but XLV fell about 0.4% today so the hedge is not guaranteed.",
+          "source": null,
+          "kind": "model_expectation"
+        }
+      ],
+      "base": [
+        {
+          "text": "Beyond a few months the range is driven by the macro regime and the zero-drift options baseline, not by scheduled events.",
+          "source": null,
+          "kind": "model_expectation"
+        }
+      ],
+      "bear": [
+        {
+          "text": "A June 2026 analysis said Lilly's obesity drugs drove most of its revenue and that a reversal of pharma tariff caps would hit Merck and AbbVie hardest.",
+          "source": "https://247wallst.com/investing/2026/06/21/the-2-factors-that-will-decide-whether-xlv-finally-catches-the-sp-500-in-2026/?.tsrc=rss"
+        },
+        {
+          "text": "Morningstar flags near-term challenges for healthcare plans and some life-science names.",
+          "source": "https://www.morningstar.com/stocks/healthcare-stocks-had-mixed-q2-defensive-nature-innovation-look-attractive"
+        },
+        {
+          "text": "Bull and bear sourcing for healthcare is thin: the newest sourced items are about Lilly, and the sector has few dated catalysts in the window.",
+          "source": null,
+          "kind": "model_expectation"
+        }
+      ]
+    },
+    "notes": "Made intraday (about 2:00 PM CT), not at a close. The AI range was written AFTER seeing the baseline, so the comparison is not blind. IV is the average of the call and put at the strike nearest the price on the 2029-01-19 expiry; the horizon has no listed expiry of its own, so this is the nearest listed one (for 5y the longest listed). The baseline is zero-drift, a weak yardstick over long horizons. Bull and bear sourcing is thin for XLV.",
+    "status": "open"
+  },
+  {
+    "id": "2026-11-25_TLT_1w",
+    "symbol": "TLT",
+    "made_at": "2026-11-25",
+    "horizon": "1w",
+    "resolves_on": "2026-12-04",
+    "price_at_prediction": 82.41,
+    "price_time": "2026-11-25T20:01:00Z",
+    "ai": {
+      "low": 80.9,
+      "high": 83.9,
+      "level": 0.8,
+      "prob_up": 0.5
+    },
+    "baseline": {
+      "method": "implied_vol",
+      "iv": 0.1121,
+      "iv_updated_at": "2026-11-25T20:01:49Z",
+      "low": 80.57,
+      "high": 84.29,
+      "level": 0.8
+    },
+    "catalysts": {
+      "bull": [
+        {
+          "text": "WTI fell to its lowest close since Aug 26 on Nov 18, which eases the energy-driven inflation worry behind high yields.",
+          "source": "https://www.nationthailand.com/news/world/40073656"
+        },
+        {
+          "text": "Treasury yields slipped after the Fed held and PCE inflation came in as expected, pushing the 10-year back below 5% (earlier in the autumn).",
+          "source": "https://finimize.com/content/treasury-yields-slipped-after-pce-came-in-as-expected"
+        },
+        {
+          "text": "TLT rose about 1.1% today as stocks fell, which fits a flight-to-quality bid if the equity sell-off deepens.",
+          "source": null,
+          "kind": "model_expectation"
+        }
+      ],
+      "base": [
+        {
+          "text": "Dec 1: JOLTS (October). Dec 4, 8:30 AM ET: November jobs report, so the Dec 4 close includes its reaction.",
+          "source": "https://www.bls.gov/schedule/2026/12_sched_list.htm"
+        },
+        {
+          "text": "The range is a bit narrower than the options-implied one at the edges, since implied vol usually runs above realized.",
+          "source": null,
+          "kind": "model_expectation"
+        }
+      ],
+      "bear": [
+        {
+          "text": "Futures priced a 96% chance of a 25 bp Fed hike in December as of Nov 17.",
+          "source": "https://www.khaleejtimes.com/business/gold-inches-up-from-over-one-year-low-fed-outlook-caps-gains"
+        },
+        {
+          "text": "The 10-year yield rose nearly 30 bp to 5.14% and the 2-year jumped 35 bp in the week ended Nov 13.",
+          "source": "https://stocktwits.com/news-articles/markets/equity/what-shaped-us-treasury-yields-and-the-dollar-in-week-ended-november-13/cNb2sojR9Qd"
+        },
+        {
+          "text": "30-year yields have stayed above 5% for one of their longest stretches in nearly two decades, reflecting fiscal sustainability worries.",
+          "source": "https://www.scmp.com/economy/global-economy/article/3361757/us-30-year-treasury-streak-how-will-5-yields-reshape-global-capital-flows"
+        }
+      ]
+    },
+    "notes": "Made intraday (about 2:00 PM CT), not at a close. The AI range was written AFTER seeing the baseline, so the comparison is not blind. IV is the average of the call and put at the strike nearest the price on the 2026-12-04 expiry.",
+    "status": "open"
+  },
+  {
+    "id": "2026-11-25_TLT_1m",
+    "symbol": "TLT",
+    "made_at": "2026-11-25",
+    "horizon": "1m",
+    "resolves_on": "2026-12-24",
+    "price_at_prediction": 82.41,
+    "price_time": "2026-11-25T20:01:00Z",
+    "ai": {
+      "low": 79.4,
+      "high": 85.4,
+      "level": 0.8,
+      "prob_up": 0.5
+    },
+    "baseline": {
+      "method": "implied_vol",
+      "iv": 0.1159,
+      "iv_updated_at": "2026-11-25T20:01:49Z",
+      "low": 79.03,
+      "high": 85.93,
+      "level": 0.8
+    },
+    "catalysts": {
+      "bull": [
+        {
+          "text": "WTI fell to its lowest close since Aug 26 on Nov 18, which eases the energy-driven inflation worry behind high yields.",
+          "source": "https://www.nationthailand.com/news/world/40073656"
+        },
+        {
+          "text": "Treasury yields slipped after the Fed held and PCE inflation came in as expected, pushing the 10-year back below 5% (earlier in the autumn).",
+          "source": "https://finimize.com/content/treasury-yields-slipped-after-pce-came-in-as-expected"
+        },
+        {
+          "text": "TLT rose about 1.1% today as stocks fell, which fits a flight-to-quality bid if the equity sell-off deepens.",
+          "source": null,
+          "kind": "model_expectation"
+        }
+      ],
+      "base": [
+        {
+          "text": "The Dec 8-9 FOMC meeting (with new projections) falls inside this window, with a hike heavily priced as of mid-November.",
+          "source": "https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm"
+        },
+        {
+          "text": "Dec 4 jobs report and Dec 10 CPI also fall inside the window.",
+          "source": "https://www.bls.gov/schedule/2026/12_sched_list.htm"
+        },
+        {
+          "text": "The range is a bit narrower than the options-implied one at the edges, since implied vol usually runs above realized.",
+          "source": null,
+          "kind": "model_expectation"
+        }
+      ],
+      "bear": [
+        {
+          "text": "Futures priced a 96% chance of a 25 bp Fed hike in December as of Nov 17.",
+          "source": "https://www.khaleejtimes.com/business/gold-inches-up-from-over-one-year-low-fed-outlook-caps-gains"
+        },
+        {
+          "text": "The 10-year yield rose nearly 30 bp to 5.14% and the 2-year jumped 35 bp in the week ended Nov 13.",
+          "source": "https://stocktwits.com/news-articles/markets/equity/what-shaped-us-treasury-yields-and-the-dollar-in-week-ended-november-13/cNb2sojR9Qd"
+        },
+        {
+          "text": "30-year yields have stayed above 5% for one of their longest stretches in nearly two decades, reflecting fiscal sustainability worries.",
+          "source": "https://www.scmp.com/economy/global-economy/article/3361757/us-30-year-treasury-streak-how-will-5-yields-reshape-global-capital-flows"
+        }
+      ]
+    },
+    "notes": "Made intraday (about 2:00 PM CT), not at a close. The AI range was written AFTER seeing the baseline, so the comparison is not blind. IV is the average of the call and put at the strike nearest the price on the 2026-12-24 expiry.",
+    "status": "open"
+  },
+  {
+    "id": "2026-11-25_TLT_6m",
+    "symbol": "TLT",
+    "made_at": "2026-11-25",
+    "horizon": "6m",
+    "resolves_on": "2027-05-25",
+    "price_at_prediction": 82.41,
+    "price_time": "2026-11-25T20:01:00Z",
+    "ai": {
+      "low": 75.0,
+      "high": 90.0,
+      "level": 0.8,
+      "prob_up": 0.5
+    },
+    "baseline": {
+      "method": "implied_vol",
+      "iv": 0.1189,
+      "iv_updated_at": "2026-11-25T20:01:49Z",
+      "low": 74.03,
+      "high": 91.74,
+      "level": 0.8
+    },
+    "catalysts": {
+      "bull": [
+        {
+          "text": "WTI fell to its lowest close since Aug 26 on Nov 18, which eases the energy-driven inflation worry behind high yields.",
+          "source": "https://www.nationthailand.com/news/world/40073656"
+        },
+        {
+          "text": "Treasury yields slipped after the Fed held and PCE inflation came in as expected, pushing the 10-year back below 5% (earlier in the autumn).",
+          "source": "https://finimize.com/content/treasury-yields-slipped-after-pce-came-in-as-expected"
+        },
+        {
+          "text": "TLT rose about 1.1% today as stocks fell, which fits a flight-to-quality bid if the equity sell-off deepens.",
+          "source": null,
+          "kind": "model_expectation"
+        }
+      ],
+      "base": [
+        {
+          "text": "Beyond a few months the range is driven by the macro regime and the zero-drift options baseline, not by scheduled events.",
+          "source": null,
+          "kind": "model_expectation"
+        }
+      ],
+      "bear": [
+        {
+          "text": "Futures priced a 96% chance of a 25 bp Fed hike in December as of Nov 17.",
+          "source": "https://www.khaleejtimes.com/business/gold-inches-up-from-over-one-year-low-fed-outlook-caps-gains"
+        },
+        {
+          "text": "The 10-year yield rose nearly 30 bp to 5.14% and the 2-year jumped 35 bp in the week ended Nov 13.",
+          "source": "https://stocktwits.com/news-articles/markets/equity/what-shaped-us-treasury-yields-and-the-dollar-in-week-ended-november-13/cNb2sojR9Qd"
+        },
+        {
+          "text": "30-year yields have stayed above 5% for one of their longest stretches in nearly two decades, reflecting fiscal sustainability worries.",
+          "source": "https://www.scmp.com/economy/global-economy/article/3361757/us-30-year-treasury-streak-how-will-5-yields-reshape-global-capital-flows"
+        }
+      ]
+    },
+    "notes": "Made intraday (about 2:00 PM CT), not at a close. The AI range was written AFTER seeing the baseline, so the comparison is not blind. IV is the average of the call and put at the strike nearest the price on the 2027-05-21 expiry; the horizon has no listed expiry of its own, so this is the nearest listed one (for 5y the longest listed). The baseline is zero-drift, a weak yardstick over long horizons.",
+    "status": "open"
+  },
+  {
+    "id": "2026-11-25_TLT_1y",
+    "symbol": "TLT",
+    "made_at": "2026-11-25",
+    "horizon": "1y",
+    "resolves_on": "2027-11-24",
+    "price_at_prediction": 82.41,
+    "price_time": "2026-11-25T20:01:00Z",
+    "ai": {
+      "low": 72.0,
+      "high": 93.0,
+      "level": 0.8,
+      "prob_up": 0.5
+    },
+    "baseline": {
+      "method": "implied_vol",
+      "iv": 0.1113,
+      "iv_updated_at": "2026-11-25T20:01:49Z",
+      "low": 71.47,
+      "high": 95.03,
+      "level": 0.8
+    },
+    "catalysts": {
+      "bull": [
+        {
+          "text": "WTI fell to its lowest close since Aug 26 on Nov 18, which eases the energy-driven inflation worry behind high yields.",
+          "source": "https://www.nationthailand.com/news/world/40073656"
+        },
+        {
+          "text": "Treasury yields slipped after the Fed held and PCE inflation came in as expected, pushing the 10-year back below 5% (earlier in the autumn).",
+          "source": "https://finimize.com/content/treasury-yields-slipped-after-pce-came-in-as-expected"
+        },
+        {
+          "text": "TLT rose about 1.1% today as stocks fell, which fits a flight-to-quality bid if the equity sell-off deepens.",
+          "source": null,
+          "kind": "model_expectation"
+        }
+      ],
+      "base": [
+        {
+          "text": "Beyond a few months the range is driven by the macro regime and the zero-drift options baseline, not by scheduled events.",
+          "source": null,
+          "kind": "model_expectation"
+        }
+      ],
+      "bear": [
+        {
+          "text": "Futures priced a 96% chance of a 25 bp Fed hike in December as of Nov 17.",
+          "source": "https://www.khaleejtimes.com/business/gold-inches-up-from-over-one-year-low-fed-outlook-caps-gains"
+        },
+        {
+          "text": "The 10-year yield rose nearly 30 bp to 5.14% and the 2-year jumped 35 bp in the week ended Nov 13.",
+          "source": "https://stocktwits.com/news-articles/markets/equity/what-shaped-us-treasury-yields-and-the-dollar-in-week-ended-november-13/cNb2sojR9Qd"
+        },
+        {
+          "text": "30-year yields have stayed above 5% for one of their longest stretches in nearly two decades, reflecting fiscal sustainability worries.",
+          "source": "https://www.scmp.com/economy/global-economy/article/3361757/us-30-year-treasury-streak-how-will-5-yields-reshape-global-capital-flows"
+        }
+      ]
+    },
+    "notes": "Made intraday (about 2:00 PM CT), not at a close. The AI range was written AFTER seeing the baseline, so the comparison is not blind. IV is the average of the call and put at the strike nearest the price on the 2027-11-19 expiry; the horizon has no listed expiry of its own, so this is the nearest listed one (for 5y the longest listed). The baseline is zero-drift, a weak yardstick over long horizons.",
+    "status": "open"
+  },
+  {
+    "id": "2026-11-25_TLT_5y",
+    "symbol": "TLT",
+    "made_at": "2026-11-25",
+    "horizon": "5y",
+    "resolves_on": "2031-11-25",
+    "price_at_prediction": 82.41,
+    "price_time": "2026-11-25T20:01:00Z",
+    "ai": {
+      "low": 58.0,
+      "high": 112.0,
+      "level": 0.8,
+      "prob_up": 0.5
+    },
+    "baseline": {
+      "method": "implied_vol",
+      "iv": 0.1802,
+      "iv_updated_at": "2026-11-25T20:01:49Z",
+      "low": 49.16,
+      "high": 138.14,
+      "level": 0.8
+    },
+    "catalysts": {
+      "bull": [
+        {
+          "text": "WTI fell to its lowest close since Aug 26 on Nov 18, which eases the energy-driven inflation worry behind high yields.",
+          "source": "https://www.nationthailand.com/news/world/40073656"
+        },
+        {
+          "text": "Treasury yields slipped after the Fed held and PCE inflation came in as expected, pushing the 10-year back below 5% (earlier in the autumn).",
+          "source": "https://finimize.com/content/treasury-yields-slipped-after-pce-came-in-as-expected"
+        },
+        {
+          "text": "TLT rose about 1.1% today as stocks fell, which fits a flight-to-quality bid if the equity sell-off deepens.",
+          "source": null,
+          "kind": "model_expectation"
+        }
+      ],
+      "base": [
+        {
+          "text": "Beyond a few months the range is driven by the macro regime and the zero-drift options baseline, not by scheduled events.",
+          "source": null,
+          "kind": "model_expectation"
+        }
+      ],
+      "bear": [
+        {
+          "text": "Futures priced a 96% chance of a 25 bp Fed hike in December as of Nov 17.",
+          "source": "https://www.khaleejtimes.com/business/gold-inches-up-from-over-one-year-low-fed-outlook-caps-gains"
+        },
+        {
+          "text": "The 10-year yield rose nearly 30 bp to 5.14% and the 2-year jumped 35 bp in the week ended Nov 13.",
+          "source": "https://stocktwits.com/news-articles/markets/equity/what-shaped-us-treasury-yields-and-the-dollar-in-week-ended-november-13/cNb2sojR9Qd"
+        },
+        {
+          "text": "30-year yields have stayed above 5% for one of their longest stretches in nearly two decades, reflecting fiscal sustainability worries.",
+          "source": "https://www.scmp.com/economy/global-economy/article/3361757/us-30-year-treasury-streak-how-will-5-yields-reshape-global-capital-flows"
+        }
+      ]
+    },
+    "notes": "Made intraday (about 2:00 PM CT), not at a close. The AI range was written AFTER seeing the baseline, so the comparison is not blind. IV is the average of the call and put at the strike nearest the price on the 2029-01-19 expiry; the horizon has no listed expiry of its own, so this is the nearest listed one (for 5y the longest listed). The baseline is zero-drift, a weak yardstick over long horizons. Only the put had a usable implied vol for this expiry, so that single value is used.",
+    "status": "open"
+  },
+  {
+    "id": "2026-11-25_GLD_1w",
+    "symbol": "GLD",
+    "made_at": "2026-11-25",
+    "horizon": "1w",
+    "resolves_on": "2026-12-04",
+    "price_at_prediction": 325.19,
+    "price_time": "2026-11-25T20:01:00Z",
+    "ai": {
+      "low": 306.0,
+      "high": 345.0,
+      "level": 0.8,
+      "prob_up": 0.5
+    },
+    "baseline": {
+      "method": "implied_vol",
+      "iv": 0.3553,
+      "iv_updated_at": "2026-11-25T20:01:49Z",
+      "low": 302.75,
+      "high": 349.29,
+      "level": 0.8
+    },
+    "catalysts": {
+      "bull": [
+        {
+          "text": "The World Gold Council says central banks bought a net 321 tonnes in Q3 2026, and Citi has a $4,500 three-month target.",
+          "source": "https://www.fxempire.com/forecasts/article/gold-forecast-whats-next-after-its-biggest-daily-gain-since-august-1642668"
+        },
+        {
+          "text": "Heraeus says central-bank gold buying is running above last year's pace and gold rebounded after the election.",
+          "source": "https://www.kitco.com/news/article/2026-11-09/gold-and-silver-prices-extend-post-election-rebound-central-banks-pace-beat"
+        },
+        {
+          "text": "A deeper equity sell-off can lift safe-haven demand, though sharp equity corrections have also forced sales of gold.",
+          "source": null,
+          "kind": "model_expectation"
+        }
+      ],
+      "base": [
+        {
+          "text": "Dec 1: JOLTS (October). Dec 4, 8:30 AM ET: November jobs report, so the Dec 4 close includes its reaction.",
+          "source": "https://www.bls.gov/schedule/2026/12_sched_list.htm"
+        },
+        {
+          "text": "The range is a bit narrower than the options-implied one at the edges, since implied vol usually runs above realized.",
+          "source": null,
+          "kind": "model_expectation"
+        }
+      ],
+      "bear": [
+        {
+          "text": "Spot gold hit $3,719.55 on Nov 18, a 14-month low, as the dollar reached a 19-month high and yields rose on hike expectations.",
+          "source": "https://www.nationthailand.com/business/trading-investment/40073658"
+        },
+        {
+          "text": "Goldman cut its year-end 2026 gold forecast to $4,150 from $4,650, citing the Fed's more hawkish stance.",
+          "source": "https://www.kitco.com/opinion/2026-11-09/gold-swot-central-bank-gold-buying-remains-strong-2026"
+        },
+        {
+          "text": "Futures priced a 96% chance of a December Fed hike, which raises the cost of holding non-yielding gold.",
+          "source": "https://www.khaleejtimes.com/business/gold-inches-up-from-over-one-year-low-fed-outlook-caps-gains"
+        }
+      ]
+    },
+    "notes": "Made intraday (about 2:00 PM CT), not at a close. The AI range was written AFTER seeing the baseline, so the comparison is not blind. IV is the average of the call and put at the strike nearest the price on the 2026-12-04 expiry.",
+    "status": "open"
+  },
+  {
+    "id": "2026-11-25_GLD_1m",
+    "symbol": "GLD",
+    "made_at": "2026-11-25",
+    "horizon": "1m",
+    "resolves_on": "2026-12-24",
+    "price_at_prediction": 325.19,
+    "price_time": "2026-11-25T20:01:00Z",
+    "ai": {
+      "low": 294.0,
+      "high": 358.0,
+      "level": 0.8,
+      "prob_up": 0.51
+    },
+    "baseline": {
+      "method": "implied_vol",
+      "iv": 0.3263,
+      "iv_updated_at": "2026-11-25T20:01:49Z",
+      "low": 289.03,
+      "high": 365.87,
+      "level": 0.8
+    },
+    "catalysts": {
+      "bull": [
+        {
+          "text": "The World Gold Council says central banks bought a net 321 tonnes in Q3 2026, and Citi has a $4,500 three-month target.",
+          "source": "https://www.fxempire.com/forecasts/article/gold-forecast-whats-next-after-its-biggest-daily-gain-since-august-1642668"
+        },
+        {
+          "text": "Heraeus says central-bank gold buying is running above last year's pace and gold rebounded after the election.",
+          "source": "https://www.kitco.com/news/article/2026-11-09/gold-and-silver-prices-extend-post-election-rebound-central-banks-pace-beat"
+        },
+        {
+          "text": "A deeper equity sell-off can lift safe-haven demand, though sharp equity corrections have also forced sales of gold.",
+          "source": null,
+          "kind": "model_expectation"
+        }
+      ],
+      "base": [
+        {
+          "text": "The Dec 8-9 FOMC meeting (with new projections) falls inside this window, with a hike heavily priced as of mid-November.",
+          "source": "https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm"
+        },
+        {
+          "text": "Dec 4 jobs report and Dec 10 CPI also fall inside the window.",
+          "source": "https://www.bls.gov/schedule/2026/12_sched_list.htm"
+        },
+        {
+          "text": "The range is a bit narrower than the options-implied one at the edges, since implied vol usually runs above realized.",
+          "source": null,
+          "kind": "model_expectation"
+        }
+      ],
+      "bear": [
+        {
+          "text": "Spot gold hit $3,719.55 on Nov 18, a 14-month low, as the dollar reached a 19-month high and yields rose on hike expectations.",
+          "source": "https://www.nationthailand.com/business/trading-investment/40073658"
+        },
+        {
+          "text": "Goldman cut its year-end 2026 gold forecast to $4,150 from $4,650, citing the Fed's more hawkish stance.",
+          "source": "https://www.kitco.com/opinion/2026-11-09/gold-swot-central-bank-gold-buying-remains-strong-2026"
+        },
+        {
+          "text": "Futures priced a 96% chance of a December Fed hike, which raises the cost of holding non-yielding gold.",
+          "source": "https://www.khaleejtimes.com/business/gold-inches-up-from-over-one-year-low-fed-outlook-caps-gains"
+        }
+      ]
+    },
+    "notes": "Made intraday (about 2:00 PM CT), not at a close. The AI range was written AFTER seeing the baseline, so the comparison is not blind. IV is the average of the call and put at the strike nearest the price on the 2026-12-24 expiry.",
+    "status": "open"
+  },
+  {
+    "id": "2026-11-25_GLD_6m",
+    "symbol": "GLD",
+    "made_at": "2026-11-25",
+    "horizon": "6m",
+    "resolves_on": "2027-05-25",
+    "price_at_prediction": 325.19,
+    "price_time": "2026-11-25T20:01:00Z",
+    "ai": {
+      "low": 262.0,
+      "high": 405.0,
+      "level": 0.8,
+      "prob_up": 0.55
+    },
+    "baseline": {
+      "method": "implied_vol",
+      "iv": 0.2748,
+      "iv_updated_at": "2026-11-25T20:01:49Z",
+      "low": 253.77,
+      "high": 416.72,
+      "level": 0.8
+    },
+    "catalysts": {
+      "bull": [
+        {
+          "text": "The World Gold Council says central banks bought a net 321 tonnes in Q3 2026, and Citi has a $4,500 three-month target.",
+          "source": "https://www.fxempire.com/forecasts/article/gold-forecast-whats-next-after-its-biggest-daily-gain-since-august-1642668"
+        },
+        {
+          "text": "Heraeus says central-bank gold buying is running above last year's pace and gold rebounded after the election.",
+          "source": "https://www.kitco.com/news/article/2026-11-09/gold-and-silver-prices-extend-post-election-rebound-central-banks-pace-beat"
+        },
+        {
+          "text": "A deeper equity sell-off can lift safe-haven demand, though sharp equity corrections have also forced sales of gold.",
+          "source": null,
+          "kind": "model_expectation"
+        }
+      ],
+      "base": [
+        {
+          "text": "Beyond a few months the range is driven by the macro regime and the zero-drift options baseline, not by scheduled events.",
+          "source": null,
+          "kind": "model_expectation"
+        }
+      ],
+      "bear": [
+        {
+          "text": "Spot gold hit $3,719.55 on Nov 18, a 14-month low, as the dollar reached a 19-month high and yields rose on hike expectations.",
+          "source": "https://www.nationthailand.com/business/trading-investment/40073658"
+        },
+        {
+          "text": "Goldman cut its year-end 2026 gold forecast to $4,150 from $4,650, citing the Fed's more hawkish stance.",
+          "source": "https://www.kitco.com/opinion/2026-11-09/gold-swot-central-bank-gold-buying-remains-strong-2026"
+        },
+        {
+          "text": "Futures priced a 96% chance of a December Fed hike, which raises the cost of holding non-yielding gold.",
+          "source": "https://www.khaleejtimes.com/business/gold-inches-up-from-over-one-year-low-fed-outlook-caps-gains"
+        }
+      ]
+    },
+    "notes": "Made intraday (about 2:00 PM CT), not at a close. The AI range was written AFTER seeing the baseline, so the comparison is not blind. IV is the average of the call and put at the strike nearest the price on the 2027-06-17 expiry; the horizon has no listed expiry of its own, so this is the nearest listed one (for 5y the longest listed). The baseline is zero-drift, a weak yardstick over long horizons.",
+    "status": "open"
+  },
+  {
+    "id": "2026-11-25_GLD_1y",
+    "symbol": "GLD",
+    "made_at": "2026-11-25",
+    "horizon": "1y",
+    "resolves_on": "2027-11-24",
+    "price_at_prediction": 325.19,
+    "price_time": "2026-11-25T20:01:00Z",
+    "ai": {
+      "low": 240.0,
+      "high": 440.0,
+      "level": 0.8,
+      "prob_up": 0.57
+    },
+    "baseline": {
+      "method": "implied_vol",
+      "iv": 0.2614,
+      "iv_updated_at": "2026-11-25T20:01:49Z",
+      "low": 232.73,
+      "high": 454.39,
+      "level": 0.8
+    },
+    "catalysts": {
+      "bull": [
+        {
+          "text": "The World Gold Council says central banks bought a net 321 tonnes in Q3 2026, and Citi has a $4,500 three-month target.",
+          "source": "https://www.fxempire.com/forecasts/article/gold-forecast-whats-next-after-its-biggest-daily-gain-since-august-1642668"
+        },
+        {
+          "text": "Heraeus says central-bank gold buying is running above last year's pace and gold rebounded after the election.",
+          "source": "https://www.kitco.com/news/article/2026-11-09/gold-and-silver-prices-extend-post-election-rebound-central-banks-pace-beat"
+        },
+        {
+          "text": "A deeper equity sell-off can lift safe-haven demand, though sharp equity corrections have also forced sales of gold.",
+          "source": null,
+          "kind": "model_expectation"
+        }
+      ],
+      "base": [
+        {
+          "text": "Beyond a few months the range is driven by the macro regime and the zero-drift options baseline, not by scheduled events.",
+          "source": null,
+          "kind": "model_expectation"
+        }
+      ],
+      "bear": [
+        {
+          "text": "Spot gold hit $3,719.55 on Nov 18, a 14-month low, as the dollar reached a 19-month high and yields rose on hike expectations.",
+          "source": "https://www.nationthailand.com/business/trading-investment/40073658"
+        },
+        {
+          "text": "Goldman cut its year-end 2026 gold forecast to $4,150 from $4,650, citing the Fed's more hawkish stance.",
+          "source": "https://www.kitco.com/opinion/2026-11-09/gold-swot-central-bank-gold-buying-remains-strong-2026"
+        },
+        {
+          "text": "Futures priced a 96% chance of a December Fed hike, which raises the cost of holding non-yielding gold.",
+          "source": "https://www.khaleejtimes.com/business/gold-inches-up-from-over-one-year-low-fed-outlook-caps-gains"
+        }
+      ]
+    },
+    "notes": "Made intraday (about 2:00 PM CT), not at a close. The AI range was written AFTER seeing the baseline, so the comparison is not blind. IV is the average of the call and put at the strike nearest the price on the 2027-11-19 expiry; the horizon has no listed expiry of its own, so this is the nearest listed one (for 5y the longest listed). The baseline is zero-drift, a weak yardstick over long horizons.",
+    "status": "open"
+  },
+  {
+    "id": "2026-11-25_GLD_5y",
+    "symbol": "GLD",
+    "made_at": "2026-11-25",
+    "horizon": "5y",
+    "resolves_on": "2031-11-25",
+    "price_at_prediction": 325.19,
+    "price_time": "2026-11-25T20:01:00Z",
+    "ai": {
+      "low": 175.0,
+      "high": 620.0,
+      "level": 0.8,
+      "prob_up": 0.65
+    },
+    "baseline": {
+      "method": "implied_vol",
+      "iv": 0.262,
+      "iv_updated_at": "2026-11-25T20:01:49Z",
+      "low": 153.45,
+      "high": 689.12,
+      "level": 0.8
+    },
+    "catalysts": {
+      "bull": [
+        {
+          "text": "The World Gold Council says central banks bought a net 321 tonnes in Q3 2026, and Citi has a $4,500 three-month target.",
+          "source": "https://www.fxempire.com/forecasts/article/gold-forecast-whats-next-after-its-biggest-daily-gain-since-august-1642668"
+        },
+        {
+          "text": "Heraeus says central-bank gold buying is running above last year's pace and gold rebounded after the election.",
+          "source": "https://www.kitco.com/news/article/2026-11-09/gold-and-silver-prices-extend-post-election-rebound-central-banks-pace-beat"
+        },
+        {
+          "text": "A deeper equity sell-off can lift safe-haven demand, though sharp equity corrections have also forced sales of gold.",
+          "source": null,
+          "kind": "model_expectation"
+        }
+      ],
+      "base": [
+        {
+          "text": "Beyond a few months the range is driven by the macro regime and the zero-drift options baseline, not by scheduled events.",
+          "source": null,
+          "kind": "model_expectation"
+        }
+      ],
+      "bear": [
+        {
+          "text": "Spot gold hit $3,719.55 on Nov 18, a 14-month low, as the dollar reached a 19-month high and yields rose on hike expectations.",
+          "source": "https://www.nationthailand.com/business/trading-investment/40073658"
+        },
+        {
+          "text": "Goldman cut its year-end 2026 gold forecast to $4,150 from $4,650, citing the Fed's more hawkish stance.",
+          "source": "https://www.kitco.com/opinion/2026-11-09/gold-swot-central-bank-gold-buying-remains-strong-2026"
+        },
+        {
+          "text": "Futures priced a 96% chance of a December Fed hike, which raises the cost of holding non-yielding gold.",
+          "source": "https://www.khaleejtimes.com/business/gold-inches-up-from-over-one-year-low-fed-outlook-caps-gains"
+        }
+      ]
+    },
+    "notes": "Made intraday (about 2:00 PM CT), not at a close. The AI range was written AFTER seeing the baseline, so the comparison is not blind. IV is the average of the call and put at the strike nearest the price on the 2029-01-19 expiry; the horizon has no listed expiry of its own, so this is the nearest listed one (for 5y the longest listed). The baseline is zero-drift, a weak yardstick over long horizons.",
+    "status": "open"
   }
 ]
