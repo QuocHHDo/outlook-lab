@@ -350,6 +350,21 @@ th { font-weight: 700; font-size: 12.5px; color: var(--muted-2); }
 .ev-title { font-family: var(--display); font-size: 16px; font-weight: 700; letter-spacing: -0.01em; }
 @media (max-width: 900px) { .hrow { grid-template-columns: 1fr 1fr; } .hrow .chart, .hrow .bars { grid-column: 1 / -1; } }
 @media (max-width: 560px) { .hrow { grid-template-columns: 1fr; } .cases { grid-template-columns: 1fr; } .chartwrap { padding: 8px 2px 2px; } }
+.chartwrap { padding: 12px 8px 4px; }
+.chartwrap .future { fill: var(--panel); opacity: .55; }
+.chartwrap .cone-base { fill: var(--base-fill); opacity: .7; }
+.chartwrap .cone-ai { fill: var(--ai-fill); stroke: none; }
+.chartwrap .edge-ai { fill: none; stroke: var(--accent); stroke-width: 1.8; }
+.chartwrap .cone-drift { fill: none; stroke: var(--muted); stroke-width: 1; stroke-dasharray: 4 3; }
+.chartwrap .hist { fill: none; stroke: var(--ink); stroke-width: 1.7; stroke-linejoin: round; }
+.chartwrap .hdot { fill: var(--card); stroke: var(--accent); stroke-width: 1.8; }
+.chartwrap .todayl { stroke: var(--ink); stroke-width: 1; stroke-dasharray: 2 3; opacity: .5; }
+.chartwrap .gridl { stroke: var(--line-2); }
+.chartwrap .axis { stroke: var(--muted); stroke-width: 1; }
+.chartwrap .ylab, .chartwrap .xlab, .chartwrap .hlab { fill: var(--muted); font-size: 11.5px; }
+.chartwrap .hlab { fill: var(--ink); font-weight: 600; }
+.chartwrap .startlab { paint-order: stroke; stroke: var(--card); stroke-width: 4px; font-size: 12px; }
+.chartwrap .endlab { paint-order: stroke; stroke: var(--card); stroke-width: 4px; }
 @media (prefers-reduced-motion: reduce) { .tile.enter { animation: none; } }
 @media (max-width: 560px) { .tmap { height: 560px; } .head h1 { font-size: 36px; } }
 </style>
@@ -422,7 +437,7 @@ th { font-weight: 700; font-size: 12.5px; color: var(--muted-2); }
     <h3 class="eyebrow">Where the price could go</h3>
     <div id="chart-pick" class="horizon-pick" role="group" aria-label="Chart window"></div>
     <div id="chart" class="chartwrap"></div>
-    <p class="muted" style="font-size:12px;margin-top:6px">Line: daily closes. Blue band: the AI 80% range; gray band: the volatility baseline; dashed lines: the drift baseline. Bands join the horizon ranges with straight lines, so the shape between horizons is only a guide.</p>
+    <p class="muted" style="font-size:12px;margin-top:6px">Black line: daily closes. Blue band: the AI's 80% range; gray band: the volatility baseline; dashed lines: the drift baseline. The dots are the stored horizon ranges (1 week, 1 month and so on); the curve between them is a smooth guide that widens with the square root of time, not a separate forecast.</p>
   </div>
 
   <div class="section">
@@ -714,62 +729,96 @@ th { font-weight: 700; font-size: 12.5px; color: var(--muted-2); }
     return n;
   }
   function dayNum(iso) { return Math.round(Date.parse(iso + "T00:00:00Z") / 86400000); }
+  function niceTicks(lo, hi, n) {
+    var raw = (hi - lo) / n, mag = Math.pow(10, Math.floor(Math.log(raw) / Math.LN10)), f = raw / mag;
+    var step = (f < 1.5 ? 1 : f < 3 ? 2 : f < 7 ? 5 : 10) * mag, out = [];
+    for (var v = Math.ceil(lo / step) * step; v <= hi + 1e-9; v += step) out.push(v);
+    return out;
+  }
   function renderChart(rows) {
-    seg2($("chart-pick"), [["1m", "Out to 1 month"], ["1y", "Out to 1 year"]], "chartWin", function () { renderChart(rows); });
+    seg2($("chart-pick"), [["1m", "Next month"], ["1y", "Next year"]], "chartWin", function () { renderChart(rows); });
     var host = $("chart"); clear(host);
     var maxH = state.chartWin === "1y" ? 365 : 31;
     var cone = rows.filter(function (p) { return p.horizon !== "5y" && dayNum(p.resolves_on) - dayNum(p.made_at) <= maxH + 1; })
       .sort(function (a, b) { return a.resolves_on < b.resolves_on ? -1 : 1; });
     if (!cone.length) return;
     var base = cone[0], t0 = dayNum(base.made_at), s0 = base.price_at_prediction;
+    var span = dayNum(cone[cone.length - 1].resolves_on) - t0;
+    var back = Math.max(45, Math.round(span * (state.chartWin === "1y" ? 0.9 : 2.2)));
     var series = state.prices[state.symbol] || {};
-    var hist = Object.keys(series).sort().filter(function (d) { return dayNum(d) >= t0 - (state.chartWin === "1y" ? 120 : 62) && d <= base.made_at; })
-      .map(function (d) { return [dayNum(d), series[d]]; });
-    var after = Object.keys(series).sort().filter(function (d) { return d > base.made_at; }).map(function (d) { return [dayNum(d), series[d]]; });
-    var x0 = hist.length ? Math.min(hist[0][0], t0) : t0 - 20, x1 = dayNum(cone[cone.length - 1].resolves_on) + 2;
-    var all = [s0];
-    cone.forEach(function (p) { all.push(p.ai.low, p.ai.high, p.baseline.low, p.baseline.high); });
+    var keys = Object.keys(series).sort();
+    var hist = keys.filter(function (d) { return dayNum(d) >= t0 - back && d <= base.made_at; }).map(function (d) { return [dayNum(d), series[d]]; });
+    var after = keys.filter(function (d) { return d > base.made_at; }).map(function (d) { return [dayNum(d), series[d]]; });
+    var x0 = hist.length ? Math.min(hist[0][0], t0) : t0 - Math.round(span * 0.5), x1 = t0 + span + Math.round(span * 0.02);
+    // smooth cone: log distance from today grows with sqrt(time), interpolated between the stored horizon ranges
+    function curve(get) {
+      var anchors = [[0, 0]].concat(cone.map(function (p) { return [Math.sqrt(dayNum(p.resolves_on) - t0), Math.log(get(p) / s0)]; }));
+      var out = [];
+      for (var i = 0; i <= 60; i++) {
+        var d = span * i / 60, r = Math.sqrt(d), k = 1;
+        while (k < anchors.length - 1 && r > anchors[k][0]) k++;
+        var a0 = anchors[k - 1], a1 = anchors[k], u = a1[0] === a0[0] ? 0 : (r - a0[0]) / (a1[0] - a0[0]);
+        out.push([t0 + d, s0 * Math.exp(a0[1] + (a1[1] - a0[1]) * u)]);
+      }
+      return out;
+    }
+    var aiHi = curve(function (p) { return p.ai.high; }), aiLo = curve(function (p) { return p.ai.low; });
+    var bHi = curve(function (p) { return p.baseline.high; }), bLo = curve(function (p) { return p.baseline.low; });
+    var dr = cone.filter(function (p) { return p.baseline_drift; }).length === cone.length;
+    var dHi = dr ? curve(function (p) { return p.baseline_drift.high; }) : null, dLo = dr ? curve(function (p) { return p.baseline_drift.low; }) : null;
+    var all = [];
+    [aiHi, aiLo, bHi, bLo].forEach(function (c) { c.forEach(function (pt) { all.push(pt[1]); }); });
     hist.concat(after).forEach(function (pt) { all.push(pt[1]); });
-    var lo = Math.min.apply(null, all), hi = Math.max.apply(null, all), pad = (hi - lo) * 0.08; lo -= pad; hi += pad;
-    var W = 720, H = 340, L = 52, R = 64, T = 14, B = 30;
-    function X(d) { return L + (d - x0) / (x1 - x0) * (W - L - R); }
+    var lo = Math.min.apply(null, all), hi = Math.max.apply(null, all), pad = (hi - lo) * 0.06; lo -= pad; hi += pad;
+    var W = 720, H = 372, L = 8, R = 70, T = 16, B = 48, PW = W - L - R;
+    function X(d) { return L + (d - x0) / (x1 - x0) * PW; }
     function Y(v) { return T + (hi - v) / (hi - lo) * (H - T - B); }
+    function money0(v) { return "$" + (v >= 100 ? v.toFixed(0) : v.toFixed(2)); }
+    function pts(arr) { return arr.map(function (pt) { return X(pt[0]).toFixed(1) + "," + Y(pt[1]).toFixed(1); }).join(" "); }
     var svg = svgEl("svg", { viewBox: "0 0 " + W + " " + H, role: "img" });
-    svg.setAttribute("aria-label", state.symbol + " price history with the AI forecast range out to " + (state.chartWin === "1y" ? "one year" : "one month"));
-    for (var i = 0; i <= 4; i++) {
-      var v = lo + (hi - lo) * i / 4, y = Y(v);
+    svg.setAttribute("aria-label", state.symbol + " price history with the AI forecast range for the next " + (state.chartWin === "1y" ? "year" : "month") + ", from " + money0(Math.min.apply(null, aiLo.map(function (q) { return q[1]; }))) + " to " + money0(Math.max.apply(null, aiHi.map(function (q) { return q[1]; }))));
+    var endYs = [Y(Math.max.apply(null, aiHi.map(function (q) { return q[1]; }))), Y(Math.min.apply(null, aiLo.map(function (q) { return q[1]; })))];
+    niceTicks(lo, hi, 5).forEach(function (v) {
+      var y = Y(v), near = endYs.some(function (e) { return Math.abs(e - y) < 15; });
       svg.appendChild(svgEl("line", { x1: L, x2: W - R, y1: y, y2: y }, "gridl"));
-      var tx = svgEl("text", { x: L - 6, y: y + 4, "text-anchor": "end" }); tx.textContent = "$" + (v >= 100 ? v.toFixed(0) : v.toFixed(1)); svg.appendChild(tx);
+      if (near) return;
+      var tx = svgEl("text", { x: W - R + 8, y: y + 4 }, "ylab"); tx.textContent = "$" + (v >= 100 ? v.toFixed(0) : v.toFixed(1)); svg.appendChild(tx);
+    });
+    // time axis: month ticks
+    var dt0 = new Date(x0 * 86400000), mt = new Date(Date.UTC(dt0.getUTCFullYear(), dt0.getUTCMonth() + 1, 1));
+    var step = (x1 - x0) > 300 ? 3 : 1, cnt = 0;
+    for (; mt.getTime() / 86400000 < x1; mt = new Date(Date.UTC(mt.getUTCFullYear(), mt.getUTCMonth() + 1, 1)), cnt++) {
+      if (cnt % step) continue;
+      var xd = mt.getTime() / 86400000;
+      if (Math.abs(X(xd) - X(t0)) < 40) continue;
+      svg.appendChild(svgEl("line", { x1: X(xd), x2: X(xd), y1: H - B, y2: H - B + 4 }, "axis"));
+      var mx = svgEl("text", { x: X(xd), y: H - B + 17, "text-anchor": "middle" }, "xlab");
+      mx.textContent = mt.toLocaleString("en-US", { month: "short", timeZone: "UTC" }) + ((x1 - x0) > 300 || mt.getUTCMonth() === 0 ? " ’" + String(mt.getUTCFullYear()).slice(2) : ""); svg.appendChild(mx);
     }
-    function poly(key, field) {
-      var up = [[t0, s0]], dn = [];
-      cone.forEach(function (p) { var d = dayNum(p.resolves_on); up.push([d, p[key][field === "ai" ? "high" : "high"]]); dn.unshift([d, p[key].low]); });
-      dn.push([t0, s0]);
-      return up.concat(dn).map(function (pt) { return X(pt[0]).toFixed(1) + "," + Y(pt[1]).toFixed(1); }).join(" ");
-    }
-    svg.appendChild(svgEl("polygon", { points: poly("baseline") }, "cone-base"));
-    svg.appendChild(svgEl("polygon", { points: poly("ai") }, "cone-ai"));
-    var drift = cone.filter(function (p) { return p.baseline_drift; });
-    if (drift.length) {
-      ["high", "low"].forEach(function (k) {
-        var pts = [[t0, s0]].concat(drift.map(function (p) { return [dayNum(p.resolves_on), p.baseline_drift[k]]; }));
-        svg.appendChild(svgEl("polyline", { points: pts.map(function (pt) { return X(pt[0]).toFixed(1) + "," + Y(pt[1]).toFixed(1); }).join(" ") }, "cone-drift"));
-      });
-    }
+    // future region
+    svg.appendChild(svgEl("rect", { x: X(t0), y: T, width: W - R - X(t0), height: H - T - B }, "future"));
+    svg.appendChild(svgEl("polygon", { points: pts(bHi.concat(bLo.slice().reverse())) }, "cone-base"));
+    svg.appendChild(svgEl("polygon", { points: pts(aiHi.concat(aiLo.slice().reverse())) }, "cone-ai"));
+    svg.appendChild(svgEl("polyline", { points: pts(aiHi) }, "edge-ai"));
+    svg.appendChild(svgEl("polyline", { points: pts(aiLo) }, "edge-ai"));
+    if (dr) { svg.appendChild(svgEl("polyline", { points: pts(dHi) }, "cone-drift")); svg.appendChild(svgEl("polyline", { points: pts(dLo) }, "cone-drift")); }
     var line = hist.concat(after);
-    if (line.length > 1) svg.appendChild(svgEl("polyline", { points: line.map(function (pt) { return X(pt[0]).toFixed(1) + "," + Y(pt[1]).toFixed(1); }).join(" ") }, "hist"));
-    svg.appendChild(svgEl("circle", { cx: X(t0), cy: Y(s0), r: 3.5 }, "start"));
+    if (line.length > 1) svg.appendChild(svgEl("polyline", { points: pts(line) }, "hist"));
+    // horizon markers
     cone.forEach(function (p) {
-      var d = dayNum(p.resolves_on);
-      if (X(d) - X(t0) > 170) { var tx2 = svgEl("text", { x: X(d), y: H - 8, "text-anchor": "end" }); tx2.textContent = HLABEL[p.horizon] || p.horizon; svg.appendChild(tx2); }
-      svg.appendChild(svgEl("line", { x1: X(d), x2: X(d), y1: Y(p.ai.low), y2: Y(p.ai.high) }, "axis"));
+      var d = dayNum(p.resolves_on), xh = X(d);
+      [p.ai.high, p.ai.low].forEach(function (v) { svg.appendChild(svgEl("circle", { cx: xh, cy: Y(v), r: 3 }, "hdot")); });
+      if (xh - X(t0) > 90) {
+        var ht = svgEl("text", { x: xh, y: H - 6, "text-anchor": "end" }, "hlab"); ht.textContent = HLABEL[p.horizon] || p.horizon; svg.appendChild(ht);
+      }
     });
     var lastP = cone[cone.length - 1];
-    [["high", lastP.ai.high], ["low", lastP.ai.low]].forEach(function (e) {
-      var lt = svgEl("text", { x: X(dayNum(lastP.resolves_on)) + 6, y: Y(e[1]) + 4 }, "endlab"); lt.textContent = "$" + (e[1] >= 100 ? e[1].toFixed(0) : e[1].toFixed(1)); svg.appendChild(lt);
+    [lastP.ai.high, lastP.ai.low].forEach(function (v) {
+      var lt = svgEl("text", { x: W - R + 8, y: Y(v) + 4 }, "endlab"); lt.textContent = money0(v); svg.appendChild(lt);
     });
-    var st0 = svgEl("text", { x: X(t0) - 8, y: Y(s0) - 9, "text-anchor": "end" }, "startlab"); st0.textContent = "$" + (s0 >= 100 ? s0.toFixed(0) : s0.toFixed(1)); svg.appendChild(st0);
-    var tn = svgEl("text", { x: X(t0), y: H - 8, "text-anchor": "start" }); tn.textContent = "Predicted " + fmtDate(base.made_at); svg.appendChild(tn);
+    svg.appendChild(svgEl("line", { x1: X(t0), x2: X(t0), y1: T, y2: H - B }, "todayl"));
+    svg.appendChild(svgEl("circle", { cx: X(t0), cy: Y(s0), r: 4 }, "start"));
+    var st0 = svgEl("text", { x: X(t0) - 8, y: T + 12, "text-anchor": "end" }, "startlab"); st0.textContent = "Predicted " + fmtDate(base.made_at) + " at " + money0(s0); svg.appendChild(st0);
     host.appendChild(svg);
   }
 
