@@ -12,7 +12,7 @@
 <meta property="og:image" content="https://quochhdo.github.io/outlook-lab/og.png">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&amp;family=Hanken+Grotesk:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
 <script>
 (function () {
   var t = null;
@@ -232,6 +232,92 @@ tbody tr { border-top: 1px solid var(--line-2); }
   .cases { grid-template-columns: 1fr; }
   .card { padding: 18px; }
 }
+
+/* ---- design layer: tracing-paper ledger ---- */
+:root {
+  --display: "Bricolage Grotesque", "Hanken Grotesk", system-ui, sans-serif;
+  --ink: oklch(0.22 0.03 255);
+  --muted: oklch(0.5 0.02 255);
+  --muted-2: oklch(0.4 0.02 255);
+  --bg: oklch(0.965 0.008 150);
+  --panel: oklch(0.935 0.01 150);
+  --card: oklch(0.99 0.004 150);
+  --line: oklch(0.86 0.012 200);
+  --line-2: oklch(0.91 0.01 200);
+  --accent: oklch(0.42 0.2 270);
+  --accent-ink: oklch(0.38 0.2 270);
+  --ai-fill: oklch(0.42 0.2 270 / 0.2);
+  --base-fill: oklch(0.82 0.012 230);
+  --ok: oklch(0.42 0.1 175);
+  --bad: oklch(0.5 0.17 28);
+  --mark: oklch(0.9 0.15 98);
+  --mark-ink: oklch(0.3 0.06 90);
+}
+:root[data-theme="dark"] {
+  --ink: oklch(0.94 0.012 150);
+  --muted: oklch(0.72 0.02 230);
+  --muted-2: oklch(0.8 0.015 230);
+  --bg: oklch(0.2 0.025 255);
+  --panel: oklch(0.25 0.028 255);
+  --card: oklch(0.23 0.026 255);
+  --line: oklch(0.36 0.03 255);
+  --line-2: oklch(0.3 0.028 255);
+  --accent: oklch(0.76 0.13 270);
+  --accent-ink: oklch(0.82 0.1 270);
+  --ai-fill: oklch(0.76 0.13 270 / 0.28);
+  --base-fill: oklch(0.4 0.025 250);
+  --ok: oklch(0.8 0.12 175);
+  --bad: oklch(0.78 0.12 30);
+  --mark: oklch(0.42 0.09 98);
+  --mark-ink: oklch(0.93 0.08 98);
+}
+.page { font-family: "Hanken Grotesk", system-ui, sans-serif; font-size: 15px; line-height: 1.55; font-variant-numeric: tabular-nums; padding-top: 40px; }
+h1, h2, h3, h4, .tile b, .hc-top b, .cal b, .price { font-family: var(--display); }
+.head h1 { font-size: clamp(34px, 5vw, 52px); font-weight: 700; letter-spacing: -0.03em; line-height: 1; }
+.head p.muted { margin-top: 10px; max-width: 46ch; font-size: 15px; }
+.pill, .chip { color: var(--mark-ink); background: var(--mark); border: 0; border-radius: 3px; font-weight: 600; letter-spacing: 0; padding: 2px 8px; }
+.price { font-size: 28px; font-weight: 700; letter-spacing: -0.02em; }
+.wrap { gap: 28px; }
+/* symbol bar: groups carry the structure */
+.tabs { border-bottom: 0; gap: 2px 2px; align-items: baseline; padding-bottom: 14px; border-bottom: 1px solid var(--line); }
+.tabs .grp { font-size: 12.5px; color: var(--muted); margin: 0 2px 0 14px; padding-left: 14px; border-left: 1px solid var(--line); }
+.tabs a { padding: 6px 10px; border-radius: 6px; border-bottom: 0; margin: 0; font-weight: 600; font-size: 14px; }
+.tabs a:hover { background: var(--panel); color: var(--ink); }
+.tabs a[aria-current="page"] { background: var(--ink); color: var(--bg); }
+/* overview sheds its box; sections are separated by space and a rule */
+#home.card { background: transparent; border: 0; padding: 0; gap: 36px; }
+#home .card-head h2 { font-size: 26px; letter-spacing: -0.02em; }
+.eyebrow { text-transform: none; letter-spacing: -0.01em; font-family: var(--display); font-size: 20px; font-weight: 700; color: var(--ink); border-top: 1px solid var(--line); padding-top: 18px; }
+.section > .eyebrow:first-child { margin-bottom: 2px; }
+.card { border-radius: 8px; }
+.horizon-pick { border-radius: 8px; background: var(--panel); }
+.horizon-pick button[aria-pressed="true"] { background: var(--ink); color: var(--bg); box-shadow: none; }
+.hcard { border-radius: 6px; background: var(--card); }
+.hcard:hover { border-color: var(--accent); box-shadow: none; }
+.hc-top b { font-size: 17px; letter-spacing: -0.01em; }
+.hero .hc-top b { font-size: 26px; }
+.tmap { height: 520px; border-radius: 6px; background: var(--bg); }
+.tile { border: 0; box-shadow: inset 0 0 0 1.5px var(--bg); border-radius: 3px; padding: 10px 11px 22px; justify-content: flex-start; align-items: flex-start; text-align: left; }
+.tile b { font-size: 18px; letter-spacing: -0.01em; }
+.tile.sm b { font-size: 13px; } .tile.xs b { font-size: 11px; }
+.tile:hover { filter: none; box-shadow: inset 0 0 0 2.5px var(--ink); }
+.tile .wk { position: absolute; left: 11px; right: 11px; bottom: 9px; height: 8px; pointer-events: none; }
+.tile .wk i { position: absolute; top: 3px; height: 2px; left: 0; right: 0; background: rgba(255,255,255,.28); }
+.tile .wk u { position: absolute; top: 0; bottom: 0; width: 1px; background: rgba(255,255,255,.75); }
+.tile .wk s { position: absolute; top: 1px; height: 6px; background: #fff; border-radius: 1px; text-decoration: none; }
+.tile.xs .wk { display: none; }
+.scalebar i { background: linear-gradient(90deg, oklch(0.5 0.17 28), oklch(0.42 0.03 250), oklch(0.5 0.11 175)); }
+.cal > div { background: transparent; border-left: 3px solid var(--line); border-radius: 0; padding: 4px 0 4px 12px; }
+.cal b { font-size: 22px; letter-spacing: -0.02em; }
+.changes li, .mini-ev li { border-top-color: var(--line-2); }
+.record { background: var(--panel); border-radius: 6px; }
+.tile.enter { animation: tin .5s cubic-bezier(.2,.7,.2,1) both; }
+@keyframes tin { from { opacity: 0; transform: translateY(6px); } }
+#outlook .eyebrow { border-top: 0; padding-top: 0; }
+#outlook .section + .section > .eyebrow, #outlook .section > .eyebrow + * { }
+.horizon-pick { max-width: 100%; overflow-x: auto; }
+@media (prefers-reduced-motion: reduce) { .tile.enter { animation: none; } }
+@media (max-width: 560px) { .tmap { height: 560px; } .head h1 { font-size: 36px; } }
 </style>
 </head>
 <body>
@@ -269,7 +355,7 @@ tbody tr { border-top: 1px solid var(--line-2); }
     </div>
     <div id="home-map" class="tmap" role="img" aria-label="Treemap of AI chance of going up, by symbol"></div>
     <div id="home-grid" class="hgrid"></div>
-    <p class="muted" style="font-size:12px">Map: color is the AI's chance of finishing up (green above 50%, red below, gray near 50%). Tile size is the AI's range width, a measure of how uncertain the forecast is; it is not market cap. Cards: all share one scale, so ranges compare directly. Click any tile or card for the full analysis.</p>
+    <p class="muted" style="font-size:12px">Map: color is the AI's chance of finishing up (teal above 50%, red below, gray near 50%). The white bar in each tile is the AI's 80% range on one shared scale, with the thin line marking the price when predicted. Tile size is the range width, a measure of how uncertain the forecast is; it is not market cap. Cards: all share one scale, so ranges compare directly. Click any tile or card for the full analysis.</p>
   </div>
   <div class="section">
     <h3 class="eyebrow">What changed</h3>
@@ -402,7 +488,7 @@ tbody tr { border-top: 1px solid var(--line-2); }
   function symbols() {
     var seen = {};
     state.preds.forEach(function (p) { seen[p.symbol] = true; });
-    var pref = ["SPY", "QQQ", "SMH", "IWM", "XLK", "XLF", "XLE", "XLV", "XLY", "XLP", "XLI", "XLB", "XLU", "XLRE", "XLC", "TLT", "GLD", "AAPL", "MSFT", "NVDA", "AMZN", "GOOGL", "META"];
+    var pref = ["SPY", "QQQ", "IWM", "SMH", "XLK", "XLF", "XLE", "XLV", "XLY", "XLP", "XLI", "XLB", "XLU", "XLRE", "XLC", "TLT", "GLD", "AAPL", "MSFT", "NVDA", "AMZN", "GOOGL", "META"];
     var all = Object.keys(seen);
     return pref.filter(function (s) { return seen[s]; }).concat(all.filter(function (s) { return pref.indexOf(s) < 0; }).sort());
   }
@@ -441,7 +527,11 @@ tbody tr { border-top: 1px solid var(--line-2); }
     var home = el("a", "Overview"); home.href = "#home";
     if (!state.symbol) home.setAttribute("aria-current", "page");
     nav.appendChild(home);
+    var labels = { index: "Indexes", sector: "Sectors", other: "Bonds and gold", stock: "Stocks" };
+    var last = null;
     symbols().forEach(function (s) {
+      var g = groupOf(s);
+      if (g !== last) { nav.appendChild(el("span", labels[g], "grp")); last = g; }
       var a = el("a", s);
       a.href = "#" + s;
       if (s === state.symbol) a.setAttribute("aria-current", "page");
@@ -525,10 +615,11 @@ tbody tr { border-top: 1px solid var(--line-2); }
     return out;
   }
   function tileColor(up) {
-    if (up == null) return "oklch(0.4 0.01 264)";
-    var dev = Math.max(-1, Math.min(1, (up - 0.5) / 0.2));
-    var c = Math.abs(dev) * 0.15 + 0.01;
-    return "oklch(" + (0.4 + Math.abs(dev) * 0.1).toFixed(3) + " " + c.toFixed(3) + " " + (dev >= 0 ? 150 : 25) + ")";
+    if (up == null) return "oklch(0.42 0.02 250)";
+    var dev = Math.max(-1, Math.min(1, (up - 0.5) / 0.1));
+    var a = Math.abs(dev);
+    if (a < 0.06) return "oklch(0.44 0.03 250)";
+    return "oklch(" + (0.44 + a * 0.06).toFixed(3) + " " + (0.04 + a * 0.1).toFixed(3) + " " + (dev > 0 ? 175 : 28) + ")";
   }
   function renderMap(data) {
     var host = $("home-map"); clear(host);
@@ -538,9 +629,12 @@ tbody tr { border-top: 1px solid var(--line-2); }
       var st = d.p.price_at_prediction, width = (d.p.ai.high - d.p.ai.low) / st;
       return { d: d, v: state.homeSize === "equal" ? 1 : Math.max(width, 0.01) };
     }).sort(function (a, b) { return b.v - a.v; });
-    squarify(items, 0, 0, w, h).forEach(function (t) {
+    var mx = 0.05;
+    data.forEach(function (d) { var st = d.p.price_at_prediction; mx = Math.max(mx, Math.abs(d.p.ai.low / st - 1), Math.abs(d.p.ai.high / st - 1)); });
+    var first = !state.mapSeen; state.mapSeen = true;
+    squarify(items, 0, 0, w, h).forEach(function (t, idx) {
       var d = t.d, p = d.p, st = p.price_at_prediction, up = p.ai.prob_up;
-      var a = el("a", undefined, "tile" + (t.w < 90 || t.h < 74 ? " sm" : "") + (t.w < 44 || t.h < 30 ? " xs" : ""));
+      var a = el("a", undefined, "tile" + (t.w < 100 || t.h < 84 ? " sm" : "") + (t.w < 44 || t.h < 30 ? " xs" : ""));
       a.href = "#" + d.s;
       a.addEventListener("click", function () { state.fromHome = state.homeH; });
       a.style.left = t.x + "px"; a.style.top = t.y + "px"; a.style.width = t.w + "px"; a.style.height = t.h + "px";
@@ -549,6 +643,13 @@ tbody tr { border-top: 1px solid var(--line-2); }
       a.appendChild(el("b", d.s));
       a.appendChild(el("span", up != null ? pct(up) + " up" : ""));
       a.appendChild(el("span", moveText(p.ai, st)));
+      var wk = el("div", undefined, "wk"); wk.setAttribute("aria-hidden", "true");
+      var pos = function (v) { return Math.max(0, Math.min(100, (v / st - 1) / (2 * mx) * 100 + 50)); };
+      var lo = pos(p.ai.low), hi = pos(p.ai.high);
+      var tr = el("i"), zr = el("u"), br = el("s");
+      zr.style.left = "50%"; br.style.left = lo + "%"; br.style.width = Math.max(2, hi - lo) + "%";
+      wk.appendChild(tr); wk.appendChild(zr); wk.appendChild(br); a.appendChild(wk);
+      if (first) { a.classList.add("enter"); a.style.animationDelay = Math.min(idx * 22, 500) + "ms"; }
       host.appendChild(a);
     });
   }
