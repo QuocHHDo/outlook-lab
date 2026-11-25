@@ -1,0 +1,279 @@
+{
+  "updated": "2026-11-25",
+  "events": [
+    {
+      "type": "scheduled",
+      "kind": "market",
+      "date": "2026-11-26",
+      "title": "US stock markets closed (Thanksgiving)",
+      "sources": [
+        {
+          "label": "NYSE",
+          "url": "https://www.nyse.com/markets/hours-calendars"
+        }
+      ]
+    },
+    {
+      "type": "scheduled",
+      "kind": "market",
+      "date": "2026-11-27",
+      "time": "Closes 1:00 PM ET",
+      "title": "Early close after Thanksgiving",
+      "sources": [
+        {
+          "label": "NYSE",
+          "url": "https://www.nyse.com/markets/hours-calendars"
+        }
+      ]
+    },
+    {
+      "type": "scheduled",
+      "kind": "macro",
+      "date": "2026-12-01",
+      "time": "10:00 AM ET",
+      "title": "JOLTS job openings (October)",
+      "sources": [
+        {
+          "label": "BLS",
+          "url": "https://www.bls.gov/schedule/2026/12_sched_list.htm"
+        }
+      ]
+    },
+    {
+      "type": "scheduled",
+      "kind": "macro",
+      "date": "2026-12-04",
+      "time": "8:30 AM ET",
+      "title": "Employment Situation: November jobs report",
+      "detail": "The 1-week predictions are scored on the close of this day, so the jobs report is inside their window.",
+      "sources": [
+        {
+          "label": "BLS",
+          "url": "https://www.bls.gov/schedule/2026/12_sched_list.htm"
+        }
+      ]
+    },
+    {
+      "type": "scheduled",
+      "kind": "fed",
+      "date": "2026-12-08",
+      "end_date": "2026-12-09",
+      "title": "Fed meeting with new economic projections",
+      "detail": "Futures priced about an 85% chance of a quarter-point hike as of Nov 13. That figure is old and may have changed.",
+      "sources": [
+        {
+          "label": "Federal Reserve",
+          "url": "https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm"
+        },
+        {
+          "label": "Hike odds (247WallSt, Nov 13)",
+          "url": "https://247wallst.com/investing/2026/11/13/kevin-warshs-fed-will-vote-on-rates-only-7-times-in-2027/"
+        }
+      ]
+    },
+    {
+      "type": "scheduled",
+      "kind": "earnings",
+      "date": "2026-12-09",
+      "time": "After the close",
+      "title": "Broadcom earnings",
+      "symbols": [
+        "SPY",
+        "QQQ",
+        "SMH"
+      ],
+      "note": "Date from Robinhood's earnings calendar; companies can change it"
+    },
+    {
+      "type": "scheduled",
+      "kind": "macro",
+      "date": "2026-12-10",
+      "time": "8:30 AM ET",
+      "title": "Consumer Price Index (November)",
+      "sources": [
+        {
+          "label": "BLS",
+          "url": "https://www.bls.gov/schedule/2026/12_sched_list.htm"
+        }
+      ]
+    },
+    {
+      "type": "scheduled",
+      "kind": "earnings",
+      "date": "2026-12-14",
+      "time": "After the close",
+      "title": "Oracle earnings",
+      "symbols": [
+        "SPY"
+      ],
+      "note": "Date from Robinhood's earnings calendar; companies can change it"
+    },
+    {
+      "type": "scheduled",
+      "kind": "macro",
+      "date": "2026-12-15",
+      "time": "8:30 AM ET",
+      "title": "Producer Price Index (November)",
+      "sources": [
+        {
+          "label": "BLS",
+          "url": "https://www.bls.gov/schedule/2026/12_sched_list.htm"
+        }
+      ]
+    },
+    {
+      "type": "scheduled",
+      "kind": "earnings",
+      "date": "2026-12-17",
+      "time": "After the close",
+      "title": "Micron earnings",
+      "symbols": [
+        "SPY",
+        "QQQ",
+        "SMH"
+      ],
+      "note": "Date from Robinhood's earnings calendar; companies can change it"
+    },
+    {
+      "type": "scheduled",
+      "kind": "market",
+      "date": "2026-12-24",
+      "time": "Closes 1:00 PM ET",
+      "title": "Early close before Christmas",
+      "detail": "The 1-month predictions are scored on this day's close, which will be a half-day close.",
+      "sources": [
+        {
+          "label": "NYSE",
+          "url": "https://www.nyse.com/markets/hours-calendars"
+        }
+      ]
+    },
+    {
+      "type": "shock",
+      "kind": "fed",
+      "date": "2026-10-28",
+      "title": "Fed held rates and left a December hike on the table",
+      "detail": "The rate stayed at 3.75% to 4%.",
+      "sources": [
+        {
+          "label": "Portfolio Adviser",
+          "url": "https://portfolio-adviser.com/warsh-sticks-to-the-script-as-fed-holds-rates-but-december-hike-highly-likely/"
+        }
+      ]
+    },
+    {
+      "type": "shock",
+      "kind": "politics",
+      "date": "2026-11-03",
+      "title": "Midterm elections: Democrats won both chambers",
+      "detail": "Chip stocks fell over the following days on data-center skepticism, according to Stocktwits.",
+      "sources": [
+        {
+          "label": "Stocktwits",
+          "url": "https://stocktwits.com/news-articles/markets/equity/soxx-etf-semiconductor-is-set-for-its-worst-week-in-over-18-months/cNG1sEhR94Z"
+        }
+      ]
+    },
+    {
+      "type": "shock",
+      "kind": "shock",
+      "date": "2026-11-05",
+      "title": "Chip crash: semiconductor index fell 12.25%",
+      "detail": "SMH fell 11.2% to $447.73. The Nasdaq had its worst session in 19 months.",
+      "symbols": [
+        "QQQ",
+        "SMH"
+      ],
+      "sources": [
+        {
+          "label": "24/7 Wall St",
+          "url": "https://247wallst.com/investing/2026/11/06/chip-stocks-just-had-their-second-worst-day-on-record/"
+        },
+        {
+          "label": "IBTimes",
+          "url": "https://www.ibtimes.co.uk/nvidia-qualcomm-shares-nasdaq-ai-selloff-1830635"
+        }
+      ]
+    },
+    {
+      "type": "shock",
+      "kind": "shock",
+      "date": "2026-11-09",
+      "title": "QQQ rebounded 3.54%, its best day since May 2025",
+      "symbols": [
+        "QQQ"
+      ],
+      "sources": [
+        {
+          "label": "24/7 Wall St",
+          "url": "https://247wallst.com/investing/2026/11/10/the-nasdaq-100-just-had-its-best-day-since-march-without-nvidias-help/"
+        }
+      ]
+    },
+    {
+      "type": "shock",
+      "kind": "shock",
+      "date": "2026-11-12",
+      "title": "Jensen Huang resigned as Nvidia CEO",
+      "detail": "CFO Colette Kress became interim CEO.",
+      "symbols": [
+        "QQQ",
+        "SMH"
+      ],
+      "sources": [
+        {
+          "label": "24/7 Wall St via Webull",
+          "url": "https://www.webull.com/news/15939186383319040"
+        }
+      ]
+    },
+    {
+      "type": "shock",
+      "kind": "shock",
+      "date": "2026-11-16",
+      "title": "Nasdaq-100 fell 2.67%, on pace for its worst November since 2008",
+      "symbols": [
+        "QQQ"
+      ],
+      "sources": [
+        {
+          "label": "24/7 Wall St via Webull",
+          "url": "https://www.webull.com/news/15939186383319040"
+        }
+      ]
+    },
+    {
+      "type": "shock",
+      "kind": "shock",
+      "date": "2026-11-23",
+      "title": "Huang returned as Nvidia CEO; Nvidia rose 31.5%",
+      "symbols": [
+        "QQQ",
+        "SMH"
+      ],
+      "sources": [
+        {
+          "label": "StockAnalysis",
+          "url": "https://stockanalysis.com/news/nvidia-gives-back-half-huang-rally/"
+        }
+      ]
+    },
+    {
+      "type": "shock",
+      "kind": "shock",
+      "date": "2026-11-25",
+      "title": "Chip sell-off, new 20% tariffs, hotter October PCE",
+      "detail": "Nvidia fell 5.9% Tuesday and about 8% Wednesday morning; the semiconductor index hit a seven-month low.",
+      "sources": [
+        {
+          "label": "StockAnalysis",
+          "url": "https://stockanalysis.com/news/nvidia-gives-back-half-huang-rally/"
+        },
+        {
+          "label": "Yahoo Finance",
+          "url": "https://finance.yahoo.com/markets/live/stock-market-today-wednesday-november-25-dow-sp-500-nasdaq-pce-inflation-data-091428237.html"
+        }
+      ]
+    }
+  ]
+}
