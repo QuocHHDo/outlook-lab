@@ -128,5 +128,293 @@
     },
     "notes": "Made intraday (about 12:35 PM CT), not at a close. The AI range was written before computing the baseline, but a similar baseline had been seen earlier in the same session, so the comparison is not fully blind.",
     "status": "open"
+  },
+  {
+    "id": "2026-11-25_QQQ_1w",
+    "symbol": "QQQ",
+    "made_at": "2026-11-25",
+    "horizon": "1w",
+    "resolves_on": "2026-12-04",
+    "price_at_prediction": 634.14,
+    "price_time": "2026-11-25T19:11:34Z",
+    "ai": {
+      "low": 592.0,
+      "high": 678.0,
+      "level": 0.8,
+      "prob_up": 0.52
+    },
+    "baseline": {
+      "method": "implied_vol",
+      "iv": 0.3968,
+      "iv_updated_at": "2026-11-25T19:11:46Z",
+      "low": 585.47,
+      "high": 686.85,
+      "level": 0.8
+    },
+    "catalysts": {
+      "bull": [
+        {
+          "text": "The Nasdaq 100 was down 4.4% at 11:04 a.m. ET, so the index had recovered much of an early plunge by the time of this prediction (QQQ was about 0.6% below Tuesday's close at 2:11 p.m. ET).",
+          "source": "https://stockanalysis.com/news/nvidia-gives-back-half-huang-rally/"
+        },
+        {
+          "text": "Rebounds in this regime have been sharp: QQQ rose 3.54% on Nov 9, its best day since May 2025, after the early-November sell-off.",
+          "source": "https://247wallst.com/investing/2026/11/10/the-nasdaq-100-just-had-its-best-day-since-march-without-nvidias-help/"
+        },
+        {
+          "text": "The model sees room for a rebound after a concentrated chip sell-off, but no reliable edge in direction.",
+          "source": null,
+          "kind": "model_expectation"
+        }
+      ],
+      "base": [
+        {
+          "text": "Dec 1: JOLTS (October). Dec 4, 8:30 AM ET: November jobs report, so the Dec 4 close includes its reaction.",
+          "source": "https://www.bls.gov/schedule/2026/12_sched_list.htm"
+        },
+        {
+          "text": "Earnings in the window include Marvell, Salesforce and Snowflake (Dec 1-2, after the close), plus Broadcom on Dec 9 (outside the 1-week window). Source: Robinhood earnings calendar.",
+          "source": null
+        },
+        {
+          "text": "The range is narrower than the options-implied one because implied vol usually runs above realized, though realized vol has been unusually high lately.",
+          "source": null,
+          "kind": "model_expectation"
+        }
+      ],
+      "bear": [
+        {
+          "text": "Chip stocks fell hard Wednesday: the PHLX Semiconductor Index lost 7.2% and hit a seven-month low on doubts that AI spending will pay off.",
+          "source": "https://stockanalysis.com/news/nvidia-gives-back-half-huang-rally/"
+        },
+        {
+          "text": "New 20% tariffs were announced and the October PCE report showed price increases picked up.",
+          "source": "https://finance.yahoo.com/markets/live/stock-market-today-wednesday-november-25-dow-sp-500-nasdaq-pce-inflation-data-091428237.html"
+        },
+        {
+          "text": "Futures priced about an 85% chance of a Fed hike on Dec 9 as of Nov 13, so a hot data print could raise rate-hike pressure on growth stocks.",
+          "source": "https://247wallst.com/investing/2026/11/13/kevin-warshs-fed-will-vote-on-rates-only-7-times-in-2027/"
+        }
+      ]
+    },
+    "notes": "Made intraday (about 1:12 PM CT), not at a close. Prices and implied vol are from Robinhood read-only quotes (IV is the average of the at-the-money call and put at the nearest strike). I ran the baseline calculator before writing the AI range, so this prediction is NOT blind to the baseline. Catalyst items without a link come from Robinhood's earnings calendar or are the model's own reasoning. The 1-week implied vol includes the Dec 4 jobs report.",
+    "status": "open"
+  },
+  {
+    "id": "2026-11-25_QQQ_1m",
+    "symbol": "QQQ",
+    "made_at": "2026-11-25",
+    "horizon": "1m",
+    "resolves_on": "2026-12-24",
+    "price_at_prediction": 634.14,
+    "price_time": "2026-11-25T19:11:34Z",
+    "ai": {
+      "low": 570.0,
+      "high": 705.0,
+      "level": 0.8,
+      "prob_up": 0.54
+    },
+    "baseline": {
+      "method": "implied_vol",
+      "iv": 0.3462,
+      "iv_updated_at": "2026-11-25T19:11:46Z",
+      "low": 559.58,
+      "high": 718.62,
+      "level": 0.8
+    },
+    "catalysts": {
+      "bull": [
+        {
+          "text": "The Nasdaq 100 was down 4.4% at 11:04 a.m. ET, so the index had recovered much of an early plunge by the time of this prediction (QQQ was about 0.6% below Tuesday's close at 2:11 p.m. ET).",
+          "source": "https://stockanalysis.com/news/nvidia-gives-back-half-huang-rally/"
+        },
+        {
+          "text": "Rebounds in this regime have been sharp: QQQ rose 3.54% on Nov 9, its best day since May 2025, after the early-November sell-off.",
+          "source": "https://247wallst.com/investing/2026/11/10/the-nasdaq-100-just-had-its-best-day-since-march-without-nvidias-help/"
+        },
+        {
+          "text": "The model sees room for a rebound after a concentrated chip sell-off, but no reliable edge in direction.",
+          "source": null,
+          "kind": "model_expectation"
+        }
+      ],
+      "base": [
+        {
+          "text": "Dec 8-9 FOMC: the Fed was priced for a quarter-point hike with a new projections release; this falls inside the 1-month window.",
+          "source": "https://247wallst.com/investing/2026/11/13/kevin-warshs-fed-will-vote-on-rates-only-7-times-in-2027/"
+        },
+        {
+          "text": "Dec 1 JOLTS and Dec 4 jobs report.",
+          "source": "https://www.bls.gov/schedule/2026/12_sched_list.htm"
+        },
+        {
+          "text": "Broadcom reports Dec 9, Oracle Dec 14 and Micron Dec 17 (all after the close), which should move AI-linked megacaps. Source: Robinhood earnings calendar.",
+          "source": null
+        },
+        {
+          "text": "Dec 24 is a shortened trading day, so the scoring close may be a half-day close.",
+          "source": null,
+          "kind": "model_expectation"
+        }
+      ],
+      "bear": [
+        {
+          "text": "Chip stocks fell hard Wednesday: the PHLX Semiconductor Index lost 7.2% and hit a seven-month low on doubts that AI spending will pay off.",
+          "source": "https://stockanalysis.com/news/nvidia-gives-back-half-huang-rally/"
+        },
+        {
+          "text": "New 20% tariffs were announced and the October PCE report showed price increases picked up.",
+          "source": "https://finance.yahoo.com/markets/live/stock-market-today-wednesday-november-25-dow-sp-500-nasdaq-pce-inflation-data-091428237.html"
+        },
+        {
+          "text": "The Fed was priced for an 85% chance of a hike on Dec 9 as of Nov 13; a hawkish surprise or higher-for-longer message is a downside risk.",
+          "source": "https://247wallst.com/investing/2026/11/13/kevin-warshs-fed-will-vote-on-rates-only-7-times-in-2027/"
+        }
+      ]
+    },
+    "notes": "Made intraday (about 1:12 PM CT), not at a close. Prices and implied vol are from Robinhood read-only quotes (IV is the average of the at-the-money call and put at the nearest strike). I ran the baseline calculator before writing the AI range, so this prediction is NOT blind to the baseline. Catalyst items without a link come from Robinhood's earnings calendar or are the model's own reasoning.",
+    "status": "open"
+  },
+  {
+    "id": "2026-11-25_SMH_1w",
+    "symbol": "SMH",
+    "made_at": "2026-11-25",
+    "horizon": "1w",
+    "resolves_on": "2026-12-04",
+    "price_at_prediction": 420.67,
+    "price_time": "2026-11-25T19:11:34Z",
+    "ai": {
+      "low": 370.0,
+      "high": 477.0,
+      "level": 0.8,
+      "prob_up": 0.5
+    },
+    "baseline": {
+      "method": "implied_vol",
+      "iv": 0.7515,
+      "iv_updated_at": "2026-11-25T19:11:46Z",
+      "low": 361.63,
+      "high": 489.35,
+      "level": 0.8
+    },
+    "catalysts": {
+      "bull": [
+        {
+          "text": "Nvidia rose 31.5% on Monday on Jensen Huang's return as CEO, which shows how violently this group can rebound.",
+          "source": "https://stockanalysis.com/news/nvidia-gives-back-half-huang-rally/"
+        },
+        {
+          "text": "The PHLX Semiconductor Index is down more than 43% from its June record after a 7.2% drop Wednesday, so a bounce is plausible from an oversold level.",
+          "source": "https://stockanalysis.com/news/nvidia-gives-back-half-huang-rally/"
+        },
+        {
+          "text": "The model does not claim an edge on timing: oversold bounces and further liquidation have both happened in this sell-off.",
+          "source": null,
+          "kind": "model_expectation"
+        }
+      ],
+      "base": [
+        {
+          "text": "Dec 1: JOLTS (October). Dec 4, 8:30 AM ET: November jobs report, so the Dec 4 close includes its reaction.",
+          "source": "https://www.bls.gov/schedule/2026/12_sched_list.htm"
+        },
+        {
+          "text": "Marvell and Credo report Dec 1 after the close, which is a direct read on AI chip demand. Source: Robinhood earnings calendar.",
+          "source": null
+        },
+        {
+          "text": "Implied vol is about 75%, so the baseline range is very wide. The AI range is only modestly narrower.",
+          "source": null,
+          "kind": "model_expectation"
+        }
+      ],
+      "bear": [
+        {
+          "text": "Micron fell 11.3%, Intel and AMD 9.0%, Marvell 8.9%, TSMC 6.7% and Broadcom 6.1% on Wednesday.",
+          "source": "https://stockanalysis.com/news/nvidia-gives-back-half-huang-rally/"
+        },
+        {
+          "text": "Doubt that heavy AI spending will pay off, higher October inflation, new tariff plans, and concern about Nvidia's dependence on Huang after he declined to discuss succession.",
+          "source": "https://stockanalysis.com/news/nvidia-gives-back-half-huang-rally/"
+        },
+        {
+          "text": "On Nov 5, SMH fell 11.2% to $447.73 after the midterms; it now trades below that level, so the selling has continued.",
+          "source": "https://247wallst.com/investing/2026/11/06/chip-stocks-just-had-their-second-worst-day-on-record/"
+        }
+      ]
+    },
+    "notes": "Made intraday (about 1:12 PM CT), not at a close. Prices and implied vol are from Robinhood read-only quotes (IV is the average of the at-the-money call and put at the nearest strike). I ran the baseline calculator before writing the AI range, so this prediction is NOT blind to the baseline. Catalyst items without a link come from Robinhood's earnings calendar or are the model's own reasoning.",
+    "status": "open"
+  },
+  {
+    "id": "2026-11-25_SMH_1m",
+    "symbol": "SMH",
+    "made_at": "2026-11-25",
+    "horizon": "1m",
+    "resolves_on": "2026-12-24",
+    "price_at_prediction": 420.67,
+    "price_time": "2026-11-25T19:11:34Z",
+    "ai": {
+      "low": 345.0,
+      "high": 515.0,
+      "level": 0.8,
+      "prob_up": 0.52
+    },
+    "baseline": {
+      "method": "implied_vol",
+      "iv": 0.6574,
+      "iv_updated_at": "2026-11-25T19:11:46Z",
+      "low": 331.75,
+      "high": 533.42,
+      "level": 0.8
+    },
+    "catalysts": {
+      "bull": [
+        {
+          "text": "Nvidia rose 31.5% on Monday on Jensen Huang's return as CEO, which shows how violently this group can rebound.",
+          "source": "https://stockanalysis.com/news/nvidia-gives-back-half-huang-rally/"
+        },
+        {
+          "text": "The PHLX Semiconductor Index is down more than 43% from its June record after a 7.2% drop Wednesday, so a bounce is plausible from an oversold level.",
+          "source": "https://stockanalysis.com/news/nvidia-gives-back-half-huang-rally/"
+        },
+        {
+          "text": "The model does not claim an edge on timing: oversold bounces and further liquidation have both happened in this sell-off.",
+          "source": null,
+          "kind": "model_expectation"
+        }
+      ],
+      "base": [
+        {
+          "text": "Dec 8-9 FOMC with a hike priced as of Nov 13; Dec 4 jobs report.",
+          "source": "https://247wallst.com/investing/2026/11/13/kevin-warshs-fed-will-vote-on-rates-only-7-times-in-2027/"
+        },
+        {
+          "text": "Earnings in the window: Marvell and Credo (Dec 1), Broadcom (Dec 9), Oracle (Dec 14), Micron (Dec 17). Source: Robinhood earnings calendar.",
+          "source": null
+        },
+        {
+          "text": "Dec 24 is a shortened trading day, so the scoring close may be a half-day close.",
+          "source": null,
+          "kind": "model_expectation"
+        }
+      ],
+      "bear": [
+        {
+          "text": "Micron fell 11.3%, Intel and AMD 9.0%, Marvell 8.9%, TSMC 6.7% and Broadcom 6.1% on Wednesday, on doubts about AI spending returns.",
+          "source": "https://stockanalysis.com/news/nvidia-gives-back-half-huang-rally/"
+        },
+        {
+          "text": "On Nov 5, SMH fell 11.2% to $447.73 after the midterms; it now trades below that level.",
+          "source": "https://247wallst.com/investing/2026/11/06/chip-stocks-just-had-their-second-worst-day-on-record/"
+        },
+        {
+          "text": "A hawkish Dec 9 FOMC (hike about 85% priced as of Nov 13) would add pressure on high-multiple chip names.",
+          "source": "https://247wallst.com/investing/2026/11/13/kevin-warshs-fed-will-vote-on-rates-only-7-times-in-2027/"
+        }
+      ]
+    },
+    "notes": "Made intraday (about 1:12 PM CT), not at a close. Prices and implied vol are from Robinhood read-only quotes (IV is the average of the at-the-money call and put at the nearest strike). I ran the baseline calculator before writing the AI range, so this prediction is NOT blind to the baseline. Catalyst items without a link come from Robinhood's earnings calendar or are the model's own reasoning.",
+    "status": "open"
   }
 ]
