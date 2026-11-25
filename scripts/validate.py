@@ -50,13 +50,45 @@ def validate(predictions):
     return errors
 
 
+EVENT_TYPES = {"scheduled", "shock"}
+EVENT_KINDS = {"fed", "macro", "earnings", "market", "shock", "politics"}
+
+
+def validate_events(doc):
+    errors = []
+    events = doc.get("events", []) if isinstance(doc, dict) else None
+    if events is None:
+        return ["events.json must be an object with an events list"]
+    for i, e in enumerate(events):
+        eid = f"event #{i} ({e.get('title', '?')})"
+        if e.get("type") not in EVENT_TYPES:
+            errors.append(f"{eid}: type must be one of {sorted(EVENT_TYPES)}")
+        if e.get("kind") not in EVENT_KINDS:
+            errors.append(f"{eid}: kind must be one of {sorted(EVENT_KINDS)}")
+        if not e.get("title"):
+            errors.append(f"{eid}: missing title")
+        for key in ("date", "end_date"):
+            if key in e:
+                try:
+                    parse_date(e[key])
+                except (TypeError, ValueError):
+                    errors.append(f"{eid}: {key} must be a YYYY-MM-DD date")
+        for src in e.get("sources", []):
+            if not str(src.get("url", "")).startswith("https://"):
+                errors.append(f"{eid}: every source needs an https url")
+        if not e.get("sources") and not e.get("note"):
+            errors.append(f"{eid}: needs a source link or a note saying where the date came from")
+    return errors
+
+
 def main():
     errors = validate(load("predictions.json", []))
+    errors += validate_events(load("events.json", {"events": []}))
     for e in errors:
         print("ERROR:", e)
     if errors:
         sys.exit(1)
-    print("predictions.json OK")
+    print("predictions.json and events.json OK")
 
 
 if __name__ == "__main__":
