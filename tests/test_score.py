@@ -91,7 +91,7 @@ class ValidateTests(unittest.TestCase):
 
     def test_catches_problems(self):
         bad = make_pred(low=120, high=110)
-        bad["horizon"] = "5y"
+        bad["horizon"] = "10y"
         errors = validate.validate([bad, make_pred()])
         self.assertTrue(any("low must be below" in e for e in errors))
         self.assertTrue(any("horizon" in e for e in errors))
