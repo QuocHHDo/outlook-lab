@@ -101,7 +101,17 @@ tbody tr { border-top: 1px solid var(--line-2); }
 .r-held { color: var(--ok); font-weight: 500; }
 .r-miss { color: var(--bad); font-weight: 500; }
 .foot { font-size: 12px; color: oklch(0.45 0.015 264); border-top: 1px solid var(--line-2); padding-top: 14px; }
+.timeline { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; }
+.ev { display: grid; grid-template-columns: 120px minmax(0, 1fr); gap: 16px; padding: 12px 0; border-top: 1px solid var(--line-2); }
+.ev-date { display: flex; flex-direction: column; }
+.ev-date b { font-weight: 600; }
+.ev-date small { font-size: 12px; color: var(--muted); }
+.ev-body { display: flex; flex-direction: column; gap: 4px; }
+.ev-title { font-weight: 600; }
+.ev-detail { font-size: 13px; color: var(--muted-2); }
+.tag.win { background: oklch(0.95 0.03 150); color: var(--ok); }
 @media (max-width: 900px) {
+  .ev { grid-template-columns: 1fr; gap: 4px; }
   .hrow { grid-template-columns: 1fr; gap: 10px; }
   .cases { grid-template-columns: 1fr; }
   .card { padding: 18px; }
@@ -157,6 +167,13 @@ tbody tr { border-top: 1px solid var(--line-2); }
     <p id="notes" class="note" hidden></p>
   </div>
 
+  <div id="events" class="section" hidden>
+    <h3 class="eyebrow">Events that can move the market</h3>
+    <div id="event-pick" class="horizon-pick" role="group" aria-label="Event list"></div>
+    <ol id="event-list" class="timeline"></ol>
+    <p class="note">Scheduled dates come from official calendars (BLS, Federal Reserve, NYSE). Earnings dates come from Robinhood's calendar and can change. Recent shocks are context only: they do not show that these events predict price moves.</p>
+  </div>
+
   <div id="all" class="section">
     <h3 id="past-title" class="eyebrow">Past outlooks</h3>
     <div class="tablewrap">
@@ -184,7 +201,7 @@ tbody tr { border-top: 1px solid var(--line-2); }
   var NAMES = { SPY: "SPDR S&P 500 ETF", QQQ: "Invesco QQQ Trust", SMH: "VanEck Semiconductor ETF" };
   var HLABEL = { "1w": "1 week", "1m": "1 month", "3m": "3 months", "6m": "6 months", "1y": "1 year", "5y": "5 years" };
   var HORDER = ["1w", "1m", "3m", "6m", "1y", "5y"];
-  var state = { preds: [], summary: null, prices: {}, symbol: null, horizon: null };
+  var state = { preds: [], summary: null, prices: {}, events: [], symbol: null, horizon: null, evTab: "scheduled" };
 
   function $(id) { return document.getElementById(id); }
   function el(tag, text, cls) {
@@ -423,6 +440,78 @@ tbody tr { border-top: 1px solid var(--line-2); }
     $("outlook-meta").textContent = meta;
   }
 
+  var KIND = { fed: "Fed", macro: "Economic data", earnings: "Earnings", market: "Market hours", shock: "Market move", politics: "Politics" };
+  function todayIso() {
+    var d = new Date();
+    return d.getFullYear() + "-" + ("0" + (d.getMonth() + 1)).slice(-2) + "-" + ("0" + d.getDate()).slice(-2);
+  }
+  function shortDate(iso) {
+    return new Date(iso + "T12:00:00Z").toLocaleDateString("en-US", { month: "short", day: "numeric", timeZone: "UTC" });
+  }
+  function dateLabel(e) {
+    if (!e.end_date) return shortDate(e.date);
+    var a = new Date(e.date + "T12:00:00Z"), b = new Date(e.end_date + "T12:00:00Z");
+    return a.getUTCMonth() === b.getUTCMonth() ? shortDate(e.date) + "–" + b.getUTCDate() : shortDate(e.date) + " – " + shortDate(e.end_date);
+  }
+
+  function renderEvents(rows) {
+    var host = $("events"), pick = $("event-pick"), list = $("event-list");
+    var all = (state.events || []).filter(function (e) {
+      return e.type === "shock" || !e.symbols || e.symbols.indexOf(state.symbol) >= 0;
+    });
+    if (!all.length) { host.hidden = true; return; }
+    host.hidden = false;
+    var today = todayIso();
+    var upcoming = all.filter(function (e) { return e.type === "scheduled" && (e.end_date || e.date) >= today; })
+      .sort(function (a, b) { return a.date < b.date ? -1 : a.date > b.date ? 1 : 0; });
+    var recent = all.filter(function (e) { return e.type === "shock"; })
+      .sort(function (a, b) { return a.date < b.date ? 1 : a.date > b.date ? -1 : 0; });
+
+    clear(pick);
+    [["scheduled", "Coming up"], ["shock", "Recent shocks"]].forEach(function (pair) {
+      var btn = el("button", pair[1]);
+      btn.type = "button";
+      btn.setAttribute("aria-pressed", pair[0] === state.evTab ? "true" : "false");
+      btn.addEventListener("click", function () { state.evTab = pair[0]; renderEvents(rows); });
+      pick.appendChild(btn);
+    });
+
+    clear(list);
+    var items = state.evTab === "scheduled" ? upcoming : recent;
+    if (!items.length) { var li0 = el("li", state.evTab === "scheduled" ? "No scheduled events listed." : "No recent shocks listed.", "muted"); list.appendChild(li0); return; }
+    items.forEach(function (e) {
+      var li = el("li", undefined, "ev");
+      var d = el("div", undefined, "ev-date");
+      d.appendChild(el("b", dateLabel(e)));
+      if (e.time) d.appendChild(el("small", e.time));
+      li.appendChild(d);
+      var body = el("div", undefined, "ev-body");
+      body.appendChild(el("span", e.title, "ev-title"));
+      if (e.detail) body.appendChild(el("span", e.detail, "ev-detail"));
+      var tags = el("span", undefined, "tags");
+      tags.appendChild(el("span", KIND[e.kind] || e.kind, "tag"));
+      if (e.type === "scheduled") {
+        var end = e.end_date || e.date;
+        var hit = rows.filter(function (p) { return p.resolves_on >= end; })[0];
+        if (hit) tags.appendChild(el("span", "Inside the " + (HLABEL[hit.horizon] || hit.horizon) + " window", "tag win"));
+      }
+      var any = false;
+      (e.sources || []).forEach(function (src) {
+        var u = safeUrl(src.url);
+        if (!u) return;
+        any = true;
+        var a = el("a", src.label || domain(u), "tag");
+        a.href = u; a.target = "_blank"; a.rel = "noopener noreferrer";
+        tags.appendChild(a);
+      });
+      if (e.note) { any = true; tags.appendChild(el("span", e.note, "tag model")); }
+      if (!any) tags.appendChild(el("span", "unverified", "tag unv"));
+      body.appendChild(tags);
+      li.appendChild(body);
+      list.appendChild(li);
+    });
+  }
+
   function resultCell(r) {
     if (!r) return ["Open", "r-open"];
     if (r === "held") return ["Held", "r-held"];
@@ -467,6 +556,7 @@ tbody tr { border-top: 1px solid var(--line-2); }
     renderRows(rows);
     renderRecord();
     renderAnalysis(rows);
+    renderEvents(rows);
     renderPast(list);
     var up = $("updated");
     up.textContent = state.summary && state.summary.generated_at ? "Scores updated " + fmtDate(state.summary.generated_at.slice(0, 10)) : "";
@@ -481,11 +571,13 @@ tbody tr { border-top: 1px solid var(--line-2); }
   Promise.all([
     load("data/predictions.json"),
     load("data/summary.json").catch(function () { return null; }),
-    load("data/prices.json").catch(function () { return {}; })
+    load("data/prices.json").catch(function () { return {}; }),
+    load("data/events.json").catch(function () { return { events: [] }; })
   ]).then(function (r) {
     state.preds = Array.isArray(r[0]) ? r[0] : [];
     state.summary = r[1];
     state.prices = r[2] || {};
+    state.events = (r[3] && Array.isArray(r[3].events)) ? r[3].events : [];
     render();
   }).catch(function () {
     $("status").textContent = "Could not load predictions.";
