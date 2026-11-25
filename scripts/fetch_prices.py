@@ -24,7 +24,7 @@ def main():
 
     for sym in symbols:
         try:
-            hist = yf.Ticker(sym).history(period="3mo", auto_adjust=False)["Close"]
+            hist = yf.Ticker(sym).history(period="2y", auto_adjust=False)["Close"]
         except Exception as exc:  # network, rate limit, schema change
             print(f"WARNING: could not fetch {sym}: {exc}")
             continue
