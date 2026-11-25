@@ -2962,5 +2962,2645 @@
     },
     "notes": "Made intraday (about 2:00 PM CT), not at a close. The AI range was written AFTER seeing the baseline, so the comparison is not blind. IV is the average of the call and put at the strike nearest the price on the 2029-01-19 expiry; the horizon has no listed expiry of its own, so this is the nearest listed one (for 5y the longest listed). The baseline is zero-drift, a weak yardstick over long horizons.",
     "status": "open"
+  },
+  {
+    "id": "2026-11-25_XLK_1w",
+    "symbol": "XLK",
+    "made_at": "2026-11-25",
+    "horizon": "1w",
+    "resolves_on": "2026-12-04",
+    "price_at_prediction": 155.21,
+    "price_time": "2026-11-25T20:23:00Z",
+    "ai": {
+      "low": 143.0,
+      "high": 168.0,
+      "level": 0.8,
+      "prob_up": 0.52
+    },
+    "baseline": {
+      "method": "implied_vol",
+      "iv": 0.4751,
+      "iv_updated_at": "2026-11-25T20:24:00Z",
+      "low": 141.06,
+      "high": 170.78,
+      "level": 0.8
+    },
+    "catalysts": {
+      "bull": [
+        {
+          "text": "Deutsche Bank raised its view of tech stocks back to overweight, per CNBC as relayed by Weiss Ratings (early November).",
+          "source": "https://weissratings.com/en/weiss-ratings-daily/factories-beat-forecasts-why-parker-hannifin-is-a-buy"
+        },
+        {
+          "text": "The Nasdaq-100 rose 3.54% on Nov 9, its best day since May 2025, after the early-November sell-off, which shows how sharp rebounds have been.",
+          "source": "https://247wallst.com/investing/2026/11/10/the-nasdaq-100-just-had-its-best-day-since-march-without-nvidias-help/"
+        },
+        {
+          "text": "XLK's 52-week range is $126.68 to $203.25, so it trades roughly 24% below its high (range as listed in early November).",
+          "source": "https://blockchain.news/stocks/xlk"
+        }
+      ],
+      "base": [
+        {
+          "text": "Dec 1: JOLTS (October). Dec 4, 8:30 AM ET: November jobs report, so the Dec 4 close includes its reaction.",
+          "source": "https://www.bls.gov/schedule/2026/12_sched_list.htm"
+        },
+        {
+          "text": "The range is a bit narrower than the options-implied one at the edges, since implied vol usually runs above realized.",
+          "source": null,
+          "kind": "model_expectation"
+        }
+      ],
+      "bear": [
+        {
+          "text": "The PHLX Semiconductor Index lost 7.2% on Wednesday and hit a seven-month low on doubts that AI spending will pay off.",
+          "source": "https://stockanalysis.com/news/nvidia-gives-back-half-huang-rally/"
+        },
+        {
+          "text": "XLK was down 17.12% over one month as of the Nov 6 close, per Fox Business's quote page.",
+          "source": "https://www.foxbusiness.com/quote?stockTicker=XLK"
+        },
+        {
+          "text": "The ten largest holdings were 64.83% of the fund as of Oct 20, so a few chip and software names drive the result.",
+          "source": "https://www.schwab.wallst.com/Prospect/Research/etfs/portfolio.asp?symbol=xlk"
+        }
+      ]
+    },
+    "notes": "Made intraday (about 2:25 PM CT), not at a close. The AI range was written AFTER seeing the baseline, so the comparison is not blind. IV is the average of the call and put at the 155 strike (nearest the price) on the 2026-12-04 expiry. XLK implied vol is unusually high after a 17% one-month drop, so the baseline is wide.",
+    "status": "open"
+  },
+  {
+    "id": "2026-11-25_XLK_1m",
+    "symbol": "XLK",
+    "made_at": "2026-11-25",
+    "horizon": "1m",
+    "resolves_on": "2026-12-24",
+    "price_at_prediction": 155.21,
+    "price_time": "2026-11-25T20:23:00Z",
+    "ai": {
+      "low": 136.0,
+      "high": 178.0,
+      "level": 0.8,
+      "prob_up": 0.53
+    },
+    "baseline": {
+      "method": "implied_vol",
+      "iv": 0.414,
+      "iv_updated_at": "2026-11-25T20:24:00Z",
+      "low": 133.65,
+      "high": 180.25,
+      "level": 0.8
+    },
+    "catalysts": {
+      "bull": [
+        {
+          "text": "Deutsche Bank raised its view of tech stocks back to overweight, per CNBC as relayed by Weiss Ratings (early November).",
+          "source": "https://weissratings.com/en/weiss-ratings-daily/factories-beat-forecasts-why-parker-hannifin-is-a-buy"
+        },
+        {
+          "text": "The Nasdaq-100 rose 3.54% on Nov 9, its best day since May 2025, after the early-November sell-off, which shows how sharp rebounds have been.",
+          "source": "https://247wallst.com/investing/2026/11/10/the-nasdaq-100-just-had-its-best-day-since-march-without-nvidias-help/"
+        },
+        {
+          "text": "XLK's 52-week range is $126.68 to $203.25, so it trades roughly 24% below its high (range as listed in early November).",
+          "source": "https://blockchain.news/stocks/xlk"
+        }
+      ],
+      "base": [
+        {
+          "text": "The Dec 8-9 FOMC meeting (with new projections) falls inside this window, with a hike heavily priced as of mid-November.",
+          "source": "https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm"
+        },
+        {
+          "text": "Dec 4 jobs report and Dec 10 CPI also fall inside the window.",
+          "source": "https://www.bls.gov/schedule/2026/12_sched_list.htm"
+        },
+        {
+          "text": "Select Sector SPDRs pay quarterly; the September ex-date was Sep 21, so a December ex-date near Dec 21 likely lands inside this window and lowers the raw price by about the quarterly yield.",
+          "source": null,
+          "kind": "model_expectation"
+        },
+        {
+          "text": "Broadcom (Dec 9), Oracle (Dec 14) and Micron (Dec 17) report inside the window and are XLK holdings. Source: Robinhood earnings calendar.",
+          "source": null
+        },
+        {
+          "text": "The range is a bit narrower than the options-implied one at the edges, since implied vol usually runs above realized.",
+          "source": null,
+          "kind": "model_expectation"
+        }
+      ],
+      "bear": [
+        {
+          "text": "The PHLX Semiconductor Index lost 7.2% on Wednesday and hit a seven-month low on doubts that AI spending will pay off.",
+          "source": "https://stockanalysis.com/news/nvidia-gives-back-half-huang-rally/"
+        },
+        {
+          "text": "XLK was down 17.12% over one month as of the Nov 6 close, per Fox Business's quote page.",
+          "source": "https://www.foxbusiness.com/quote?stockTicker=XLK"
+        },
+        {
+          "text": "The ten largest holdings were 64.83% of the fund as of Oct 20, so a few chip and software names drive the result.",
+          "source": "https://www.schwab.wallst.com/Prospect/Research/etfs/portfolio.asp?symbol=xlk"
+        }
+      ]
+    },
+    "notes": "Made intraday (about 2:25 PM CT), not at a close. The AI range was written AFTER seeing the baseline, so the comparison is not blind. IV is the average of the call and put at the 155 strike (nearest the price) on the 2026-12-24 expiry. XLK implied vol is unusually high after a 17% one-month drop, so the baseline is wide.",
+    "status": "open"
+  },
+  {
+    "id": "2026-11-25_XLK_6m",
+    "symbol": "XLK",
+    "made_at": "2026-11-25",
+    "horizon": "6m",
+    "resolves_on": "2027-05-25",
+    "price_at_prediction": 155.21,
+    "price_time": "2026-11-25T20:23:00Z",
+    "ai": {
+      "low": 118.0,
+      "high": 205.0,
+      "level": 0.8,
+      "prob_up": 0.57
+    },
+    "baseline": {
+      "method": "implied_vol",
+      "iv": 0.3551,
+      "iv_updated_at": "2026-11-25T20:24:00Z",
+      "low": 112.65,
+      "high": 213.85,
+      "level": 0.8
+    },
+    "catalysts": {
+      "bull": [
+        {
+          "text": "Deutsche Bank raised its view of tech stocks back to overweight, per CNBC as relayed by Weiss Ratings (early November).",
+          "source": "https://weissratings.com/en/weiss-ratings-daily/factories-beat-forecasts-why-parker-hannifin-is-a-buy"
+        },
+        {
+          "text": "The Nasdaq-100 rose 3.54% on Nov 9, its best day since May 2025, after the early-November sell-off, which shows how sharp rebounds have been.",
+          "source": "https://247wallst.com/investing/2026/11/10/the-nasdaq-100-just-had-its-best-day-since-march-without-nvidias-help/"
+        },
+        {
+          "text": "XLK's 52-week range is $126.68 to $203.25, so it trades roughly 24% below its high (range as listed in early November).",
+          "source": "https://blockchain.news/stocks/xlk"
+        }
+      ],
+      "base": [
+        {
+          "text": "Beyond a few months the range is driven by the macro regime and the zero-drift options baseline, not by scheduled events.",
+          "source": null,
+          "kind": "model_expectation"
+        }
+      ],
+      "bear": [
+        {
+          "text": "The PHLX Semiconductor Index lost 7.2% on Wednesday and hit a seven-month low on doubts that AI spending will pay off.",
+          "source": "https://stockanalysis.com/news/nvidia-gives-back-half-huang-rally/"
+        },
+        {
+          "text": "XLK was down 17.12% over one month as of the Nov 6 close, per Fox Business's quote page.",
+          "source": "https://www.foxbusiness.com/quote?stockTicker=XLK"
+        },
+        {
+          "text": "The ten largest holdings were 64.83% of the fund as of Oct 20, so a few chip and software names drive the result.",
+          "source": "https://www.schwab.wallst.com/Prospect/Research/etfs/portfolio.asp?symbol=xlk"
+        }
+      ]
+    },
+    "notes": "Made intraday (about 2:25 PM CT), not at a close. The AI range was written AFTER seeing the baseline, so the comparison is not blind. IV is the average of the call and put at the 155 strike (nearest the price) on the 2027-06-17 expiry; the horizon has no listed expiry of its own, so this is the nearest listed one (for 5y the longest listed). The baseline is zero-drift, a weak yardstick over long horizons. XLK implied vol is unusually high after a 17% one-month drop, so the baseline is wide.",
+    "status": "open"
+  },
+  {
+    "id": "2026-11-25_XLK_1y",
+    "symbol": "XLK",
+    "made_at": "2026-11-25",
+    "horizon": "1y",
+    "resolves_on": "2027-11-24",
+    "price_at_prediction": 155.21,
+    "price_time": "2026-11-25T20:23:00Z",
+    "ai": {
+      "low": 108.0,
+      "high": 225.0,
+      "level": 0.8,
+      "prob_up": 0.6
+    },
+    "baseline": {
+      "method": "implied_vol",
+      "iv": 0.3325,
+      "iv_updated_at": "2026-11-25T20:24:00Z",
+      "low": 101.42,
+      "high": 237.54,
+      "level": 0.8
+    },
+    "catalysts": {
+      "bull": [
+        {
+          "text": "Deutsche Bank raised its view of tech stocks back to overweight, per CNBC as relayed by Weiss Ratings (early November).",
+          "source": "https://weissratings.com/en/weiss-ratings-daily/factories-beat-forecasts-why-parker-hannifin-is-a-buy"
+        },
+        {
+          "text": "The Nasdaq-100 rose 3.54% on Nov 9, its best day since May 2025, after the early-November sell-off, which shows how sharp rebounds have been.",
+          "source": "https://247wallst.com/investing/2026/11/10/the-nasdaq-100-just-had-its-best-day-since-march-without-nvidias-help/"
+        },
+        {
+          "text": "XLK's 52-week range is $126.68 to $203.25, so it trades roughly 24% below its high (range as listed in early November).",
+          "source": "https://blockchain.news/stocks/xlk"
+        }
+      ],
+      "base": [
+        {
+          "text": "Beyond a few months the range is driven by the macro regime and the zero-drift options baseline, not by scheduled events.",
+          "source": null,
+          "kind": "model_expectation"
+        }
+      ],
+      "bear": [
+        {
+          "text": "The PHLX Semiconductor Index lost 7.2% on Wednesday and hit a seven-month low on doubts that AI spending will pay off.",
+          "source": "https://stockanalysis.com/news/nvidia-gives-back-half-huang-rally/"
+        },
+        {
+          "text": "XLK was down 17.12% over one month as of the Nov 6 close, per Fox Business's quote page.",
+          "source": "https://www.foxbusiness.com/quote?stockTicker=XLK"
+        },
+        {
+          "text": "The ten largest holdings were 64.83% of the fund as of Oct 20, so a few chip and software names drive the result.",
+          "source": "https://www.schwab.wallst.com/Prospect/Research/etfs/portfolio.asp?symbol=xlk"
+        }
+      ]
+    },
+    "notes": "Made intraday (about 2:25 PM CT), not at a close. The AI range was written AFTER seeing the baseline, so the comparison is not blind. IV is the average of the call and put at the 155 strike (nearest the price) on the 2027-12-17 expiry; the horizon has no listed expiry of its own, so this is the nearest listed one (for 5y the longest listed). The baseline is zero-drift, a weak yardstick over long horizons. XLK implied vol is unusually high after a 17% one-month drop, so the baseline is wide.",
+    "status": "open"
+  },
+  {
+    "id": "2026-11-25_XLK_5y",
+    "symbol": "XLK",
+    "made_at": "2026-11-25",
+    "horizon": "5y",
+    "resolves_on": "2031-11-25",
+    "price_at_prediction": 155.21,
+    "price_time": "2026-11-25T20:23:00Z",
+    "ai": {
+      "low": 80.0,
+      "high": 360.0,
+      "level": 0.8,
+      "prob_up": 0.72
+    },
+    "baseline": {
+      "method": "implied_vol",
+      "iv": 0.3194,
+      "iv_updated_at": "2026-11-25T20:24:00Z",
+      "low": 62.13,
+      "high": 387.75,
+      "level": 0.8
+    },
+    "catalysts": {
+      "bull": [
+        {
+          "text": "Deutsche Bank raised its view of tech stocks back to overweight, per CNBC as relayed by Weiss Ratings (early November).",
+          "source": "https://weissratings.com/en/weiss-ratings-daily/factories-beat-forecasts-why-parker-hannifin-is-a-buy"
+        },
+        {
+          "text": "The Nasdaq-100 rose 3.54% on Nov 9, its best day since May 2025, after the early-November sell-off, which shows how sharp rebounds have been.",
+          "source": "https://247wallst.com/investing/2026/11/10/the-nasdaq-100-just-had-its-best-day-since-march-without-nvidias-help/"
+        },
+        {
+          "text": "XLK's 52-week range is $126.68 to $203.25, so it trades roughly 24% below its high (range as listed in early November).",
+          "source": "https://blockchain.news/stocks/xlk"
+        }
+      ],
+      "base": [
+        {
+          "text": "Beyond a few months the range is driven by the macro regime and the zero-drift options baseline, not by scheduled events.",
+          "source": null,
+          "kind": "model_expectation"
+        }
+      ],
+      "bear": [
+        {
+          "text": "The PHLX Semiconductor Index lost 7.2% on Wednesday and hit a seven-month low on doubts that AI spending will pay off.",
+          "source": "https://stockanalysis.com/news/nvidia-gives-back-half-huang-rally/"
+        },
+        {
+          "text": "XLK was down 17.12% over one month as of the Nov 6 close, per Fox Business's quote page.",
+          "source": "https://www.foxbusiness.com/quote?stockTicker=XLK"
+        },
+        {
+          "text": "The ten largest holdings were 64.83% of the fund as of Oct 20, so a few chip and software names drive the result.",
+          "source": "https://www.schwab.wallst.com/Prospect/Research/etfs/portfolio.asp?symbol=xlk"
+        }
+      ]
+    },
+    "notes": "Made intraday (about 2:25 PM CT), not at a close. The AI range was written AFTER seeing the baseline, so the comparison is not blind. IV is the average of the call and put at the 155 strike (nearest the price) on the 2029-01-19 expiry; the horizon has no listed expiry of its own, so this is the nearest listed one (for 5y the longest listed). The baseline is zero-drift, a weak yardstick over long horizons. XLK implied vol is unusually high after a 17% one-month drop, so the baseline is wide.",
+    "status": "open"
+  },
+  {
+    "id": "2026-11-25_XLY_1w",
+    "symbol": "XLY",
+    "made_at": "2026-11-25",
+    "horizon": "1w",
+    "resolves_on": "2026-12-04",
+    "price_at_prediction": 117.76,
+    "price_time": "2026-11-25T20:23:00Z",
+    "ai": {
+      "low": 111.5,
+      "high": 124.5,
+      "level": 0.8,
+      "prob_up": 0.51
+    },
+    "baseline": {
+      "method": "implied_vol",
+      "iv": 0.2973,
+      "iv_updated_at": "2026-11-25T20:24:00Z",
+      "low": 110.92,
+      "high": 125.02,
+      "level": 0.8
+    },
+    "catalysts": {
+      "bull": [
+        {
+          "text": "EY-Parthenon forecasts a 5.2% rise in nominal US holiday retail sales for Nov-Dec 2026, the strongest gain since 2021.",
+          "source": "https://www.ey.com/en_us/insights/strategy/macroeconomics/us-holiday-sales-2026"
+        },
+        {
+          "text": "Inflation-adjusted consumer spending grew at a 3.8% annualized rate in Q3 2026, per J.P. Morgan Wealth Management (Nov 10).",
+          "source": "https://www.chase.com/personal/investments/learning-and-insights/article/consumer-discretionary-stocks-in-2026"
+        },
+        {
+          "text": "Telsey projects holiday 2026 retail sales growth of 5.0% to 5.5%.",
+          "source": "https://www.streetinsider.com/dr/news.php?id=27237489"
+        }
+      ],
+      "base": [
+        {
+          "text": "Dec 1: JOLTS (October). Dec 4, 8:30 AM ET: November jobs report, so the Dec 4 close includes its reaction.",
+          "source": "https://www.bls.gov/schedule/2026/12_sched_list.htm"
+        },
+        {
+          "text": "The range is a bit narrower than the options-implied one at the edges, since implied vol usually runs above realized.",
+          "source": null,
+          "kind": "model_expectation"
+        }
+      ],
+      "bear": [
+        {
+          "text": "Consumer discretionary was up only about 4% in 2026 versus 10% for the S&P 500 as of Nov 10, despite strong spending, and growth has leaned toward services over big-ticket items.",
+          "source": "https://www.chase.com/personal/investments/learning-and-insights/article/consumer-discretionary-stocks-in-2026"
+        },
+        {
+          "text": "New 20% tariffs were announced and the October PCE report showed price increases picked up, which can squeeze goods spending and margins.",
+          "source": "https://finance.yahoo.com/markets/live/stock-market-today-wednesday-november-25-dow-sp-500-nasdaq-pce-inflation-data-091428237.html"
+        },
+        {
+          "text": "Futures priced a 96% chance of a 25 bp Fed hike in December as of Nov 17, which raises borrowing costs for big-ticket purchases.",
+          "source": "https://www.khaleejtimes.com/business/gold-inches-up-from-over-one-year-low-fed-outlook-caps-gains"
+        }
+      ]
+    },
+    "notes": "Made intraday (about 2:25 PM CT), not at a close. The AI range was written AFTER seeing the baseline, so the comparison is not blind. IV is the average of the call and put at the 118 strike (nearest the price) on the 2026-12-04 expiry.",
+    "status": "open"
+  },
+  {
+    "id": "2026-11-25_XLY_1m",
+    "symbol": "XLY",
+    "made_at": "2026-11-25",
+    "horizon": "1m",
+    "resolves_on": "2026-12-24",
+    "price_at_prediction": 117.76,
+    "price_time": "2026-11-25T20:23:00Z",
+    "ai": {
+      "low": 107.0,
+      "high": 129.0,
+      "level": 0.8,
+      "prob_up": 0.52
+    },
+    "baseline": {
+      "method": "implied_vol",
+      "iv": 0.2872,
+      "iv_updated_at": "2026-11-25T20:24:00Z",
+      "low": 106.15,
+      "high": 130.63,
+      "level": 0.8
+    },
+    "catalysts": {
+      "bull": [
+        {
+          "text": "EY-Parthenon forecasts a 5.2% rise in nominal US holiday retail sales for Nov-Dec 2026, the strongest gain since 2021.",
+          "source": "https://www.ey.com/en_us/insights/strategy/macroeconomics/us-holiday-sales-2026"
+        },
+        {
+          "text": "Inflation-adjusted consumer spending grew at a 3.8% annualized rate in Q3 2026, per J.P. Morgan Wealth Management (Nov 10).",
+          "source": "https://www.chase.com/personal/investments/learning-and-insights/article/consumer-discretionary-stocks-in-2026"
+        },
+        {
+          "text": "Telsey projects holiday 2026 retail sales growth of 5.0% to 5.5%.",
+          "source": "https://www.streetinsider.com/dr/news.php?id=27237489"
+        }
+      ],
+      "base": [
+        {
+          "text": "The Dec 8-9 FOMC meeting (with new projections) falls inside this window, with a hike heavily priced as of mid-November.",
+          "source": "https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm"
+        },
+        {
+          "text": "Dec 4 jobs report and Dec 10 CPI also fall inside the window.",
+          "source": "https://www.bls.gov/schedule/2026/12_sched_list.htm"
+        },
+        {
+          "text": "Select Sector SPDRs pay quarterly; the September ex-date was Sep 21, so a December ex-date near Dec 21 likely lands inside this window and lowers the raw price by about the quarterly yield.",
+          "source": null,
+          "kind": "model_expectation"
+        },
+        {
+          "text": "The range is a bit narrower than the options-implied one at the edges, since implied vol usually runs above realized.",
+          "source": null,
+          "kind": "model_expectation"
+        }
+      ],
+      "bear": [
+        {
+          "text": "Consumer discretionary was up only about 4% in 2026 versus 10% for the S&P 500 as of Nov 10, despite strong spending, and growth has leaned toward services over big-ticket items.",
+          "source": "https://www.chase.com/personal/investments/learning-and-insights/article/consumer-discretionary-stocks-in-2026"
+        },
+        {
+          "text": "New 20% tariffs were announced and the October PCE report showed price increases picked up, which can squeeze goods spending and margins.",
+          "source": "https://finance.yahoo.com/markets/live/stock-market-today-wednesday-november-25-dow-sp-500-nasdaq-pce-inflation-data-091428237.html"
+        },
+        {
+          "text": "Futures priced a 96% chance of a 25 bp Fed hike in December as of Nov 17, which raises borrowing costs for big-ticket purchases.",
+          "source": "https://www.khaleejtimes.com/business/gold-inches-up-from-over-one-year-low-fed-outlook-caps-gains"
+        }
+      ]
+    },
+    "notes": "Made intraday (about 2:25 PM CT), not at a close. The AI range was written AFTER seeing the baseline, so the comparison is not blind. IV is the average of the call and put at the 118 strike (nearest the price) on the 2026-12-24 expiry.",
+    "status": "open"
+  },
+  {
+    "id": "2026-11-25_XLY_6m",
+    "symbol": "XLY",
+    "made_at": "2026-11-25",
+    "horizon": "6m",
+    "resolves_on": "2027-05-25",
+    "price_at_prediction": 117.76,
+    "price_time": "2026-11-25T20:23:00Z",
+    "ai": {
+      "low": 96.0,
+      "high": 145.0,
+      "level": 0.8,
+      "prob_up": 0.55
+    },
+    "baseline": {
+      "method": "implied_vol",
+      "iv": 0.2553,
+      "iv_updated_at": "2026-11-25T20:24:00Z",
+      "low": 93.53,
+      "high": 148.27,
+      "level": 0.8
+    },
+    "catalysts": {
+      "bull": [
+        {
+          "text": "EY-Parthenon forecasts a 5.2% rise in nominal US holiday retail sales for Nov-Dec 2026, the strongest gain since 2021.",
+          "source": "https://www.ey.com/en_us/insights/strategy/macroeconomics/us-holiday-sales-2026"
+        },
+        {
+          "text": "Inflation-adjusted consumer spending grew at a 3.8% annualized rate in Q3 2026, per J.P. Morgan Wealth Management (Nov 10).",
+          "source": "https://www.chase.com/personal/investments/learning-and-insights/article/consumer-discretionary-stocks-in-2026"
+        },
+        {
+          "text": "Telsey projects holiday 2026 retail sales growth of 5.0% to 5.5%.",
+          "source": "https://www.streetinsider.com/dr/news.php?id=27237489"
+        }
+      ],
+      "base": [
+        {
+          "text": "Beyond a few months the range is driven by the macro regime and the zero-drift options baseline, not by scheduled events.",
+          "source": null,
+          "kind": "model_expectation"
+        }
+      ],
+      "bear": [
+        {
+          "text": "Consumer discretionary was up only about 4% in 2026 versus 10% for the S&P 500 as of Nov 10, despite strong spending, and growth has leaned toward services over big-ticket items.",
+          "source": "https://www.chase.com/personal/investments/learning-and-insights/article/consumer-discretionary-stocks-in-2026"
+        },
+        {
+          "text": "New 20% tariffs were announced and the October PCE report showed price increases picked up, which can squeeze goods spending and margins.",
+          "source": "https://finance.yahoo.com/markets/live/stock-market-today-wednesday-november-25-dow-sp-500-nasdaq-pce-inflation-data-091428237.html"
+        },
+        {
+          "text": "Futures priced a 96% chance of a 25 bp Fed hike in December as of Nov 17, which raises borrowing costs for big-ticket purchases.",
+          "source": "https://www.khaleejtimes.com/business/gold-inches-up-from-over-one-year-low-fed-outlook-caps-gains"
+        }
+      ]
+    },
+    "notes": "Made intraday (about 2:25 PM CT), not at a close. The AI range was written AFTER seeing the baseline, so the comparison is not blind. IV is the average of the call and put at the 118 strike (nearest the price) on the 2027-06-17 expiry; the horizon has no listed expiry of its own, so this is the nearest listed one (for 5y the longest listed). The baseline is zero-drift, a weak yardstick over long horizons.",
+    "status": "open"
+  },
+  {
+    "id": "2026-11-25_XLY_1y",
+    "symbol": "XLY",
+    "made_at": "2026-11-25",
+    "horizon": "1y",
+    "resolves_on": "2027-11-24",
+    "price_at_prediction": 117.76,
+    "price_time": "2026-11-25T20:23:00Z",
+    "ai": {
+      "low": 88.0,
+      "high": 156.0,
+      "level": 0.8,
+      "prob_up": 0.57
+    },
+    "baseline": {
+      "method": "implied_vol",
+      "iv": 0.245,
+      "iv_updated_at": "2026-11-25T20:24:00Z",
+      "low": 86.06,
+      "high": 161.13,
+      "level": 0.8
+    },
+    "catalysts": {
+      "bull": [
+        {
+          "text": "EY-Parthenon forecasts a 5.2% rise in nominal US holiday retail sales for Nov-Dec 2026, the strongest gain since 2021.",
+          "source": "https://www.ey.com/en_us/insights/strategy/macroeconomics/us-holiday-sales-2026"
+        },
+        {
+          "text": "Inflation-adjusted consumer spending grew at a 3.8% annualized rate in Q3 2026, per J.P. Morgan Wealth Management (Nov 10).",
+          "source": "https://www.chase.com/personal/investments/learning-and-insights/article/consumer-discretionary-stocks-in-2026"
+        },
+        {
+          "text": "Telsey projects holiday 2026 retail sales growth of 5.0% to 5.5%.",
+          "source": "https://www.streetinsider.com/dr/news.php?id=27237489"
+        }
+      ],
+      "base": [
+        {
+          "text": "Beyond a few months the range is driven by the macro regime and the zero-drift options baseline, not by scheduled events.",
+          "source": null,
+          "kind": "model_expectation"
+        }
+      ],
+      "bear": [
+        {
+          "text": "Consumer discretionary was up only about 4% in 2026 versus 10% for the S&P 500 as of Nov 10, despite strong spending, and growth has leaned toward services over big-ticket items.",
+          "source": "https://www.chase.com/personal/investments/learning-and-insights/article/consumer-discretionary-stocks-in-2026"
+        },
+        {
+          "text": "New 20% tariffs were announced and the October PCE report showed price increases picked up, which can squeeze goods spending and margins.",
+          "source": "https://finance.yahoo.com/markets/live/stock-market-today-wednesday-november-25-dow-sp-500-nasdaq-pce-inflation-data-091428237.html"
+        },
+        {
+          "text": "Futures priced a 96% chance of a 25 bp Fed hike in December as of Nov 17, which raises borrowing costs for big-ticket purchases.",
+          "source": "https://www.khaleejtimes.com/business/gold-inches-up-from-over-one-year-low-fed-outlook-caps-gains"
+        }
+      ]
+    },
+    "notes": "Made intraday (about 2:25 PM CT), not at a close. The AI range was written AFTER seeing the baseline, so the comparison is not blind. IV is the average of the call and put at the 118 strike (nearest the price) on the 2028-01-21 expiry; the horizon has no listed expiry of its own, so this is the nearest listed one (for 5y the longest listed). The baseline is zero-drift, a weak yardstick over long horizons. The 118 strike was not listed on this expiry, so the 120 strike was used.",
+    "status": "open"
+  },
+  {
+    "id": "2026-11-25_XLY_5y",
+    "symbol": "XLY",
+    "made_at": "2026-11-25",
+    "horizon": "5y",
+    "resolves_on": "2031-11-25",
+    "price_at_prediction": 117.76,
+    "price_time": "2026-11-25T20:23:00Z",
+    "ai": {
+      "low": 65.0,
+      "high": 230.0,
+      "level": 0.8,
+      "prob_up": 0.68
+    },
+    "baseline": {
+      "method": "implied_vol",
+      "iv": 0.2447,
+      "iv_updated_at": "2026-11-25T20:24:00Z",
+      "low": 58.39,
+      "high": 237.48,
+      "level": 0.8
+    },
+    "catalysts": {
+      "bull": [
+        {
+          "text": "EY-Parthenon forecasts a 5.2% rise in nominal US holiday retail sales for Nov-Dec 2026, the strongest gain since 2021.",
+          "source": "https://www.ey.com/en_us/insights/strategy/macroeconomics/us-holiday-sales-2026"
+        },
+        {
+          "text": "Inflation-adjusted consumer spending grew at a 3.8% annualized rate in Q3 2026, per J.P. Morgan Wealth Management (Nov 10).",
+          "source": "https://www.chase.com/personal/investments/learning-and-insights/article/consumer-discretionary-stocks-in-2026"
+        },
+        {
+          "text": "Telsey projects holiday 2026 retail sales growth of 5.0% to 5.5%.",
+          "source": "https://www.streetinsider.com/dr/news.php?id=27237489"
+        }
+      ],
+      "base": [
+        {
+          "text": "Beyond a few months the range is driven by the macro regime and the zero-drift options baseline, not by scheduled events.",
+          "source": null,
+          "kind": "model_expectation"
+        }
+      ],
+      "bear": [
+        {
+          "text": "Consumer discretionary was up only about 4% in 2026 versus 10% for the S&P 500 as of Nov 10, despite strong spending, and growth has leaned toward services over big-ticket items.",
+          "source": "https://www.chase.com/personal/investments/learning-and-insights/article/consumer-discretionary-stocks-in-2026"
+        },
+        {
+          "text": "New 20% tariffs were announced and the October PCE report showed price increases picked up, which can squeeze goods spending and margins.",
+          "source": "https://finance.yahoo.com/markets/live/stock-market-today-wednesday-november-25-dow-sp-500-nasdaq-pce-inflation-data-091428237.html"
+        },
+        {
+          "text": "Futures priced a 96% chance of a 25 bp Fed hike in December as of Nov 17, which raises borrowing costs for big-ticket purchases.",
+          "source": "https://www.khaleejtimes.com/business/gold-inches-up-from-over-one-year-low-fed-outlook-caps-gains"
+        }
+      ]
+    },
+    "notes": "Made intraday (about 2:25 PM CT), not at a close. The AI range was written AFTER seeing the baseline, so the comparison is not blind. IV is the average of the call and put at the 118 strike (nearest the price) on the 2029-01-19 expiry; the horizon has no listed expiry of its own, so this is the nearest listed one (for 5y the longest listed). The baseline is zero-drift, a weak yardstick over long horizons.",
+    "status": "open"
+  },
+  {
+    "id": "2026-11-25_XLP_1w",
+    "symbol": "XLP",
+    "made_at": "2026-11-25",
+    "horizon": "1w",
+    "resolves_on": "2026-12-04",
+    "price_at_prediction": 92.36,
+    "price_time": "2026-11-25T20:23:00Z",
+    "ai": {
+      "low": 88.9,
+      "high": 95.9,
+      "level": 0.8,
+      "prob_up": 0.49
+    },
+    "baseline": {
+      "method": "implied_vol",
+      "iv": 0.2101,
+      "iv_updated_at": "2026-11-25T20:24:00Z",
+      "low": 88.54,
+      "high": 96.35,
+      "level": 0.8
+    },
+    "catalysts": {
+      "bull": [
+        {
+          "text": "XLP closed at an all-time high on Nov 16, up over 19% year to date and 5.87% in a month while the S&P 500 fell 2.6%.",
+          "source": "https://pro.thestreet.com/trade-ideas/lock-in-the-consumer-staples-sector-with-this-etf"
+        },
+        {
+          "text": "Staples beat tech by 21% in October, the biggest sector rotation since February 2001, and XLP had its best month ever.",
+          "source": "https://www.benzinga.com/quote/XLP?nid=50770898"
+        },
+        {
+          "text": "If the AI-led sell-off deepens, defensive staples can keep attracting money, but a sharp tech rebound could reverse the rotation just as fast.",
+          "source": null,
+          "kind": "model_expectation"
+        }
+      ],
+      "base": [
+        {
+          "text": "Dec 1: JOLTS (October). Dec 4, 8:30 AM ET: November jobs report, so the Dec 4 close includes its reaction.",
+          "source": "https://www.bls.gov/schedule/2026/12_sched_list.htm"
+        },
+        {
+          "text": "The range is a bit narrower than the options-implied one at the edges, since implied vol usually runs above realized.",
+          "source": null,
+          "kind": "model_expectation"
+        }
+      ],
+      "bear": [
+        {
+          "text": "XLP trades at about 26.5x trailing earnings and 21.9x forward earnings against estimated 3-5 year EPS growth of 8.4% (SSGA, Nov 4).",
+          "source": "https://www.ssga.com/mainfund/XLP"
+        },
+        {
+          "text": "A Yahoo Finance headline argues the staples rally is masking deeply flawed fundamentals at Hershey, one of the sector's names.",
+          "source": "https://sg.finance.yahoo.com/quote/XLP/analysis/"
+        },
+        {
+          "text": "After a record month of outperformance, positioning is crowded; QQQ's 3.54% jump on Nov 9 showed how fast rotations can reverse.",
+          "source": null,
+          "kind": "model_expectation"
+        }
+      ]
+    },
+    "notes": "Made intraday (about 2:25 PM CT), not at a close. The AI range was written AFTER seeing the baseline, so the comparison is not blind. IV is the average of the call and put at the 92 strike (nearest the price) on the 2026-12-04 expiry.",
+    "status": "open"
+  },
+  {
+    "id": "2026-11-25_XLP_1m",
+    "symbol": "XLP",
+    "made_at": "2026-11-25",
+    "horizon": "1m",
+    "resolves_on": "2026-12-24",
+    "price_at_prediction": 92.36,
+    "price_time": "2026-11-25T20:23:00Z",
+    "ai": {
+      "low": 86.0,
+      "high": 99.0,
+      "level": 0.8,
+      "prob_up": 0.5
+    },
+    "baseline": {
+      "method": "implied_vol",
+      "iv": 0.2154,
+      "iv_updated_at": "2026-11-25T20:24:00Z",
+      "low": 85.45,
+      "high": 99.83,
+      "level": 0.8
+    },
+    "catalysts": {
+      "bull": [
+        {
+          "text": "XLP closed at an all-time high on Nov 16, up over 19% year to date and 5.87% in a month while the S&P 500 fell 2.6%.",
+          "source": "https://pro.thestreet.com/trade-ideas/lock-in-the-consumer-staples-sector-with-this-etf"
+        },
+        {
+          "text": "Staples beat tech by 21% in October, the biggest sector rotation since February 2001, and XLP had its best month ever.",
+          "source": "https://www.benzinga.com/quote/XLP?nid=50770898"
+        },
+        {
+          "text": "If the AI-led sell-off deepens, defensive staples can keep attracting money, but a sharp tech rebound could reverse the rotation just as fast.",
+          "source": null,
+          "kind": "model_expectation"
+        }
+      ],
+      "base": [
+        {
+          "text": "The Dec 8-9 FOMC meeting (with new projections) falls inside this window, with a hike heavily priced as of mid-November.",
+          "source": "https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm"
+        },
+        {
+          "text": "Dec 4 jobs report and Dec 10 CPI also fall inside the window.",
+          "source": "https://www.bls.gov/schedule/2026/12_sched_list.htm"
+        },
+        {
+          "text": "Select Sector SPDRs pay quarterly; the September ex-date was Sep 21, so a December ex-date near Dec 21 likely lands inside this window and lowers the raw price by about the quarterly yield.",
+          "source": null,
+          "kind": "model_expectation"
+        },
+        {
+          "text": "The range is a bit narrower than the options-implied one at the edges, since implied vol usually runs above realized.",
+          "source": null,
+          "kind": "model_expectation"
+        }
+      ],
+      "bear": [
+        {
+          "text": "XLP trades at about 26.5x trailing earnings and 21.9x forward earnings against estimated 3-5 year EPS growth of 8.4% (SSGA, Nov 4).",
+          "source": "https://www.ssga.com/mainfund/XLP"
+        },
+        {
+          "text": "A Yahoo Finance headline argues the staples rally is masking deeply flawed fundamentals at Hershey, one of the sector's names.",
+          "source": "https://sg.finance.yahoo.com/quote/XLP/analysis/"
+        },
+        {
+          "text": "After a record month of outperformance, positioning is crowded; QQQ's 3.54% jump on Nov 9 showed how fast rotations can reverse.",
+          "source": null,
+          "kind": "model_expectation"
+        }
+      ]
+    },
+    "notes": "Made intraday (about 2:25 PM CT), not at a close. The AI range was written AFTER seeing the baseline, so the comparison is not blind. IV is the average of the call and put at the 92 strike (nearest the price) on the 2026-12-24 expiry.",
+    "status": "open"
+  },
+  {
+    "id": "2026-11-25_XLP_6m",
+    "symbol": "XLP",
+    "made_at": "2026-11-25",
+    "horizon": "6m",
+    "resolves_on": "2027-05-25",
+    "price_at_prediction": 92.36,
+    "price_time": "2026-11-25T20:23:00Z",
+    "ai": {
+      "low": 79.0,
+      "high": 108.0,
+      "level": 0.8,
+      "prob_up": 0.54
+    },
+    "baseline": {
+      "method": "implied_vol",
+      "iv": 0.1914,
+      "iv_updated_at": "2026-11-25T20:24:00Z",
+      "low": 77.71,
+      "high": 109.77,
+      "level": 0.8
+    },
+    "catalysts": {
+      "bull": [
+        {
+          "text": "XLP closed at an all-time high on Nov 16, up over 19% year to date and 5.87% in a month while the S&P 500 fell 2.6%.",
+          "source": "https://pro.thestreet.com/trade-ideas/lock-in-the-consumer-staples-sector-with-this-etf"
+        },
+        {
+          "text": "Staples beat tech by 21% in October, the biggest sector rotation since February 2001, and XLP had its best month ever.",
+          "source": "https://www.benzinga.com/quote/XLP?nid=50770898"
+        },
+        {
+          "text": "If the AI-led sell-off deepens, defensive staples can keep attracting money, but a sharp tech rebound could reverse the rotation just as fast.",
+          "source": null,
+          "kind": "model_expectation"
+        }
+      ],
+      "base": [
+        {
+          "text": "Beyond a few months the range is driven by the macro regime and the zero-drift options baseline, not by scheduled events.",
+          "source": null,
+          "kind": "model_expectation"
+        }
+      ],
+      "bear": [
+        {
+          "text": "XLP trades at about 26.5x trailing earnings and 21.9x forward earnings against estimated 3-5 year EPS growth of 8.4% (SSGA, Nov 4).",
+          "source": "https://www.ssga.com/mainfund/XLP"
+        },
+        {
+          "text": "A Yahoo Finance headline argues the staples rally is masking deeply flawed fundamentals at Hershey, one of the sector's names.",
+          "source": "https://sg.finance.yahoo.com/quote/XLP/analysis/"
+        },
+        {
+          "text": "After a record month of outperformance, positioning is crowded; QQQ's 3.54% jump on Nov 9 showed how fast rotations can reverse.",
+          "source": null,
+          "kind": "model_expectation"
+        }
+      ]
+    },
+    "notes": "Made intraday (about 2:25 PM CT), not at a close. The AI range was written AFTER seeing the baseline, so the comparison is not blind. IV is the average of the call and put at the 92 strike (nearest the price) on the 2027-06-17 expiry; the horizon has no listed expiry of its own, so this is the nearest listed one (for 5y the longest listed). The baseline is zero-drift, a weak yardstick over long horizons.",
+    "status": "open"
+  },
+  {
+    "id": "2026-11-25_XLP_1y",
+    "symbol": "XLP",
+    "made_at": "2026-11-25",
+    "horizon": "1y",
+    "resolves_on": "2027-11-24",
+    "price_at_prediction": 92.36,
+    "price_time": "2026-11-25T20:23:00Z",
+    "ai": {
+      "low": 76.0,
+      "high": 112.0,
+      "level": 0.8,
+      "prob_up": 0.56
+    },
+    "baseline": {
+      "method": "implied_vol",
+      "iv": 0.1649,
+      "iv_updated_at": "2026-11-25T20:24:00Z",
+      "low": 74.79,
+      "high": 114.06,
+      "level": 0.8
+    },
+    "catalysts": {
+      "bull": [
+        {
+          "text": "XLP closed at an all-time high on Nov 16, up over 19% year to date and 5.87% in a month while the S&P 500 fell 2.6%.",
+          "source": "https://pro.thestreet.com/trade-ideas/lock-in-the-consumer-staples-sector-with-this-etf"
+        },
+        {
+          "text": "Staples beat tech by 21% in October, the biggest sector rotation since February 2001, and XLP had its best month ever.",
+          "source": "https://www.benzinga.com/quote/XLP?nid=50770898"
+        },
+        {
+          "text": "If the AI-led sell-off deepens, defensive staples can keep attracting money, but a sharp tech rebound could reverse the rotation just as fast.",
+          "source": null,
+          "kind": "model_expectation"
+        }
+      ],
+      "base": [
+        {
+          "text": "Beyond a few months the range is driven by the macro regime and the zero-drift options baseline, not by scheduled events.",
+          "source": null,
+          "kind": "model_expectation"
+        }
+      ],
+      "bear": [
+        {
+          "text": "XLP trades at about 26.5x trailing earnings and 21.9x forward earnings against estimated 3-5 year EPS growth of 8.4% (SSGA, Nov 4).",
+          "source": "https://www.ssga.com/mainfund/XLP"
+        },
+        {
+          "text": "A Yahoo Finance headline argues the staples rally is masking deeply flawed fundamentals at Hershey, one of the sector's names.",
+          "source": "https://sg.finance.yahoo.com/quote/XLP/analysis/"
+        },
+        {
+          "text": "After a record month of outperformance, positioning is crowded; QQQ's 3.54% jump on Nov 9 showed how fast rotations can reverse.",
+          "source": null,
+          "kind": "model_expectation"
+        }
+      ]
+    },
+    "notes": "Made intraday (about 2:25 PM CT), not at a close. The AI range was written AFTER seeing the baseline, so the comparison is not blind. IV is the average of the call and put at the 92 strike (nearest the price) on the 2028-01-21 expiry; the horizon has no listed expiry of its own, so this is the nearest listed one (for 5y the longest listed). The baseline is zero-drift, a weak yardstick over long horizons.",
+    "status": "open"
+  },
+  {
+    "id": "2026-11-25_XLP_5y",
+    "symbol": "XLP",
+    "made_at": "2026-11-25",
+    "horizon": "5y",
+    "resolves_on": "2031-11-25",
+    "price_at_prediction": 92.36,
+    "price_time": "2026-11-25T20:23:00Z",
+    "ai": {
+      "low": 62.0,
+      "high": 140.0,
+      "level": 0.8,
+      "prob_up": 0.66
+    },
+    "baseline": {
+      "method": "implied_vol",
+      "iv": 0.1575,
+      "iv_updated_at": "2026-11-25T20:24:00Z",
+      "low": 58.8,
+      "high": 145.06,
+      "level": 0.8
+    },
+    "catalysts": {
+      "bull": [
+        {
+          "text": "XLP closed at an all-time high on Nov 16, up over 19% year to date and 5.87% in a month while the S&P 500 fell 2.6%.",
+          "source": "https://pro.thestreet.com/trade-ideas/lock-in-the-consumer-staples-sector-with-this-etf"
+        },
+        {
+          "text": "Staples beat tech by 21% in October, the biggest sector rotation since February 2001, and XLP had its best month ever.",
+          "source": "https://www.benzinga.com/quote/XLP?nid=50770898"
+        },
+        {
+          "text": "If the AI-led sell-off deepens, defensive staples can keep attracting money, but a sharp tech rebound could reverse the rotation just as fast.",
+          "source": null,
+          "kind": "model_expectation"
+        }
+      ],
+      "base": [
+        {
+          "text": "Beyond a few months the range is driven by the macro regime and the zero-drift options baseline, not by scheduled events.",
+          "source": null,
+          "kind": "model_expectation"
+        }
+      ],
+      "bear": [
+        {
+          "text": "XLP trades at about 26.5x trailing earnings and 21.9x forward earnings against estimated 3-5 year EPS growth of 8.4% (SSGA, Nov 4).",
+          "source": "https://www.ssga.com/mainfund/XLP"
+        },
+        {
+          "text": "A Yahoo Finance headline argues the staples rally is masking deeply flawed fundamentals at Hershey, one of the sector's names.",
+          "source": "https://sg.finance.yahoo.com/quote/XLP/analysis/"
+        },
+        {
+          "text": "After a record month of outperformance, positioning is crowded; QQQ's 3.54% jump on Nov 9 showed how fast rotations can reverse.",
+          "source": null,
+          "kind": "model_expectation"
+        }
+      ]
+    },
+    "notes": "Made intraday (about 2:25 PM CT), not at a close. The AI range was written AFTER seeing the baseline, so the comparison is not blind. IV is the average of the call and put at the 92 strike (nearest the price) on the 2029-01-19 expiry; the horizon has no listed expiry of its own, so this is the nearest listed one (for 5y the longest listed). The baseline is zero-drift, a weak yardstick over long horizons.",
+    "status": "open"
+  },
+  {
+    "id": "2026-11-25_XLI_1w",
+    "symbol": "XLI",
+    "made_at": "2026-11-25",
+    "horizon": "1w",
+    "resolves_on": "2026-12-04",
+    "price_at_prediction": 162.94,
+    "price_time": "2026-11-25T20:23:00Z",
+    "ai": {
+      "low": 154.8,
+      "high": 171.5,
+      "level": 0.8,
+      "prob_up": 0.51
+    },
+    "baseline": {
+      "method": "implied_vol",
+      "iv": 0.2703,
+      "iv_updated_at": "2026-11-25T20:24:00Z",
+      "low": 154.31,
+      "high": 172.04,
+      "level": 0.8
+    },
+    "catalysts": {
+      "bull": [
+        {
+          "text": "Industrials have a 20-year average November return of 3.48%, the best of any sector (Kiplinger, via the XLI proxy).",
+          "source": "https://www.kiplinger.com/investing/stocks/2-sectors-4-stocks-to-buy-november-2026"
+        },
+        {
+          "text": "Companies that build data-center power systems, cooling and wiring sit in industrials, and manufacturers beat forecasts, per Weiss Ratings (Nov 2026).",
+          "source": "https://weissratings.com/en/weiss-ratings-daily/factories-beat-forecasts-why-parker-hannifin-is-a-buy"
+        },
+        {
+          "text": "Zacks cited infrastructure spending, defense demand and AI-related investment behind XLI's gains this year (13.2% through June 11).",
+          "source": "https://www.zacks.com/stock/news/2936348/4-industrial-stocks-riding-wall-streets-manufacturing-revival"
+        }
+      ],
+      "base": [
+        {
+          "text": "Dec 1: JOLTS (October). Dec 4, 8:30 AM ET: November jobs report, so the Dec 4 close includes its reaction.",
+          "source": "https://www.bls.gov/schedule/2026/12_sched_list.htm"
+        },
+        {
+          "text": "The range is a bit narrower than the options-implied one at the edges, since implied vol usually runs above realized.",
+          "source": null,
+          "kind": "model_expectation"
+        }
+      ],
+      "bear": [
+        {
+          "text": "Industrials gained 16% in 2026 through August and became the most expensively valued S&P sector, despite higher oil and bond yields.",
+          "source": "https://www.advisorperspectives.com/articles/2026/08/21/ai-bets-send-industrials-soaring-slowdow-coming?topic=etf"
+        },
+        {
+          "text": "Weiss says costs remain the sore spot for industrials (Nov 2026).",
+          "source": "https://weissratings.com/en/weiss-ratings-daily/factories-beat-forecasts-why-parker-hannifin-is-a-buy"
+        },
+        {
+          "text": "New 20% tariffs were announced on Nov 25, adding input-cost and trade uncertainty for manufacturers.",
+          "source": "https://finance.yahoo.com/markets/live/stock-market-today-wednesday-november-25-dow-sp-500-nasdaq-pce-inflation-data-091428237.html"
+        }
+      ]
+    },
+    "notes": "Made intraday (about 2:25 PM CT), not at a close. The AI range was written AFTER seeing the baseline, so the comparison is not blind. IV is the average of the call and put at the 163 strike (nearest the price) on the 2026-12-04 expiry.",
+    "status": "open"
+  },
+  {
+    "id": "2026-11-25_XLI_1m",
+    "symbol": "XLI",
+    "made_at": "2026-11-25",
+    "horizon": "1m",
+    "resolves_on": "2026-12-24",
+    "price_at_prediction": 162.94,
+    "price_time": "2026-11-25T20:23:00Z",
+    "ai": {
+      "low": 148.0,
+      "high": 179.0,
+      "level": 0.8,
+      "prob_up": 0.52
+    },
+    "baseline": {
+      "method": "implied_vol",
+      "iv": 0.2803,
+      "iv_updated_at": "2026-11-25T20:24:00Z",
+      "low": 147.24,
+      "high": 180.3,
+      "level": 0.8
+    },
+    "catalysts": {
+      "bull": [
+        {
+          "text": "Industrials have a 20-year average November return of 3.48%, the best of any sector (Kiplinger, via the XLI proxy).",
+          "source": "https://www.kiplinger.com/investing/stocks/2-sectors-4-stocks-to-buy-november-2026"
+        },
+        {
+          "text": "Companies that build data-center power systems, cooling and wiring sit in industrials, and manufacturers beat forecasts, per Weiss Ratings (Nov 2026).",
+          "source": "https://weissratings.com/en/weiss-ratings-daily/factories-beat-forecasts-why-parker-hannifin-is-a-buy"
+        },
+        {
+          "text": "Zacks cited infrastructure spending, defense demand and AI-related investment behind XLI's gains this year (13.2% through June 11).",
+          "source": "https://www.zacks.com/stock/news/2936348/4-industrial-stocks-riding-wall-streets-manufacturing-revival"
+        }
+      ],
+      "base": [
+        {
+          "text": "The Dec 8-9 FOMC meeting (with new projections) falls inside this window, with a hike heavily priced as of mid-November.",
+          "source": "https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm"
+        },
+        {
+          "text": "Dec 4 jobs report and Dec 10 CPI also fall inside the window.",
+          "source": "https://www.bls.gov/schedule/2026/12_sched_list.htm"
+        },
+        {
+          "text": "Select Sector SPDRs pay quarterly; the September ex-date was Sep 21, so a December ex-date near Dec 21 likely lands inside this window and lowers the raw price by about the quarterly yield.",
+          "source": null,
+          "kind": "model_expectation"
+        },
+        {
+          "text": "The range is a bit narrower than the options-implied one at the edges, since implied vol usually runs above realized.",
+          "source": null,
+          "kind": "model_expectation"
+        }
+      ],
+      "bear": [
+        {
+          "text": "Industrials gained 16% in 2026 through August and became the most expensively valued S&P sector, despite higher oil and bond yields.",
+          "source": "https://www.advisorperspectives.com/articles/2026/08/21/ai-bets-send-industrials-soaring-slowdow-coming?topic=etf"
+        },
+        {
+          "text": "Weiss says costs remain the sore spot for industrials (Nov 2026).",
+          "source": "https://weissratings.com/en/weiss-ratings-daily/factories-beat-forecasts-why-parker-hannifin-is-a-buy"
+        },
+        {
+          "text": "New 20% tariffs were announced on Nov 25, adding input-cost and trade uncertainty for manufacturers.",
+          "source": "https://finance.yahoo.com/markets/live/stock-market-today-wednesday-november-25-dow-sp-500-nasdaq-pce-inflation-data-091428237.html"
+        }
+      ]
+    },
+    "notes": "Made intraday (about 2:25 PM CT), not at a close. The AI range was written AFTER seeing the baseline, so the comparison is not blind. IV is the average of the call and put at the 163 strike (nearest the price) on the 2026-12-24 expiry.",
+    "status": "open"
+  },
+  {
+    "id": "2026-11-25_XLI_6m",
+    "symbol": "XLI",
+    "made_at": "2026-11-25",
+    "horizon": "6m",
+    "resolves_on": "2027-05-25",
+    "price_at_prediction": 162.94,
+    "price_time": "2026-11-25T20:23:00Z",
+    "ai": {
+      "low": 133.0,
+      "high": 199.0,
+      "level": 0.8,
+      "prob_up": 0.56
+    },
+    "baseline": {
+      "method": "implied_vol",
+      "iv": 0.238,
+      "iv_updated_at": "2026-11-25T20:24:00Z",
+      "low": 131.44,
+      "high": 201.98,
+      "level": 0.8
+    },
+    "catalysts": {
+      "bull": [
+        {
+          "text": "Industrials have a 20-year average November return of 3.48%, the best of any sector (Kiplinger, via the XLI proxy).",
+          "source": "https://www.kiplinger.com/investing/stocks/2-sectors-4-stocks-to-buy-november-2026"
+        },
+        {
+          "text": "Companies that build data-center power systems, cooling and wiring sit in industrials, and manufacturers beat forecasts, per Weiss Ratings (Nov 2026).",
+          "source": "https://weissratings.com/en/weiss-ratings-daily/factories-beat-forecasts-why-parker-hannifin-is-a-buy"
+        },
+        {
+          "text": "Zacks cited infrastructure spending, defense demand and AI-related investment behind XLI's gains this year (13.2% through June 11).",
+          "source": "https://www.zacks.com/stock/news/2936348/4-industrial-stocks-riding-wall-streets-manufacturing-revival"
+        }
+      ],
+      "base": [
+        {
+          "text": "Beyond a few months the range is driven by the macro regime and the zero-drift options baseline, not by scheduled events.",
+          "source": null,
+          "kind": "model_expectation"
+        }
+      ],
+      "bear": [
+        {
+          "text": "Industrials gained 16% in 2026 through August and became the most expensively valued S&P sector, despite higher oil and bond yields.",
+          "source": "https://www.advisorperspectives.com/articles/2026/08/21/ai-bets-send-industrials-soaring-slowdow-coming?topic=etf"
+        },
+        {
+          "text": "Weiss says costs remain the sore spot for industrials (Nov 2026).",
+          "source": "https://weissratings.com/en/weiss-ratings-daily/factories-beat-forecasts-why-parker-hannifin-is-a-buy"
+        },
+        {
+          "text": "New 20% tariffs were announced on Nov 25, adding input-cost and trade uncertainty for manufacturers.",
+          "source": "https://finance.yahoo.com/markets/live/stock-market-today-wednesday-november-25-dow-sp-500-nasdaq-pce-inflation-data-091428237.html"
+        }
+      ]
+    },
+    "notes": "Made intraday (about 2:25 PM CT), not at a close. The AI range was written AFTER seeing the baseline, so the comparison is not blind. IV is the average of the call and put at the 163 strike (nearest the price) on the 2027-06-17 expiry; the horizon has no listed expiry of its own, so this is the nearest listed one (for 5y the longest listed). The baseline is zero-drift, a weak yardstick over long horizons.",
+    "status": "open"
+  },
+  {
+    "id": "2026-11-25_XLI_1y",
+    "symbol": "XLI",
+    "made_at": "2026-11-25",
+    "horizon": "1y",
+    "resolves_on": "2027-11-24",
+    "price_at_prediction": 162.94,
+    "price_time": "2026-11-25T20:23:00Z",
+    "ai": {
+      "low": 124.0,
+      "high": 215.0,
+      "level": 0.8,
+      "prob_up": 0.58
+    },
+    "baseline": {
+      "method": "implied_vol",
+      "iv": 0.2308,
+      "iv_updated_at": "2026-11-25T20:24:00Z",
+      "low": 121.26,
+      "high": 218.93,
+      "level": 0.8
+    },
+    "catalysts": {
+      "bull": [
+        {
+          "text": "Industrials have a 20-year average November return of 3.48%, the best of any sector (Kiplinger, via the XLI proxy).",
+          "source": "https://www.kiplinger.com/investing/stocks/2-sectors-4-stocks-to-buy-november-2026"
+        },
+        {
+          "text": "Companies that build data-center power systems, cooling and wiring sit in industrials, and manufacturers beat forecasts, per Weiss Ratings (Nov 2026).",
+          "source": "https://weissratings.com/en/weiss-ratings-daily/factories-beat-forecasts-why-parker-hannifin-is-a-buy"
+        },
+        {
+          "text": "Zacks cited infrastructure spending, defense demand and AI-related investment behind XLI's gains this year (13.2% through June 11).",
+          "source": "https://www.zacks.com/stock/news/2936348/4-industrial-stocks-riding-wall-streets-manufacturing-revival"
+        }
+      ],
+      "base": [
+        {
+          "text": "Beyond a few months the range is driven by the macro regime and the zero-drift options baseline, not by scheduled events.",
+          "source": null,
+          "kind": "model_expectation"
+        }
+      ],
+      "bear": [
+        {
+          "text": "Industrials gained 16% in 2026 through August and became the most expensively valued S&P sector, despite higher oil and bond yields.",
+          "source": "https://www.advisorperspectives.com/articles/2026/08/21/ai-bets-send-industrials-soaring-slowdow-coming?topic=etf"
+        },
+        {
+          "text": "Weiss says costs remain the sore spot for industrials (Nov 2026).",
+          "source": "https://weissratings.com/en/weiss-ratings-daily/factories-beat-forecasts-why-parker-hannifin-is-a-buy"
+        },
+        {
+          "text": "New 20% tariffs were announced on Nov 25, adding input-cost and trade uncertainty for manufacturers.",
+          "source": "https://finance.yahoo.com/markets/live/stock-market-today-wednesday-november-25-dow-sp-500-nasdaq-pce-inflation-data-091428237.html"
+        }
+      ]
+    },
+    "notes": "Made intraday (about 2:25 PM CT), not at a close. The AI range was written AFTER seeing the baseline, so the comparison is not blind. IV is the average of the call and put at the 163 strike (nearest the price) on the 2028-01-21 expiry; the horizon has no listed expiry of its own, so this is the nearest listed one (for 5y the longest listed). The baseline is zero-drift, a weak yardstick over long horizons.",
+    "status": "open"
+  },
+  {
+    "id": "2026-11-25_XLI_5y",
+    "symbol": "XLI",
+    "made_at": "2026-11-25",
+    "horizon": "5y",
+    "resolves_on": "2031-11-25",
+    "price_at_prediction": 162.94,
+    "price_time": "2026-11-25T20:23:00Z",
+    "ai": {
+      "low": 90.0,
+      "high": 310.0,
+      "level": 0.8,
+      "prob_up": 0.7
+    },
+    "baseline": {
+      "method": "implied_vol",
+      "iv": 0.2281,
+      "iv_updated_at": "2026-11-25T20:24:00Z",
+      "low": 84.73,
+      "high": 313.31,
+      "level": 0.8
+    },
+    "catalysts": {
+      "bull": [
+        {
+          "text": "Industrials have a 20-year average November return of 3.48%, the best of any sector (Kiplinger, via the XLI proxy).",
+          "source": "https://www.kiplinger.com/investing/stocks/2-sectors-4-stocks-to-buy-november-2026"
+        },
+        {
+          "text": "Companies that build data-center power systems, cooling and wiring sit in industrials, and manufacturers beat forecasts, per Weiss Ratings (Nov 2026).",
+          "source": "https://weissratings.com/en/weiss-ratings-daily/factories-beat-forecasts-why-parker-hannifin-is-a-buy"
+        },
+        {
+          "text": "Zacks cited infrastructure spending, defense demand and AI-related investment behind XLI's gains this year (13.2% through June 11).",
+          "source": "https://www.zacks.com/stock/news/2936348/4-industrial-stocks-riding-wall-streets-manufacturing-revival"
+        }
+      ],
+      "base": [
+        {
+          "text": "Beyond a few months the range is driven by the macro regime and the zero-drift options baseline, not by scheduled events.",
+          "source": null,
+          "kind": "model_expectation"
+        }
+      ],
+      "bear": [
+        {
+          "text": "Industrials gained 16% in 2026 through August and became the most expensively valued S&P sector, despite higher oil and bond yields.",
+          "source": "https://www.advisorperspectives.com/articles/2026/08/21/ai-bets-send-industrials-soaring-slowdow-coming?topic=etf"
+        },
+        {
+          "text": "Weiss says costs remain the sore spot for industrials (Nov 2026).",
+          "source": "https://weissratings.com/en/weiss-ratings-daily/factories-beat-forecasts-why-parker-hannifin-is-a-buy"
+        },
+        {
+          "text": "New 20% tariffs were announced on Nov 25, adding input-cost and trade uncertainty for manufacturers.",
+          "source": "https://finance.yahoo.com/markets/live/stock-market-today-wednesday-november-25-dow-sp-500-nasdaq-pce-inflation-data-091428237.html"
+        }
+      ]
+    },
+    "notes": "Made intraday (about 2:25 PM CT), not at a close. The AI range was written AFTER seeing the baseline, so the comparison is not blind. IV is the average of the call and put at the 163 strike (nearest the price) on the 2029-01-19 expiry; the horizon has no listed expiry of its own, so this is the nearest listed one (for 5y the longest listed). The baseline is zero-drift, a weak yardstick over long horizons.",
+    "status": "open"
+  },
+  {
+    "id": "2026-11-25_XLB_1w",
+    "symbol": "XLB",
+    "made_at": "2026-11-25",
+    "horizon": "1w",
+    "resolves_on": "2026-12-04",
+    "price_at_prediction": 51.32,
+    "price_time": "2026-11-25T20:23:00Z",
+    "ai": {
+      "low": 48.9,
+      "high": 53.8,
+      "level": 0.8,
+      "prob_up": 0.51
+    },
+    "baseline": {
+      "method": "implied_vol",
+      "iv": 0.2543,
+      "iv_updated_at": "2026-11-25T20:24:00Z",
+      "low": 48.76,
+      "high": 54.01,
+      "level": 0.8
+    },
+    "catalysts": {
+      "bull": [
+        {
+          "text": "XLB was up 13.7% in 2026 as of late June, ahead of the S&P 500, and CFRA raised its copper forecast on AI data-center, grid and EV demand.",
+          "source": "https://www.medicaleconomics.com/view/as-materials-and-industrials-climb-together-so-does-investor-opportunity"
+        },
+        {
+          "text": "Materials have a 20-year average November return of 2.94%, the second-best of any sector (Kiplinger).",
+          "source": "https://www.kiplinger.com/investing/stocks/2-sectors-4-stocks-to-buy-november-2026"
+        },
+        {
+          "text": "XLB closed at $53.02 on Nov 11 and trades about 3% lower now, so some of the weakness is already in the price.",
+          "source": null,
+          "kind": "model_expectation"
+        }
+      ],
+      "base": [
+        {
+          "text": "Dec 1: JOLTS (October). Dec 4, 8:30 AM ET: November jobs report, so the Dec 4 close includes its reaction.",
+          "source": "https://www.bls.gov/schedule/2026/12_sched_list.htm"
+        },
+        {
+          "text": "The range is a bit narrower than the options-implied one at the edges, since implied vol usually runs above realized.",
+          "source": null,
+          "kind": "model_expectation"
+        }
+      ],
+      "bear": [
+        {
+          "text": "Spot gold hit a 14-month low near $3,720 on Nov 18 as the dollar reached a 19-month high; gold miners are part of XLB.",
+          "source": "https://www.nationthailand.com/business/trading-investment/40073658"
+        },
+        {
+          "text": "RBC downgraded materials while swapping tech for health care (Yahoo Finance headline, Oct 16).",
+          "source": "https://ca.finance.yahoo.com/quote/XLB/chart/"
+        },
+        {
+          "text": "Futures priced a 96% chance of a December Fed hike, and a stronger dollar and higher yields tend to weigh on cyclical commodities.",
+          "source": "https://www.khaleejtimes.com/business/gold-inches-up-from-over-one-year-low-fed-outlook-caps-gains"
+        }
+      ]
+    },
+    "notes": "Made intraday (about 2:25 PM CT), not at a close. The AI range was written AFTER seeing the baseline, so the comparison is not blind. IV is the average of the call and put at the 51 strike (nearest the price) on the 2026-12-04 expiry.",
+    "status": "open"
+  },
+  {
+    "id": "2026-11-25_XLB_1m",
+    "symbol": "XLB",
+    "made_at": "2026-11-25",
+    "horizon": "1m",
+    "resolves_on": "2026-12-24",
+    "price_at_prediction": 51.32,
+    "price_time": "2026-11-25T20:23:00Z",
+    "ai": {
+      "low": 47.3,
+      "high": 55.6,
+      "level": 0.8,
+      "prob_up": 0.51
+    },
+    "baseline": {
+      "method": "implied_vol",
+      "iv": 0.2345,
+      "iv_updated_at": "2026-11-25T20:24:00Z",
+      "low": 47.15,
+      "high": 55.86,
+      "level": 0.8
+    },
+    "catalysts": {
+      "bull": [
+        {
+          "text": "XLB was up 13.7% in 2026 as of late June, ahead of the S&P 500, and CFRA raised its copper forecast on AI data-center, grid and EV demand.",
+          "source": "https://www.medicaleconomics.com/view/as-materials-and-industrials-climb-together-so-does-investor-opportunity"
+        },
+        {
+          "text": "Materials have a 20-year average November return of 2.94%, the second-best of any sector (Kiplinger).",
+          "source": "https://www.kiplinger.com/investing/stocks/2-sectors-4-stocks-to-buy-november-2026"
+        },
+        {
+          "text": "XLB closed at $53.02 on Nov 11 and trades about 3% lower now, so some of the weakness is already in the price.",
+          "source": null,
+          "kind": "model_expectation"
+        }
+      ],
+      "base": [
+        {
+          "text": "The Dec 8-9 FOMC meeting (with new projections) falls inside this window, with a hike heavily priced as of mid-November.",
+          "source": "https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm"
+        },
+        {
+          "text": "Dec 4 jobs report and Dec 10 CPI also fall inside the window.",
+          "source": "https://www.bls.gov/schedule/2026/12_sched_list.htm"
+        },
+        {
+          "text": "Select Sector SPDRs pay quarterly; the September ex-date was Sep 21, so a December ex-date near Dec 21 likely lands inside this window and lowers the raw price by about the quarterly yield.",
+          "source": null,
+          "kind": "model_expectation"
+        },
+        {
+          "text": "The range is a bit narrower than the options-implied one at the edges, since implied vol usually runs above realized.",
+          "source": null,
+          "kind": "model_expectation"
+        }
+      ],
+      "bear": [
+        {
+          "text": "Spot gold hit a 14-month low near $3,720 on Nov 18 as the dollar reached a 19-month high; gold miners are part of XLB.",
+          "source": "https://www.nationthailand.com/business/trading-investment/40073658"
+        },
+        {
+          "text": "RBC downgraded materials while swapping tech for health care (Yahoo Finance headline, Oct 16).",
+          "source": "https://ca.finance.yahoo.com/quote/XLB/chart/"
+        },
+        {
+          "text": "Futures priced a 96% chance of a December Fed hike, and a stronger dollar and higher yields tend to weigh on cyclical commodities.",
+          "source": "https://www.khaleejtimes.com/business/gold-inches-up-from-over-one-year-low-fed-outlook-caps-gains"
+        }
+      ]
+    },
+    "notes": "Made intraday (about 2:25 PM CT), not at a close. The AI range was written AFTER seeing the baseline, so the comparison is not blind. IV is the average of the call and put at the 51 strike (nearest the price) on the 2026-12-24 expiry.",
+    "status": "open"
+  },
+  {
+    "id": "2026-11-25_XLB_6m",
+    "symbol": "XLB",
+    "made_at": "2026-11-25",
+    "horizon": "6m",
+    "resolves_on": "2027-05-25",
+    "price_at_prediction": 51.32,
+    "price_time": "2026-11-25T20:23:00Z",
+    "ai": {
+      "low": 42.5,
+      "high": 62.0,
+      "level": 0.8,
+      "prob_up": 0.54
+    },
+    "baseline": {
+      "method": "implied_vol",
+      "iv": 0.2207,
+      "iv_updated_at": "2026-11-25T20:24:00Z",
+      "low": 42.05,
+      "high": 62.63,
+      "level": 0.8
+    },
+    "catalysts": {
+      "bull": [
+        {
+          "text": "XLB was up 13.7% in 2026 as of late June, ahead of the S&P 500, and CFRA raised its copper forecast on AI data-center, grid and EV demand.",
+          "source": "https://www.medicaleconomics.com/view/as-materials-and-industrials-climb-together-so-does-investor-opportunity"
+        },
+        {
+          "text": "Materials have a 20-year average November return of 2.94%, the second-best of any sector (Kiplinger).",
+          "source": "https://www.kiplinger.com/investing/stocks/2-sectors-4-stocks-to-buy-november-2026"
+        },
+        {
+          "text": "XLB closed at $53.02 on Nov 11 and trades about 3% lower now, so some of the weakness is already in the price.",
+          "source": null,
+          "kind": "model_expectation"
+        }
+      ],
+      "base": [
+        {
+          "text": "Beyond a few months the range is driven by the macro regime and the zero-drift options baseline, not by scheduled events.",
+          "source": null,
+          "kind": "model_expectation"
+        }
+      ],
+      "bear": [
+        {
+          "text": "Spot gold hit a 14-month low near $3,720 on Nov 18 as the dollar reached a 19-month high; gold miners are part of XLB.",
+          "source": "https://www.nationthailand.com/business/trading-investment/40073658"
+        },
+        {
+          "text": "RBC downgraded materials while swapping tech for health care (Yahoo Finance headline, Oct 16).",
+          "source": "https://ca.finance.yahoo.com/quote/XLB/chart/"
+        },
+        {
+          "text": "Futures priced a 96% chance of a December Fed hike, and a stronger dollar and higher yields tend to weigh on cyclical commodities.",
+          "source": "https://www.khaleejtimes.com/business/gold-inches-up-from-over-one-year-low-fed-outlook-caps-gains"
+        }
+      ]
+    },
+    "notes": "Made intraday (about 2:25 PM CT), not at a close. The AI range was written AFTER seeing the baseline, so the comparison is not blind. IV is the average of the call and put at the 51 strike (nearest the price) on the 2027-06-17 expiry; the horizon has no listed expiry of its own, so this is the nearest listed one (for 5y the longest listed). The baseline is zero-drift, a weak yardstick over long horizons.",
+    "status": "open"
+  },
+  {
+    "id": "2026-11-25_XLB_1y",
+    "symbol": "XLB",
+    "made_at": "2026-11-25",
+    "horizon": "1y",
+    "resolves_on": "2027-11-24",
+    "price_at_prediction": 51.32,
+    "price_time": "2026-11-25T20:23:00Z",
+    "ai": {
+      "low": 40.2,
+      "high": 65.5,
+      "level": 0.8,
+      "prob_up": 0.56
+    },
+    "baseline": {
+      "method": "implied_vol",
+      "iv": 0.2006,
+      "iv_updated_at": "2026-11-25T20:24:00Z",
+      "low": 39.7,
+      "high": 66.34,
+      "level": 0.8
+    },
+    "catalysts": {
+      "bull": [
+        {
+          "text": "XLB was up 13.7% in 2026 as of late June, ahead of the S&P 500, and CFRA raised its copper forecast on AI data-center, grid and EV demand.",
+          "source": "https://www.medicaleconomics.com/view/as-materials-and-industrials-climb-together-so-does-investor-opportunity"
+        },
+        {
+          "text": "Materials have a 20-year average November return of 2.94%, the second-best of any sector (Kiplinger).",
+          "source": "https://www.kiplinger.com/investing/stocks/2-sectors-4-stocks-to-buy-november-2026"
+        },
+        {
+          "text": "XLB closed at $53.02 on Nov 11 and trades about 3% lower now, so some of the weakness is already in the price.",
+          "source": null,
+          "kind": "model_expectation"
+        }
+      ],
+      "base": [
+        {
+          "text": "Beyond a few months the range is driven by the macro regime and the zero-drift options baseline, not by scheduled events.",
+          "source": null,
+          "kind": "model_expectation"
+        }
+      ],
+      "bear": [
+        {
+          "text": "Spot gold hit a 14-month low near $3,720 on Nov 18 as the dollar reached a 19-month high; gold miners are part of XLB.",
+          "source": "https://www.nationthailand.com/business/trading-investment/40073658"
+        },
+        {
+          "text": "RBC downgraded materials while swapping tech for health care (Yahoo Finance headline, Oct 16).",
+          "source": "https://ca.finance.yahoo.com/quote/XLB/chart/"
+        },
+        {
+          "text": "Futures priced a 96% chance of a December Fed hike, and a stronger dollar and higher yields tend to weigh on cyclical commodities.",
+          "source": "https://www.khaleejtimes.com/business/gold-inches-up-from-over-one-year-low-fed-outlook-caps-gains"
+        }
+      ]
+    },
+    "notes": "Made intraday (about 2:25 PM CT), not at a close. The AI range was written AFTER seeing the baseline, so the comparison is not blind. IV is the average of the call and put at the 51 strike (nearest the price) on the 2028-01-21 expiry; the horizon has no listed expiry of its own, so this is the nearest listed one (for 5y the longest listed). The baseline is zero-drift, a weak yardstick over long horizons.",
+    "status": "open"
+  },
+  {
+    "id": "2026-11-25_XLB_5y",
+    "symbol": "XLB",
+    "made_at": "2026-11-25",
+    "horizon": "5y",
+    "resolves_on": "2031-11-25",
+    "price_at_prediction": 51.32,
+    "price_time": "2026-11-25T20:23:00Z",
+    "ai": {
+      "low": 30.0,
+      "high": 88.0,
+      "level": 0.8,
+      "prob_up": 0.66
+    },
+    "baseline": {
+      "method": "implied_vol",
+      "iv": 0.2018,
+      "iv_updated_at": "2026-11-25T20:24:00Z",
+      "low": 28.78,
+      "high": 91.52,
+      "level": 0.8
+    },
+    "catalysts": {
+      "bull": [
+        {
+          "text": "XLB was up 13.7% in 2026 as of late June, ahead of the S&P 500, and CFRA raised its copper forecast on AI data-center, grid and EV demand.",
+          "source": "https://www.medicaleconomics.com/view/as-materials-and-industrials-climb-together-so-does-investor-opportunity"
+        },
+        {
+          "text": "Materials have a 20-year average November return of 2.94%, the second-best of any sector (Kiplinger).",
+          "source": "https://www.kiplinger.com/investing/stocks/2-sectors-4-stocks-to-buy-november-2026"
+        },
+        {
+          "text": "XLB closed at $53.02 on Nov 11 and trades about 3% lower now, so some of the weakness is already in the price.",
+          "source": null,
+          "kind": "model_expectation"
+        }
+      ],
+      "base": [
+        {
+          "text": "Beyond a few months the range is driven by the macro regime and the zero-drift options baseline, not by scheduled events.",
+          "source": null,
+          "kind": "model_expectation"
+        }
+      ],
+      "bear": [
+        {
+          "text": "Spot gold hit a 14-month low near $3,720 on Nov 18 as the dollar reached a 19-month high; gold miners are part of XLB.",
+          "source": "https://www.nationthailand.com/business/trading-investment/40073658"
+        },
+        {
+          "text": "RBC downgraded materials while swapping tech for health care (Yahoo Finance headline, Oct 16).",
+          "source": "https://ca.finance.yahoo.com/quote/XLB/chart/"
+        },
+        {
+          "text": "Futures priced a 96% chance of a December Fed hike, and a stronger dollar and higher yields tend to weigh on cyclical commodities.",
+          "source": "https://www.khaleejtimes.com/business/gold-inches-up-from-over-one-year-low-fed-outlook-caps-gains"
+        }
+      ]
+    },
+    "notes": "Made intraday (about 2:25 PM CT), not at a close. The AI range was written AFTER seeing the baseline, so the comparison is not blind. IV is the average of the call and put at the 51 strike (nearest the price) on the 2029-01-19 expiry; the horizon has no listed expiry of its own, so this is the nearest listed one (for 5y the longest listed). The baseline is zero-drift, a weak yardstick over long horizons.",
+    "status": "open"
+  },
+  {
+    "id": "2026-11-25_XLU_1w",
+    "symbol": "XLU",
+    "made_at": "2026-11-25",
+    "horizon": "1w",
+    "resolves_on": "2026-12-04",
+    "price_at_prediction": 43.67,
+    "price_time": "2026-11-25T20:23:00Z",
+    "ai": {
+      "low": 42.2,
+      "high": 45.2,
+      "level": 0.8,
+      "prob_up": 0.51
+    },
+    "baseline": {
+      "method": "implied_vol",
+      "iv": 0.1806,
+      "iv_updated_at": "2026-11-25T20:24:00Z",
+      "low": 42.11,
+      "high": 45.28,
+      "level": 0.8
+    },
+    "catalysts": {
+      "bull": [
+        {
+          "text": "AI data centers are driving US electricity demand higher, and Constellation disclosed a 20-year, 690 MW deal with a cloud provider in its Q3 2026 results.",
+          "source": "https://www.webull.com/news/15896424137802752"
+        },
+        {
+          "text": "About $6.5 billion has flowed into XLU over the past year against roughly $1.65 billion of outflows.",
+          "source": "https://www.nasdaq.com/articles/utilities-unexpected-ai-infrastructure-trade"
+        },
+        {
+          "text": "XLU's trailing yield was about 2.3% to 2.8% as of Nov 9, which is attractive if yields stop rising.",
+          "source": "https://www.webull.com/news/15896424137802752"
+        }
+      ],
+      "base": [
+        {
+          "text": "Dec 1: JOLTS (October). Dec 4, 8:30 AM ET: November jobs report, so the Dec 4 close includes its reaction.",
+          "source": "https://www.bls.gov/schedule/2026/12_sched_list.htm"
+        },
+        {
+          "text": "The range is a bit narrower than the options-implied one at the edges, since implied vol usually runs above realized.",
+          "source": null,
+          "kind": "model_expectation"
+        }
+      ],
+      "bear": [
+        {
+          "text": "Utilities fell on Nov 10 as Treasury yields rose and on fears a slowdown in the AI infrastructure buildout would weigh on power producers.",
+          "source": "https://www.morningstar.com/news/dow-jones/2026111012983/utilities-down-as-treasury-yields-rise-utilities-roundup"
+        },
+        {
+          "text": "The 10-year yield jumped nearly 30 bp to 5.14% in the week ended Nov 13, which competes with utility dividends.",
+          "source": "https://stocktwits.com/news-articles/markets/equity/what-shaped-us-treasury-yields-and-the-dollar-in-week-ended-november-13/cNb2sojR9Qd"
+        },
+        {
+          "text": "Futures priced a 96% chance of a 25 bp Fed hike in December as of Nov 17.",
+          "source": "https://www.khaleejtimes.com/business/gold-inches-up-from-over-one-year-low-fed-outlook-caps-gains"
+        }
+      ]
+    },
+    "notes": "Made intraday (about 2:25 PM CT), not at a close. The AI range was written AFTER seeing the baseline, so the comparison is not blind. IV is the average of the call and put at the 44 strike (nearest the price) on the 2026-12-04 expiry.",
+    "status": "open"
+  },
+  {
+    "id": "2026-11-25_XLU_1m",
+    "symbol": "XLU",
+    "made_at": "2026-11-25",
+    "horizon": "1m",
+    "resolves_on": "2026-12-24",
+    "price_at_prediction": 43.67,
+    "price_time": "2026-11-25T20:23:00Z",
+    "ai": {
+      "low": 41.1,
+      "high": 46.4,
+      "level": 0.8,
+      "prob_up": 0.51
+    },
+    "baseline": {
+      "method": "implied_vol",
+      "iv": 0.181,
+      "iv_updated_at": "2026-11-25T20:24:00Z",
+      "low": 40.9,
+      "high": 46.62,
+      "level": 0.8
+    },
+    "catalysts": {
+      "bull": [
+        {
+          "text": "AI data centers are driving US electricity demand higher, and Constellation disclosed a 20-year, 690 MW deal with a cloud provider in its Q3 2026 results.",
+          "source": "https://www.webull.com/news/15896424137802752"
+        },
+        {
+          "text": "About $6.5 billion has flowed into XLU over the past year against roughly $1.65 billion of outflows.",
+          "source": "https://www.nasdaq.com/articles/utilities-unexpected-ai-infrastructure-trade"
+        },
+        {
+          "text": "XLU's trailing yield was about 2.3% to 2.8% as of Nov 9, which is attractive if yields stop rising.",
+          "source": "https://www.webull.com/news/15896424137802752"
+        }
+      ],
+      "base": [
+        {
+          "text": "The Dec 8-9 FOMC meeting (with new projections) falls inside this window, with a hike heavily priced as of mid-November.",
+          "source": "https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm"
+        },
+        {
+          "text": "Dec 4 jobs report and Dec 10 CPI also fall inside the window.",
+          "source": "https://www.bls.gov/schedule/2026/12_sched_list.htm"
+        },
+        {
+          "text": "Select Sector SPDRs pay quarterly; the September ex-date was Sep 21, so a December ex-date near Dec 21 likely lands inside this window and lowers the raw price by about the quarterly yield.",
+          "source": null,
+          "kind": "model_expectation"
+        },
+        {
+          "text": "The range is a bit narrower than the options-implied one at the edges, since implied vol usually runs above realized.",
+          "source": null,
+          "kind": "model_expectation"
+        }
+      ],
+      "bear": [
+        {
+          "text": "Utilities fell on Nov 10 as Treasury yields rose and on fears a slowdown in the AI infrastructure buildout would weigh on power producers.",
+          "source": "https://www.morningstar.com/news/dow-jones/2026111012983/utilities-down-as-treasury-yields-rise-utilities-roundup"
+        },
+        {
+          "text": "The 10-year yield jumped nearly 30 bp to 5.14% in the week ended Nov 13, which competes with utility dividends.",
+          "source": "https://stocktwits.com/news-articles/markets/equity/what-shaped-us-treasury-yields-and-the-dollar-in-week-ended-november-13/cNb2sojR9Qd"
+        },
+        {
+          "text": "Futures priced a 96% chance of a 25 bp Fed hike in December as of Nov 17.",
+          "source": "https://www.khaleejtimes.com/business/gold-inches-up-from-over-one-year-low-fed-outlook-caps-gains"
+        }
+      ]
+    },
+    "notes": "Made intraday (about 2:25 PM CT), not at a close. The AI range was written AFTER seeing the baseline, so the comparison is not blind. IV is the average of the call and put at the 44 strike (nearest the price) on the 2026-12-24 expiry.",
+    "status": "open"
+  },
+  {
+    "id": "2026-11-25_XLU_6m",
+    "symbol": "XLU",
+    "made_at": "2026-11-25",
+    "horizon": "6m",
+    "resolves_on": "2027-05-25",
+    "price_at_prediction": 43.67,
+    "price_time": "2026-11-25T20:23:00Z",
+    "ai": {
+      "low": 37.6,
+      "high": 50.5,
+      "level": 0.8,
+      "prob_up": 0.55
+    },
+    "baseline": {
+      "method": "implied_vol",
+      "iv": 0.1768,
+      "iv_updated_at": "2026-11-25T20:24:00Z",
+      "low": 37.23,
+      "high": 51.22,
+      "level": 0.8
+    },
+    "catalysts": {
+      "bull": [
+        {
+          "text": "AI data centers are driving US electricity demand higher, and Constellation disclosed a 20-year, 690 MW deal with a cloud provider in its Q3 2026 results.",
+          "source": "https://www.webull.com/news/15896424137802752"
+        },
+        {
+          "text": "About $6.5 billion has flowed into XLU over the past year against roughly $1.65 billion of outflows.",
+          "source": "https://www.nasdaq.com/articles/utilities-unexpected-ai-infrastructure-trade"
+        },
+        {
+          "text": "XLU's trailing yield was about 2.3% to 2.8% as of Nov 9, which is attractive if yields stop rising.",
+          "source": "https://www.webull.com/news/15896424137802752"
+        }
+      ],
+      "base": [
+        {
+          "text": "Beyond a few months the range is driven by the macro regime and the zero-drift options baseline, not by scheduled events.",
+          "source": null,
+          "kind": "model_expectation"
+        }
+      ],
+      "bear": [
+        {
+          "text": "Utilities fell on Nov 10 as Treasury yields rose and on fears a slowdown in the AI infrastructure buildout would weigh on power producers.",
+          "source": "https://www.morningstar.com/news/dow-jones/2026111012983/utilities-down-as-treasury-yields-rise-utilities-roundup"
+        },
+        {
+          "text": "The 10-year yield jumped nearly 30 bp to 5.14% in the week ended Nov 13, which competes with utility dividends.",
+          "source": "https://stocktwits.com/news-articles/markets/equity/what-shaped-us-treasury-yields-and-the-dollar-in-week-ended-november-13/cNb2sojR9Qd"
+        },
+        {
+          "text": "Futures priced a 96% chance of a 25 bp Fed hike in December as of Nov 17.",
+          "source": "https://www.khaleejtimes.com/business/gold-inches-up-from-over-one-year-low-fed-outlook-caps-gains"
+        }
+      ]
+    },
+    "notes": "Made intraday (about 2:25 PM CT), not at a close. The AI range was written AFTER seeing the baseline, so the comparison is not blind. IV is the average of the call and put at the 44 strike (nearest the price) on the 2027-06-17 expiry; the horizon has no listed expiry of its own, so this is the nearest listed one (for 5y the longest listed). The baseline is zero-drift, a weak yardstick over long horizons.",
+    "status": "open"
+  },
+  {
+    "id": "2026-11-25_XLU_1y",
+    "symbol": "XLU",
+    "made_at": "2026-11-25",
+    "horizon": "1y",
+    "resolves_on": "2027-11-24",
+    "price_at_prediction": 43.67,
+    "price_time": "2026-11-25T20:23:00Z",
+    "ai": {
+      "low": 35.6,
+      "high": 53.5,
+      "level": 0.8,
+      "prob_up": 0.57
+    },
+    "baseline": {
+      "method": "implied_vol",
+      "iv": 0.1743,
+      "iv_updated_at": "2026-11-25T20:24:00Z",
+      "low": 34.94,
+      "high": 54.58,
+      "level": 0.8
+    },
+    "catalysts": {
+      "bull": [
+        {
+          "text": "AI data centers are driving US electricity demand higher, and Constellation disclosed a 20-year, 690 MW deal with a cloud provider in its Q3 2026 results.",
+          "source": "https://www.webull.com/news/15896424137802752"
+        },
+        {
+          "text": "About $6.5 billion has flowed into XLU over the past year against roughly $1.65 billion of outflows.",
+          "source": "https://www.nasdaq.com/articles/utilities-unexpected-ai-infrastructure-trade"
+        },
+        {
+          "text": "XLU's trailing yield was about 2.3% to 2.8% as of Nov 9, which is attractive if yields stop rising.",
+          "source": "https://www.webull.com/news/15896424137802752"
+        }
+      ],
+      "base": [
+        {
+          "text": "Beyond a few months the range is driven by the macro regime and the zero-drift options baseline, not by scheduled events.",
+          "source": null,
+          "kind": "model_expectation"
+        }
+      ],
+      "bear": [
+        {
+          "text": "Utilities fell on Nov 10 as Treasury yields rose and on fears a slowdown in the AI infrastructure buildout would weigh on power producers.",
+          "source": "https://www.morningstar.com/news/dow-jones/2026111012983/utilities-down-as-treasury-yields-rise-utilities-roundup"
+        },
+        {
+          "text": "The 10-year yield jumped nearly 30 bp to 5.14% in the week ended Nov 13, which competes with utility dividends.",
+          "source": "https://stocktwits.com/news-articles/markets/equity/what-shaped-us-treasury-yields-and-the-dollar-in-week-ended-november-13/cNb2sojR9Qd"
+        },
+        {
+          "text": "Futures priced a 96% chance of a 25 bp Fed hike in December as of Nov 17.",
+          "source": "https://www.khaleejtimes.com/business/gold-inches-up-from-over-one-year-low-fed-outlook-caps-gains"
+        }
+      ]
+    },
+    "notes": "Made intraday (about 2:25 PM CT), not at a close. The AI range was written AFTER seeing the baseline, so the comparison is not blind. IV is the average of the call and put at the 44 strike (nearest the price) on the 2027-12-17 expiry; the horizon has no listed expiry of its own, so this is the nearest listed one (for 5y the longest listed). The baseline is zero-drift, a weak yardstick over long horizons. The 44 strike was not listed on this expiry, so the 45 strike was used.",
+    "status": "open"
+  },
+  {
+    "id": "2026-11-25_XLU_5y",
+    "symbol": "XLU",
+    "made_at": "2026-11-25",
+    "horizon": "5y",
+    "resolves_on": "2031-11-25",
+    "price_at_prediction": 43.67,
+    "price_time": "2026-11-25T20:23:00Z",
+    "ai": {
+      "low": 29.0,
+      "high": 67.0,
+      "level": 0.8,
+      "prob_up": 0.68
+    },
+    "baseline": {
+      "method": "implied_vol",
+      "iv": 0.1593,
+      "iv_updated_at": "2026-11-25T20:24:00Z",
+      "low": 27.66,
+      "high": 68.94,
+      "level": 0.8
+    },
+    "catalysts": {
+      "bull": [
+        {
+          "text": "AI data centers are driving US electricity demand higher, and Constellation disclosed a 20-year, 690 MW deal with a cloud provider in its Q3 2026 results.",
+          "source": "https://www.webull.com/news/15896424137802752"
+        },
+        {
+          "text": "About $6.5 billion has flowed into XLU over the past year against roughly $1.65 billion of outflows.",
+          "source": "https://www.nasdaq.com/articles/utilities-unexpected-ai-infrastructure-trade"
+        },
+        {
+          "text": "XLU's trailing yield was about 2.3% to 2.8% as of Nov 9, which is attractive if yields stop rising.",
+          "source": "https://www.webull.com/news/15896424137802752"
+        }
+      ],
+      "base": [
+        {
+          "text": "Beyond a few months the range is driven by the macro regime and the zero-drift options baseline, not by scheduled events.",
+          "source": null,
+          "kind": "model_expectation"
+        }
+      ],
+      "bear": [
+        {
+          "text": "Utilities fell on Nov 10 as Treasury yields rose and on fears a slowdown in the AI infrastructure buildout would weigh on power producers.",
+          "source": "https://www.morningstar.com/news/dow-jones/2026111012983/utilities-down-as-treasury-yields-rise-utilities-roundup"
+        },
+        {
+          "text": "The 10-year yield jumped nearly 30 bp to 5.14% in the week ended Nov 13, which competes with utility dividends.",
+          "source": "https://stocktwits.com/news-articles/markets/equity/what-shaped-us-treasury-yields-and-the-dollar-in-week-ended-november-13/cNb2sojR9Qd"
+        },
+        {
+          "text": "Futures priced a 96% chance of a 25 bp Fed hike in December as of Nov 17.",
+          "source": "https://www.khaleejtimes.com/business/gold-inches-up-from-over-one-year-low-fed-outlook-caps-gains"
+        }
+      ]
+    },
+    "notes": "Made intraday (about 2:25 PM CT), not at a close. The AI range was written AFTER seeing the baseline, so the comparison is not blind. IV is the average of the call and put at the 44 strike (nearest the price) on the 2029-01-19 expiry; the horizon has no listed expiry of its own, so this is the nearest listed one (for 5y the longest listed). The baseline is zero-drift, a weak yardstick over long horizons.",
+    "status": "open"
+  },
+  {
+    "id": "2026-11-25_XLRE_1w",
+    "symbol": "XLRE",
+    "made_at": "2026-11-25",
+    "horizon": "1w",
+    "resolves_on": "2026-12-04",
+    "price_at_prediction": 43.95,
+    "price_time": "2026-11-25T20:23:00Z",
+    "ai": {
+      "low": 42.5,
+      "high": 45.5,
+      "level": 0.8,
+      "prob_up": 0.5
+    },
+    "baseline": {
+      "method": "implied_vol",
+      "iv": 0.1756,
+      "iv_updated_at": "2026-11-25T20:24:00Z",
+      "low": 42.42,
+      "high": 45.53,
+      "level": 0.8
+    },
+    "catalysts": {
+      "bull": [
+        {
+          "text": "The S&P 500 real estate sector returned 14.66% year to date through late August versus 12.97% for the S&P 500 (SSGA).",
+          "source": "https://www.ssga.com/hk/en/institutional/insights/mind-on-the-market-31-august-2026"
+        },
+        {
+          "text": "REITs rallied at the start of Q4 after taking a hit when rates spiked in Q3 (Wealth Management Q&A).",
+          "source": "https://www.wealthmanagement.com/alternative-investments/q-a-reits-bounce-back-in-october"
+        },
+        {
+          "text": "Data-center REITs have become a primary driver of real estate ETF performance this year (ETF Trends).",
+          "source": "https://www.etftrends.com/?p=650749"
+        }
+      ],
+      "base": [
+        {
+          "text": "Dec 1: JOLTS (October). Dec 4, 8:30 AM ET: November jobs report, so the Dec 4 close includes its reaction.",
+          "source": "https://www.bls.gov/schedule/2026/12_sched_list.htm"
+        },
+        {
+          "text": "The range is a bit narrower than the options-implied one at the edges, since implied vol usually runs above realized.",
+          "source": null,
+          "kind": "model_expectation"
+        }
+      ],
+      "bear": [
+        {
+          "text": "Morningstar notes the sector underperformed in Q3 as interest rates rose, and says real estate moves opposite to rates.",
+          "source": "https://www.morningstar.com/stocks/real-estate-sector-underperformed-third-quarter-interest-rates-rose"
+        },
+        {
+          "text": "The 10-year yield jumped nearly 30 bp to 5.14% in the week ended Nov 13.",
+          "source": "https://stocktwits.com/news-articles/markets/equity/what-shaped-us-treasury-yields-and-the-dollar-in-week-ended-november-13/cNb2sojR9Qd"
+        },
+        {
+          "text": "Futures priced a 96% chance of a 25 bp Fed hike in December as of Nov 17.",
+          "source": "https://www.khaleejtimes.com/business/gold-inches-up-from-over-one-year-low-fed-outlook-caps-gains"
+        }
+      ]
+    },
+    "notes": "Made intraday (about 2:25 PM CT), not at a close. The AI range was written AFTER seeing the baseline, so the comparison is not blind. IV is the average of the call and put at the 44 strike (nearest the price) on the 2026-12-18 expiry; XLRE lists only four expiries (Dec 18, Jan 15, Feb 19, May 21), so the Dec 18 expiry (23 days out) stands in for the 1-week and 1-month horizons and the May 21 expiry for 6 months, 1 year and 5 years. The baseline is zero-drift, a weak yardstick over long horizons.",
+    "status": "open"
+  },
+  {
+    "id": "2026-11-25_XLRE_1m",
+    "symbol": "XLRE",
+    "made_at": "2026-11-25",
+    "horizon": "1m",
+    "resolves_on": "2026-12-24",
+    "price_at_prediction": 43.95,
+    "price_time": "2026-11-25T20:23:00Z",
+    "ai": {
+      "low": 41.4,
+      "high": 46.6,
+      "level": 0.8,
+      "prob_up": 0.5
+    },
+    "baseline": {
+      "method": "implied_vol",
+      "iv": 0.1756,
+      "iv_updated_at": "2026-11-25T20:24:00Z",
+      "low": 41.25,
+      "high": 46.83,
+      "level": 0.8
+    },
+    "catalysts": {
+      "bull": [
+        {
+          "text": "The S&P 500 real estate sector returned 14.66% year to date through late August versus 12.97% for the S&P 500 (SSGA).",
+          "source": "https://www.ssga.com/hk/en/institutional/insights/mind-on-the-market-31-august-2026"
+        },
+        {
+          "text": "REITs rallied at the start of Q4 after taking a hit when rates spiked in Q3 (Wealth Management Q&A).",
+          "source": "https://www.wealthmanagement.com/alternative-investments/q-a-reits-bounce-back-in-october"
+        },
+        {
+          "text": "Data-center REITs have become a primary driver of real estate ETF performance this year (ETF Trends).",
+          "source": "https://www.etftrends.com/?p=650749"
+        }
+      ],
+      "base": [
+        {
+          "text": "The Dec 8-9 FOMC meeting (with new projections) falls inside this window, with a hike heavily priced as of mid-November.",
+          "source": "https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm"
+        },
+        {
+          "text": "Dec 4 jobs report and Dec 10 CPI also fall inside the window.",
+          "source": "https://www.bls.gov/schedule/2026/12_sched_list.htm"
+        },
+        {
+          "text": "Select Sector SPDRs pay quarterly; the September ex-date was Sep 21, so a December ex-date near Dec 21 likely lands inside this window and lowers the raw price by about the quarterly yield.",
+          "source": null,
+          "kind": "model_expectation"
+        },
+        {
+          "text": "The range is a bit narrower than the options-implied one at the edges, since implied vol usually runs above realized.",
+          "source": null,
+          "kind": "model_expectation"
+        }
+      ],
+      "bear": [
+        {
+          "text": "Morningstar notes the sector underperformed in Q3 as interest rates rose, and says real estate moves opposite to rates.",
+          "source": "https://www.morningstar.com/stocks/real-estate-sector-underperformed-third-quarter-interest-rates-rose"
+        },
+        {
+          "text": "The 10-year yield jumped nearly 30 bp to 5.14% in the week ended Nov 13.",
+          "source": "https://stocktwits.com/news-articles/markets/equity/what-shaped-us-treasury-yields-and-the-dollar-in-week-ended-november-13/cNb2sojR9Qd"
+        },
+        {
+          "text": "Futures priced a 96% chance of a 25 bp Fed hike in December as of Nov 17.",
+          "source": "https://www.khaleejtimes.com/business/gold-inches-up-from-over-one-year-low-fed-outlook-caps-gains"
+        }
+      ]
+    },
+    "notes": "Made intraday (about 2:25 PM CT), not at a close. The AI range was written AFTER seeing the baseline, so the comparison is not blind. IV is the average of the call and put at the 44 strike (nearest the price) on the 2026-12-18 expiry; XLRE lists only four expiries (Dec 18, Jan 15, Feb 19, May 21), so the Dec 18 expiry (23 days out) stands in for the 1-week and 1-month horizons and the May 21 expiry for 6 months, 1 year and 5 years. The baseline is zero-drift, a weak yardstick over long horizons.",
+    "status": "open"
+  },
+  {
+    "id": "2026-11-25_XLRE_6m",
+    "symbol": "XLRE",
+    "made_at": "2026-11-25",
+    "horizon": "6m",
+    "resolves_on": "2027-05-25",
+    "price_at_prediction": 43.95,
+    "price_time": "2026-11-25T20:23:00Z",
+    "ai": {
+      "low": 37.9,
+      "high": 50.8,
+      "level": 0.8,
+      "prob_up": 0.53
+    },
+    "baseline": {
+      "method": "implied_vol",
+      "iv": 0.1723,
+      "iv_updated_at": "2026-11-25T20:24:00Z",
+      "low": 37.62,
+      "high": 51.34,
+      "level": 0.8
+    },
+    "catalysts": {
+      "bull": [
+        {
+          "text": "The S&P 500 real estate sector returned 14.66% year to date through late August versus 12.97% for the S&P 500 (SSGA).",
+          "source": "https://www.ssga.com/hk/en/institutional/insights/mind-on-the-market-31-august-2026"
+        },
+        {
+          "text": "REITs rallied at the start of Q4 after taking a hit when rates spiked in Q3 (Wealth Management Q&A).",
+          "source": "https://www.wealthmanagement.com/alternative-investments/q-a-reits-bounce-back-in-october"
+        },
+        {
+          "text": "Data-center REITs have become a primary driver of real estate ETF performance this year (ETF Trends).",
+          "source": "https://www.etftrends.com/?p=650749"
+        }
+      ],
+      "base": [
+        {
+          "text": "Beyond a few months the range is driven by the macro regime and the zero-drift options baseline, not by scheduled events.",
+          "source": null,
+          "kind": "model_expectation"
+        }
+      ],
+      "bear": [
+        {
+          "text": "Morningstar notes the sector underperformed in Q3 as interest rates rose, and says real estate moves opposite to rates.",
+          "source": "https://www.morningstar.com/stocks/real-estate-sector-underperformed-third-quarter-interest-rates-rose"
+        },
+        {
+          "text": "The 10-year yield jumped nearly 30 bp to 5.14% in the week ended Nov 13.",
+          "source": "https://stocktwits.com/news-articles/markets/equity/what-shaped-us-treasury-yields-and-the-dollar-in-week-ended-november-13/cNb2sojR9Qd"
+        },
+        {
+          "text": "Futures priced a 96% chance of a 25 bp Fed hike in December as of Nov 17.",
+          "source": "https://www.khaleejtimes.com/business/gold-inches-up-from-over-one-year-low-fed-outlook-caps-gains"
+        }
+      ]
+    },
+    "notes": "Made intraday (about 2:25 PM CT), not at a close. The AI range was written AFTER seeing the baseline, so the comparison is not blind. IV is the average of the call and put at the 44 strike (nearest the price) on the 2027-05-21 expiry; XLRE lists only four expiries (Dec 18, Jan 15, Feb 19, May 21), so the Dec 18 expiry (23 days out) stands in for the 1-week and 1-month horizons and the May 21 expiry for 6 months, 1 year and 5 years. The baseline is zero-drift, a weak yardstick over long horizons.",
+    "status": "open"
+  },
+  {
+    "id": "2026-11-25_XLRE_1y",
+    "symbol": "XLRE",
+    "made_at": "2026-11-25",
+    "horizon": "1y",
+    "resolves_on": "2027-11-24",
+    "price_at_prediction": 43.95,
+    "price_time": "2026-11-25T20:23:00Z",
+    "ai": {
+      "low": 35.6,
+      "high": 53.5,
+      "level": 0.8,
+      "prob_up": 0.55
+    },
+    "baseline": {
+      "method": "implied_vol",
+      "iv": 0.1723,
+      "iv_updated_at": "2026-11-25T20:24:00Z",
+      "low": 35.25,
+      "high": 54.79,
+      "level": 0.8
+    },
+    "catalysts": {
+      "bull": [
+        {
+          "text": "The S&P 500 real estate sector returned 14.66% year to date through late August versus 12.97% for the S&P 500 (SSGA).",
+          "source": "https://www.ssga.com/hk/en/institutional/insights/mind-on-the-market-31-august-2026"
+        },
+        {
+          "text": "REITs rallied at the start of Q4 after taking a hit when rates spiked in Q3 (Wealth Management Q&A).",
+          "source": "https://www.wealthmanagement.com/alternative-investments/q-a-reits-bounce-back-in-october"
+        },
+        {
+          "text": "Data-center REITs have become a primary driver of real estate ETF performance this year (ETF Trends).",
+          "source": "https://www.etftrends.com/?p=650749"
+        }
+      ],
+      "base": [
+        {
+          "text": "Beyond a few months the range is driven by the macro regime and the zero-drift options baseline, not by scheduled events.",
+          "source": null,
+          "kind": "model_expectation"
+        }
+      ],
+      "bear": [
+        {
+          "text": "Morningstar notes the sector underperformed in Q3 as interest rates rose, and says real estate moves opposite to rates.",
+          "source": "https://www.morningstar.com/stocks/real-estate-sector-underperformed-third-quarter-interest-rates-rose"
+        },
+        {
+          "text": "The 10-year yield jumped nearly 30 bp to 5.14% in the week ended Nov 13.",
+          "source": "https://stocktwits.com/news-articles/markets/equity/what-shaped-us-treasury-yields-and-the-dollar-in-week-ended-november-13/cNb2sojR9Qd"
+        },
+        {
+          "text": "Futures priced a 96% chance of a 25 bp Fed hike in December as of Nov 17.",
+          "source": "https://www.khaleejtimes.com/business/gold-inches-up-from-over-one-year-low-fed-outlook-caps-gains"
+        }
+      ]
+    },
+    "notes": "Made intraday (about 2:25 PM CT), not at a close. The AI range was written AFTER seeing the baseline, so the comparison is not blind. IV is the average of the call and put at the 44 strike (nearest the price) on the 2027-05-21 expiry; XLRE lists only four expiries (Dec 18, Jan 15, Feb 19, May 21), so the Dec 18 expiry (23 days out) stands in for the 1-week and 1-month horizons and the May 21 expiry for 6 months, 1 year and 5 years. The baseline is zero-drift, a weak yardstick over long horizons.",
+    "status": "open"
+  },
+  {
+    "id": "2026-11-25_XLRE_5y",
+    "symbol": "XLRE",
+    "made_at": "2026-11-25",
+    "horizon": "5y",
+    "resolves_on": "2031-11-25",
+    "price_at_prediction": 43.95,
+    "price_time": "2026-11-25T20:23:00Z",
+    "ai": {
+      "low": 28.0,
+      "high": 68.0,
+      "level": 0.8,
+      "prob_up": 0.62
+    },
+    "baseline": {
+      "method": "implied_vol",
+      "iv": 0.1723,
+      "iv_updated_at": "2026-11-25T20:24:00Z",
+      "low": 26.82,
+      "high": 72.02,
+      "level": 0.8
+    },
+    "catalysts": {
+      "bull": [
+        {
+          "text": "The S&P 500 real estate sector returned 14.66% year to date through late August versus 12.97% for the S&P 500 (SSGA).",
+          "source": "https://www.ssga.com/hk/en/institutional/insights/mind-on-the-market-31-august-2026"
+        },
+        {
+          "text": "REITs rallied at the start of Q4 after taking a hit when rates spiked in Q3 (Wealth Management Q&A).",
+          "source": "https://www.wealthmanagement.com/alternative-investments/q-a-reits-bounce-back-in-october"
+        },
+        {
+          "text": "Data-center REITs have become a primary driver of real estate ETF performance this year (ETF Trends).",
+          "source": "https://www.etftrends.com/?p=650749"
+        }
+      ],
+      "base": [
+        {
+          "text": "Beyond a few months the range is driven by the macro regime and the zero-drift options baseline, not by scheduled events.",
+          "source": null,
+          "kind": "model_expectation"
+        }
+      ],
+      "bear": [
+        {
+          "text": "Morningstar notes the sector underperformed in Q3 as interest rates rose, and says real estate moves opposite to rates.",
+          "source": "https://www.morningstar.com/stocks/real-estate-sector-underperformed-third-quarter-interest-rates-rose"
+        },
+        {
+          "text": "The 10-year yield jumped nearly 30 bp to 5.14% in the week ended Nov 13.",
+          "source": "https://stocktwits.com/news-articles/markets/equity/what-shaped-us-treasury-yields-and-the-dollar-in-week-ended-november-13/cNb2sojR9Qd"
+        },
+        {
+          "text": "Futures priced a 96% chance of a 25 bp Fed hike in December as of Nov 17.",
+          "source": "https://www.khaleejtimes.com/business/gold-inches-up-from-over-one-year-low-fed-outlook-caps-gains"
+        }
+      ]
+    },
+    "notes": "Made intraday (about 2:25 PM CT), not at a close. The AI range was written AFTER seeing the baseline, so the comparison is not blind. IV is the average of the call and put at the 44 strike (nearest the price) on the 2027-05-21 expiry; XLRE lists only four expiries (Dec 18, Jan 15, Feb 19, May 21), so the Dec 18 expiry (23 days out) stands in for the 1-week and 1-month horizons and the May 21 expiry for 6 months, 1 year and 5 years. The baseline is zero-drift, a weak yardstick over long horizons.",
+    "status": "open"
+  },
+  {
+    "id": "2026-11-25_XLC_1w",
+    "symbol": "XLC",
+    "made_at": "2026-11-25",
+    "horizon": "1w",
+    "resolves_on": "2026-12-04",
+    "price_at_prediction": 105.3,
+    "price_time": "2026-11-25T20:23:00Z",
+    "ai": {
+      "low": 98.5,
+      "high": 112.5,
+      "level": 0.8,
+      "prob_up": 0.51
+    },
+    "baseline": {
+      "method": "implied_vol",
+      "iv": 0.3599,
+      "iv_updated_at": "2026-11-25T20:24:00Z",
+      "low": 97.94,
+      "high": 113.2,
+      "level": 0.8
+    },
+    "catalysts": {
+      "bull": [
+        {
+          "text": "XLC rose 1.9% in a week while rate-hike bets stayed elevated; Zacks says Meta and Alphabet have company-specific catalysts and resilient cash flows (undated recent piece).",
+          "source": "https://www.zacks.com/stock/news/2991132/should-you-rotate-to-telecom-software-etfs-now"
+        },
+        {
+          "text": "Same piece: XLK trades at a forward P/E of 25.63 while XLC trades at 12.95, about half the valuation.",
+          "source": "https://www.zacks.com/stock/news/2991132/should-you-rotate-to-telecom-software-etfs-now"
+        },
+        {
+          "text": "XLC closed at $107.76 on Nov 10 and is about 2.3% lower now, so it has not been immune to the sell-off but has held up better than chips.",
+          "source": null,
+          "kind": "model_expectation"
+        }
+      ],
+      "base": [
+        {
+          "text": "Dec 1: JOLTS (October). Dec 4, 8:30 AM ET: November jobs report, so the Dec 4 close includes its reaction.",
+          "source": "https://www.bls.gov/schedule/2026/12_sched_list.htm"
+        },
+        {
+          "text": "The range is a bit narrower than the options-implied one at the edges, since implied vol usually runs above realized.",
+          "source": null,
+          "kind": "model_expectation"
+        }
+      ],
+      "bear": [
+        {
+          "text": "The PHLX Semiconductor Index hit a seven-month low on doubts AI spending will pay off, which can spill into Alphabet and Meta given their heavy AI capex.",
+          "source": "https://stockanalysis.com/news/nvidia-gives-back-half-huang-rally/"
+        },
+        {
+          "text": "Yahoo Finance headlines point to legal overhangs for Meta and Google, including a social media verdict and a Meta trial (earlier in 2026).",
+          "source": "https://finance.yahoo.com/sectors/communication-services/"
+        },
+        {
+          "text": "New 20% tariffs and a hotter October PCE add consumer and ad-spending worries, with a 96% chance of a December hike priced as of Nov 17.",
+          "source": "https://finance.yahoo.com/markets/live/stock-market-today-wednesday-november-25-dow-sp-500-nasdaq-pce-inflation-data-091428237.html"
+        }
+      ]
+    },
+    "notes": "Made intraday (about 2:25 PM CT), not at a close. The AI range was written AFTER seeing the baseline, so the comparison is not blind. IV is the average of the call and put at the 105 strike (nearest the price) on the 2026-12-04 expiry.",
+    "status": "open"
+  },
+  {
+    "id": "2026-11-25_XLC_1m",
+    "symbol": "XLC",
+    "made_at": "2026-11-25",
+    "horizon": "1m",
+    "resolves_on": "2026-12-24",
+    "price_at_prediction": 105.3,
+    "price_time": "2026-11-25T20:23:00Z",
+    "ai": {
+      "low": 95.0,
+      "high": 116.0,
+      "level": 0.8,
+      "prob_up": 0.52
+    },
+    "baseline": {
+      "method": "implied_vol",
+      "iv": 0.3002,
+      "iv_updated_at": "2026-11-25T20:24:00Z",
+      "low": 94.47,
+      "high": 117.36,
+      "level": 0.8
+    },
+    "catalysts": {
+      "bull": [
+        {
+          "text": "XLC rose 1.9% in a week while rate-hike bets stayed elevated; Zacks says Meta and Alphabet have company-specific catalysts and resilient cash flows (undated recent piece).",
+          "source": "https://www.zacks.com/stock/news/2991132/should-you-rotate-to-telecom-software-etfs-now"
+        },
+        {
+          "text": "Same piece: XLK trades at a forward P/E of 25.63 while XLC trades at 12.95, about half the valuation.",
+          "source": "https://www.zacks.com/stock/news/2991132/should-you-rotate-to-telecom-software-etfs-now"
+        },
+        {
+          "text": "XLC closed at $107.76 on Nov 10 and is about 2.3% lower now, so it has not been immune to the sell-off but has held up better than chips.",
+          "source": null,
+          "kind": "model_expectation"
+        }
+      ],
+      "base": [
+        {
+          "text": "The Dec 8-9 FOMC meeting (with new projections) falls inside this window, with a hike heavily priced as of mid-November.",
+          "source": "https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm"
+        },
+        {
+          "text": "Dec 4 jobs report and Dec 10 CPI also fall inside the window.",
+          "source": "https://www.bls.gov/schedule/2026/12_sched_list.htm"
+        },
+        {
+          "text": "Select Sector SPDRs pay quarterly; the September ex-date was Sep 21, so a December ex-date near Dec 21 likely lands inside this window and lowers the raw price by about the quarterly yield.",
+          "source": null,
+          "kind": "model_expectation"
+        },
+        {
+          "text": "The range is a bit narrower than the options-implied one at the edges, since implied vol usually runs above realized.",
+          "source": null,
+          "kind": "model_expectation"
+        }
+      ],
+      "bear": [
+        {
+          "text": "The PHLX Semiconductor Index hit a seven-month low on doubts AI spending will pay off, which can spill into Alphabet and Meta given their heavy AI capex.",
+          "source": "https://stockanalysis.com/news/nvidia-gives-back-half-huang-rally/"
+        },
+        {
+          "text": "Yahoo Finance headlines point to legal overhangs for Meta and Google, including a social media verdict and a Meta trial (earlier in 2026).",
+          "source": "https://finance.yahoo.com/sectors/communication-services/"
+        },
+        {
+          "text": "New 20% tariffs and a hotter October PCE add consumer and ad-spending worries, with a 96% chance of a December hike priced as of Nov 17.",
+          "source": "https://finance.yahoo.com/markets/live/stock-market-today-wednesday-november-25-dow-sp-500-nasdaq-pce-inflation-data-091428237.html"
+        }
+      ]
+    },
+    "notes": "Made intraday (about 2:25 PM CT), not at a close. The AI range was written AFTER seeing the baseline, so the comparison is not blind. IV is the average of the call and put at the 105 strike (nearest the price) on the 2026-12-24 expiry.",
+    "status": "open"
+  },
+  {
+    "id": "2026-11-25_XLC_6m",
+    "symbol": "XLC",
+    "made_at": "2026-11-25",
+    "horizon": "6m",
+    "resolves_on": "2027-05-25",
+    "price_at_prediction": 105.3,
+    "price_time": "2026-11-25T20:23:00Z",
+    "ai": {
+      "low": 85.0,
+      "high": 130.0,
+      "level": 0.8,
+      "prob_up": 0.56
+    },
+    "baseline": {
+      "method": "implied_vol",
+      "iv": 0.2553,
+      "iv_updated_at": "2026-11-25T20:24:00Z",
+      "low": 83.63,
+      "high": 132.58,
+      "level": 0.8
+    },
+    "catalysts": {
+      "bull": [
+        {
+          "text": "XLC rose 1.9% in a week while rate-hike bets stayed elevated; Zacks says Meta and Alphabet have company-specific catalysts and resilient cash flows (undated recent piece).",
+          "source": "https://www.zacks.com/stock/news/2991132/should-you-rotate-to-telecom-software-etfs-now"
+        },
+        {
+          "text": "Same piece: XLK trades at a forward P/E of 25.63 while XLC trades at 12.95, about half the valuation.",
+          "source": "https://www.zacks.com/stock/news/2991132/should-you-rotate-to-telecom-software-etfs-now"
+        },
+        {
+          "text": "XLC closed at $107.76 on Nov 10 and is about 2.3% lower now, so it has not been immune to the sell-off but has held up better than chips.",
+          "source": null,
+          "kind": "model_expectation"
+        }
+      ],
+      "base": [
+        {
+          "text": "Beyond a few months the range is driven by the macro regime and the zero-drift options baseline, not by scheduled events.",
+          "source": null,
+          "kind": "model_expectation"
+        }
+      ],
+      "bear": [
+        {
+          "text": "The PHLX Semiconductor Index hit a seven-month low on doubts AI spending will pay off, which can spill into Alphabet and Meta given their heavy AI capex.",
+          "source": "https://stockanalysis.com/news/nvidia-gives-back-half-huang-rally/"
+        },
+        {
+          "text": "Yahoo Finance headlines point to legal overhangs for Meta and Google, including a social media verdict and a Meta trial (earlier in 2026).",
+          "source": "https://finance.yahoo.com/sectors/communication-services/"
+        },
+        {
+          "text": "New 20% tariffs and a hotter October PCE add consumer and ad-spending worries, with a 96% chance of a December hike priced as of Nov 17.",
+          "source": "https://finance.yahoo.com/markets/live/stock-market-today-wednesday-november-25-dow-sp-500-nasdaq-pce-inflation-data-091428237.html"
+        }
+      ]
+    },
+    "notes": "Made intraday (about 2:25 PM CT), not at a close. The AI range was written AFTER seeing the baseline, so the comparison is not blind. IV is the average of the call and put at the 105 strike (nearest the price) on the 2027-06-17 expiry; the horizon has no listed expiry of its own, so this is the nearest listed one (for 5y the longest listed). The baseline is zero-drift, a weak yardstick over long horizons.",
+    "status": "open"
+  },
+  {
+    "id": "2026-11-25_XLC_1y",
+    "symbol": "XLC",
+    "made_at": "2026-11-25",
+    "horizon": "1y",
+    "resolves_on": "2027-11-24",
+    "price_at_prediction": 105.3,
+    "price_time": "2026-11-25T20:23:00Z",
+    "ai": {
+      "low": 79.0,
+      "high": 140.0,
+      "level": 0.8,
+      "prob_up": 0.58
+    },
+    "baseline": {
+      "method": "implied_vol",
+      "iv": 0.2352,
+      "iv_updated_at": "2026-11-25T20:24:00Z",
+      "low": 77.92,
+      "high": 142.28,
+      "level": 0.8
+    },
+    "catalysts": {
+      "bull": [
+        {
+          "text": "XLC rose 1.9% in a week while rate-hike bets stayed elevated; Zacks says Meta and Alphabet have company-specific catalysts and resilient cash flows (undated recent piece).",
+          "source": "https://www.zacks.com/stock/news/2991132/should-you-rotate-to-telecom-software-etfs-now"
+        },
+        {
+          "text": "Same piece: XLK trades at a forward P/E of 25.63 while XLC trades at 12.95, about half the valuation.",
+          "source": "https://www.zacks.com/stock/news/2991132/should-you-rotate-to-telecom-software-etfs-now"
+        },
+        {
+          "text": "XLC closed at $107.76 on Nov 10 and is about 2.3% lower now, so it has not been immune to the sell-off but has held up better than chips.",
+          "source": null,
+          "kind": "model_expectation"
+        }
+      ],
+      "base": [
+        {
+          "text": "Beyond a few months the range is driven by the macro regime and the zero-drift options baseline, not by scheduled events.",
+          "source": null,
+          "kind": "model_expectation"
+        }
+      ],
+      "bear": [
+        {
+          "text": "The PHLX Semiconductor Index hit a seven-month low on doubts AI spending will pay off, which can spill into Alphabet and Meta given their heavy AI capex.",
+          "source": "https://stockanalysis.com/news/nvidia-gives-back-half-huang-rally/"
+        },
+        {
+          "text": "Yahoo Finance headlines point to legal overhangs for Meta and Google, including a social media verdict and a Meta trial (earlier in 2026).",
+          "source": "https://finance.yahoo.com/sectors/communication-services/"
+        },
+        {
+          "text": "New 20% tariffs and a hotter October PCE add consumer and ad-spending worries, with a 96% chance of a December hike priced as of Nov 17.",
+          "source": "https://finance.yahoo.com/markets/live/stock-market-today-wednesday-november-25-dow-sp-500-nasdaq-pce-inflation-data-091428237.html"
+        }
+      ]
+    },
+    "notes": "Made intraday (about 2:25 PM CT), not at a close. The AI range was written AFTER seeing the baseline, so the comparison is not blind. IV is the average of the call and put at the 105 strike (nearest the price) on the 2028-01-21 expiry; the horizon has no listed expiry of its own, so this is the nearest listed one (for 5y the longest listed). The baseline is zero-drift, a weak yardstick over long horizons.",
+    "status": "open"
+  },
+  {
+    "id": "2026-11-25_XLC_5y",
+    "symbol": "XLC",
+    "made_at": "2026-11-25",
+    "horizon": "5y",
+    "resolves_on": "2031-11-25",
+    "price_at_prediction": 105.3,
+    "price_time": "2026-11-25T20:23:00Z",
+    "ai": {
+      "low": 58.0,
+      "high": 205.0,
+      "level": 0.8,
+      "prob_up": 0.68
+    },
+    "baseline": {
+      "method": "implied_vol",
+      "iv": 0.2404,
+      "iv_updated_at": "2026-11-25T20:24:00Z",
+      "low": 52.86,
+      "high": 209.74,
+      "level": 0.8
+    },
+    "catalysts": {
+      "bull": [
+        {
+          "text": "XLC rose 1.9% in a week while rate-hike bets stayed elevated; Zacks says Meta and Alphabet have company-specific catalysts and resilient cash flows (undated recent piece).",
+          "source": "https://www.zacks.com/stock/news/2991132/should-you-rotate-to-telecom-software-etfs-now"
+        },
+        {
+          "text": "Same piece: XLK trades at a forward P/E of 25.63 while XLC trades at 12.95, about half the valuation.",
+          "source": "https://www.zacks.com/stock/news/2991132/should-you-rotate-to-telecom-software-etfs-now"
+        },
+        {
+          "text": "XLC closed at $107.76 on Nov 10 and is about 2.3% lower now, so it has not been immune to the sell-off but has held up better than chips.",
+          "source": null,
+          "kind": "model_expectation"
+        }
+      ],
+      "base": [
+        {
+          "text": "Beyond a few months the range is driven by the macro regime and the zero-drift options baseline, not by scheduled events.",
+          "source": null,
+          "kind": "model_expectation"
+        }
+      ],
+      "bear": [
+        {
+          "text": "The PHLX Semiconductor Index hit a seven-month low on doubts AI spending will pay off, which can spill into Alphabet and Meta given their heavy AI capex.",
+          "source": "https://stockanalysis.com/news/nvidia-gives-back-half-huang-rally/"
+        },
+        {
+          "text": "Yahoo Finance headlines point to legal overhangs for Meta and Google, including a social media verdict and a Meta trial (earlier in 2026).",
+          "source": "https://finance.yahoo.com/sectors/communication-services/"
+        },
+        {
+          "text": "New 20% tariffs and a hotter October PCE add consumer and ad-spending worries, with a 96% chance of a December hike priced as of Nov 17.",
+          "source": "https://finance.yahoo.com/markets/live/stock-market-today-wednesday-november-25-dow-sp-500-nasdaq-pce-inflation-data-091428237.html"
+        }
+      ]
+    },
+    "notes": "Made intraday (about 2:25 PM CT), not at a close. The AI range was written AFTER seeing the baseline, so the comparison is not blind. IV is the average of the call and put at the 105 strike (nearest the price) on the 2029-01-19 expiry; the horizon has no listed expiry of its own, so this is the nearest listed one (for 5y the longest listed). The baseline is zero-drift, a weak yardstick over long horizons.",
+    "status": "open"
   }
 ]
