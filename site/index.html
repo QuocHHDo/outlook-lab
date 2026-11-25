@@ -316,6 +316,40 @@ h1, h2, h3, h4, .tile b, .hc-top b, .cal b, .price { font-family: var(--display)
 #outlook .eyebrow { border-top: 0; padding-top: 0; }
 #outlook .section + .section > .eyebrow, #outlook .section > .eyebrow + * { }
 .horizon-pick { max-width: 100%; overflow-x: auto; }
+/* ---- ticker page ---- */
+#outlook.card { background: transparent; border: 0; padding: 0; gap: 40px; }
+#outlook .card-head { align-items: baseline; }
+#outlook-title { font-size: 26px; letter-spacing: -0.02em; }
+#outlook .card-head svg { display: none; }
+.hero-chart .horizon-pick { align-self: flex-start; }
+.chartwrap { background: var(--card); border: 1px solid var(--line); border-radius: 6px; padding: 14px 10px 6px; }
+.chartwrap .cone-ai { fill: var(--ai-fill); stroke: var(--accent); stroke-width: 1.6; }
+.chartwrap .cone-base { opacity: 1; }
+.chartwrap .hist { stroke-width: 2; }
+.chartwrap .endlab { fill: var(--accent-ink); font-weight: 700; font-size: 12px; }
+.chartwrap .startlab { fill: var(--ink); font-weight: 700; font-size: 12px; }
+.chartwrap text { font-size: 11.5px; }
+.hrow { grid-template-columns: 130px minmax(240px, 1fr) 230px 120px; padding: 18px 0; }
+.hlabel b { font-family: var(--display); font-size: 18px; letter-spacing: -0.01em; }
+.nums > span:first-child { font-family: var(--display); font-size: 19px; letter-spacing: -0.015em; color: var(--ink); }
+.nums .ai-k { color: var(--accent-ink); font-size: 13px; margin-right: 4px; font-family: "Hanken Grotesk", sans-serif; }
+.hrow > .nums:last-child > span:first-child { font-family: "Hanken Grotesk", sans-serif; font-size: 12px; letter-spacing: 0; color: var(--muted); }
+.hrow > .nums:last-child > span:last-child { font-family: var(--display); font-size: 19px; }
+.hrow > .nums:last-child .ai-k { font-size: inherit; margin: 0; }
+.hrow > .nums:last-child .alt { font-size: 12px; font-family: "Hanken Grotesk", sans-serif; }
+.bar-ai { background: var(--ai-fill); border-width: 2px; }
+.bar-base { background: var(--base-fill); }
+.case { border: 0; border-top: 3px solid var(--line); border-radius: 0; padding: 12px 0 0; }
+.case-bull { border-top-color: var(--ok); } .case-bear { border-top-color: var(--bad); } .case-base { border-top-color: var(--muted); }
+.case h4 { font-family: var(--display); font-size: 18px; letter-spacing: -0.01em; }
+.case-bull h4 { color: var(--ok); } .case-bear h4 { color: var(--bad); }
+.claim { font-size: 14px; line-height: 1.5; }
+.tablewrap { border-radius: 6px; }
+thead tr { background: transparent; border-bottom: 2px solid var(--ink); }
+th { font-weight: 700; font-size: 12.5px; color: var(--muted-2); }
+.ev-title { font-family: var(--display); font-size: 16px; font-weight: 700; letter-spacing: -0.01em; }
+@media (max-width: 900px) { .hrow { grid-template-columns: 1fr 1fr; } .hrow .chart, .hrow .bars { grid-column: 1 / -1; } }
+@media (max-width: 560px) { .hrow { grid-template-columns: 1fr; } .cases { grid-template-columns: 1fr; } .chartwrap { padding: 8px 2px 2px; } }
 @media (prefers-reduced-motion: reduce) { .tile.enter { animation: none; } }
 @media (max-width: 560px) { .tmap { height: 560px; } .head h1 { font-size: 36px; } }
 </style>
@@ -377,28 +411,32 @@ h1, h2, h3, h4, .tile b, .hc-top b, .cal b, .price { font-family: var(--display)
     <div>
       <div class="title-row">
         <svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" style="color:var(--accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polygon points="16.2 7.8 14.1 14.1 7.8 16.2 9.9 9.9 16.2 7.8"></polygon></svg>
-        <h2 id="outlook-title">AI outlook</h2>
+        <h2 id="outlook-title">Outlook</h2>
         <span class="chip">Prediction · the model's judgment, not a fact or advice</span>
       </div>
     </div>
     <p id="updated" class="muted" style="font-size:12px"></p>
   </div>
 
-  <div class="section">
-    <div class="section-top">
-      <h3 class="eyebrow">Prediction</h3>
-      <div id="legend" class="legend"></div>
-    </div>
-    <div id="rows"></div>
-    <h3 class="eyebrow" style="margin-top:18px">Price history and forecast range</h3>
+  <div class="section hero-chart">
+    <h3 class="eyebrow">Where the price could go</h3>
     <div id="chart-pick" class="horizon-pick" role="group" aria-label="Chart window"></div>
     <div id="chart" class="chartwrap"></div>
     <p class="muted" style="font-size:12px;margin-top:6px">Line: daily closes. Blue band: the AI 80% range; gray band: the volatility baseline; dashed lines: the drift baseline. Bands join the horizon ranges with straight lines, so the shape between horizons is only a guide.</p>
+  </div>
+
+  <div class="section">
+        <div class="section-top">
+      <h3 class="eyebrow">Range for each horizon</h3>
+      <div id="legend" class="legend"></div>
+    </div>
+    <div id="rows"></div>
     <div class="record">
       <p id="record-text"></p>
       <a id="all-link" href="#all">All predictions and scores →</a>
     </div>
   </div>
+
 
   <div class="section">
     <h3 class="eyebrow">The model's analysis</h3>
@@ -693,7 +731,7 @@ h1, h2, h3, h4, .tile b, .hc-top b, .cal b, .price { font-family: var(--display)
     cone.forEach(function (p) { all.push(p.ai.low, p.ai.high, p.baseline.low, p.baseline.high); });
     hist.concat(after).forEach(function (pt) { all.push(pt[1]); });
     var lo = Math.min.apply(null, all), hi = Math.max.apply(null, all), pad = (hi - lo) * 0.08; lo -= pad; hi += pad;
-    var W = 720, H = 280, L = 52, R = 12, T = 12, B = 28;
+    var W = 720, H = 340, L = 52, R = 64, T = 14, B = 30;
     function X(d) { return L + (d - x0) / (x1 - x0) * (W - L - R); }
     function Y(v) { return T + (hi - v) / (hi - lo) * (H - T - B); }
     var svg = svgEl("svg", { viewBox: "0 0 " + W + " " + H, role: "img" });
@@ -723,9 +761,14 @@ h1, h2, h3, h4, .tile b, .hc-top b, .cal b, .price { font-family: var(--display)
     svg.appendChild(svgEl("circle", { cx: X(t0), cy: Y(s0), r: 3.5 }, "start"));
     cone.forEach(function (p) {
       var d = dayNum(p.resolves_on);
-      if (X(d) - X(t0) > 110) { var tx2 = svgEl("text", { x: X(d), y: H - 8, "text-anchor": "end" }); tx2.textContent = HLABEL[p.horizon] || p.horizon; svg.appendChild(tx2); }
+      if (X(d) - X(t0) > 170) { var tx2 = svgEl("text", { x: X(d), y: H - 8, "text-anchor": "end" }); tx2.textContent = HLABEL[p.horizon] || p.horizon; svg.appendChild(tx2); }
       svg.appendChild(svgEl("line", { x1: X(d), x2: X(d), y1: Y(p.ai.low), y2: Y(p.ai.high) }, "axis"));
     });
+    var lastP = cone[cone.length - 1];
+    [["high", lastP.ai.high], ["low", lastP.ai.low]].forEach(function (e) {
+      var lt = svgEl("text", { x: X(dayNum(lastP.resolves_on)) + 6, y: Y(e[1]) + 4 }, "endlab"); lt.textContent = "$" + (e[1] >= 100 ? e[1].toFixed(0) : e[1].toFixed(1)); svg.appendChild(lt);
+    });
+    var st0 = svgEl("text", { x: X(t0) - 8, y: Y(s0) - 9, "text-anchor": "end" }, "startlab"); st0.textContent = "$" + (s0 >= 100 ? s0.toFixed(0) : s0.toFixed(1)); svg.appendChild(st0);
     var tn = svgEl("text", { x: X(t0), y: H - 8, "text-anchor": "start" }); tn.textContent = "Predicted " + fmtDate(base.made_at); svg.appendChild(tn);
     host.appendChild(svg);
   }
@@ -973,7 +1016,7 @@ h1, h2, h3, h4, .tile b, .hc-top b, .cal b, .price { font-family: var(--display)
     clear(cases);
     var claimCount = 0;
     [["bull", "Bull case"], ["base", "Base case"], ["bear", "Bear case"]].forEach(function (pair) {
-      var box = el("div", undefined, "case");
+      var box = el("div", undefined, "case case-" + pair[0]);
       box.appendChild(el("h4", pair[1]));
       var ul = el("ul");
       (cat[pair[0]] || []).forEach(function (c) {
