@@ -82,7 +82,7 @@
         "QQQ",
         "SMH"
       ],
-      "note": "Date from Robinhood's earnings calendar; companies can change it"
+      "note": "Robinhood calendar · tentative"
     },
     {
       "type": "scheduled",
@@ -106,7 +106,7 @@
       "symbols": [
         "SPY"
       ],
-      "note": "Date from Robinhood's earnings calendar; companies can change it"
+      "note": "Robinhood calendar · tentative"
     },
     {
       "type": "scheduled",
@@ -132,7 +132,7 @@
         "QQQ",
         "SMH"
       ],
-      "note": "Date from Robinhood's earnings calendar; companies can change it"
+      "note": "Robinhood calendar · tentative"
     },
     {
       "type": "scheduled",
