@@ -4,83 +4,205 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Outlook Lab: scored market forecasts</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
 <style>
-  :root { --ink:#1a1a1a; --muted:#5a5f6b; --line:#dfe2e8; --bg:#f6f7f9; --card:#fff; --accent:#2b4ccf; --ok:#1b6e3c; --bad:#a8420f; }
-  * { box-sizing: border-box; }
-  body { margin:0; background:var(--bg); color:var(--ink); font:15px/1.5 system-ui, -apple-system, "Segoe UI", sans-serif; }
-  main { max-width: 1040px; margin: 0 auto; padding: 32px 20px 64px; display:flex; flex-direction:column; gap:20px; }
-  h1 { margin:0; font-size:26px; }
-  h2 { margin:0 0 10px; font-size:13px; letter-spacing:.05em; text-transform:uppercase; color:var(--muted); }
-  p { margin:0; }
-  .muted { color:var(--muted); font-size:13px; }
-  .card { background:var(--card); border:1px solid var(--line); border-radius:10px; padding:18px 20px; }
-  .banner { background:#fff6e0; border:1px solid #e8d49a; border-radius:8px; padding:10px 14px; font-size:13px; color:#5c4a10; }
-  .grid { display:grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap:14px; }
-  .stat b { display:block; font-size:24px; }
-  .tablewrap { overflow-x:auto; }
-  table { width:100%; min-width:760px; border-collapse:collapse; font-size:13px; }
-  th, td { text-align:left; padding:9px 12px; border-top:1px solid var(--line); white-space:nowrap; }
-  thead th { border-top:0; background:#f0f2f6; font-weight:600; }
-  .held { color:var(--ok); font-weight:600; }
-  .missed { color:var(--bad); font-weight:600; }
-  .open { color:var(--muted); }
+:root {
+  --ink: oklch(0.145 0 0);
+  --muted: oklch(0.5 0.015 264);
+  --muted-2: oklch(0.4 0.015 264);
+  --line: oklch(0.9 0.006 264);
+  --line-2: oklch(0.93 0.006 264);
+  --bg: oklch(0.975 0.004 264);
+  --panel: oklch(0.965 0.006 264);
+  --accent: oklch(0.47 0.18 264);
+  --accent-ink: oklch(0.42 0.18 264);
+  --warn-bg: oklch(0.96 0.04 85);
+  --warn-ink: oklch(0.42 0.12 65);
+  --warn-line: oklch(0.85 0.08 80);
+  --ok: oklch(0.45 0.13 150);
+  --bad: oklch(0.5 0.16 40);
+}
+* { box-sizing: border-box; }
+body { margin: 0; }
+a { color: var(--accent); }
+a:hover { color: oklch(0.38 0.18 264); }
+a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.page { min-height: 100vh; background: var(--bg); color: var(--ink); font-family: Inter, system-ui, sans-serif; font-size: 14px; line-height: 1.5; padding: 32px 24px 64px; }
+.wrap { max-width: 1120px; margin: 0 auto; display: flex; flex-direction: column; gap: 20px; }
+p { margin: 0; }
+h1, h2, h3, h4 { margin: 0; }
+.muted { color: var(--muted); }
+.pill { align-self: flex-start; font-size: 12px; font-weight: 600; letter-spacing: 0.02em; color: var(--warn-ink); background: var(--warn-bg); border: 1px solid var(--warn-line); border-radius: 999px; padding: 4px 12px; }
+.head { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 12px; }
+.head h1 { font-size: 28px; font-weight: 700; letter-spacing: -0.01em; }
+.price { font-size: 22px; font-weight: 600; text-align: right; }
+.price small { display: block; font-size: 12px; font-weight: 400; color: var(--muted); }
+.tabs { display: flex; flex-wrap: wrap; gap: 4px; border-bottom: 1px solid var(--line); }
+.tabs a { text-decoration: none; color: var(--muted); padding: 10px 14px; font-weight: 500; margin-bottom: -1px; border-bottom: 2px solid transparent; }
+.tabs a[aria-current="page"] { color: var(--ink); font-weight: 600; border-bottom-color: var(--accent); }
+.card { background: #fff; border: 1px solid var(--line); border-radius: 10px; padding: 24px; display: flex; flex-direction: column; gap: 24px; }
+.card-head { display: flex; flex-wrap: wrap; align-items: flex-start; justify-content: space-between; gap: 16px; }
+.title-row { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; }
+.title-row h2 { font-size: 18px; font-weight: 600; }
+.chip { font-size: 12px; font-weight: 600; color: var(--warn-ink); background: var(--warn-bg); border-radius: 6px; padding: 3px 8px; }
+.meta { font-size: 13px; color: var(--muted); margin-top: 8px; }
+.section { display: flex; flex-direction: column; gap: 14px; }
+.eyebrow { font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; color: var(--muted); }
+.section-top { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 8px; }
+.legend { display: flex; flex-wrap: wrap; gap: 16px; font-size: 12px; color: var(--muted-2); }
+.legend span { display: flex; align-items: center; gap: 6px; }
+.sw-ai { width: 18px; height: 10px; border-radius: 3px; background: oklch(0.47 0.18 264 / 0.3); border: 1.5px solid var(--accent); }
+.sw-base { width: 18px; height: 10px; border-radius: 3px; background: oklch(0.88 0.01 264); }
+.sw-today { width: 2px; height: 14px; background: var(--ink); }
+.sw-close { width: 9px; height: 9px; background: var(--ink); transform: rotate(45deg); }
+.hrow { display: grid; grid-template-columns: 150px minmax(240px, 1fr) 210px 170px; gap: 20px; align-items: center; padding: 14px 0; border-top: 1px solid var(--line-2); }
+.hlabel { display: flex; flex-direction: column; }
+.hlabel b { font-weight: 600; }
+.hlabel small { font-size: 12px; color: var(--muted); }
+.bars { position: relative; height: 44px; }
+.bar-base { position: absolute; top: 4px; height: 14px; border-radius: 4px; background: oklch(0.88 0.01 264); }
+.bar-ai { position: absolute; top: 24px; height: 16px; border-radius: 4px; background: oklch(0.47 0.18 264 / 0.3); border: 1.5px solid var(--accent); }
+.mark-today { position: absolute; top: 0; bottom: 0; width: 2px; background: var(--ink); }
+.mark-close { position: absolute; top: 17px; width: 10px; height: 10px; margin-left: -5px; background: var(--ink); transform: rotate(45deg); }
+.ticks { position: relative; height: 16px; font-size: 11px; color: var(--muted); margin-top: 4px; }
+.ticks span { position: absolute; transform: translateX(-50%); }
+.nums { display: flex; flex-direction: column; gap: 2px; font-size: 13px; }
+.nums .sub { font-size: 12px; color: var(--muted); }
+.ai-k { font-weight: 600; color: var(--accent-ink); }
+.alt { color: oklch(0.45 0.015 264); }
+.record { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px; background: var(--panel); border-radius: 8px; padding: 12px 16px; }
+.record p { font-size: 13px; }
+.record a { font-size: 13px; font-weight: 500; }
+.horizon-pick { display: inline-flex; gap: 4px; background: var(--panel); border-radius: 8px; padding: 3px; align-self: flex-start; }
+.horizon-pick button { font: inherit; font-size: 13px; font-weight: 500; min-height: 34px; padding: 0 14px; border: 0; border-radius: 6px; background: transparent; color: var(--muted-2); cursor: pointer; }
+.horizon-pick button[aria-pressed="true"] { background: #fff; color: var(--ink); font-weight: 600; box-shadow: 0 0 0 1px var(--line); }
+.cases { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+.case { border: 1px solid var(--line); border-radius: 8px; padding: 16px; display: flex; flex-direction: column; gap: 12px; }
+.case h4 { font-size: 15px; font-weight: 600; }
+.case ul { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 12px; }
+.claim { display: flex; flex-direction: column; gap: 4px; font-size: 13px; }
+.claim.unv { color: var(--muted); font-style: italic; }
+.tags { display: flex; flex-wrap: wrap; gap: 4px; font-style: normal; }
+.tag { font-size: 11px; font-weight: 500; border-radius: 4px; padding: 1px 6px; background: oklch(0.945 0.006 264); color: var(--muted-2); text-decoration: none; }
+a.tag:hover { color: var(--ink); text-decoration: underline; }
+.tag.model { background: oklch(0.95 0.03 264); color: var(--accent-ink); }
+.tag.unv { background: var(--warn-bg); color: var(--warn-ink); }
+.sources h4 { font-size: 14px; font-weight: 600; margin-bottom: 6px; }
+.sources ol { margin: 0; padding-left: 20px; font-size: 12px; color: var(--muted-2); display: flex; flex-direction: column; gap: 2px; }
+.note { font-size: 12px; color: oklch(0.45 0.015 264); background: var(--panel); border-radius: 8px; padding: 10px 14px; }
+.tablewrap { overflow-x: auto; border: 1px solid var(--line); border-radius: 8px; }
+table { width: 100%; min-width: 760px; border-collapse: collapse; font-size: 13px; }
+thead tr { background: var(--panel); text-align: left; }
+th, td { padding: 10px 14px; text-align: left; white-space: nowrap; }
+th { font-weight: 600; }
+tbody tr { border-top: 1px solid var(--line-2); }
+.r-open { color: var(--muted); font-weight: 500; }
+.r-held { color: var(--ok); font-weight: 500; }
+.r-miss { color: var(--bad); font-weight: 500; }
+.foot { font-size: 12px; color: oklch(0.45 0.015 264); border-top: 1px solid var(--line-2); padding-top: 14px; }
+@media (max-width: 900px) {
+  .hrow { grid-template-columns: 1fr; gap: 10px; }
+  .cases { grid-template-columns: 1fr; }
+  .card { padding: 18px; }
+}
 </style>
 </head>
 <body>
-<main>
-  <header>
-    <h1>Outlook Lab</h1>
-    <p class="muted">AI forecast ranges for index and sector ETFs, scored against a no-view volatility baseline.</p>
-  </header>
+<div class="page">
+<div class="wrap">
 
-  <p class="banner">Predictions by an AI model are its judgment, not facts and not financial advice. Every prediction is kept and scored when it comes due, including the misses.</p>
+<header class="head">
+  <div>
+    <h1 id="sym-title">Outlook Lab</h1>
+    <p id="sym-name" class="muted">AI forecast ranges scored against a no-view volatility baseline</p>
+  </div>
+  <p id="sym-price" class="price" hidden></p>
+</header>
 
-  <section class="card" aria-labelledby="record-title">
-    <h2 id="record-title">Track record</h2>
-    <p id="record-note" class="muted">Loading…</p>
-    <div id="record-stats" class="grid" style="margin-top:12px"></div>
-  </section>
+<nav id="tabs" class="tabs" aria-label="Symbols"></nav>
 
-  <section class="card" aria-labelledby="preds-title">
-    <h2 id="preds-title">All predictions</h2>
+<p id="status" class="muted">Loading…</p>
+
+<section id="outlook" class="card" aria-labelledby="outlook-title" hidden>
+  <div class="card-head">
+    <div>
+      <div class="title-row">
+        <svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="oklch(0.47 0.18 264)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polygon points="16.2 7.8 14.1 14.1 7.8 16.2 9.9 9.9 16.2 7.8"></polygon></svg>
+        <h2 id="outlook-title">AI outlook</h2>
+        <span class="chip">Prediction · the model's judgment, not a fact or advice</span>
+      </div>
+      <p id="outlook-meta" class="meta"></p>
+    </div>
+    <p id="updated" class="muted" style="font-size:12px"></p>
+  </div>
+
+  <div class="section">
+    <div class="section-top">
+      <h3 class="eyebrow">Prediction</h3>
+      <div id="legend" class="legend"></div>
+    </div>
+    <div id="rows"></div>
+    <div class="record">
+      <p id="record-text"></p>
+      <a id="all-link" href="#all">All predictions and scores →</a>
+    </div>
+  </div>
+
+  <div class="section">
+    <h3 class="eyebrow">The model's analysis</h3>
+    <div id="horizon-pick" class="horizon-pick" role="group" aria-label="Horizon for the analysis" hidden></div>
+    <div id="cases" class="cases"></div>
+    <div id="sources" class="sources"></div>
+    <p id="notes" class="note" hidden></p>
+  </div>
+
+  <div id="all" class="section">
+    <h3 id="past-title" class="eyebrow">Past outlooks</h3>
     <div class="tablewrap">
       <table>
         <thead>
           <tr>
-            <th scope="col">Made</th><th scope="col">Symbol</th><th scope="col">Horizon</th>
-            <th scope="col">Start</th><th scope="col">AI range</th><th scope="col">Baseline range</th>
-            <th scope="col">Close</th><th scope="col">AI</th><th scope="col">Baseline</th>
+            <th scope="col">Made</th><th scope="col">Horizon</th><th scope="col">AI range</th>
+            <th scope="col">Baseline range</th><th scope="col">Close at horizon</th>
+            <th scope="col">AI</th><th scope="col">Baseline</th>
           </tr>
         </thead>
-        <tbody id="rows"></tbody>
+        <tbody id="past"></tbody>
       </table>
     </div>
-    <p id="empty" class="muted" hidden>No predictions yet.</p>
-  </section>
+  </div>
 
-  <section class="card">
-    <h2>How scoring works</h2>
-    <p class="muted">Coverage is how often the close landed inside the range. An 80% range should cover about 80% over many predictions: far higher means it is too wide to be useful, far lower means it is overconfident. The interval score rewards narrow ranges that still hold (lower is better). Comparisons with the baseline are shown only after enough predictions have resolved.</p>
-  </section>
-</main>
+  <p class="foot">This is a prediction by an AI model: its best judgment, not a fact and not advice. Every prediction is kept and scored when it comes due. Coverage is how often the close lands inside the range; an 80% range should cover about 80% over many predictions.</p>
+</section>
+
+</div>
+</div>
 
 <script>
 (function () {
+  var NAMES = { SPY: "SPDR S&P 500 ETF", QQQ: "Invesco QQQ Trust", SMH: "VanEck Semiconductor ETF" };
+  var HLABEL = { "1w": "1 week", "1m": "1 month", "3m": "3 months", "1y": "12 months" };
+  var HORDER = ["1w", "1m", "3m", "1y"];
+  var state = { preds: [], summary: null, prices: {}, symbol: null, horizon: null };
+
+  function $(id) { return document.getElementById(id); }
   function el(tag, text, cls) {
     var n = document.createElement(tag);
-    if (text !== undefined) n.textContent = text;
+    if (text !== undefined && text !== null) n.textContent = text;
     if (cls) n.className = cls;
     return n;
   }
+  function clear(n) { while (n.firstChild) n.removeChild(n.firstChild); }
   function money(v) { return v == null ? "" : "$" + Number(v).toFixed(2); }
   function range(r) { return r ? money(r.low) + " – " + money(r.high) : ""; }
   function pct(v) { return v == null ? "n/a" : Math.round(v * 100) + "%"; }
-  function num(v) { return v == null ? "n/a" : Number(v).toFixed(4); }
-  function label(r) {
-    if (!r) return ["Open", "open"];
-    if (r === "held") return ["Held", "held"];
-    return [r === "missed_above" ? "Missed (above)" : "Missed (below)", "missed"];
+  function fmtDate(iso) {
+    var d = new Date(iso + "T12:00:00Z");
+    return d.toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric", timeZone: "UTC" });
   }
+  function safeUrl(u) { return typeof u === "string" && /^https:\/\//.test(u) ? u : null; }
+  function domain(u) { try { return new URL(u).hostname.replace(/^www\./, ""); } catch (e) { return u; } }
   function load(path) {
     return fetch(path, { cache: "no-store" }).then(function (r) {
       if (!r.ok) throw new Error(path + " " + r.status);
@@ -88,49 +210,286 @@
     });
   }
 
-  function renderRecord(s) {
-    var note = document.getElementById("record-note");
-    var box = document.getElementById("record-stats");
-    if (!s || !s.n_total) { note.textContent = "No predictions yet."; return; }
-    note.textContent = s.n_resolved + " of " + s.n_total + " predictions have resolved. " +
-      (s.comparison_ready
-        ? "Enough to compare, but still a small sample."
-        : "Too few to judge; the comparison with the baseline shows from " + s.min_resolved_for_comparison + ".");
-    if (!s.comparison_ready) return;
-    var o = s.overall;
-    [
-      ["AI coverage", pct(o.ai.coverage)],
-      ["Baseline coverage", pct(o.baseline.coverage)],
-      ["AI interval score", num(o.ai.mean_interval_score)],
-      ["Baseline interval score", num(o.baseline.mean_interval_score)]
-    ].forEach(function (pair) {
-      var c = el("div", undefined, "stat");
-      c.appendChild(el("span", pair[0], "muted"));
-      c.appendChild(el("b", pair[1]));
-      box.appendChild(c);
+  function symbols() {
+    var seen = {};
+    state.preds.forEach(function (p) { seen[p.symbol] = true; });
+    var pref = ["SPY", "QQQ", "SMH"];
+    var all = Object.keys(seen);
+    return pref.filter(function (s) { return seen[s]; }).concat(all.filter(function (s) { return pref.indexOf(s) < 0; }).sort());
+  }
+  function forSymbol(sym) { return state.preds.filter(function (p) { return p.symbol === sym; }); }
+  function latestByHorizon(list) {
+    var map = {};
+    list.forEach(function (p) {
+      var cur = map[p.horizon];
+      if (!cur || p.made_at >= cur.made_at) map[p.horizon] = p;
+    });
+    return HORDER.filter(function (h) { return map[h]; }).map(function (h) { return map[h]; });
+  }
+
+  function makeScale(rows) {
+    var vals = [];
+    rows.forEach(function (p) {
+      vals.push(p.ai.low, p.ai.high, p.baseline.low, p.baseline.high, p.price_at_prediction);
+      if (p.result) vals.push(p.result.close);
+    });
+    var lo = Math.min.apply(null, vals), hi = Math.max.apply(null, vals);
+    var pad = (hi - lo) * 0.08 || 1;
+    lo -= pad; hi += pad;
+    var steps = [1, 2, 5, 10, 20, 25, 50, 100, 200, 250, 500, 1000];
+    var step = steps[steps.length - 1];
+    for (var i = 0; i < steps.length; i++) { if ((hi - lo) / steps[i] <= 6) { step = steps[i]; break; } }
+    var ticks = [];
+    for (var t = Math.ceil(lo / step) * step; t <= hi; t += step) ticks.push(t);
+    return { lo: lo, hi: hi, ticks: ticks };
+  }
+  function pos(sc, v) { return ((v - sc.lo) / (sc.hi - sc.lo) * 100).toFixed(2) + "%"; }
+  function wid(sc, a, b) { return ((b - a) / (sc.hi - sc.lo) * 100).toFixed(2) + "%"; }
+
+  function renderTabs() {
+    var nav = $("tabs");
+    clear(nav);
+    symbols().forEach(function (s) {
+      var a = el("a", s);
+      a.href = "#" + s;
+      if (s === state.symbol) a.setAttribute("aria-current", "page");
+      nav.appendChild(a);
     });
   }
 
-  function renderRows(preds) {
-    var body = document.getElementById("rows");
-    if (!preds.length) { document.getElementById("empty").hidden = false; return; }
-    preds.slice().sort(function (a, b) { return a.made_at < b.made_at ? 1 : -1; }).forEach(function (p) {
-      var res = p.result || null;
-      var ai = label(res && res.ai.result), bl = label(res && res.baseline.result);
-      var tr = document.createElement("tr");
-      [p.made_at, p.symbol, p.horizon, money(p.price_at_prediction), range(p.ai), range(p.baseline),
-       res ? money(res.close) + " (" + res.close_date + ")" : "Due " + p.resolves_on].forEach(function (t) {
-        tr.appendChild(el("td", t));
+  function renderHeader(rows) {
+    $("sym-title").textContent = state.symbol;
+    $("sym-name").textContent = NAMES[state.symbol] || "";
+    var p = $("sym-price");
+    var series = state.prices[state.symbol];
+    var text = null, sub = null;
+    if (series) {
+      var dates = Object.keys(series).sort();
+      if (dates.length) { text = money(series[dates[dates.length - 1]]); sub = "Close " + fmtDate(dates[dates.length - 1]); }
+    }
+    if (!text && rows.length) { text = money(rows[rows.length - 1].price_at_prediction); sub = "At prediction"; }
+    clear(p);
+    if (text) { p.appendChild(document.createTextNode(text)); p.appendChild(el("small", sub)); p.hidden = false; }
+    else { p.hidden = true; }
+  }
+
+  function renderRows(rows) {
+    var host = $("rows");
+    clear(host);
+    var sc = makeScale(rows);
+    var anyClose = rows.some(function (p) { return p.result; });
+    var legend = $("legend");
+    clear(legend);
+    [["sw-ai", "AI 80% range"], ["sw-base", "Baseline 80% range (volatility only, no view)"], ["sw-today", "Price at prediction"]]
+      .concat(anyClose ? [["sw-close", "Close at horizon"]] : [])
+      .forEach(function (x) {
+        var s = el("span");
+        s.appendChild(el("i", "", x[0]));
+        s.firstChild.setAttribute("aria-hidden", "true");
+        s.appendChild(document.createTextNode(x[1]));
+        legend.appendChild(s);
       });
+
+    rows.forEach(function (p) {
+      var row = el("div", undefined, "hrow");
+      var label = el("div", undefined, "hlabel");
+      label.appendChild(el("b", HLABEL[p.horizon] || p.horizon));
+      label.appendChild(el("small", (p.result ? "Resolved " : "Resolves ") + fmtDate(p.resolves_on)));
+      row.appendChild(label);
+
+      var chart = el("div");
+      var bars = el("div", undefined, "bars");
+      bars.setAttribute("role", "img");
+      bars.setAttribute("aria-label", (HLABEL[p.horizon] || p.horizon) + ": AI range " + range(p.ai) + ", baseline " + range(p.baseline) + ", price at prediction " + money(p.price_at_prediction));
+      var b = el("div", undefined, "bar-base"); b.style.left = pos(sc, p.baseline.low); b.style.width = wid(sc, p.baseline.low, p.baseline.high);
+      var a = el("div", undefined, "bar-ai"); a.style.left = pos(sc, p.ai.low); a.style.width = wid(sc, p.ai.low, p.ai.high);
+      var t = el("div", undefined, "mark-today"); t.style.left = pos(sc, p.price_at_prediction);
+      bars.appendChild(b); bars.appendChild(a); bars.appendChild(t);
+      if (p.result) { var c = el("div", undefined, "mark-close"); c.style.left = pos(sc, p.result.close); c.title = "Close " + money(p.result.close); bars.appendChild(c); }
+      chart.appendChild(bars);
+      var ticks = el("div", undefined, "ticks");
+      ticks.setAttribute("aria-hidden", "true");
+      sc.ticks.forEach(function (v) { var s = el("span", "$" + v); s.style.left = pos(sc, v); ticks.appendChild(s); });
+      chart.appendChild(ticks);
+      row.appendChild(chart);
+
+      var nums = el("div", undefined, "nums");
+      var l1 = el("span"); l1.appendChild(el("span", "AI", "ai-k")); l1.appendChild(document.createTextNode(" " + range(p.ai)));
+      nums.appendChild(l1);
+      nums.appendChild(el("span", "Baseline " + range(p.baseline), "alt"));
+      row.appendChild(nums);
+
+      var up = el("div", undefined, "nums");
+      up.appendChild(el("span", "Chance above start", "sub"));
+      var l2 = el("span");
+      l2.appendChild(el("span", "AI " + pct(p.ai.prob_up), "ai-k"));
+      l2.appendChild(document.createTextNode(" · "));
+      l2.appendChild(el("span", "baseline 50%", "alt"));
+      up.appendChild(l2);
+      row.appendChild(up);
+      host.appendChild(row);
+    });
+  }
+
+  function renderRecord() {
+    var s = state.summary, t = $("record-text");
+    clear(t);
+    var strong = el("strong", "Track record:");
+    strong.style.fontWeight = "600";
+    t.appendChild(strong);
+    if (!s || !s.n_total) { t.appendChild(document.createTextNode(" no predictions yet.")); return; }
+    var msg = " " + s.n_resolved + " of " + s.n_total + " predictions have resolved. ";
+    if (s.comparison_ready) {
+      msg += "AI range held " + pct(s.overall.ai.coverage) + " of the time, baseline " + pct(s.overall.baseline.coverage) + ". Still a small sample.";
+    } else {
+      msg += "Too few to judge; the comparison with the baseline shows from " + s.min_resolved_for_comparison + ".";
+    }
+    t.appendChild(document.createTextNode(msg));
+  }
+
+  function renderAnalysis(rows) {
+    var pickHost = $("horizon-pick");
+    clear(pickHost);
+    if (!rows.length) return;
+    if (!rows.some(function (p) { return p.horizon === state.horizon; })) state.horizon = rows[0].horizon;
+    if (rows.length > 1) {
+      rows.forEach(function (p) {
+        var btn = el("button", HLABEL[p.horizon] || p.horizon);
+        btn.type = "button";
+        btn.setAttribute("aria-pressed", p.horizon === state.horizon ? "true" : "false");
+        btn.addEventListener("click", function () { state.horizon = p.horizon; renderAnalysis(rows); });
+        pickHost.appendChild(btn);
+      });
+      pickHost.hidden = false;
+    } else { pickHost.hidden = true; }
+
+    var cur = rows.filter(function (p) { return p.horizon === state.horizon; })[0] || rows[0];
+    if (!cur) return;
+    state.horizon = cur.horizon;
+
+    var cat = cur.catalysts || {};
+    var urls = [];
+    ["bull", "base", "bear"].forEach(function (k) {
+      (cat[k] || []).forEach(function (c) { var u = safeUrl(c.source); if (u && urls.indexOf(u) < 0) urls.push(u); });
+    });
+
+    var cases = $("cases");
+    clear(cases);
+    var claimCount = 0;
+    [["bull", "Bull case"], ["base", "Base case"], ["bear", "Bear case"]].forEach(function (pair) {
+      var box = el("div", undefined, "case");
+      box.appendChild(el("h4", pair[1]));
+      var ul = el("ul");
+      (cat[pair[0]] || []).forEach(function (c) {
+        claimCount++;
+        var u = safeUrl(c.source);
+        var model = c.kind === "model_expectation";
+        var li = el("li", undefined, "claim" + (!u && !model ? " unv" : ""));
+        li.appendChild(el("span", c.text));
+        var tags = el("span", undefined, "tags");
+        if (u) {
+          var a = el("a", "source " + (urls.indexOf(u) + 1), "tag");
+          a.href = u; a.target = "_blank"; a.rel = "noopener noreferrer";
+          tags.appendChild(a);
+        }
+        if (model) tags.appendChild(el("span", "model's expectation", "tag model"));
+        if (!u && !model) tags.appendChild(el("span", "unverified", "tag unv"));
+        li.appendChild(tags);
+        ul.appendChild(li);
+      });
+      box.appendChild(ul);
+      cases.appendChild(box);
+    });
+
+    var src = $("sources");
+    clear(src);
+    if (urls.length) {
+      src.appendChild(el("h4", "Sources"));
+      var ol = el("ol");
+      urls.forEach(function (u) {
+        var li = el("li");
+        var a = el("a", domain(u));
+        a.href = u; a.target = "_blank"; a.rel = "noopener noreferrer";
+        li.appendChild(a);
+        ol.appendChild(li);
+      });
+      src.appendChild(ol);
+    }
+
+    var notes = $("notes");
+    if (cur.notes) { notes.textContent = "Note: " + cur.notes; notes.hidden = false; } else { notes.hidden = true; }
+
+    var meta = "Made " + fmtDate(cur.made_at) + " at " + money(cur.price_at_prediction) + " · " + claimCount + " claims · " + urls.length + " sources";
+    $("outlook-meta").textContent = meta;
+  }
+
+  function resultCell(r) {
+    if (!r) return ["Open", "r-open"];
+    if (r === "held") return ["Held", "r-held"];
+    return [r === "missed_above" ? "Missed (above)" : "Missed (below)", "r-miss"];
+  }
+
+  function renderPast(list) {
+    $("past-title").textContent = "Past outlooks for " + state.symbol;
+    var body = $("past");
+    clear(body);
+    list.slice().sort(function (a, b) {
+      if (a.made_at !== b.made_at) return a.made_at < b.made_at ? 1 : -1;
+      return HORDER.indexOf(a.horizon) - HORDER.indexOf(b.horizon);
+    }).forEach(function (p) {
+      var res = p.result || null;
+      var ai = resultCell(res && res.ai.result), bl = resultCell(res && res.baseline.result);
+      var tr = el("tr");
+      [fmtDate(p.made_at), HLABEL[p.horizon] || p.horizon, range(p.ai), range(p.baseline),
+       res ? money(res.close) + " (" + fmtDate(res.close_date) + ")" : "Due " + fmtDate(p.resolves_on)
+      ].forEach(function (t) { tr.appendChild(el("td", t)); });
       tr.appendChild(el("td", ai[0], ai[1]));
       tr.appendChild(el("td", bl[0], bl[1]));
       body.appendChild(tr);
     });
   }
 
-  Promise.all([load("data/summary.json").catch(function () { return null; }),
-               load("data/predictions.json").catch(function () { return []; })])
-    .then(function (r) { renderRecord(r[0]); renderRows(r[1]); });
+  function render() {
+    var syms = symbols();
+    var status = $("status"), outlook = $("outlook");
+    if (!syms.length) {
+      status.textContent = "No predictions yet.";
+      status.hidden = false; outlook.hidden = true;
+      return;
+    }
+    var wanted = decodeURIComponent((location.hash || "").replace("#", ""));
+    state.symbol = syms.indexOf(wanted) >= 0 ? wanted : (syms.indexOf(state.symbol) >= 0 ? state.symbol : syms[0]);
+    var list = forSymbol(state.symbol);
+    var rows = latestByHorizon(list);
+    status.hidden = true; outlook.hidden = false;
+    renderTabs();
+    renderHeader(rows);
+    renderRows(rows);
+    renderRecord();
+    renderAnalysis(rows);
+    renderPast(list);
+    var up = $("updated");
+    up.textContent = state.summary && state.summary.generated_at ? "Scores updated " + fmtDate(state.summary.generated_at.slice(0, 10)) : "";
+  }
+
+  $("all-link").addEventListener("click", function (e) {
+    e.preventDefault();
+    $("all").scrollIntoView({ behavior: "smooth", block: "start" });
+  });
+  window.addEventListener("hashchange", function () { state.horizon = null; render(); });
+
+  Promise.all([
+    load("data/predictions.json"),
+    load("data/summary.json").catch(function () { return null; }),
+    load("data/prices.json").catch(function () { return {}; })
+  ]).then(function (r) {
+    state.preds = Array.isArray(r[0]) ? r[0] : [];
+    state.summary = r[1];
+    state.prices = r[2] || {};
+    render();
+  }).catch(function () {
+    $("status").textContent = "Could not load predictions.";
+  });
 })();
 </script>
 </body>
