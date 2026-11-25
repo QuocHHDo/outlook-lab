@@ -20,8 +20,9 @@ def check_range(errors, pid, name, obj):
         errors.append(f"{pid}: {name}.level must be between 0 and 1")
 
 
-def validate(predictions):
+def validate(predictions, locks=None):
     errors, seen = [], set()
+    locks = locks or {}
     for i, p in enumerate(predictions):
         pid = p.get("id", f"#{i}")
         if pid in seen:
@@ -44,6 +45,13 @@ def validate(predictions):
         base = p.get("baseline") or {}
         if base.get("method") not in BASELINE_METHODS:
             errors.append(f"{pid}: baseline.method must be one of {sorted(BASELINE_METHODS)}")
+        if p.get("blind"):
+            lock = locks.get(pid)
+            ai = p.get("ai") or {}
+            if not lock:
+                errors.append(f"{pid}: blind=true needs an entry in data/locks.json committed before the baseline")
+            elif any(lock.get(k) != ai.get(k) for k in ("low", "high", "prob_up")):
+                errors.append(f"{pid}: ai range differs from its lock in data/locks.json")
         prob = (p.get("ai") or {}).get("prob_up")
         if prob is not None and not (isinstance(prob, (int, float)) and 0 <= prob <= 1):
             errors.append(f"{pid}: ai.prob_up must be between 0 and 1")
@@ -82,7 +90,7 @@ def validate_events(doc):
 
 
 def main():
-    errors = validate(load("predictions.json", []))
+    errors = validate(load("predictions.json", []), load("locks.json", {}))
     errors += validate_events(load("events.json", {"events": []}))
     for e in errors:
         print("ERROR:", e)

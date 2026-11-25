@@ -28,6 +28,26 @@ def baseline_range(price, vol, days, level=0.8):
     return price * math.exp(-z * sigma), price * math.exp(z * sigma)
 
 
+DRIFT_ANNUAL = 0.06  # assumed long-run price return for every symbol (rough equity-market level)
+
+
+def drift_range(price, vol, days, level=0.8, mu=DRIFT_ANNUAL):
+    """Second baseline: same volatility, but the median moves with an assumed drift.
+
+    The mean price grows at `mu` per year, so the median log-return is
+    (mu - vol^2 / 2) * years. This is a crude, constant assumption for every symbol
+    (poor for bonds and gold); it exists to check whether an AI edge over the
+    zero-drift baseline is just the market's usual upward drift.
+    """
+    if price <= 0 or vol <= 0 or days <= 0:
+        raise ValueError("price, vol and days must be positive")
+    years = days / 365.0
+    sigma = vol * math.sqrt(years)
+    z = NormalDist().inv_cdf(0.5 + level / 2)
+    centre = (mu - 0.5 * vol * vol) * years
+    return price * math.exp(centre - z * sigma), price * math.exp(centre + z * sigma)
+
+
 def hist_vol(closes):
     """Annualized volatility from a list of daily closes (oldest first), 252 trading days."""
     if len(closes) < 21:

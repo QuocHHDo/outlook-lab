@@ -15,6 +15,7 @@ the ranges are too wide to be useful; far below means overconfident.
 """
 from datetime import datetime, timezone
 
+from baseline import drift_range
 from common import load, parse_date, save
 
 MIN_RESOLVED_FOR_COMPARISON = 10
@@ -59,18 +60,35 @@ def interval_score(low, high, outcome, level):
     return score
 
 
+def add_drift_baseline(pred):
+    """Attach baseline_drift (zero view, assumed drift) to a prediction that has an IV."""
+    base = pred.get("baseline") or {}
+    iv = base.get("iv")
+    if not iv or "baseline_drift" in pred:
+        return
+    try:
+        days = (parse_date(pred["resolves_on"]) - parse_date(pred["made_at"])).days
+        low, high = drift_range(pred["price_at_prediction"], iv, days, base.get("level", 0.8))
+    except (KeyError, ValueError):
+        return
+    pred["baseline_drift"] = {"method": "implied_vol_drift", "iv": iv, "low": round(low, 2),
+                              "high": round(high, 2), "level": base.get("level", 0.8)}
+
+
 def score_one(pred, close_date, close):
     start = pred["price_at_prediction"]
     out = {"close": close, "close_date": close_date}
     went_up = 1.0 if close > start else 0.0
-    for name in ("ai", "baseline"):
-        rng = pred[name]
+    for name in ("ai", "baseline", "baseline_drift"):
+        rng = pred.get(name)
+        if rng is None:
+            continue
         entry = {
             "result": classify(rng["low"], rng["high"], close),
             "interval_score": round(interval_score(rng["low"], rng["high"], close, rng["level"]) / start, 6),
             "width_pct": round((rng["high"] - rng["low"]) / start * 100, 3),
         }
-        prob = 0.5 if name == "baseline" else rng.get("prob_up")
+        prob = rng.get("prob_up") if name == "ai" else 0.5
         if prob is not None:
             entry["brier_up"] = round((prob - went_up) ** 2, 6)
         out[name] = entry
@@ -83,8 +101,10 @@ def _mean(values):
 
 def summarize_group(resolved):
     summary = {"n": len(resolved)}
-    for name in ("ai", "baseline"):
-        rows = [p["result"][name] for p in resolved]
+    for name in ("ai", "baseline", "baseline_drift"):
+        rows = [p["result"][name] for p in resolved if name in p["result"]]
+        if not rows:
+            continue
         briers = [r["brier_up"] for r in rows if "brier_up" in r]
         summary[name] = {
             "coverage": _mean([1.0 if r["result"] == "held" else 0.0 for r in rows]),
@@ -96,9 +116,25 @@ def summarize_group(resolved):
     return summary
 
 
+PROB_BINS = [(0.0, 0.4), (0.4, 0.5), (0.5, 0.6), (0.6, 0.7), (0.7, 1.0001)]
+
+
+def calibration(resolved):
+    """Reliability of ai.prob_up: in each probability bin, how often did the close beat the start?"""
+    bins = []
+    for lo, hi in PROB_BINS:
+        rows = [p for p in resolved if p["ai"].get("prob_up") is not None and lo <= p["ai"]["prob_up"] < hi]
+        ups = [1.0 if p["result"]["close"] > p["price_at_prediction"] else 0.0 for p in rows]
+        bins.append({"lo": lo, "hi": min(hi, 1.0), "n": len(rows),
+                     "mean_prob": _mean([p["ai"]["prob_up"] for p in rows]),
+                     "freq_up": _mean(ups)})
+    return bins
+
+
 def run(predictions, prices, now=None):
     needs_price = []
     for pred in predictions:
+        add_drift_baseline(pred)
         if pred.get("status") == "resolved":
             continue
         found = resolve_close(prices.get(pred["symbol"]), pred["resolves_on"])
@@ -124,7 +160,9 @@ def run(predictions, prices, now=None):
         "n_resolved": len(resolved),
         "min_resolved_for_comparison": MIN_RESOLVED_FOR_COMPARISON,
         "comparison_ready": len(resolved) >= MIN_RESOLVED_FOR_COMPARISON,
+        "n_blind": sum(1 for p in predictions if p.get("blind")),
         "overall": summarize_group(resolved),
+        "calibration": calibration(resolved),
         "by_horizon": by_horizon,
         "needs_price": needs_price,
     }
