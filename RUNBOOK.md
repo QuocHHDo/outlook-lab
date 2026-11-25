@@ -9,10 +9,10 @@ Run once a week, in Claude, with the Robinhood MCP connected. Do the steps in or
 - **Sources for every catalyst claim.** If a claim has no source, mark it as the model's expectation or leave it out.
 - **Write the AI range before looking at the baseline you compute**, so the comparison stays honest.
 
-## Steps (per symbol: SPY, QQQ, SMH; horizons 1w and 1m)
+## Steps (per symbol: SPY, QQQ, SMH; horizons 1w, 1m, 6m, 1y, 5y)
 
 1. **Pull the quote.** Record the last trade price and its timestamp (`price_at_prediction`).
-2. **Pick the expiry** closest to the horizon (about 7 days for `1w`, about 30 days for `1m`). Set `resolves_on` to that expiry date.
+2. **Pick the expiry** closest to the horizon (about 7 days for `1w`, 30 for `1m`). For `6m`, `1y` and `5y`, set `resolves_on` to the target trading day and take implied vol from the nearest listed expiry (for `5y` the longest listed one, since no 5-year options exist); say so in `notes`. For short horizons set `resolves_on` to the expiry date.
 3. **Read implied vol.** List contracts for that expiry at the strike nearest the current price (calls and puts), fetch their quotes, and average the two `implied_volatility` values. Record the `updated_at` time.
 4. **Compute the baseline:**
    ```
@@ -36,3 +36,8 @@ Run once a week, in Claude, with the Robinhood MCP connected. Do the steps in or
 - Is coverage drifting far from the stated level?
 - Is the AI interval score beating the baseline after 10+ resolved predictions?
 - Write down what you got wrong before changing the method. Do not edit past predictions.
+
+
+## Long horizons (6m, 1y, 5y)
+
+The baseline is zero-drift (median = today's price), which is a weak yardstick over years because stocks tend to drift up. A long-horizon range that tilts upward can beat it without any skill. Read long-horizon results with that in mind, and note that 6m resolves in 2027 and 5y in 2031, so these add nothing to the track record soon.
