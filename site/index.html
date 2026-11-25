@@ -289,7 +289,7 @@ tbody tr { border-top: 1px solid var(--line-2); }
 
 <script>
 (function () {
-  var NAMES = { SPY: "SPDR S&P 500 ETF", QQQ: "Invesco QQQ Trust", SMH: "VanEck Semiconductor ETF", IWM: "iShares Russell 2000 ETF", XLF: "Financial Select Sector SPDR", XLE: "Energy Select Sector SPDR", XLV: "Health Care Select Sector SPDR", TLT: "iShares 20+ Year Treasury Bond ETF", GLD: "SPDR Gold Shares" };
+  var NAMES = { SPY: "SPDR S&P 500 ETF", QQQ: "Invesco QQQ Trust", SMH: "VanEck Semiconductor ETF", IWM: "iShares Russell 2000 ETF", XLF: "Financial Select Sector SPDR", XLE: "Energy Select Sector SPDR", XLV: "Health Care Select Sector SPDR", TLT: "iShares 20+ Year Treasury Bond ETF", GLD: "SPDR Gold Shares", XLK: "Technology Select Sector SPDR", XLY: "Consumer Discretionary Select Sector SPDR", XLP: "Consumer Staples Select Sector SPDR", XLI: "Industrial Select Sector SPDR", XLB: "Materials Select Sector SPDR", XLU: "Utilities Select Sector SPDR", XLRE: "Real Estate Select Sector SPDR", XLC: "Communication Services Select Sector SPDR" };
   var HLABEL = { "1w": "1 week", "1m": "1 month", "3m": "3 months", "6m": "6 months", "1y": "1 year", "5y": "5 years" };
   var HORDER = ["1w", "1m", "3m", "6m", "1y", "5y"];
   var state = { preds: [], summary: null, prices: {}, events: [], symbol: null, horizon: null, evTab: "scheduled", evAll: false };
@@ -334,7 +334,7 @@ tbody tr { border-top: 1px solid var(--line-2); }
   function symbols() {
     var seen = {};
     state.preds.forEach(function (p) { seen[p.symbol] = true; });
-    var pref = ["SPY", "QQQ", "SMH", "IWM", "XLF", "XLE", "XLV", "TLT", "GLD"];
+    var pref = ["SPY", "QQQ", "SMH", "IWM", "XLK", "XLF", "XLE", "XLV", "XLY", "XLP", "XLI", "XLB", "XLU", "XLRE", "XLC", "TLT", "GLD"];
     var all = Object.keys(seen);
     return pref.filter(function (s) { return seen[s]; }).concat(all.filter(function (s) { return pref.indexOf(s) < 0; }).sort());
   }
