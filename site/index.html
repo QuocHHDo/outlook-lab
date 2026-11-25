@@ -182,8 +182,8 @@ tbody tr { border-top: 1px solid var(--line-2); }
 <script>
 (function () {
   var NAMES = { SPY: "SPDR S&P 500 ETF", QQQ: "Invesco QQQ Trust", SMH: "VanEck Semiconductor ETF" };
-  var HLABEL = { "1w": "1 week", "1m": "1 month", "3m": "3 months", "1y": "12 months" };
-  var HORDER = ["1w", "1m", "3m", "1y"];
+  var HLABEL = { "1w": "1 week", "1m": "1 month", "3m": "3 months", "6m": "6 months", "1y": "1 year", "5y": "5 years" };
+  var HORDER = ["1w", "1m", "3m", "6m", "1y", "5y"];
   var state = { preds: [], summary: null, prices: {}, symbol: null, horizon: null };
 
   function $(id) { return document.getElementById(id); }
