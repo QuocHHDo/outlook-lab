@@ -157,6 +157,18 @@ tbody tr { border-top: 1px solid var(--line-2); }
 .note[open] summary { margin-bottom: 8px; }
 .more { align-self: flex-start; font: inherit; font-size: 13px; font-weight: 500; color: var(--accent); background: transparent; border: 1px solid var(--line); border-radius: 6px; min-height: 34px; padding: 0 14px; cursor: pointer; }
 .more:hover { background: var(--panel); }
+.tmap { position: relative; width: 100%; height: 460px; border-radius: 10px; overflow: hidden; background: var(--line-2); }
+.tile { position: absolute; box-sizing: border-box; border: 2px solid var(--card); border-radius: 4px; padding: 8px 9px; color: #fff; text-decoration: none; overflow: hidden; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; line-height: 1.25; transition: filter .12s; }
+.tile:hover { filter: brightness(1.15); }
+.tile b { font-size: 15px; letter-spacing: .01em; }
+.tile span { font-size: 12px; opacity: .92; }
+.tile.sm b { font-size: 12px; } .tile.sm span { display: none; }
+.tile.xs b { font-size: 10px; } .tile.xs span { display: none; }
+.mapbar { display: flex; flex-wrap: wrap; gap: 14px 22px; align-items: center; margin: 4px 0 10px; font-size: 12px; color: var(--muted); }
+.mapbar .horizon-pick { margin: 0; }
+.scalebar { display: inline-flex; align-items: center; gap: 6px; }
+.scalebar i { display: inline-block; width: 110px; height: 10px; border-radius: 5px; background: linear-gradient(90deg, oklch(0.5 0.17 25), oklch(0.4 0.01 264), oklch(0.5 0.15 150)); }
+@media (max-width: 560px) { .tmap { height: 520px; } }
 .hgrid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
 .hcard { display: flex; flex-direction: column; gap: 10px; border: 1px solid var(--line); border-radius: 10px; padding: 16px; text-decoration: none; color: var(--ink); background: var(--card); }
 .hcard:hover { border-color: var(--accent); box-shadow: 0 1px 6px oklch(0.5 0.15 264 / 0.2); color: var(--ink); }
@@ -214,8 +226,14 @@ tbody tr { border-top: 1px solid var(--line-2); }
   <div class="section">
     <div id="home-pick" class="horizon-pick" role="group" aria-label="Horizon for the overview"></div>
     <div class="legend"><span><i class="sw-ai"></i>AI 80% range</span><span><i class="sw-base"></i>Baseline range</span><span><i class="sw-today"></i>Price when predicted (0%)</span></div>
+    <div class="mapbar">
+      <div id="home-view" class="horizon-pick" role="group" aria-label="View"></div>
+      <div id="home-size" class="horizon-pick" role="group" aria-label="Tile size"></div>
+      <span class="scalebar" id="home-scale">Chance up: 30%<i></i>70%</span>
+    </div>
+    <div id="home-map" class="tmap" role="img" aria-label="Treemap of AI chance of going up, by symbol"></div>
     <div id="home-grid" class="hgrid"></div>
-    <p class="muted" style="font-size:12px">All cards share one scale for the chosen horizon, so ranges compare directly across symbols. Click a card for the full analysis.</p>
+    <p class="muted" style="font-size:12px">Map: color is the AI's chance of finishing up (green above 50%, red below, gray near 50%). Tile size is the AI's range width, a measure of how uncertain the forecast is; it is not market cap. Cards: all share one scale, so ranges compare directly. Click any tile or card for the full analysis.</p>
   </div>
   <div class="section">
     <h3 class="eyebrow">Coming up, across the market</h3>
@@ -433,6 +451,57 @@ tbody tr { border-top: 1px solid var(--line-2); }
     }
     return a;
   }
+
+  function squarify(items, x, y, w, h) {
+    var out = [], total = items.reduce(function (a, i) { return a + i.v; }, 0);
+    var rest = items.map(function (i) { return { d: i.d, a: i.v / total * w * h }; });
+    function worst(row, side) {
+      var s = row.reduce(function (a, r) { return a + r.a; }, 0), mx = 0, mn = Infinity;
+      row.forEach(function (r) { mx = Math.max(mx, r.a); mn = Math.min(mn, r.a); });
+      return Math.max(side * side * mx / (s * s), s * s / (side * side * mn));
+    }
+    while (rest.length) {
+      var side = Math.min(w, h), row = [rest[0]], i = 1;
+      while (i < rest.length && worst(row.concat([rest[i]]), side) <= worst(row, side)) { row.push(rest[i]); i++; }
+      var s = row.reduce(function (a, r) { return a + r.a; }, 0), t = s / side, off = 0;
+      row.forEach(function (r) {
+        var l = r.a / t;
+        if (w >= h) out.push({ d: r.d, x: x, y: y + off, w: t, h: l }); else out.push({ d: r.d, x: x + off, y: y, w: l, h: t });
+        off += l;
+      });
+      if (w >= h) { x += t; w -= t; } else { y += t; h -= t; }
+      rest = rest.slice(row.length);
+    }
+    return out;
+  }
+  function tileColor(up) {
+    if (up == null) return "oklch(0.4 0.01 264)";
+    var dev = Math.max(-1, Math.min(1, (up - 0.5) / 0.2));
+    var c = Math.abs(dev) * 0.15 + 0.01;
+    return "oklch(" + (0.4 + Math.abs(dev) * 0.1).toFixed(3) + " " + c.toFixed(3) + " " + (dev >= 0 ? 150 : 25) + ")";
+  }
+  function renderMap(data) {
+    var host = $("home-map"); clear(host);
+    var w = host.clientWidth, h = host.clientHeight;
+    if (!w || !h) return;
+    var items = data.map(function (d) {
+      var st = d.p.price_at_prediction, width = (d.p.ai.high - d.p.ai.low) / st;
+      return { d: d, v: state.homeSize === "equal" ? 1 : Math.max(width, 0.01) };
+    }).sort(function (a, b) { return b.v - a.v; });
+    squarify(items, 0, 0, w, h).forEach(function (t) {
+      var d = t.d, p = d.p, st = p.price_at_prediction, up = p.ai.prob_up;
+      var a = el("a", undefined, "tile" + (t.w < 90 || t.h < 74 ? " sm" : "") + (t.w < 44 || t.h < 30 ? " xs" : ""));
+      a.href = "#" + d.s;
+      a.addEventListener("click", function () { state.fromHome = state.homeH; });
+      a.style.left = t.x + "px"; a.style.top = t.y + "px"; a.style.width = t.w + "px"; a.style.height = t.h + "px";
+      a.style.background = tileColor(up);
+      a.title = d.s + (NAMES[d.s] ? " \u2013 " + NAMES[d.s] : "") + ": " + (up != null ? pct(up) + " chance up; " : "") + "AI range " + moveText(p.ai, st);
+      a.appendChild(el("b", d.s));
+      a.appendChild(el("span", up != null ? pct(up) + " up" : ""));
+      a.appendChild(el("span", moveText(p.ai, st)));
+      host.appendChild(a);
+    });
+  }
   function renderHome() {
     var syms = symbols();
     var per = syms.map(function (s) { return { s: s, rows: latestByHorizon(forSymbol(s)) }; });
@@ -447,6 +516,23 @@ tbody tr { border-top: 1px solid var(--line-2); }
     });
     var data = per.map(function (d) { return { s: d.s, p: d.rows.filter(function (r) { return r.horizon === state.homeH; })[0] }; })
       .filter(function (d) { return d.p; });
+    function seg(host, opts, key) {
+      clear(host);
+      opts.forEach(function (o) {
+        var b = el("button", o[1]); b.type = "button";
+        b.setAttribute("aria-pressed", state[key] === o[0] ? "true" : "false");
+        b.addEventListener("click", function () { state[key] = o[0]; renderHome(); });
+        host.appendChild(b);
+      });
+    }
+    if (!state.homeView) state.homeView = "map";
+    if (!state.homeSize) state.homeSize = "width";
+    seg($("home-view"), [["map", "Map"], ["cards", "Cards"]], "homeView");
+    seg($("home-size"), [["width", "Size: AI range width"], ["equal", "Size: equal"]], "homeSize");
+    var isMap = state.homeView === "map";
+    $("home-map").hidden = !isMap; $("home-scale").hidden = !isMap; $("home-size").hidden = !isMap;
+    $("home-grid").hidden = isMap;
+    if (isMap) renderMap(data);
     var vals = [0];
     data.forEach(function (d) { var st = d.p.price_at_prediction; vals.push(d.p.ai.low / st - 1, d.p.ai.high / st - 1, d.p.baseline.low / st - 1, d.p.baseline.high / st - 1); });
     var lo = Math.min.apply(null, vals), hi = Math.max.apply(null, vals), pad = (hi - lo) * 0.06;
@@ -768,6 +854,7 @@ tbody tr { border-top: 1px solid var(--line-2); }
     e.preventDefault();
     $("all").scrollIntoView({ behavior: "smooth", block: "start" });
   });
+  window.addEventListener("resize", function () { if (!$("home").hidden && state.homeView === "map") renderHome(); });
   window.addEventListener("hashchange", function () { state.horizon = state.fromHome || null; state.fromHome = null; render(); window.scrollTo(0, 0); });
 
   Promise.all([
