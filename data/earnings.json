@@ -1,6 +1,6 @@
 {
  "as_of": "2026-11-25",
- "note": "Next confirmed earnings dates from Robinhood's earnings calendar, hand-refreshed each Monday. Calendar checked through 2026-01-25 only; a stock missing here has no confirmed date in that span.",
+ "note": "Next confirmed earnings dates from Robinhood's earnings calendar, hand-refreshed each Monday. Calendar checked through 2027-01-25 only; a stock missing here has no confirmed date in that span.",
  "dates": {
   "AVGO": [
    "2026-12-09"
