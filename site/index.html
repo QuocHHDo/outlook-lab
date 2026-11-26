@@ -384,6 +384,25 @@ th { font-weight: 700; font-size: 12.5px; color: var(--muted-2); }
 .sc-due { display: flex; flex-wrap: wrap; gap: 8px; }
 .sc-due div { background: var(--panel); border-radius: 8px; padding: 8px 12px; font-size: 13px; }
 .sc-due b { display: block; font-size: 16px; }
+.tabs { align-items: center; position: relative; }
+.symmenu { position: relative; }
+.symbtn { font: inherit; font-size: 14px; font-weight: 600; padding: 6px 10px; border: 1px solid var(--line); border-radius: 6px; background: var(--card); color: var(--ink); cursor: pointer; min-height: 34px; }
+.symbtn:hover { background: var(--panel); }
+.symbtn[aria-current="page"] { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+.symbtn .caret { margin-left: 6px; font-size: 11px; }
+.sympanel { position: absolute; z-index: 20; top: calc(100% + 6px); left: 0; width: min(620px, calc(100vw - 32px)); max-height: min(70vh, 560px); overflow: auto; background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 12px; box-shadow: 0 12px 32px oklch(0.2 0.02 255 / 0.18); }
+.sympanel input { width: 100%; font: inherit; font-size: 14px; padding: 9px 12px; border: 1px solid var(--line); border-radius: 8px; background: var(--bg); color: var(--ink); margin-bottom: 10px; }
+.symgroup h4 { margin: 10px 0 6px; font-size: 13px; color: var(--muted); font-weight: 600; }
+.symgrid { display: grid; grid-template-columns: repeat(auto-fill, minmax(170px, 1fr)); gap: 2px; }
+.tabs .symgrid a { display: flex; flex-direction: column; padding: 6px 8px; font-weight: 400; border-radius: 6px; }
+.tabs .symgrid a b { font-size: 14px; color: var(--ink); }
+.tabs .symgrid a span { font-size: 11.5px; color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.tabs .symgrid a[aria-current="page"] { background: var(--panel); color: var(--ink); }
+.tabs .symgrid a:hover { background: var(--panel); }
+.symnone { color: var(--muted); font-size: 13px; margin: 8px 2px; }
+.symstep { margin-left: auto; display: inline-flex; gap: 2px; }
+.tabs .symstep a { font-size: 20px; line-height: 1; padding: 4px 12px; }
+@media (max-width: 640px) { .symmenu { position: static; } .sympanel { left: 0; right: 0; width: auto; } .symgrid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 @media (prefers-reduced-motion: reduce) { .tile.enter { animation: none; } }
 @media (max-width: 560px) { .tmap { height: 560px; } .head h1 { font-size: 36px; } }
 </style>
@@ -617,23 +636,78 @@ th { font-weight: 700; font-size: 12.5px; color: var(--muted-2); }
   function renderTabs() {
     var nav = $("tabs");
     clear(nav);
+    var syms = symbols();
     var home = el("a", "Overview"); home.href = "#home";
     if (!state.symbol && state.view !== "scorecard") home.setAttribute("aria-current", "page");
     nav.appendChild(home);
     var sc = el("a", "Scorecard"); sc.href = "#scorecard";
     if (state.view === "scorecard") sc.setAttribute("aria-current", "page");
     nav.appendChild(sc);
+
+    var wrap = el("div", undefined, "symmenu");
+    var btn = el("button", state.symbol ? state.symbol : "Symbols"); btn.type = "button"; btn.className = "symbtn";
+    btn.appendChild(el("span", "\u25BE", "caret"));
+    btn.setAttribute("aria-haspopup", "true"); btn.setAttribute("aria-expanded", "false");
+    if (state.symbol) btn.setAttribute("aria-current", "page");
+    var panel = el("div", undefined, "sympanel"); panel.hidden = true;
+    var input = el("input"); input.type = "search"; input.placeholder = "Find a symbol or company"; input.setAttribute("aria-label", "Find a symbol or company");
+    panel.appendChild(input);
+    var groups = el("div", undefined, "symgroups");
     var labels = { index: "Indexes", sector: "Sectors", other: "Bonds and gold", stock: "Stocks" };
-    var last = null;
-    symbols().forEach(function (s) {
-      var g = groupOf(s);
-      if (g !== last) { nav.appendChild(el("span", labels[g], "grp")); last = g; }
-      var a = el("a", s);
-      a.href = "#" + s;
-      if (s === state.symbol) a.setAttribute("aria-current", "page");
-      nav.appendChild(a);
+    var order = ["index", "sector", "stock", "other"], links = [];
+    order.forEach(function (g) {
+      var members = syms.filter(function (x) { return groupOf(x) === g; });
+      if (!members.length) return;
+      var box = el("div", undefined, "symgroup");
+      box.appendChild(el("h4", labels[g]));
+      var grid = el("div", undefined, "symgrid");
+      members.forEach(function (x) {
+        var a = el("a"); a.href = "#" + x;
+        a.appendChild(el("b", x)); a.appendChild(el("span", NAMES[x] || ""));
+        if (x === state.symbol) a.setAttribute("aria-current", "page");
+        grid.appendChild(a); links.push(a);
+      });
+      box.appendChild(grid); groups.appendChild(box);
     });
+    var none = el("p", "No match. Try a ticker like SPY or a name like Apple.", "symnone"); none.hidden = true;
+    groups.appendChild(none);
+    panel.appendChild(groups);
+    function setOpen(open) {
+      panel.hidden = !open; btn.setAttribute("aria-expanded", open ? "true" : "false");
+      if (open) { input.value = ""; filter(); input.focus(); }
+    }
+    function filter() {
+      var q = input.value.trim().toLowerCase(), shown = 0;
+      links.forEach(function (a) {
+        var hit = !q || a.textContent.toLowerCase().indexOf(q) >= 0;
+        a.hidden = !hit; if (hit) shown++;
+      });
+      [].forEach.call(groups.querySelectorAll(".symgroup"), function (g) { g.hidden = !g.querySelector("a:not([hidden])"); });
+      none.hidden = shown > 0;
+    }
+    btn.addEventListener("click", function (e) { e.stopPropagation(); setOpen(panel.hidden); });
+    input.addEventListener("input", filter);
+    input.addEventListener("keydown", function (e) {
+      if (e.key === "Enter") { var f = links.filter(function (a) { return !a.hidden; })[0]; if (f) { location.hash = f.getAttribute("href"); } }
+    });
+    panel.addEventListener("click", function (e) { e.stopPropagation(); if (e.target.closest && e.target.closest("a")) setOpen(false); });
+    wrap.addEventListener("keydown", function (e) { if (e.key === "Escape") { setOpen(false); btn.focus(); } });
+    wrap.appendChild(btn); wrap.appendChild(panel);
+    nav.appendChild(wrap);
+    state.closeMenu = function () { if (!panel.hidden) setOpen(false); };
+
+    if (state.symbol) {
+      var i = syms.indexOf(state.symbol);
+      var stepper = el("span", undefined, "symstep");
+      [[-1, "\u2039", "Previous symbol"], [1, "\u203A", "Next symbol"]].forEach(function (d) {
+        var t = syms[(i + d[0] + syms.length) % syms.length];
+        var a = el("a", d[1]); a.href = "#" + t; a.setAttribute("aria-label", d[2] + ": " + t); a.title = d[2] + " (" + t + ")";
+        stepper.appendChild(a);
+      });
+      nav.appendChild(stepper);
+    }
   }
+  document.addEventListener("click", function () { if (state.closeMenu) state.closeMenu(); });
 
   function renderHeader(rows) {
     $("sym-title").textContent = state.symbol;
