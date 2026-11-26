@@ -67,6 +67,13 @@
       "low": 676.81,
       "high": 753.98,
       "level": 0.8
+    },
+    "baseline_realized": {
+      "method": "hist_vol_60d",
+      "vol": 0.2005,
+      "low": 685.7,
+      "high": 743.33,
+      "level": 0.8
     }
   },
   {
@@ -140,6 +147,13 @@
       "iv": 0.2397,
       "low": 656.34,
       "high": 780.44,
+      "level": 0.8
+    },
+    "baseline_realized": {
+      "method": "hist_vol_60d",
+      "vol": 0.2005,
+      "low": 664.05,
+      "high": 767.56,
       "level": 0.8
     }
   },
@@ -218,6 +232,13 @@
       "iv": 0.3968,
       "low": 585.2,
       "high": 686.54,
+      "level": 0.8
+    },
+    "baseline_realized": {
+      "method": "hist_vol_60d",
+      "vol": 0.3112,
+      "low": 595.64,
+      "high": 675.13,
       "level": 0.8
     }
   },
@@ -301,6 +322,13 @@
       "low": 559.6,
       "high": 718.62,
       "level": 0.8
+    },
+    "baseline_realized": {
+      "method": "hist_vol_60d",
+      "vol": 0.3112,
+      "low": 566.71,
+      "high": 709.6,
+      "level": 0.8
     }
   },
   {
@@ -378,6 +406,13 @@
       "iv": 0.7515,
       "low": 359.65,
       "high": 486.67,
+      "level": 0.8
+    },
+    "baseline_realized": {
+      "method": "hist_vol_60d",
+      "vol": 0.613,
+      "low": 371.85,
+      "high": 475.9,
       "level": 0.8
     }
   },
@@ -457,6 +492,13 @@
       "low": 327.66,
       "high": 526.85,
       "level": 0.8
+    },
+    "baseline_realized": {
+      "method": "hist_vol_60d",
+      "vol": 0.613,
+      "low": 337.12,
+      "high": 524.93,
+      "level": 0.8
     }
   },
   {
@@ -525,6 +567,13 @@
       "low": 603.24,
       "high": 885.72,
       "level": 0.8
+    },
+    "baseline_realized": {
+      "method": "hist_vol_60d",
+      "vol": 0.2005,
+      "low": 598.77,
+      "high": 859.87,
+      "level": 0.8
     }
   },
   {
@@ -591,6 +640,13 @@
       "iv": 0.2093,
       "low": 570.18,
       "high": 974.26,
+      "level": 0.8
+    },
+    "baseline_realized": {
+      "method": "hist_vol_60d",
+      "vol": 0.2005,
+      "low": 555.14,
+      "high": 927.45,
       "level": 0.8
     }
   },
@@ -659,6 +715,13 @@
       "iv": 0.2056,
       "low": 483.44,
       "high": 1571.2,
+      "level": 0.8
+    },
+    "baseline_realized": {
+      "method": "hist_vol_60d",
+      "vol": 0.2005,
+      "low": 403.87,
+      "high": 1274.84,
       "level": 0.8
     }
   },
@@ -731,6 +794,13 @@
       "low": 492.4,
       "high": 830.63,
       "level": 0.8
+    },
+    "baseline_realized": {
+      "method": "hist_vol_60d",
+      "vol": 0.3112,
+      "low": 478.63,
+      "high": 839.39,
+      "level": 0.8
     }
   },
   {
@@ -800,6 +870,13 @@
       "iv": 0.2747,
       "low": 455.98,
       "high": 921.1,
+      "level": 0.8
+    },
+    "baseline_realized": {
+      "method": "hist_vol_60d",
+      "vol": 0.3112,
+      "low": 425.59,
+      "high": 943.98,
       "level": 0.8
     }
   },
@@ -871,6 +948,13 @@
       "iv": 0.2643,
       "low": 336.85,
       "high": 1532.76,
+      "level": 0.8
+    },
+    "baseline_realized": {
+      "method": "hist_vol_60d",
+      "vol": 0.3112,
+      "low": 259.74,
+      "high": 1546.75,
       "level": 0.8
     }
   },
@@ -947,6 +1031,13 @@
       "low": 255.3,
       "high": 643.5,
       "level": 0.8
+    },
+    "baseline_realized": {
+      "method": "hist_vol_60d",
+      "vol": 0.613,
+      "low": 241.48,
+      "high": 730.07,
+      "level": 0.8
     }
   },
   {
@@ -1020,6 +1111,13 @@
       "iv": 0.4759,
       "low": 216.55,
       "high": 732.11,
+      "level": 0.8
+    },
+    "baseline_realized": {
+      "method": "hist_vol_60d",
+      "vol": 0.613,
+      "low": 191.62,
+      "high": 920.06,
       "level": 0.8
     }
   },
@@ -1096,6 +1194,13 @@
       "low": 96.18,
       "high": 1237.37,
       "level": 0.8
+    },
+    "baseline_realized": {
+      "method": "hist_vol_60d",
+      "vol": 0.613,
+      "low": 72.45,
+      "high": 2433.25,
+      "level": 0.8
     }
   },
   {
@@ -1169,6 +1274,13 @@
       "iv": 0.2425,
       "low": 256.24,
       "high": 282.51,
+      "level": 0.8
+    },
+    "baseline_realized": {
+      "method": "hist_vol_60d",
+      "vol": 0.2092,
+      "low": 257.77,
+      "high": 280.41,
       "level": 0.8
     }
   },
@@ -1248,6 +1360,13 @@
       "low": 247.13,
       "high": 293.94,
       "level": 0.8
+    },
+    "baseline_realized": {
+      "method": "hist_vol_60d",
+      "vol": 0.2092,
+      "low": 249.28,
+      "high": 289.96,
+      "level": 0.8
     }
   },
   {
@@ -1317,6 +1436,13 @@
       "iv": 0.2293,
       "low": 222.28,
       "high": 336.23,
+      "level": 0.8
+    },
+    "baseline_realized": {
+      "method": "hist_vol_60d",
+      "vol": 0.2092,
+      "low": 222.59,
+      "high": 324.72,
       "level": 0.8
     }
   },
@@ -1388,6 +1514,13 @@
       "low": 208.27,
       "high": 371.69,
       "level": 0.8
+    },
+    "baseline_realized": {
+      "method": "hist_vol_60d",
+      "vol": 0.2092,
+      "low": 205.7,
+      "high": 351.4,
+      "level": 0.8
     }
   },
   {
@@ -1457,6 +1590,13 @@
       "iv": 0.219,
       "low": 171.85,
       "high": 603.11,
+      "level": 0.8
+    },
+    "baseline_realized": {
+      "method": "hist_vol_60d",
+      "vol": 0.2092,
+      "low": 147.59,
+      "high": 489.73,
       "level": 0.8
     }
   },
@@ -1531,6 +1671,13 @@
       "iv": 0.2051,
       "low": 54.3,
       "high": 58.97,
+      "level": 0.8
+    },
+    "baseline_realized": {
+      "method": "hist_vol_60d",
+      "vol": 0.179,
+      "low": 54.53,
+      "high": 58.6,
       "level": 0.8
     }
   },
@@ -1610,6 +1757,13 @@
       "low": 52.58,
       "high": 61.15,
       "level": 0.8
+    },
+    "baseline_realized": {
+      "method": "hist_vol_60d",
+      "vol": 0.179,
+      "low": 52.99,
+      "high": 60.31,
+      "level": 0.8
     }
   },
   {
@@ -1679,6 +1833,13 @@
       "iv": 0.1939,
       "low": 48.43,
       "high": 68.73,
+      "level": 0.8
+    },
+    "baseline_realized": {
+      "method": "hist_vol_60d",
+      "vol": 0.179,
+      "low": 48.1,
+      "high": 66.44,
       "level": 0.8
     }
   },
@@ -1750,6 +1911,13 @@
       "low": 45.65,
       "high": 75.86,
       "level": 0.8
+    },
+    "baseline_realized": {
+      "method": "hist_vol_60d",
+      "vol": 0.179,
+      "low": 44.96,
+      "high": 71.08,
+      "level": 0.8
     }
   },
   {
@@ -1819,6 +1987,13 @@
       "iv": 0.1865,
       "low": 40.99,
       "high": 119.4,
+      "level": 0.8
+    },
+    "baseline_realized": {
+      "method": "hist_vol_60d",
+      "vol": 0.179,
+      "low": 33.84,
+      "high": 94.43,
       "level": 0.8
     }
   },
@@ -1896,6 +2071,13 @@
       "iv": 0.2775,
       "low": 57.76,
       "high": 64.59,
+      "level": 0.8
+    },
+    "baseline_realized": {
+      "method": "hist_vol_60d",
+      "vol": 0.2534,
+      "low": 58.02,
+      "high": 64.24,
       "level": 0.8
     }
   },
@@ -1978,6 +2160,13 @@
       "low": 55.27,
       "high": 67.66,
       "level": 0.8
+    },
+    "baseline_realized": {
+      "method": "hist_vol_60d",
+      "vol": 0.2534,
+      "low": 55.71,
+      "high": 66.9,
+      "level": 0.8
     }
   },
   {
@@ -2046,6 +2235,13 @@
       "iv": 0.256,
       "low": 49.12,
       "high": 77.96,
+      "level": 0.8
+    },
+    "baseline_realized": {
+      "method": "hist_vol_60d",
+      "vol": 0.2534,
+      "low": 48.57,
+      "high": 76.74,
       "level": 0.8
     }
   },
@@ -2116,6 +2312,13 @@
       "low": 45.28,
       "high": 86.95,
       "level": 0.8
+    },
+    "baseline_realized": {
+      "method": "hist_vol_60d",
+      "vol": 0.2534,
+      "low": 44.14,
+      "high": 84.43,
+      "level": 0.8
     }
   },
   {
@@ -2184,6 +2387,13 @@
       "iv": 0.2474,
       "low": 34.8,
       "high": 143.73,
+      "level": 0.8
+    },
+    "baseline_realized": {
+      "method": "hist_vol_60d",
+      "vol": 0.2534,
+      "low": 29.53,
+      "high": 126.22,
       "level": 0.8
     }
   },
@@ -2259,6 +2469,13 @@
       "iv": 0.236,
       "low": 175.53,
       "high": 193.02,
+      "level": 0.8
+    },
+    "baseline_realized": {
+      "method": "hist_vol_60d",
+      "vol": 0.1946,
+      "low": 176.86,
+      "high": 191.27,
       "level": 0.8
     }
   },
@@ -2339,6 +2556,13 @@
       "low": 169.17,
       "high": 200.96,
       "level": 0.8
+    },
+    "baseline_realized": {
+      "method": "hist_vol_60d",
+      "vol": 0.1946,
+      "low": 171.43,
+      "high": 197.32,
+      "level": 0.8
     }
   },
   {
@@ -2409,6 +2633,13 @@
       "iv": 0.2149,
       "low": 154.29,
       "high": 227.41,
+      "level": 0.8
+    },
+    "baseline_realized": {
+      "method": "hist_vol_60d",
+      "vol": 0.1946,
+      "low": 154.29,
+      "high": 219.24,
       "level": 0.8
     }
   },
@@ -2481,6 +2712,13 @@
       "low": 146.8,
       "high": 248.92,
       "level": 0.8
+    },
+    "baseline_realized": {
+      "method": "hist_vol_60d",
+      "vol": 0.1946,
+      "low": 143.37,
+      "high": 235.95,
+      "level": 0.8
     }
   },
   {
@@ -2551,6 +2789,13 @@
       "iv": 0.1991,
       "low": 127.08,
       "high": 397.91,
+      "level": 0.8
+    },
+    "baseline_realized": {
+      "method": "hist_vol_60d",
+      "vol": 0.1946,
+      "low": 105.28,
+      "high": 321.31,
       "level": 0.8
     }
   },
@@ -2625,6 +2870,13 @@
       "iv": 0.1121,
       "low": 80.68,
       "high": 84.4,
+      "level": 0.8
+    },
+    "baseline_realized": {
+      "method": "hist_vol_60d",
+      "vol": 0.1108,
+      "low": 80.59,
+      "high": 84.27,
       "level": 0.8
     }
   },
@@ -2704,6 +2956,13 @@
       "low": 79.37,
       "high": 86.3,
       "level": 0.8
+    },
+    "baseline_realized": {
+      "method": "hist_vol_60d",
+      "vol": 0.1108,
+      "low": 79.18,
+      "high": 85.77,
+      "level": 0.8
     }
   },
   {
@@ -2773,6 +3032,13 @@
       "iv": 0.1189,
       "low": 75.99,
       "high": 94.18,
+      "level": 0.8
+    },
+    "baseline_realized": {
+      "method": "hist_vol_60d",
+      "vol": 0.1108,
+      "low": 74.57,
+      "high": 91.07,
       "level": 0.8
     }
   },
@@ -2844,6 +3110,13 @@
       "low": 75.41,
       "high": 100.26,
       "level": 0.8
+    },
+    "baseline_realized": {
+      "method": "hist_vol_60d",
+      "vol": 0.1108,
+      "low": 71.52,
+      "high": 94.96,
+      "level": 0.8
     }
   },
   {
@@ -2913,6 +3186,13 @@
       "iv": 0.1802,
       "low": 61.2,
       "high": 171.95,
+      "level": 0.8
+    },
+    "baseline_realized": {
+      "method": "hist_vol_60d",
+      "vol": 0.1108,
+      "low": 59.99,
+      "high": 113.21,
       "level": 0.8
     }
   },
@@ -2987,6 +3267,13 @@
       "iv": 0.3553,
       "low": 302.73,
       "high": 349.27,
+      "level": 0.8
+    },
+    "baseline_realized": {
+      "method": "hist_vol_60d",
+      "vol": 0.2568,
+      "low": 308.81,
+      "high": 342.43,
       "level": 0.8
     }
   },
@@ -3066,6 +3353,13 @@
       "low": 289.19,
       "high": 366.07,
       "level": 0.8
+    },
+    "baseline_realized": {
+      "method": "hist_vol_60d",
+      "vol": 0.2568,
+      "low": 296.38,
+      "high": 356.8,
+      "level": 0.8
     }
   },
   {
@@ -3135,6 +3429,13 @@
       "iv": 0.2748,
       "low": 256.58,
       "high": 421.34,
+      "level": 0.8
+    },
+    "baseline_realized": {
+      "method": "hist_vol_60d",
+      "vol": 0.2568,
+      "low": 257.93,
+      "high": 409.99,
       "level": 0.8
     }
   },
@@ -3206,6 +3507,13 @@
       "low": 238.8,
       "high": 466.25,
       "level": 0.8
+    },
+    "baseline_realized": {
+      "method": "hist_vol_60d",
+      "vol": 0.2568,
+      "low": 234.11,
+      "high": 451.7,
+      "level": 0.8
     }
   },
   {
@@ -3275,6 +3583,13 @@
       "iv": 0.262,
       "low": 174.49,
       "high": 783.58,
+      "level": 0.8
+    },
+    "baseline_realized": {
+      "method": "hist_vol_60d",
+      "vol": 0.2568,
+      "low": 155.78,
+      "high": 678.85,
       "level": 0.8
     }
   },
@@ -3348,6 +3663,13 @@
       "iv": 0.4751,
       "low": 140.87,
       "high": 170.56,
+      "level": 0.8
+    },
+    "baseline_realized": {
+      "method": "hist_vol_60d",
+      "vol": 0.3952,
+      "low": 143.34,
+      "high": 168.06,
       "level": 0.8
     }
   },
@@ -3435,6 +3757,13 @@
       "low": 133.38,
       "high": 179.88,
       "level": 0.8
+    },
+    "baseline_realized": {
+      "method": "hist_vol_60d",
+      "vol": 0.3952,
+      "low": 134.56,
+      "high": 179.03,
+      "level": 0.8
     }
   },
   {
@@ -3503,6 +3832,13 @@
       "iv": 0.3551,
       "low": 112.48,
       "high": 213.52,
+      "level": 0.8
+    },
+    "baseline_realized": {
+      "method": "hist_vol_60d",
+      "vol": 0.3952,
+      "low": 108.65,
+      "high": 221.72,
       "level": 0.8
     }
   },
@@ -3573,6 +3909,13 @@
       "low": 101.9,
       "high": 238.66,
       "level": 0.8
+    },
+    "baseline_realized": {
+      "method": "hist_vol_60d",
+      "vol": 0.3952,
+      "low": 93.6,
+      "high": 257.37,
+      "level": 0.8
     }
   },
   {
@@ -3641,6 +3984,13 @@
       "iv": 0.3194,
       "low": 64.99,
       "high": 405.57,
+      "level": 0.8
+    },
+    "baseline_realized": {
+      "method": "hist_vol_60d",
+      "vol": 0.3952,
+      "low": 50.0,
+      "high": 481.8,
       "level": 0.8
     }
   },
@@ -3714,6 +4064,13 @@
       "iv": 0.2973,
       "low": 110.96,
       "high": 125.07,
+      "level": 0.8
+    },
+    "baseline_realized": {
+      "method": "hist_vol_60d",
+      "vol": 0.2289,
+      "low": 112.46,
+      "high": 123.31,
       "level": 0.8
     }
   },
@@ -3797,6 +4154,13 @@
       "low": 106.31,
       "high": 130.83,
       "level": 0.8
+    },
+    "baseline_realized": {
+      "method": "hist_vol_60d",
+      "vol": 0.2289,
+      "low": 108.42,
+      "high": 127.91,
+      "level": 0.8
     }
   },
   {
@@ -3865,6 +4229,13 @@
       "iv": 0.2553,
       "low": 94.81,
       "high": 150.3,
+      "level": 0.8
+    },
+    "baseline_realized": {
+      "method": "hist_vol_60d",
+      "vol": 0.2289,
+      "low": 95.78,
+      "high": 144.78,
       "level": 0.8
     }
   },
@@ -3935,6 +4306,13 @@
       "low": 88.68,
       "high": 166.02,
       "level": 0.8
+    },
+    "baseline_realized": {
+      "method": "hist_vol_60d",
+      "vol": 0.2289,
+      "low": 87.86,
+      "high": 157.84,
+      "level": 0.8
     }
   },
   {
@@ -4003,6 +4381,13 @@
       "iv": 0.2447,
       "low": 67.87,
       "high": 276.01,
+      "level": 0.8
+    },
+    "baseline_realized": {
+      "method": "hist_vol_60d",
+      "vol": 0.2289,
+      "low": 61.11,
+      "high": 226.94,
       "level": 0.8
     }
   },
@@ -4078,6 +4463,13 @@
       "iv": 0.2101,
       "low": 88.62,
       "high": 96.44,
+      "level": 0.8
+    },
+    "baseline_realized": {
+      "method": "hist_vol_60d",
+      "vol": 0.1799,
+      "low": 89.08,
+      "high": 95.77,
       "level": 0.8
     }
   },
@@ -4163,6 +4555,13 @@
       "low": 85.7,
       "high": 100.13,
       "level": 0.8
+    },
+    "baseline_realized": {
+      "method": "hist_vol_60d",
+      "vol": 0.1799,
+      "low": 86.55,
+      "high": 98.56,
+      "level": 0.8
     }
   },
   {
@@ -4233,6 +4632,13 @@
       "iv": 0.1914,
       "low": 79.33,
       "high": 112.07,
+      "level": 0.8
+    },
+    "baseline_realized": {
+      "method": "hist_vol_60d",
+      "vol": 0.1799,
+      "low": 78.52,
+      "high": 108.65,
       "level": 0.8
     }
   },
@@ -4305,6 +4711,13 @@
       "low": 78.33,
       "high": 119.46,
       "level": 0.8
+    },
+    "baseline_realized": {
+      "method": "hist_vol_60d",
+      "vol": 0.1799,
+      "low": 73.36,
+      "high": 116.28,
+      "level": 0.8
     }
   },
   {
@@ -4375,6 +4788,13 @@
       "iv": 0.1575,
       "low": 74.62,
       "high": 184.06,
+      "level": 0.8
+    },
+    "baseline_realized": {
+      "method": "hist_vol_60d",
+      "vol": 0.1799,
+      "low": 55.14,
+      "high": 154.7,
       "level": 0.8
     }
   },
@@ -4448,6 +4868,13 @@
       "iv": 0.2703,
       "low": 154.4,
       "high": 172.15,
+      "level": 0.8
+    },
+    "baseline_realized": {
+      "method": "hist_vol_60d",
+      "vol": 0.2088,
+      "low": 156.23,
+      "high": 169.93,
       "level": 0.8
     }
   },
@@ -4531,6 +4958,13 @@
       "low": 147.49,
       "high": 180.6,
       "level": 0.8
+    },
+    "baseline_realized": {
+      "method": "hist_vol_60d",
+      "vol": 0.2088,
+      "low": 151.1,
+      "high": 175.71,
+      "level": 0.8
     }
   },
   {
@@ -4599,6 +5033,13 @@
       "iv": 0.238,
       "low": 133.53,
       "high": 205.18,
+      "level": 0.8
+    },
+    "baseline_realized": {
+      "method": "hist_vol_60d",
+      "vol": 0.2088,
+      "low": 134.95,
+      "high": 196.73,
       "level": 0.8
     }
   },
@@ -4669,6 +5110,13 @@
       "low": 125.37,
       "high": 226.34,
       "level": 0.8
+    },
+    "baseline_realized": {
+      "method": "hist_vol_60d",
+      "vol": 0.2088,
+      "low": 124.73,
+      "high": 212.86,
+      "level": 0.8
     }
   },
   {
@@ -4737,6 +5185,13 @@
       "iv": 0.2281,
       "low": 100.44,
       "high": 371.38,
+      "level": 0.8
+    },
+    "baseline_realized": {
+      "method": "hist_vol_60d",
+      "vol": 0.2088,
+      "low": 89.55,
+      "high": 296.48,
       "level": 0.8
     }
   },
@@ -4811,6 +5266,13 @@
       "iv": 0.2543,
       "low": 48.79,
       "high": 54.05,
+      "level": 0.8
+    },
+    "baseline_realized": {
+      "method": "hist_vol_60d",
+      "vol": 0.1922,
+      "low": 49.37,
+      "high": 53.34,
       "level": 0.8
     }
   },
@@ -4895,6 +5357,13 @@
       "low": 47.27,
       "high": 56.0,
       "level": 0.8
+    },
+    "baseline_realized": {
+      "method": "hist_vol_60d",
+      "vol": 0.1922,
+      "low": 47.88,
+      "high": 55.01,
+      "level": 0.8
     }
   },
   {
@@ -4964,6 +5433,13 @@
       "iv": 0.2207,
       "low": 42.8,
       "high": 63.75,
+      "level": 0.8
+    },
+    "baseline_realized": {
+      "method": "hist_vol_60d",
+      "vol": 0.1922,
+      "low": 43.15,
+      "high": 61.04,
       "level": 0.8
     }
   },
@@ -5035,6 +5511,13 @@
       "low": 41.31,
       "high": 69.03,
       "level": 0.8
+    },
+    "baseline_realized": {
+      "method": "hist_vol_60d",
+      "vol": 0.1922,
+      "low": 40.13,
+      "high": 65.63,
+      "level": 0.8
     }
   },
   {
@@ -5104,6 +5587,13 @@
       "iv": 0.2018,
       "low": 35.09,
       "high": 111.59,
+      "level": 0.8
+    },
+    "baseline_realized": {
+      "method": "hist_vol_60d",
+      "vol": 0.1922,
+      "low": 29.58,
+      "high": 89.04,
       "level": 0.8
     }
   },
@@ -5177,6 +5667,13 @@
       "iv": 0.1806,
       "low": 42.16,
       "high": 45.34,
+      "level": 0.8
+    },
+    "baseline_realized": {
+      "method": "hist_vol_60d",
+      "vol": 0.1556,
+      "low": 42.32,
+      "high": 45.06,
       "level": 0.8
     }
   },
@@ -5260,6 +5757,13 @@
       "low": 41.05,
       "high": 46.78,
       "level": 0.8
+    },
+    "baseline_realized": {
+      "method": "hist_vol_60d",
+      "vol": 0.1556,
+      "low": 41.28,
+      "high": 46.2,
+      "level": 0.8
     }
   },
   {
@@ -5328,6 +5832,13 @@
       "iv": 0.1768,
       "low": 38.06,
       "high": 52.36,
+      "level": 0.8
+    },
+    "baseline_realized": {
+      "method": "hist_vol_60d",
+      "vol": 0.1556,
+      "low": 37.95,
+      "high": 50.26,
       "level": 0.8
     }
   },
@@ -5398,6 +5909,13 @@
       "low": 36.54,
       "high": 57.08,
       "level": 0.8
+    },
+    "baseline_realized": {
+      "method": "hist_vol_60d",
+      "vol": 0.1556,
+      "low": 35.78,
+      "high": 53.29,
+      "level": 0.8
     }
   },
   {
@@ -5466,6 +5984,13 @@
       "iv": 0.1593,
       "low": 35.05,
       "high": 87.35,
+      "level": 0.8
+    },
+    "baseline_realized": {
+      "method": "hist_vol_60d",
+      "vol": 0.1556,
+      "low": 27.95,
+      "high": 68.22,
       "level": 0.8
     }
   },
@@ -5539,6 +6064,13 @@
       "iv": 0.1756,
       "low": 42.47,
       "high": 45.58,
+      "level": 0.8
+    },
+    "baseline_realized": {
+      "method": "hist_vol_60d",
+      "vol": 0.1619,
+      "low": 42.54,
+      "high": 45.41,
       "level": 0.8
     }
   },
@@ -5622,6 +6154,13 @@
       "low": 41.4,
       "high": 46.99,
       "level": 0.8
+    },
+    "baseline_realized": {
+      "method": "hist_vol_60d",
+      "vol": 0.1619,
+      "low": 41.45,
+      "high": 46.6,
+      "level": 0.8
     }
   },
   {
@@ -5690,6 +6229,13 @@
       "iv": 0.1723,
       "low": 38.47,
       "high": 52.51,
+      "level": 0.8
+    },
+    "baseline_realized": {
+      "method": "hist_vol_60d",
+      "vol": 0.1619,
+      "low": 37.97,
+      "high": 50.87,
       "level": 0.8
     }
   },
@@ -5760,6 +6306,13 @@
       "low": 36.88,
       "high": 57.32,
       "level": 0.8
+    },
+    "baseline_realized": {
+      "method": "hist_vol_60d",
+      "vol": 0.1619,
+      "low": 35.72,
+      "high": 54.07,
+      "level": 0.8
     }
   },
   {
@@ -5828,6 +6381,13 @@
       "iv": 0.1723,
       "low": 33.62,
       "high": 90.27,
+      "level": 0.8
+    },
+    "baseline_realized": {
+      "method": "hist_vol_60d",
+      "vol": 0.1619,
+      "low": 27.63,
+      "high": 69.91,
       "level": 0.8
     }
   },
@@ -5902,6 +6462,13 @@
       "iv": 0.3599,
       "low": 97.93,
       "high": 113.2,
+      "level": 0.8
+    },
+    "baseline_realized": {
+      "method": "hist_vol_60d",
+      "vol": 0.2246,
+      "low": 100.65,
+      "high": 110.17,
       "level": 0.8
     }
   },
@@ -5986,6 +6553,13 @@
       "low": 94.59,
       "high": 117.5,
       "level": 0.8
+    },
+    "baseline_realized": {
+      "method": "hist_vol_60d",
+      "vol": 0.2246,
+      "low": 97.09,
+      "high": 114.2,
+      "level": 0.8
     }
   },
   {
@@ -6055,6 +6629,13 @@
       "iv": 0.2553,
       "low": 84.78,
       "high": 134.4,
+      "level": 0.8
+    },
+    "baseline_realized": {
+      "method": "hist_vol_60d",
+      "vol": 0.2246,
+      "low": 85.98,
+      "high": 128.97,
       "level": 0.8
     }
   },
@@ -6126,6 +6707,13 @@
       "low": 80.48,
       "high": 146.95,
       "level": 0.8
+    },
+    "baseline_realized": {
+      "method": "hist_vol_60d",
+      "vol": 0.2246,
+      "low": 78.99,
+      "high": 140.37,
+      "level": 0.8
     }
   },
   {
@@ -6196,6 +6784,13 @@
       "low": 61.76,
       "high": 245.06,
       "level": 0.8
+    },
+    "baseline_realized": {
+      "method": "hist_vol_60d",
+      "vol": 0.2246,
+      "low": 55.31,
+      "high": 200.49,
+      "level": 0.8
     }
   },
   {
@@ -6261,6 +6856,13 @@
       "iv": 0.2558,
       "low": 337.96,
       "high": 374.6,
+      "level": 0.8
+    },
+    "baseline_realized": {
+      "method": "hist_vol_60d",
+      "vol": 0.2212,
+      "low": 340.09,
+      "high": 371.75,
       "level": 0.8
     }
   },
@@ -6328,6 +6930,13 @@
       "low": 325.76,
       "high": 389.91,
       "level": 0.8
+    },
+    "baseline_realized": {
+      "method": "hist_vol_60d",
+      "vol": 0.2212,
+      "low": 328.26,
+      "high": 385.15,
+      "level": 0.8
     }
   },
   {
@@ -6393,6 +7002,13 @@
       "iv": 0.2787,
       "low": 275.48,
       "high": 469.92,
+      "level": 0.8
+    },
+    "baseline_realized": {
+      "method": "hist_vol_60d",
+      "vol": 0.2212,
+      "low": 287.67,
+      "high": 439.5,
       "level": 0.8
     }
   },
@@ -6460,6 +7076,13 @@
       "low": 248.54,
       "high": 529.53,
       "level": 0.8
+    },
+    "baseline_realized": {
+      "method": "hist_vol_60d",
+      "vol": 0.2212,
+      "low": 265.56,
+      "high": 476.09,
+      "level": 0.8
     }
   },
   {
@@ -6526,6 +7149,13 @@
       "low": 219.25,
       "high": 630.16,
       "level": 0.8
+    },
+    "baseline_realized": {
+      "method": "hist_vol_60d",
+      "vol": 0.2212,
+      "low": 234.57,
+      "high": 538.99,
+      "level": 0.8
     }
   },
   {
@@ -6590,6 +7220,13 @@
       "iv": 0.3843,
       "low": 453.3,
       "high": 529.13,
+      "level": 0.8
+    },
+    "baseline_realized": {
+      "method": "hist_vol_60d",
+      "vol": 0.2839,
+      "low": 462.72,
+      "high": 518.72,
       "level": 0.8
     }
   },
@@ -6656,6 +7293,13 @@
       "low": 430.11,
       "high": 557.64,
       "level": 0.8
+    },
+    "baseline_realized": {
+      "method": "hist_vol_60d",
+      "vol": 0.2839,
+      "low": 442.17,
+      "high": 542.83,
+      "level": 0.8
     }
   },
   {
@@ -6720,6 +7364,13 @@
       "iv": 0.3609,
       "low": 354.13,
       "high": 674.41,
+      "level": 0.8
+    },
+    "baseline_realized": {
+      "method": "hist_vol_60d",
+      "vol": 0.2839,
+      "low": 380.28,
+      "high": 631.18,
       "level": 0.8
     }
   },
@@ -6786,6 +7437,13 @@
       "low": 311.39,
       "high": 766.57,
       "level": 0.8
+    },
+    "baseline_realized": {
+      "method": "hist_vol_60d",
+      "vol": 0.2839,
+      "low": 341.53,
+      "high": 702.78,
+      "level": 0.8
     }
   },
   {
@@ -6850,6 +7508,13 @@
       "iv": 0.3477,
       "low": 254.52,
       "high": 941.21,
+      "level": 0.8
+    },
+    "baseline_realized": {
+      "method": "hist_vol_60d",
+      "vol": 0.2839,
+      "low": 287.25,
+      "high": 835.57,
       "level": 0.8
     }
   },
@@ -6917,6 +7582,13 @@
       "low": 123.96,
       "high": 176.97,
       "level": 0.8
+    },
+    "baseline_realized": {
+      "method": "hist_vol_60d",
+      "vol": 0.7714,
+      "low": 127.86,
+      "high": 174.41,
+      "level": 0.8
     }
   },
   {
@@ -6982,6 +7654,13 @@
       "iv": 0.712,
       "low": 113.7,
       "high": 190.18,
+      "level": 0.8
+    },
+    "baseline_realized": {
+      "method": "hist_vol_60d",
+      "vol": 0.7714,
+      "low": 113.01,
+      "high": 197.32,
       "level": 0.8
     }
   },
@@ -7049,6 +7728,13 @@
       "low": 87.2,
       "high": 233.76,
       "level": 0.8
+    },
+    "baseline_realized": {
+      "method": "hist_vol_60d",
+      "vol": 0.7714,
+      "low": 75.02,
+      "high": 297.26,
+      "level": 0.8
     }
   },
   {
@@ -7114,6 +7800,13 @@
       "iv": 0.527,
       "low": 70.72,
       "high": 269.99,
+      "level": 0.8
+    },
+    "baseline_realized": {
+      "method": "hist_vol_60d",
+      "vol": 0.7714,
+      "low": 56.02,
+      "high": 398.07,
       "level": 0.8
     }
   },
@@ -7181,6 +7874,13 @@
       "low": 53.15,
       "high": 328.09,
       "level": 0.8
+    },
+    "baseline_realized": {
+      "method": "hist_vol_60d",
+      "vol": 0.7714,
+      "low": 35.0,
+      "high": 637.11,
+      "level": 0.8
     }
   },
   {
@@ -7246,6 +7946,13 @@
       "iv": 0.4373,
       "low": 223.59,
       "high": 266.62,
+      "level": 0.8
+    },
+    "baseline_realized": {
+      "method": "hist_vol_60d",
+      "vol": 0.3469,
+      "low": 227.89,
+      "high": 262.04,
       "level": 0.8
     }
   },
@@ -7313,6 +8020,13 @@
       "low": 210.32,
       "high": 282.85,
       "level": 0.8
+    },
+    "baseline_realized": {
+      "method": "hist_vol_60d",
+      "vol": 0.3469,
+      "low": 215.59,
+      "high": 276.99,
+      "level": 0.8
     }
   },
   {
@@ -7378,6 +8092,13 @@
       "iv": 0.408,
       "low": 163.17,
       "high": 356.59,
+      "level": 0.8
+    },
+    "baseline_realized": {
+      "method": "hist_vol_60d",
+      "vol": 0.3469,
+      "low": 175.27,
+      "high": 340.71,
       "level": 0.8
     }
   },
@@ -7445,6 +8166,13 @@
       "low": 143.28,
       "high": 399.6,
       "level": 0.8
+    },
+    "baseline_realized": {
+      "method": "hist_vol_60d",
+      "vol": 0.3469,
+      "low": 157.25,
+      "high": 379.77,
+      "level": 0.8
     }
   },
   {
@@ -7511,6 +8239,13 @@
       "low": 104.05,
       "high": 523.98,
       "level": 0.8
+    },
+    "baseline_realized": {
+      "method": "hist_vol_60d",
+      "vol": 0.3469,
+      "low": 120.05,
+      "high": 497.41,
+      "level": 0.8
     }
   },
   {
@@ -7575,6 +8310,13 @@
       "iv": 0.4461,
       "low": 249.34,
       "high": 298.38,
+      "level": 0.8
+    },
+    "baseline_realized": {
+      "method": "hist_vol_60d",
+      "vol": 0.3997,
+      "low": 251.93,
+      "high": 295.9,
       "level": 0.8
     }
   },
@@ -7641,6 +8383,13 @@
       "low": 235.61,
       "high": 315.33,
       "level": 0.8
+    },
+    "baseline_realized": {
+      "method": "hist_vol_60d",
+      "vol": 0.3997,
+      "low": 236.32,
+      "high": 315.44,
+      "level": 0.8
     }
   },
   {
@@ -7705,6 +8454,13 @@
       "iv": 0.4111,
       "low": 186.95,
       "high": 389.39,
+      "level": 0.8
+    },
+    "baseline_realized": {
+      "method": "hist_vol_60d",
+      "vol": 0.3997,
+      "low": 191.11,
+      "high": 390.07,
       "level": 0.8
     }
   },
@@ -7771,6 +8527,13 @@
       "low": 160.97,
       "high": 445.18,
       "level": 0.8
+    },
+    "baseline_realized": {
+      "method": "hist_vol_60d",
+      "vol": 0.3997,
+      "low": 164.27,
+      "high": 453.79,
+      "level": 0.8
     }
   },
   {
@@ -7835,6 +8598,13 @@
       "iv": 0.3902,
       "low": 126.6,
       "high": 549.31,
+      "level": 0.8
+    },
+    "baseline_realized": {
+      "method": "hist_vol_60d",
+      "vol": 0.3997,
+      "low": 128.74,
+      "high": 579.03,
       "level": 0.8
     }
   },
@@ -7901,6 +8671,13 @@
       "low": 550.49,
       "high": 673.72,
       "level": 0.8
+    },
+    "baseline_realized": {
+      "method": "hist_vol_60d",
+      "vol": 0.4872,
+      "low": 553.02,
+      "high": 672.83,
+      "level": 0.8
     }
   },
   {
@@ -7965,6 +8742,13 @@
       "iv": 0.4565,
       "low": 515.44,
       "high": 716.83,
+      "level": 0.8
+    },
+    "baseline_realized": {
+      "method": "hist_vol_60d",
+      "vol": 0.4872,
+      "low": 511.55,
+      "high": 727.37,
       "level": 0.8
     }
   },
@@ -8031,6 +8815,13 @@
       "low": 392.68,
       "high": 903.58,
       "level": 0.8
+    },
+    "baseline_realized": {
+      "method": "hist_vol_60d",
+      "vol": 0.4872,
+      "low": 394.9,
+      "high": 942.23,
+      "level": 0.8
     }
   },
   {
@@ -8096,6 +8887,13 @@
       "low": 322.2,
       "high": 1057.72,
       "level": 0.8
+    },
+    "baseline_realized": {
+      "method": "hist_vol_60d",
+      "vol": 0.4872,
+      "low": 320.7,
+      "high": 1160.24,
+      "level": 0.8
     }
   },
   {
@@ -8160,6 +8958,13 @@
       "iv": 0.4411,
       "low": 245.58,
       "high": 1290.38,
+      "level": 0.8
+    },
+    "baseline_realized": {
+      "method": "hist_vol_60d",
+      "vol": 0.4872,
+      "low": 244.0,
+      "high": 1524.94,
       "level": 0.8
     }
   }

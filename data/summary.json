@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-26T00:17:06Z",
+  "generated_at": "2026-11-26T00:28:17Z",
   "latest_price_date": "2026-11-25",
   "n_total": 115,
   "n_open": 115,
@@ -48,5 +48,13 @@
     }
   ],
   "by_horizon": {},
+  "by_blind": {
+    "blind": {
+      "n": 0
+    },
+    "not_blind": {
+      "n": 0
+    }
+  },
   "needs_price": []
 }
