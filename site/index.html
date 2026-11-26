@@ -441,7 +441,7 @@ th { font-weight: 700; font-size: 12.5px; color: var(--muted-2); }
     <h3 class="eyebrow">Where the price could go</h3>
     <div id="chart-pick" class="horizon-pick" role="group" aria-label="Chart window"></div>
     <div id="chart" class="chartwrap"></div>
-    <p class="muted" style="font-size:12px;margin-top:6px">Dark line: daily closes. Blue band: the AI's 80% range; gray dashed band: the volatility baseline (no view). Dots mark the stored horizon ranges (1 week, 1 month and so on); the curve between them is a smooth guide that widens with the square root of time, not a separate forecast. Hover for exact values, scroll or pinch to zoom, drag to pan. Chart by TradingView Lightweight Charts.</p>
+    <p class="muted" style="font-size:12px;margin-top:6px">Dark line: daily closes. Blue band: the AI's 80% range; gray dashed band: the volatility baseline (no view). Dots mark the stored horizon ranges (1 week, 1 month and so on); the curve between them is a smooth guide that widens with the square root of time, not a separate forecast. Zoom out (scroll or pinch) to see the longer horizons out to 5 years, or use the buttons; drag to pan and hover for exact values. Chart by TradingView Lightweight Charts.</p>
   </div>
 
   <div class="section">
@@ -781,20 +781,14 @@ th { font-weight: 700; font-size: 12.5px; color: var(--muted-2); }
     if (!window.LightweightCharts) { renderChartSvg(rows); return; }
     state.lastRows = rows;
     var LW = window.LightweightCharts;
-    seg2($("chart-pick"), [["1m", "1 month"], ["6m", "6 months"], ["1y", "1 year"], ["5y", "5 years"]], "chartWin", function () { renderChart(rows); });
-    var lg = el("button", "Log scale"); lg.type = "button"; lg.className = "logtoggle";
-    lg.setAttribute("aria-pressed", state.chartLog ? "true" : "false");
-    lg.addEventListener("click", function () { state.chartLog = !state.chartLog; renderChart(rows); });
-    $("chart-pick").appendChild(lg);
+    var chart, lastApply = 0, applyWin, controls;
     var host = $("chart"); clear(host);
     if (state.tv) { try { state.tv.remove(); } catch (e) {} state.tv = null; }
-    var maxH = { "1m": 31, "6m": 190, "1y": 366, "5y": 1830 }[state.chartWin] || 31;
-    var cone = rows.filter(function (p) { return dayNum(p.resolves_on) - dayNum(p.made_at) <= maxH + 1; })
-      .sort(function (a, b) { return a.resolves_on < b.resolves_on ? -1 : 1; });
+    var cone = rows.slice().sort(function (a, b) { return a.resolves_on < b.resolves_on ? -1 : 1; });
     if (!cone.length) return;
     var base = cone[0], t0 = dayNum(base.made_at), s0 = base.price_at_prediction;
     var span = dayNum(cone[cone.length - 1].resolves_on) - t0;
-    var back = Math.max(45, Math.round(span * (state.chartWin === "1m" ? 2.2 : 0.9)));
+    var back = 1900;
     var series = state.prices[state.symbol] || {}, keys = Object.keys(series).sort();
     var histData = keys.filter(function (d) { return dayNum(d) >= t0 - back && d <= base.made_at; }).map(function (d) { return { time: d, value: series[d] }; });
     var afterData = keys.filter(function (d) { return d > base.made_at; }).map(function (d) { return { time: d, value: series[d] }; });
@@ -818,12 +812,12 @@ th { font-weight: 700; font-size: 12.5px; color: var(--muted-2); }
     box.style.height = (host.clientWidth < 560 ? 320 : 420) + "px";
     var legend = document.createElement("div"); legend.className = "tvlegend";
     host.appendChild(box); host.appendChild(legend);
-    var chart = LW.createChart(box, {
+    chart = LW.createChart(box, {
       autoSize: true,
       layout: { background: { type: "solid", color: card }, textColor: muted, fontFamily: getComputedStyle(document.body).fontFamily, fontSize: 12 },
       grid: { vertLines: { visible: false }, horzLines: { color: line } },
       rightPriceScale: { borderVisible: false, mode: state.chartLog ? LW.PriceScaleMode.Logarithmic : LW.PriceScaleMode.Normal, scaleMargins: { top: 0.1, bottom: 0.1 } },
-      timeScale: { borderVisible: false, rightOffset: 2, timeVisible: false },
+      timeScale: { borderVisible: false, rightOffset: 2, timeVisible: false, minBarSpacing: 0.05, fixLeftEdge: false, fixRightEdge: false },
       crosshair: { mode: LW.CrosshairMode.Normal, vertLine: { color: muted, style: 3, width: 1, labelBackgroundColor: ink }, horzLine: { color: muted, style: 3, width: 1, labelBackgroundColor: ink } }
     });
     state.tv = chart;
@@ -832,8 +826,8 @@ th { font-weight: 700; font-size: 12.5px; color: var(--muted-2); }
     }
     var sBHi = chart.addSeries(LW.LineSeries, lineOpts(cssRgb("--muted", 0.75), 1, 2, false));
     var sBLo = chart.addSeries(LW.LineSeries, lineOpts(cssRgb("--muted", 0.75), 1, 2, false));
-    var sHi = chart.addSeries(LW.LineSeries, lineOpts(accent, 2, 0, true));
-    var sLo = chart.addSeries(LW.LineSeries, lineOpts(accent, 2, 0, true));
+    var sHi = chart.addSeries(LW.LineSeries, lineOpts(accent, 2, 0, false));
+    var sLo = chart.addSeries(LW.LineSeries, lineOpts(accent, 2, 0, false));
     var sHist = chart.addSeries(LW.AreaSeries, { lineColor: ink, lineWidth: 2, topColor: cssRgb("--ink", 0.16), bottomColor: cssRgb("--ink", 0.0), priceLineVisible: true, priceLineStyle: 3, priceLineColor: muted, crosshairMarkerRadius: 4 });
     sBHi.setData(bHi); sBLo.setData(bLo); sHi.setData(aiHi); sLo.setData(aiLo);
     sHist.setData(histData.concat(afterData));
@@ -848,7 +842,40 @@ th { font-weight: 700; font-size: 12.5px; color: var(--muted-2); }
     var padDays = Math.max(6, Math.round(span * 0.06)), pad = [];
     for (dd = 1; dd <= padDays; dd++) { var w2 = new Date((t0 + span + dd) * 86400000).getUTCDay(); if (w2 !== 0 && w2 !== 6) pad.push({ time: isoOf(t0 + span + dd) }); }
     sHi.setData(aiHi.concat(pad));
-    chart.timeScale().setVisibleRange({ from: histData[0].time, to: pad.length ? pad[pad.length - 1].time : aiHi[aiHi.length - 1].time });
+    var firstDay = dayNum(histData[0].time), lastDay = t0 + span + padDays;
+    function snapDay(d, dir) { var g = 0; while (g++ < 4) { var w = new Date(d * 86400000).getUTCDay(); if (w !== 0 && w !== 6) break; d += dir; } return d; }
+    var PRESET = { "1m": [68, 31], "6m": [165, 183], "1y": [330, 365], "5y": [back, span] };
+    applyWin = function (win) {
+      var pr = PRESET[win]; if (!pr) return;
+      var fwd = pr[1], fromD = Math.max(firstDay, t0 - pr[0]), toD = Math.min(lastDay, t0 + fwd + Math.max(6, Math.round(fwd * 0.06)));
+      lastApply = Date.now();
+      try { chart.timeScale().setVisibleRange({ from: isoOf(snapDay(fromD, 1)), to: isoOf(snapDay(toD, -1)) }); } catch (e) {}
+      setTimeout(updateEnds, 80);
+    };
+    var endLines = [];
+    function updateEnds() {
+      endLines.forEach(function (h) { try { h[0].removePriceLine(h[1]); } catch (e) {} }); endLines = [];
+      var r = chart.timeScale().getVisibleRange(); if (!r) return;
+      var t = String(r.to), lastT = aiHi[aiHi.length - 1].time, k = 0;
+      if (t > lastT) t = lastT;
+      while (mAiHi[t] === undefined && k++ < 4) t = isoOf(dayNum(t) - 1);
+      if (mAiHi[t] === undefined || t < base.made_at) return;
+      [[sHi, mAiHi[t]], [sLo, mAiLo[t]]].forEach(function (x) {
+        endLines.push([x[0], x[0].createPriceLine({ price: x[1], color: accent, lineVisible: false, axisLabelVisible: true, title: "" })]);
+      });
+    }
+    controls = function () {
+      seg2($("chart-pick"), [["1m", "1 month"], ["6m", "6 months"], ["1y", "1 year"], ["5y", "5 years"]], "chartWin", function () { applyWin(state.chartWin); controls(); });
+      var lg = el("button", "Log scale"); lg.type = "button"; lg.className = "logtoggle";
+      lg.setAttribute("aria-pressed", state.chartLog ? "true" : "false");
+      lg.addEventListener("click", function () {
+        state.chartLog = !state.chartLog;
+        chart.priceScale("right").applyOptions({ mode: state.chartLog ? LW.PriceScaleMode.Logarithmic : LW.PriceScaleMode.Normal });
+        lg.setAttribute("aria-pressed", state.chartLog ? "true" : "false");
+      });
+      $("chart-pick").appendChild(lg);
+    };
+    controls();
 
     var mapOf = function (arr) { var m = {}; arr.forEach(function (q) { m[q.time] = q.value; }); return m; };
     var mHist = mapOf(histData.concat(afterData)), mAiHi = mapOf(aiHi), mAiLo = mapOf(aiLo), mBHi = mapOf(bHi), mBLo = mapOf(bLo);
@@ -863,6 +890,11 @@ th { font-weight: 700; font-size: 12.5px; color: var(--muted-2); }
     }
     setLegend(null);
     chart.subscribeCrosshairMove(function (param) { setLegend(param && param.time ? String(param.time) : null); });
+    chart.timeScale().subscribeVisibleTimeRangeChange(function () {
+      if (Date.now() - lastApply > 500 && state.chartWin) { state.chartWin = null; controls(); }
+      updateEnds();
+    });
+    applyWin(state.chartWin || "1m");
   }
 
   function renderChartSvg(rows) {
