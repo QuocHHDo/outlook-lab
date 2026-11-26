@@ -240,3 +240,9 @@ def test_shock_cause_and_move_are_checked():
     assert len(validate.validate_events({"events": [bad]})) == 2
     no_scope = {k: v for k, v in base.items() if k != "scope"}
     assert len(validate.validate_events({"events": [no_scope]})) == 1
+
+
+def test_share_class_tickers_map_to_yahoo_and_symbols_are_unique():
+    import fetch_prices, common
+    assert fetch_prices.yf_ticker("BRK.B") == "BRK-B" and fetch_prices.yf_ticker("SPY") == "SPY"
+    assert len(common.DEFAULT_SYMBOLS) == len(set(common.DEFAULT_SYMBOLS)) == 45
