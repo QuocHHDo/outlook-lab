@@ -157,6 +157,31 @@ tbody tr { border-top: 1px solid var(--line-2); }
 .ev-date { display: flex; flex-direction: column; }
 .ev-date b { font-weight: 600; }
 .ev-date small { font-size: 12px; color: var(--muted); }
+.evgroup { margin-top: 20px; }
+.evgroup:first-child { margin-top: 4px; }
+.evg-h { display: flex; flex-wrap: wrap; align-items: baseline; gap: 2px 10px; margin: 0 0 4px; }
+.evg-h h4 { margin: 0; font-size: 14px; font-weight: 600; color: var(--ink); }
+.evg-h small { font-size: 12px; color: var(--muted-2); }
+.evc { list-style: none; border-top: 1px solid var(--line-2); }
+.evc summary { list-style: none; cursor: pointer; display: grid; grid-template-columns: 96px minmax(0, 1fr) auto 14px; grid-template-areas: "date title meta chev"; gap: 12px; align-items: center; padding: 10px 0; }
+.evc summary::-webkit-details-marker { display: none; }
+.evc summary::after { content: "\25be"; grid-area: chev; color: var(--muted); font-size: 12px; }
+.evc details[open] > summary::after { transform: rotate(180deg); }
+.evc summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 4px; }
+.evc-date { grid-area: date; font-weight: 600; font-size: 13px; }
+.evc-title { grid-area: title; font-weight: 600; }
+.evc-meta { grid-area: meta; display: flex; align-items: center; gap: 10px; font-size: 12px; color: var(--muted-2); white-space: nowrap; }
+.mbar { display: inline-block; position: relative; width: 52px; height: 6px; background: var(--tag-bg); border-radius: 3px; }
+.mbar i { position: absolute; left: 0; top: 0; bottom: 0; background: var(--accent); border-radius: 3px; }
+.mimp { font-weight: 600; }
+.mimp.bear { color: var(--bad); } .mimp.bull { color: var(--ok); }
+.evc-full { display: flex; flex-direction: column; gap: 4px; padding: 0 0 12px 108px; }
+.evg-more { margin-top: 8px; }
+@media (max-width: 640px) {
+  .evc summary { grid-template-columns: minmax(0, 1fr) 14px; grid-template-areas: "date chev" "title title" "meta meta"; gap: 2px 8px; }
+  .evc-meta { white-space: normal; flex-wrap: wrap; }
+  .evc-full { padding-left: 0; }
+}
 .wrow { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 18px; margin: 6px 0 2px; }
 @media (max-width: 640px) { .wrow { grid-template-columns: minmax(0, 1fr); gap: 12px; } }
 .wlab { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 2px 8px; font-size: 12px; color: var(--muted-2); margin-bottom: 5px; }
@@ -532,9 +557,7 @@ th { font-weight: 700; font-size: 12.5px; color: var(--muted-2); }
 
   <div id="events" class="section" hidden>
     <h3 class="eyebrow">Events that can move the market</h3>
-    <div id="event-pick" class="horizon-pick" role="group" aria-label="Event list"></div>
-    <ol id="event-list" class="timeline"></ol>
-    <button id="event-more" type="button" class="more" hidden></button>
+    <div id="event-groups"></div>
     <p class="note">Scheduled dates come from official calendars (BLS, Federal Reserve, NYSE). Earnings dates come from Robinhood's calendar and can change. Recent shocks are context only: they do not show that these events predict price moves. Items under Being watched are rumors or unconfirmed reports. Impact ranges are judgment, not scored; META's are SPY's times 1.6, because on two extreme 2025 days META moved about 1.9x and 2.5x SPY's move. The percentage is the model's own estimate, it is judged against what happens, and a rumor can be wrong.</p>
   </div>
 
@@ -1723,92 +1746,112 @@ th { font-weight: 700; font-size: 12.5px; color: var(--muted-2); }
     box.appendChild(svg);
     return box;
   }
+  function evRow(e, rows, wax) {
+    var li = el("li", undefined, "evc");
+    var det = document.createElement("details");
+    var sum = document.createElement("summary");
+    sum.appendChild(el("span", e.type === "watch" ? "By " + shortDate(e.by) : dateLabel(e), "evc-date"));
+    sum.appendChild(el("span", e.title, "evc-title"));
+    var meta = el("span", undefined, "evc-meta");
+    if (e.type === "watch") {
+      var pc = Math.round((e.prob || 0) * 100);
+      var mb = el("span", undefined, "mbar"); var fi = el("i"); fi.style.width = Math.min(pc / wax.pmax * 100, 100) + "%"; mb.appendChild(fi);
+      mb.setAttribute("role", "img"); mb.setAttribute("aria-label", "Model chance " + pc + "%");
+      meta.appendChild(mb); meta.appendChild(el("span", pc + "% chance"));
+      var im = impactFor(e);
+      if (im) meta.appendChild(el("span", signed(im.r[0]) + " to " + signed(im.r[1]), "mimp " + (e.direction === "bull" ? "bull" : "bear")));
+    } else {
+      if (e.time) meta.appendChild(el("span", e.time));
+      if (e.type === "scheduled") {
+        var end0 = e.end_date || e.date;
+        var hit0 = rows.filter(function (p) { return p.resolves_on >= end0; })[0];
+        if (hit0) meta.appendChild(el("span", "Inside the " + (HLABEL[hit0.horizon] || hit0.horizon) + " window", "tag win"));
+      } else meta.appendChild(el("span", KIND[e.kind] || e.kind, "tag"));
+    }
+    sum.appendChild(meta);
+    det.appendChild(sum);
+    var body = el("div", undefined, "evc-full");
+    if (e.detail) body.appendChild(el("span", e.detail, "ev-detail"));
+    if (e.type === "watch") {
+      body.appendChild(watchBars(e, wax));
+      if (e.resolves_if) body.appendChild(el("span", e.resolves_if, "ev-detail"));
+      if (e.impact && e.impact.basis) body.appendChild(el("small", e.impact.basis, "wnote"));
+    }
+    var tags = el("span", undefined, "tags");
+    tags.appendChild(el("span", KIND[e.kind] || e.kind, "tag"));
+    if (e.type === "watch") {
+      tags.appendChild(el("span", WSTATUS[e.status] || e.status, "tag unv"));
+      tags.appendChild(el("span", "Reported " + shortDate(e.date), "tag"));
+      if (e.checked) tags.appendChild(el("span", "Checked " + shortDate(e.checked), "tag"));
+      tags.appendChild(el("span", "Not yet scored", "tag model"));
+      ((e.impact && e.impact.sources) || []).forEach(function (src) {
+        var u = safeUrl(src.url); if (!u) return;
+        var a = el("a", "Analogue: " + (src.label || domain(u)), "tag");
+        a.href = u; a.target = "_blank"; a.rel = "noopener noreferrer"; tags.appendChild(a);
+      });
+    }
+    var any = false;
+    (e.sources || []).forEach(function (src) {
+      var u = safeUrl(src.url);
+      if (!u) return;
+      any = true;
+      var a = el("a", src.label || domain(u), "tag");
+      a.href = u; a.target = "_blank"; a.rel = "noopener noreferrer";
+      tags.appendChild(a);
+    });
+    if (e.note) { any = true; tags.appendChild(el("span", e.note, "tag model")); }
+    if (!any) tags.appendChild(el("span", "unverified", "tag unv"));
+    body.appendChild(tags);
+    det.appendChild(body);
+    li.appendChild(det);
+    return li;
+  }
+
+  function evGroup(key, title, sub, items, limit, mk, emptyText, chart, rows) {
+    var g = el("div", undefined, "evgroup");
+    var h = el("div", undefined, "evg-h");
+    h.appendChild(el("h4", title)); if (sub) h.appendChild(el("small", sub));
+    g.appendChild(h);
+    if (chart) g.appendChild(chart);
+    var ol = el("ol", undefined, "timeline");
+    if (!items.length) ol.appendChild(el("li", emptyText, "muted"));
+    var open = state.evOpen[key];
+    (open ? items : items.slice(0, limit)).forEach(function (e) { ol.appendChild(mk(e)); });
+    g.appendChild(ol);
+    if (items.length > limit) {
+      var btn = el("button", open ? "Show fewer" : "Show all " + items.length, "more evg-more");
+      btn.type = "button";
+      btn.addEventListener("click", function () { state.evOpen[key] = !open; renderEvents(rows); });
+      g.appendChild(btn);
+    }
+    return g;
+  }
+
   function renderEvents(rows) {
-    var host = $("events"), pick = $("event-pick"), list = $("event-list");
+    var host = $("events"), groups = $("event-groups");
     var all = (state.events || []).filter(function (e) {
       return e.type === "shock" || !e.symbols || e.symbols.indexOf(state.symbol) >= 0;
     });
     if (!all.length) { host.hidden = true; return; }
     host.hidden = false;
+    state.evOpen = state.evOpen || {};
     var today = todayIso();
     var upcoming = all.filter(function (e) { return e.type === "scheduled" && (e.end_date || e.date) >= today; })
       .sort(function (a, b) { return a.date < b.date ? -1 : a.date > b.date ? 1 : 0; });
     var recent = all.filter(function (e) { return e.type === "shock"; })
       .sort(function (a, b) { return a.date < b.date ? 1 : a.date > b.date ? -1 : 0; });
-
     var watching = all.filter(function (e) { return e.type === "watch" && (e.by || "") >= today; })
       .sort(function (a, b) { return (b.prob || 0) - (a.prob || 0); });
-    clear(pick);
-    [["scheduled", "Coming up"], ["shock", "Recent shocks"]].concat(watching.length ? [["watch", "Being watched"]] : []).forEach(function (pair) {
-      var btn = el("button", pair[1]);
-      btn.type = "button";
-      btn.setAttribute("aria-pressed", pair[0] === state.evTab ? "true" : "false");
-      btn.addEventListener("click", function () { state.evTab = pair[0]; state.evAll = false; renderEvents(rows); });
-      pick.appendChild(btn);
-    });
-
-    var oldChart = $("watch-chart"); if (oldChart) oldChart.remove();
     var wax = watchAxis(watching);
-    if (state.evTab === "watch" && watching.length) {
-      var wch = watchChart(watching, wax);
-      if (wch) list.parentNode.insertBefore(wch, list);
+    clear(groups);
+    groups.appendChild(evGroup("scheduled", "Coming up", upcoming.length > 3 ? "Next 3 of " + upcoming.length + ", soonest first" : "Soonest first",
+      upcoming, 3, function (e) { return evRow(e, rows, wax); }, "No scheduled events listed.", null, rows));
+    if (watching.length) {
+      groups.appendChild(evGroup("watch", "Being watched", "Unconfirmed items, sorted by chance it happens, highest first",
+        watching, 99, function (e) { return evRow(e, rows, wax); }, "", watchChart(watching, wax), rows));
     }
-    clear(list);
-    var items = state.evTab === "scheduled" ? upcoming : state.evTab === "watch" ? watching : recent;
-    if (!items.length) { var li0 = el("li", state.evTab === "scheduled" ? "No scheduled events listed." : "No recent shocks listed.", "muted"); list.appendChild(li0); return; }
-    var LIMIT = 5, shown = state.evAll ? items : items.slice(0, LIMIT);
-    shown.forEach(function (e) {
-      var li = el("li", undefined, "ev");
-      var d = el("div", undefined, "ev-date");
-      if (e.type === "watch") { d.appendChild(el("b", "By " + shortDate(e.by))); d.appendChild(el("small", "Reported " + shortDate(e.date))); }
-      else { d.appendChild(el("b", dateLabel(e))); if (e.time) d.appendChild(el("small", e.time)); }
-      li.appendChild(d);
-      var body = el("div", undefined, "ev-body");
-      body.appendChild(el("span", e.title, "ev-title"));
-      if (e.detail) body.appendChild(el("span", e.detail, "ev-detail"));
-      if (e.type === "watch") {
-        body.appendChild(watchBars(e, wax));
-        if (e.resolves_if) body.appendChild(el("span", e.resolves_if, "ev-detail"));
-        if (e.impact && e.impact.basis) body.appendChild(el("small", e.impact.basis, "wnote"));
-      }
-      var tags = el("span", undefined, "tags");
-      tags.appendChild(el("span", KIND[e.kind] || e.kind, "tag"));
-      if (e.type === "watch") {
-        tags.appendChild(el("span", WSTATUS[e.status] || e.status, "tag unv"));
-        if (e.checked) tags.appendChild(el("span", "Checked " + shortDate(e.checked), "tag"));
-        tags.appendChild(el("span", "Not yet scored", "tag model"));
-        ((e.impact && e.impact.sources) || []).forEach(function (src) {
-          var u = safeUrl(src.url); if (!u) return;
-          var a = el("a", "Analogue: " + (src.label || domain(u)), "tag");
-          a.href = u; a.target = "_blank"; a.rel = "noopener noreferrer"; tags.appendChild(a);
-        });
-      }
-      if (e.type === "scheduled") {
-        var end = e.end_date || e.date;
-        var hit = rows.filter(function (p) { return p.resolves_on >= end; })[0];
-        if (hit) tags.appendChild(el("span", "Inside the " + (HLABEL[hit.horizon] || hit.horizon) + " window", "tag win"));
-      }
-      var any = false;
-      (e.sources || []).forEach(function (src) {
-        var u = safeUrl(src.url);
-        if (!u) return;
-        any = true;
-        var a = el("a", src.label || domain(u), "tag");
-        a.href = u; a.target = "_blank"; a.rel = "noopener noreferrer";
-        tags.appendChild(a);
-      });
-      if (e.note) { any = true; tags.appendChild(el("span", e.note, "tag model")); }
-      if (!any) tags.appendChild(el("span", "unverified", "tag unv"));
-      body.appendChild(tags);
-      li.appendChild(body);
-      list.appendChild(li);
-    });
-    var more = $("event-more");
-    if (items.length > LIMIT) {
-      more.hidden = false;
-      more.textContent = state.evAll ? "Show fewer" : "Show all " + items.length + " events";
-      more.onclick = function () { state.evAll = !state.evAll; renderEvents(rows); };
-    } else { more.hidden = true; }
+    groups.appendChild(evGroup("shock", "Recent shocks", "Context only, newest first",
+      recent, 3, function (e) { return evRow(e, rows, wax); }, "No recent shocks listed.", null, rows));
   }
 
   function resultCell(r) {
