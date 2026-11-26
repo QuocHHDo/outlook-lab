@@ -193,10 +193,9 @@ tbody tr { border-top: 1px solid var(--line-2); }
 .wrange { position: absolute; top: 0; bottom: 0; border-radius: 5px; min-width: 3px; }
 .wrange.bear { background: var(--bad); } .wrange.bull { background: var(--ok); }
 .wnote { display: block; font-size: 11px; color: var(--muted-2); margin-top: 4px; line-height: 1.45; }
-.wchart { border: 1px solid var(--line); border-radius: 8px; padding: 10px 12px 4px; margin: 0 0 12px; }
-.wchart p { margin: 0 0 2px; font-size: 13px; color: var(--muted-2); }
-.wchart p b { color: var(--ink); font-weight: 600; }
-.wchart svg { display: block; width: 100%; height: auto; }
+.wchart { margin: 2px 0 8px; }
+.wchart p { margin: 0 0 4px; font-size: 12px; color: var(--muted-2); }
+.wchart svg { display: block; width: 100%; height: 150px; overflow: visible; }
 .ev-body { display: flex; flex-direction: column; gap: 4px; }
 .ev-title { font-weight: 600; }
 .ev-detail { font-size: 13px; color: var(--muted-2); }
@@ -1713,35 +1712,43 @@ th { font-weight: 700; font-size: 12.5px; color: var(--muted-2); }
     if (text !== undefined) n.textContent = text;
     return n;
   }
-  function watchChart(items, ax) {
+  function watchChart(items, ax, width) {
     var pts = items.filter(function (e) { return impactFor(e); });
     if (!pts.length) return null;
     var box = el("div", undefined, "wchart"); box.id = "watch-chart";
     var sym = impactFor(pts[0]).key;
-    var cap = el("p"); cap.appendChild(el("b", "Which items deserve attention. "));
-    cap.appendChild(document.createTextNode("Left to right is how likely. Up and down is the " + (sym === "SPY" && state.symbol !== "SPY" ? "SPY" : sym) + " move if it happens, with its range."));
-    box.appendChild(cap);
-    var W = 640, H = 210, X0 = 48, X1 = 620, Y0 = 14, Y1 = 184;
-    var svg = svgEl("svg", { viewBox: "0 0 " + W + " " + H, role: "img" });
+    box.appendChild(el("p", "Across: chance it happens. Up and down: " + (sym === "SPY" && state.symbol !== "SPY" ? "SPY" : sym) + " move if it happens, with its range."));
+    var W = Math.max(280, Math.round(width || 640)), H = 150, X0 = 38, X1 = W - 10, Y0 = 8, Y1 = H - 22;
+    var svg = svgEl("svg", { viewBox: "0 0 " + W + " " + H, width: W, height: H, role: "img" });
     svg.appendChild(svgEl("title", {}, "Chance of each watched item against its likely market move"));
     var px = function (p) { return X0 + p / ax.pmax * (X1 - X0); };
     var py = function (v) { return Y0 + (ax.B - v) / (ax.B - ax.A) * (Y1 - Y0); };
-    var grey = function (n, st, sw) { n.style.stroke = st; n.style.strokeWidth = sw; return n; };
-    for (var t = 0; t <= ax.pmax; t += 10) {
-      svg.appendChild(grey(svgEl("line", { x1: px(t), x2: px(t), y1: Y0, y2: Y1 }), "var(--line)", "1"));
-      var tx = svgEl("text", { x: px(t), y: 203, "text-anchor": "middle", "font-size": 11 }, t + "%"); tx.style.fill = "var(--muted-2)"; svg.appendChild(tx);
-    }
+    var line = function (x1, y1, x2, y2, col, w, dash) {
+      var n = svgEl("line", { x1: x1, y1: y1, x2: x2, y2: y2, "stroke-linecap": "round" });
+      n.style.stroke = col; n.style.strokeWidth = w; if (dash) n.setAttribute("stroke-dasharray", dash); return n;
+    };
+    var txt = function (x, y, t, anchor, col) {
+      var n = svgEl("text", { x: x, y: y, "text-anchor": anchor, "font-size": 11 }, t); n.style.fill = col; return n;
+    };
     for (var v = Math.ceil(ax.A / 2) * 2; v <= ax.B; v += 2) {
-      svg.appendChild(grey(svgEl("line", { x1: X0, x2: X1, y1: py(v), y2: py(v) }), v === 0 ? "var(--muted-2)" : "var(--line)", "1"));
-      var ty = svgEl("text", { x: X0 - 6, y: py(v) + 4, "text-anchor": "end", "font-size": 11 }, (v > 0 ? "+" : v < 0 ? "\u2212" : "") + Math.abs(v) + "%"); ty.style.fill = "var(--muted-2)"; svg.appendChild(ty);
+      svg.appendChild(line(X0, py(v), X1, py(v), v === 0 ? "var(--muted)" : "var(--line)", v === 0 ? 1 : 1, v === 0 ? null : "2 3"));
+      svg.appendChild(txt(X0 - 6, py(v) + 4, (v > 0 ? "+" : v < 0 ? "\u2212" : "") + Math.abs(v) + "%", "end", "var(--muted-2)"));
     }
+    [0, ax.pmax / 2, ax.pmax].forEach(function (t, i) {
+      svg.appendChild(txt(px(t), H - 6, t + "%", i === 0 ? "start" : i === 2 ? "end" : "middle", "var(--muted-2)"));
+    });
     pts.forEach(function (e) {
       var im = impactFor(e), x = px(Math.min(e.prob * 100, ax.pmax)), col = e.direction === "bull" ? "var(--ok)" : "var(--bad)";
       var mid = (im.r[0] + im.r[1]) / 2;
-      var ln = svgEl("line", { x1: x, x2: x, y1: py(im.r[1]), y2: py(im.r[0]), "stroke-linecap": "round" }); grey(ln, col, "3"); svg.appendChild(ln);
-      var c = svgEl("circle", { cx: x, cy: py(mid), r: 6 }); c.style.fill = col; svg.appendChild(c);
-      var right = e.prob * 100 / ax.pmax > 0.6;
-      var lb = svgEl("text", { x: x + (right ? -12 : 12), y: py(mid) + 4, "text-anchor": right ? "end" : "start", "font-size": 12 }, e.short || e.title.slice(0, 18)); lb.style.fill = "var(--ink)"; svg.appendChild(lb);
+      svg.appendChild(line(x, py(im.r[1]), x, py(im.r[0]), col, 2));
+      var c = svgEl("circle", { cx: x, cy: py(mid), r: 4.5 }); c.style.fill = col; svg.appendChild(c);
+      var right = e.prob * 100 / ax.pmax > 0.62, name = e.short || e.title.slice(0, 18);
+      if (W < 460) {
+        var edge = x < X0 + 50 ? "start" : x > X1 - 50 ? "end" : "middle";
+        svg.appendChild(txt(edge === "start" ? x - 4 : edge === "end" ? x + 4 : x, py(im.r[1]) - 7, name, edge, "var(--ink)"));
+      } else {
+        svg.appendChild(txt(x + (right ? -9 : 9), py(mid) + 4, name, right ? "end" : "start", "var(--ink)"));
+      }
     });
     box.appendChild(svg);
     return box;
@@ -1843,12 +1850,26 @@ th { font-weight: 700; font-size: 12.5px; color: var(--muted-2); }
     var watching = all.filter(function (e) { return e.type === "watch" && (e.by || "") >= today; })
       .sort(function (a, b) { return (b.prob || 0) - (a.prob || 0); });
     var wax = watchAxis(watching);
+    state.evWatch = { items: watching, ax: wax };
+    if (!window._evResize) {
+      window._evResize = true;
+      var tmr = null;
+      window.addEventListener("resize", function () {
+        clearTimeout(tmr);
+        tmr = setTimeout(function () {
+          var old = $("watch-chart"), g = $("event-groups");
+          if (!old || !state.evWatch || !g.clientWidth || Math.abs(g.clientWidth - old.firstChild.nextSibling.getAttribute("width")) < 24) return;
+          var nu = watchChart(state.evWatch.items, state.evWatch.ax, g.clientWidth);
+          if (nu) old.replaceWith(nu);
+        }, 150);
+      });
+    }
     clear(groups);
     groups.appendChild(evGroup("scheduled", "Coming up", upcoming.length > 3 ? "Next 3 of " + upcoming.length + ", soonest first" : "Soonest first",
       upcoming, 3, function (e) { return evRow(e, rows, wax); }, "No scheduled events listed.", null, rows));
     if (watching.length) {
       groups.appendChild(evGroup("watch", "Being watched", "Unconfirmed items, sorted by chance it happens, highest first",
-        watching, 99, function (e) { return evRow(e, rows, wax); }, "", watchChart(watching, wax), rows));
+        watching, 99, function (e) { return evRow(e, rows, wax); }, "", watchChart(watching, wax, groups.clientWidth), rows));
     }
     groups.appendChild(evGroup("shock", "Recent shocks", "Context only, newest first",
       recent, 3, function (e) { return evRow(e, rows, wax); }, "No recent shocks listed.", null, rows));
