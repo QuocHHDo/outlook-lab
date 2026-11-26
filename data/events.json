@@ -163,7 +163,12 @@
           "label": "Portfolio Adviser",
           "url": "https://portfolio-adviser.com/warsh-sticks-to-the-script-as-fed-holds-rates-but-december-hike-highly-likely/"
         }
-      ]
+      ],
+      "cause": "fed",
+      "move": {
+        "label": "Held 3.75–4%",
+        "tone": "flat"
+      }
     },
     {
       "type": "shock",
@@ -176,7 +181,8 @@
           "label": "Stocktwits",
           "url": "https://stocktwits.com/news-articles/markets/equity/soxx-etf-semiconductor-is-set-for-its-worst-week-in-over-18-months/cNG1sEhR94Z"
         }
-      ]
+      ],
+      "cause": "policy"
     },
     {
       "type": "shock",
@@ -197,7 +203,12 @@
           "label": "IBTimes",
           "url": "https://www.ibtimes.co.uk/nvidia-qualcomm-shares-nasdaq-ai-selloff-1830635"
         }
-      ]
+      ],
+      "cause": "stocks",
+      "move": {
+        "label": "SMH −11.2%",
+        "tone": "bad"
+      }
     },
     {
       "type": "shock",
@@ -212,7 +223,12 @@
           "label": "24/7 Wall St",
           "url": "https://247wallst.com/investing/2026/11/10/the-nasdaq-100-just-had-its-best-day-since-march-without-nvidias-help/"
         }
-      ]
+      ],
+      "cause": "stocks",
+      "move": {
+        "label": "QQQ +3.54%",
+        "tone": "good"
+      }
     },
     {
       "type": "shock",
@@ -229,7 +245,8 @@
           "label": "24/7 Wall St via Webull",
           "url": "https://www.webull.com/news/15939186383319040"
         }
-      ]
+      ],
+      "cause": "company"
     },
     {
       "type": "shock",
@@ -244,7 +261,12 @@
           "label": "24/7 Wall St via Webull",
           "url": "https://www.webull.com/news/15939186383319040"
         }
-      ]
+      ],
+      "cause": "stocks",
+      "move": {
+        "label": "Nasdaq-100 −2.67%",
+        "tone": "bad"
+      }
     },
     {
       "type": "shock",
@@ -260,7 +282,12 @@
           "label": "StockAnalysis",
           "url": "https://stockanalysis.com/news/nvidia-gives-back-half-huang-rally/"
         }
-      ]
+      ],
+      "cause": "company",
+      "move": {
+        "label": "NVDA +31.5%",
+        "tone": "good"
+      }
     },
     {
       "type": "shock",
@@ -277,7 +304,12 @@
           "label": "Yahoo Finance",
           "url": "https://finance.yahoo.com/markets/live/stock-market-today-wednesday-november-25-dow-sp-500-nasdaq-pce-inflation-data-091428237.html"
         }
-      ]
+      ],
+      "cause": "stocks",
+      "move": {
+        "label": "NVDA −5.9%",
+        "tone": "bad"
+      }
     },
     {
       "type": "scheduled",
@@ -307,7 +339,12 @@
           "label": "StockTwits",
           "url": "https://stocktwits.com/news-articles/markets/equity/what-shaped-us-treasury-yields-and-the-dollar-in-week-ended-november-13/cNb2sojR9Qd"
         }
-      ]
+      ],
+      "cause": "rates",
+      "move": {
+        "label": "10-yr +30 bp",
+        "tone": "bad"
+      }
     },
     {
       "type": "shock",
@@ -320,7 +357,12 @@
           "label": "Nation Thailand (Reuters)",
           "url": "https://www.nationthailand.com/business/trading-investment/40073658"
         }
-      ]
+      ],
+      "cause": "commodity",
+      "move": {
+        "label": "Gold $3,720",
+        "tone": "flat"
+      }
     },
     {
       "type": "watch",
