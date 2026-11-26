@@ -1,6 +1,6 @@
 # Outlook Lab
 
-Scored AI forecast ranges for S&P 500, QQQ, SMH, IWM, all eleven SPDR sector ETFs (XLK, XLF, XLE, XLV, XLY, XLP, XLI, XLB, XLU, XLRE, XLC), TLT and GLD, compared against a no-view volatility baseline. Every prediction is kept and scored when it comes due, including misses.
+Scored AI forecast ranges for 23 symbols: SPY, QQQ, SMH, IWM, all eleven SPDR sector ETFs (XLK, XLF, XLE, XLV, XLY, XLP, XLI, XLB, XLU, XLRE, XLC), TLT, GLD and six large stocks (AAPL, MSFT, NVDA, AMZN, GOOGL, META), compared against no-view baselines. Every prediction is kept and scored when it comes due, including misses.
 
 This is an evaluation project, not a trading signal and not financial advice.
 
@@ -31,9 +31,12 @@ Running cost: $0. The model step is run by you inside Claude on your own subscri
 
 ## What the site shows
 
-Overview: a treemap of every symbol (color is the AI chance of finishing up, size is range width), a card view with sorting and filters, what changed since the last update, and a calibration panel. Each symbol page has the ranges, a price chart with the forecast cone, catalysts with sources, events, and the full list of past predictions. `site/methodology.html` explains the method and its limits.
+- **Overview:** a treemap of every symbol (color is the AI chance of finishing up; size is range width, market value, or equal), a card view with sorting and filters, what changed since the last update, and a calibration panel.
+- **Scorecard (`#scorecard`):** progress toward the 10-resolved unlock, AI vs three baselines, coverage by horizon, a reliability diagram for the chance-up number, blind vs not blind, and when predictions come due.
+- **Symbol pages:** a TradingView-style chart (self-hosted Lightweight Charts) with the forecast cone, zoom from 1 month to 5 years, log scale, optional layers (earlier forecasts, events, resolved outcomes, candles), plus ranges, catalysts with sources, events and past predictions.
+- `site/methodology.html` explains the method and its limits.
 
-Two baselines are scored: the zero-drift volatility baseline and a drift baseline (6% a year). Predictions marked blind were locked in `data/locks.json` before any baseline was computed.
+Three baselines are scored: zero-drift implied-vol, a drift baseline (6% a year), and a realized-vol baseline (60-day history, no options). Predictions marked blind were locked in `data/locks.json` before any baseline was computed; `scripts/verify_lock_published.py` confirms the lock is public before option data is pulled, and `validate.py` requires the lock to predate the IV read.
 
 ## Setup
 
@@ -57,10 +60,13 @@ Two baselines are scored: the zero-drift volatility baseline and a drift baselin
 | `data/predictions.json` | All predictions, open and resolved |
 | `data/prices.json` | Daily closes used for scoring |
 | `data/summary.json` | Generated track-record summary |
+| `data/ohlc.json` | Generated: last ~300 sessions of OHLC for the candle view |
+| `data/meta.json` | Market value per symbol for the map's size option (refreshed by hand) |
+| `data/events.json`, `data/locks.json` | Dated events; blind-prediction locks |
 | `docs/example_prediction.json` | Shape of one prediction (illustrative numbers, not a real forecast) |
-| `scripts/` | `baseline.py`, `fetch_prices.py`, `validate.py`, `score.py` |
-| `site/index.html` | The public page |
-| `tests/test_score.py` | `python -m unittest discover tests` |
+| `scripts/` | `baseline.py`, `fetch_prices.py`, `validate.py`, `score.py`, `verify_lock_published.py` |
+| `site/index.html`, `site/lightweight-charts.js` | The public page and its self-hosted chart library |
+| `tests/test_score.py` | `python -m pytest tests` |
 
 ## Known limits
 

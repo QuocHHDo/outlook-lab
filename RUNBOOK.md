@@ -9,14 +9,14 @@ Run once a week, in Claude, with the Robinhood MCP connected. Do the steps in or
 - **Sources for every catalyst claim.** If a claim has no source, mark it as the model's expectation or leave it out.
 - **Blind process.** The AI range is written and committed to `data/locks.json` *before* any implied volatility or baseline is looked at. Predictions made this way get `"blind": true`; `validate.py` fails if a blind prediction has no matching lock. Anything written after seeing a baseline must leave `blind` out and say so in `notes`.
 
-## Steps (per symbol: SPY, QQQ, SMH, IWM, XLK, XLF, XLE, XLV, XLY, XLP, XLI, XLB, XLU, XLRE, XLC, TLT, GLD, plus any large-cap stocks listed in `scripts/common.py`; horizons 1w, 1m, 6m, 1y, 5y)
+## Steps (per symbol: SPY, QQQ, SMH, IWM, XLK, XLF, XLE, XLV, XLY, XLP, XLI, XLB, XLU, XLRE, XLC, TLT, GLD, AAPL, MSFT, NVDA, AMZN, GOOGL, META, plus any others listed in `scripts/common.py`; horizons 1w, 1m, 6m, 1y, 5y)
 
 **Phase 1: lock the AI view (no option data yet)**
 
 1. **Pull the quote.** Record the last trade price and its timestamp (`price_at_prediction`). Do not open option chains yet.
 2. **Gather catalysts.** Check recent news and the earnings calendar. Write bull, base, and bear points with sources.
 3. **Write the AI range** (`low`, `high`, `level` 0.8) and `prob_up` for every symbol and horizon.
-4. **Commit the locks.** Add one entry per prediction id to `data/locks.json`: `{"<id>": {"low": ..., "high": ..., "prob_up": ..., "locked_at": "<ISO time>"}}`. Commit it on its own. It does not trigger the workflow.
+4. **Commit the locks.** Add one entry per prediction id to `data/locks.json`: `{"<id>": {"low": ..., "high": ..., "prob_up": ..., "locked_at": "<ISO time>"}}`. Commit and push it on its own (it does not trigger the workflow), then **verify it is public before Phase 2**: `python scripts/verify_lock_published.py <id> <id> ...` must print OK. If it fails, do not pull option data. Each lock's `locked_at` must be earlier than the prediction's `baseline.iv_updated_at`; `validate.py` enforces this.
 
 **Phase 2: baseline and publish**
 
@@ -26,7 +26,7 @@ Run once a week, in Claude, with the Robinhood MCP connected. Do the steps in or
    ```
    python scripts/baseline.py --price <price> --vol <iv> --days <calendar days to resolves_on> --level 0.8
    ```
-   The drift baseline (`baseline_drift`) is added automatically by `score.py` from the stored IV.
+   The drift baseline (`baseline_drift`) and the 60-day realized-vol baseline (`baseline_realized`) are added automatically by `score.py`.
 8. **Append the predictions** to `data/predictions.json` using the shape in `docs/example_prediction.json`, copying the AI numbers exactly from the locks and setting `"blind": true`. Use the id `YYYY-MM-DD_SYMBOL_horizon`.
 9. **Validate and commit:**
    ```
