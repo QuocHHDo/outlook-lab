@@ -9011,7 +9011,14 @@
       ]
     },
     "notes": "Made on Nov 26 (Thanksgiving, markets closed) from the Nov 25 close, so it is NOT blind and is not counted as blind. The AI range was written from price history and news before any option data was viewed. Baseline here is 60-day realized volatility (no option quotes pulled for this batch); implied vol is added in the next blind batch. 6m, 1y and 5y resolve on target trading days. Some catalyst sides are thin and marked model_expectation.",
-    "status": "open"
+    "status": "open",
+    "baseline_realized": {
+      "method": "hist_vol_60d",
+      "vol": 0.1726,
+      "low": 95.99,
+      "high": 102.48,
+      "level": 0.8
+    }
   },
   {
     "id": "2026-11-26_EFA_1m",
@@ -9056,7 +9063,14 @@
       ]
     },
     "notes": "Made on Nov 26 (Thanksgiving, markets closed) from the Nov 25 close, so it is NOT blind and is not counted as blind. The AI range was written from price history and news before any option data was viewed. Baseline here is 60-day realized volatility (no option quotes pulled for this batch); implied vol is added in the next blind batch. 6m, 1y and 5y resolve on target trading days. Some catalyst sides are thin and marked model_expectation.",
-    "status": "open"
+    "status": "open",
+    "baseline_realized": {
+      "method": "hist_vol_60d",
+      "vol": 0.1726,
+      "low": 93.29,
+      "high": 105.44,
+      "level": 0.8
+    }
   },
   {
     "id": "2026-11-26_EFA_6m",
@@ -9101,7 +9115,14 @@
       ]
     },
     "notes": "Made on Nov 26 (Thanksgiving, markets closed) from the Nov 25 close, so it is NOT blind and is not counted as blind. The AI range was written from price history and news before any option data was viewed. Baseline here is 60-day realized volatility (no option quotes pulled for this batch); implied vol is added in the next blind batch. 6m, 1y and 5y resolve on target trading days. Some catalyst sides are thin and marked model_expectation.",
-    "status": "open"
+    "status": "open",
+    "baseline_realized": {
+      "method": "hist_vol_60d",
+      "vol": 0.1726,
+      "low": 84.91,
+      "high": 115.84,
+      "level": 0.8
+    }
   },
   {
     "id": "2026-11-26_EFA_1y",
@@ -9146,7 +9167,14 @@
       ]
     },
     "notes": "Made on Nov 26 (Thanksgiving, markets closed) from the Nov 25 close, so it is NOT blind and is not counted as blind. The AI range was written from price history and news before any option data was viewed. Baseline here is 60-day realized volatility (no option quotes pulled for this batch); implied vol is added in the next blind batch. 6m, 1y and 5y resolve on target trading days. Some catalyst sides are thin and marked model_expectation.",
-    "status": "open"
+    "status": "open",
+    "baseline_realized": {
+      "method": "hist_vol_60d",
+      "vol": 0.1726,
+      "low": 79.55,
+      "high": 123.65,
+      "level": 0.8
+    }
   },
   {
     "id": "2026-11-26_EFA_5y",
@@ -9191,7 +9219,14 @@
       ]
     },
     "notes": "Made on Nov 26 (Thanksgiving, markets closed) from the Nov 25 close, so it is NOT blind and is not counted as blind. The AI range was written from price history and news before any option data was viewed. Baseline here is 60-day realized volatility (no option quotes pulled for this batch); implied vol is added in the next blind batch. 6m, 1y and 5y resolve on target trading days. Some catalyst sides are thin and marked model_expectation.",
-    "status": "open"
+    "status": "open",
+    "baseline_realized": {
+      "method": "hist_vol_60d",
+      "vol": 0.1726,
+      "low": 60.49,
+      "high": 162.62,
+      "level": 0.8
+    }
   },
   {
     "id": "2026-11-26_EEM_1w",
@@ -9236,7 +9271,14 @@
       ]
     },
     "notes": "Made on Nov 26 (Thanksgiving, markets closed) from the Nov 25 close, so it is NOT blind and is not counted as blind. The AI range was written from price history and news before any option data was viewed. Baseline here is 60-day realized volatility (no option quotes pulled for this batch); implied vol is added in the next blind batch. 6m, 1y and 5y resolve on target trading days. Some catalyst sides are thin and marked model_expectation.",
-    "status": "open"
+    "status": "open",
+    "baseline_realized": {
+      "method": "hist_vol_60d",
+      "vol": 0.3149,
+      "low": 53.13,
+      "high": 59.87,
+      "level": 0.8
+    }
   },
   {
     "id": "2026-11-26_EEM_1m",
@@ -9281,7 +9323,14 @@
       ]
     },
     "notes": "Made on Nov 26 (Thanksgiving, markets closed) from the Nov 25 close, so it is NOT blind and is not counted as blind. The AI range was written from price history and news before any option data was viewed. Baseline here is 60-day realized volatility (no option quotes pulled for this batch); implied vol is added in the next blind batch. 6m, 1y and 5y resolve on target trading days. Some catalyst sides are thin and marked model_expectation.",
-    "status": "open"
+    "status": "open",
+    "baseline_realized": {
+      "method": "hist_vol_60d",
+      "vol": 0.3149,
+      "low": 50.44,
+      "high": 63.07,
+      "level": 0.8
+    }
   },
   {
     "id": "2026-11-26_EEM_6m",
@@ -9326,7 +9375,14 @@
       ]
     },
     "notes": "Made on Nov 26 (Thanksgiving, markets closed) from the Nov 25 close, so it is NOT blind and is not counted as blind. The AI range was written from price history and news before any option data was viewed. Baseline here is 60-day realized volatility (no option quotes pulled for this batch); implied vol is added in the next blind batch. 6m, 1y and 5y resolve on target trading days. Some catalyst sides are thin and marked model_expectation.",
-    "status": "open"
+    "status": "open",
+    "baseline_realized": {
+      "method": "hist_vol_60d",
+      "vol": 0.3149,
+      "low": 42.48,
+      "high": 74.88,
+      "level": 0.8
+    }
   },
   {
     "id": "2026-11-26_EEM_1y",
@@ -9371,7 +9427,14 @@
       ]
     },
     "notes": "Made on Nov 26 (Thanksgiving, markets closed) from the Nov 25 close, so it is NOT blind and is not counted as blind. The AI range was written from price history and news before any option data was viewed. Baseline here is 60-day realized volatility (no option quotes pulled for this batch); implied vol is added in the next blind batch. 6m, 1y and 5y resolve on target trading days. Some catalyst sides are thin and marked model_expectation.",
-    "status": "open"
+    "status": "open",
+    "baseline_realized": {
+      "method": "hist_vol_60d",
+      "vol": 0.3149,
+      "low": 37.71,
+      "high": 84.35,
+      "level": 0.8
+    }
   },
   {
     "id": "2026-11-26_EEM_5y",
@@ -9416,7 +9479,14 @@
       ]
     },
     "notes": "Made on Nov 26 (Thanksgiving, markets closed) from the Nov 25 close, so it is NOT blind and is not counted as blind. The AI range was written from price history and news before any option data was viewed. Baseline here is 60-day realized volatility (no option quotes pulled for this batch); implied vol is added in the next blind batch. 6m, 1y and 5y resolve on target trading days. Some catalyst sides are thin and marked model_expectation.",
-    "status": "open"
+    "status": "open",
+    "baseline_realized": {
+      "method": "hist_vol_60d",
+      "vol": 0.3149,
+      "low": 22.87,
+      "high": 139.06,
+      "level": 0.8
+    }
   },
   {
     "id": "2026-11-26_HYG_1w",
@@ -9461,7 +9531,14 @@
       ]
     },
     "notes": "Made on Nov 26 (Thanksgiving, markets closed) from the Nov 25 close, so it is NOT blind and is not counted as blind. The AI range was written from price history and news before any option data was viewed. Baseline here is 60-day realized volatility (no option quotes pulled for this batch); implied vol is added in the next blind batch. 6m, 1y and 5y resolve on target trading days. Some catalyst sides are thin and marked model_expectation.",
-    "status": "open"
+    "status": "open",
+    "baseline_realized": {
+      "method": "hist_vol_60d",
+      "vol": 0.0436,
+      "low": 75.89,
+      "high": 77.16,
+      "level": 0.8
+    }
   },
   {
     "id": "2026-11-26_HYG_1m",
@@ -9506,7 +9583,14 @@
       ]
     },
     "notes": "Made on Nov 26 (Thanksgiving, markets closed) from the Nov 25 close, so it is NOT blind and is not counted as blind. The AI range was written from price history and news before any option data was viewed. Baseline here is 60-day realized volatility (no option quotes pulled for this batch); implied vol is added in the next blind batch. 6m, 1y and 5y resolve on target trading days. Some catalyst sides are thin and marked model_expectation.",
-    "status": "open"
+    "status": "open",
+    "baseline_realized": {
+      "method": "hist_vol_60d",
+      "vol": 0.0436,
+      "low": 75.35,
+      "high": 77.71,
+      "level": 0.8
+    }
   },
   {
     "id": "2026-11-26_HYG_6m",
@@ -9551,7 +9635,14 @@
       ]
     },
     "notes": "Made on Nov 26 (Thanksgiving, markets closed) from the Nov 25 close, so it is NOT blind and is not counted as blind. The AI range was written from price history and news before any option data was viewed. Baseline here is 60-day realized volatility (no option quotes pulled for this batch); implied vol is added in the next blind batch. 6m, 1y and 5y resolve on target trading days. Some catalyst sides are thin and marked model_expectation.",
-    "status": "open"
+    "status": "open",
+    "baseline_realized": {
+      "method": "hist_vol_60d",
+      "vol": 0.0436,
+      "low": 73.58,
+      "high": 79.58,
+      "level": 0.8
+    }
   },
   {
     "id": "2026-11-26_HYG_1y",
@@ -9596,7 +9687,14 @@
       ]
     },
     "notes": "Made on Nov 26 (Thanksgiving, markets closed) from the Nov 25 close, so it is NOT blind and is not counted as blind. The AI range was written from price history and news before any option data was viewed. Baseline here is 60-day realized volatility (no option quotes pulled for this batch); implied vol is added in the next blind batch. 6m, 1y and 5y resolve on target trading days. Some catalyst sides are thin and marked model_expectation.",
-    "status": "open"
+    "status": "open",
+    "baseline_realized": {
+      "method": "hist_vol_60d",
+      "vol": 0.0436,
+      "low": 72.37,
+      "high": 80.9,
+      "level": 0.8
+    }
   },
   {
     "id": "2026-11-26_HYG_5y",
@@ -9641,7 +9739,14 @@
       ]
     },
     "notes": "Made on Nov 26 (Thanksgiving, markets closed) from the Nov 25 close, so it is NOT blind and is not counted as blind. The AI range was written from price history and news before any option data was viewed. Baseline here is 60-day realized volatility (no option quotes pulled for this batch); implied vol is added in the next blind batch. 6m, 1y and 5y resolve on target trading days. Some catalyst sides are thin and marked model_expectation.",
-    "status": "open"
+    "status": "open",
+    "baseline_realized": {
+      "method": "hist_vol_60d",
+      "vol": 0.0436,
+      "low": 67.54,
+      "high": 86.7,
+      "level": 0.8
+    }
   },
   {
     "id": "2026-11-26_TSLA_1w",
@@ -9690,7 +9795,14 @@
       ]
     },
     "notes": "Made on Nov 26 (Thanksgiving, markets closed) from the Nov 25 close, so it is NOT blind and is not counted as blind. The AI range was written from price history and news before any option data was viewed. Baseline here is 60-day realized volatility (no option quotes pulled for this batch); implied vol is added in the next blind batch. 6m, 1y and 5y resolve on target trading days. Some catalyst sides are thin and marked model_expectation.",
-    "status": "open"
+    "status": "open",
+    "baseline_realized": {
+      "method": "hist_vol_60d",
+      "vol": 0.5259,
+      "low": 344.04,
+      "high": 420.02,
+      "level": 0.8
+    }
   },
   {
     "id": "2026-11-26_TSLA_1m",
@@ -9739,7 +9851,14 @@
       ]
     },
     "notes": "Made on Nov 26 (Thanksgiving, markets closed) from the Nov 25 close, so it is NOT blind and is not counted as blind. The AI range was written from price history and news before any option data was viewed. Baseline here is 60-day realized volatility (no option quotes pulled for this batch); implied vol is added in the next blind batch. 6m, 1y and 5y resolve on target trading days. Some catalyst sides are thin and marked model_expectation.",
-    "status": "open"
+    "status": "open",
+    "baseline_realized": {
+      "method": "hist_vol_60d",
+      "vol": 0.5259,
+      "low": 315.41,
+      "high": 458.15,
+      "level": 0.8
+    }
   },
   {
     "id": "2026-11-26_TSLA_6m",
@@ -9788,7 +9907,14 @@
       ]
     },
     "notes": "Made on Nov 26 (Thanksgiving, markets closed) from the Nov 25 close, so it is NOT blind and is not counted as blind. The AI range was written from price history and news before any option data was viewed. Baseline here is 60-day realized volatility (no option quotes pulled for this batch); implied vol is added in the next blind batch. 6m, 1y and 5y resolve on target trading days. Some catalyst sides are thin and marked model_expectation.",
-    "status": "open"
+    "status": "open",
+    "baseline_realized": {
+      "method": "hist_vol_60d",
+      "vol": 0.5259,
+      "low": 236.82,
+      "high": 610.21,
+      "level": 0.8
+    }
   },
   {
     "id": "2026-11-26_TSLA_1y",
@@ -9837,7 +9963,14 @@
       ]
     },
     "notes": "Made on Nov 26 (Thanksgiving, markets closed) from the Nov 25 close, so it is NOT blind and is not counted as blind. The AI range was written from price history and news before any option data was viewed. Baseline here is 60-day realized volatility (no option quotes pulled for this batch); implied vol is added in the next blind batch. 6m, 1y and 5y resolve on target trading days. Some catalyst sides are thin and marked model_expectation.",
-    "status": "open"
+    "status": "open",
+    "baseline_realized": {
+      "method": "hist_vol_60d",
+      "vol": 0.5259,
+      "low": 194.12,
+      "high": 744.42,
+      "level": 0.8
+    }
   },
   {
     "id": "2026-11-26_TSLA_5y",
@@ -9886,7 +10019,14 @@
       ]
     },
     "notes": "Made on Nov 26 (Thanksgiving, markets closed) from the Nov 25 close, so it is NOT blind and is not counted as blind. The AI range was written from price history and news before any option data was viewed. Baseline here is 60-day realized volatility (no option quotes pulled for this batch); implied vol is added in the next blind batch. 6m, 1y and 5y resolve on target trading days. Some catalyst sides are thin and marked model_expectation.",
-    "status": "open"
+    "status": "open",
+    "baseline_realized": {
+      "method": "hist_vol_60d",
+      "vol": 0.5259,
+      "low": 84.24,
+      "high": 1715.51,
+      "level": 0.8
+    }
   },
   {
     "id": "2026-11-26_AVGO_1w",
@@ -9935,7 +10075,14 @@
       ]
     },
     "notes": "Made on Nov 26 (Thanksgiving, markets closed) from the Nov 25 close, so it is NOT blind and is not counted as blind. The AI range was written from price history and news before any option data was viewed. Baseline here is 60-day realized volatility (no option quotes pulled for this batch); implied vol is added in the next blind batch. 6m, 1y and 5y resolve on target trading days. Some catalyst sides are thin and marked model_expectation.",
-    "status": "open"
+    "status": "open",
+    "baseline_realized": {
+      "method": "hist_vol_60d",
+      "vol": 0.5727,
+      "low": 269.88,
+      "high": 335.39,
+      "level": 0.8
+    }
   },
   {
     "id": "2026-11-26_AVGO_1m",
@@ -9984,7 +10131,14 @@
       ]
     },
     "notes": "Made on Nov 26 (Thanksgiving, markets closed) from the Nov 25 close, so it is NOT blind and is not counted as blind. The AI range was written from price history and news before any option data was viewed. Baseline here is 60-day realized volatility (no option quotes pulled for this batch); implied vol is added in the next blind batch. 6m, 1y and 5y resolve on target trading days. Some catalyst sides are thin and marked model_expectation.",
-    "status": "open"
+    "status": "open",
+    "baseline_realized": {
+      "method": "hist_vol_60d",
+      "vol": 0.5727,
+      "low": 245.52,
+      "high": 368.68,
+      "level": 0.8
+    }
   },
   {
     "id": "2026-11-26_AVGO_6m",
@@ -10033,7 +10187,14 @@
       ]
     },
     "notes": "Made on Nov 26 (Thanksgiving, markets closed) from the Nov 25 close, so it is NOT blind and is not counted as blind. The AI range was written from price history and news before any option data was viewed. Baseline here is 60-day realized volatility (no option quotes pulled for this batch); implied vol is added in the next blind batch. 6m, 1y and 5y resolve on target trading days. Some catalyst sides are thin and marked model_expectation.",
-    "status": "open"
+    "status": "open",
+    "baseline_realized": {
+      "method": "hist_vol_60d",
+      "vol": 0.5727,
+      "low": 179.69,
+      "high": 503.74,
+      "level": 0.8
+    }
   },
   {
     "id": "2026-11-26_AVGO_1y",
@@ -10082,7 +10243,14 @@
       ]
     },
     "notes": "Made on Nov 26 (Thanksgiving, markets closed) from the Nov 25 close, so it is NOT blind and is not counted as blind. The AI range was written from price history and news before any option data was viewed. Baseline here is 60-day realized volatility (no option quotes pulled for this batch); implied vol is added in the next blind batch. 6m, 1y and 5y resolve on target trading days. Some catalyst sides are thin and marked model_expectation.",
-    "status": "open"
+    "status": "open",
+    "baseline_realized": {
+      "method": "hist_vol_60d",
+      "vol": 0.5727,
+      "low": 144.7,
+      "high": 625.53,
+      "level": 0.8
+    }
   },
   {
     "id": "2026-11-26_AVGO_5y",
@@ -10131,7 +10299,14 @@
       ]
     },
     "notes": "Made on Nov 26 (Thanksgiving, markets closed) from the Nov 25 close, so it is NOT blind and is not counted as blind. The AI range was written from price history and news before any option data was viewed. Baseline here is 60-day realized volatility (no option quotes pulled for this batch); implied vol is added in the next blind batch. 6m, 1y and 5y resolve on target trading days. Some catalyst sides are thin and marked model_expectation.",
-    "status": "open"
+    "status": "open",
+    "baseline_realized": {
+      "method": "hist_vol_60d",
+      "vol": 0.5727,
+      "low": 58.29,
+      "high": 1552.84,
+      "level": 0.8
+    }
   },
   {
     "id": "2026-11-26_JPM_1w",
@@ -10175,7 +10350,14 @@
       ]
     },
     "notes": "Made on Nov 26 (Thanksgiving, markets closed) from the Nov 25 close, so it is NOT blind and is not counted as blind. The AI range was written from price history and news before any option data was viewed. Baseline here is 60-day realized volatility (no option quotes pulled for this batch); implied vol is added in the next blind batch. 6m, 1y and 5y resolve on target trading days. Some catalyst sides are thin and marked model_expectation.",
-    "status": "open"
+    "status": "open",
+    "baseline_realized": {
+      "method": "hist_vol_60d",
+      "vol": 0.2272,
+      "low": 303.38,
+      "high": 330.69,
+      "level": 0.8
+    }
   },
   {
     "id": "2026-11-26_JPM_1m",
@@ -10219,7 +10401,14 @@
       ]
     },
     "notes": "Made on Nov 26 (Thanksgiving, markets closed) from the Nov 25 close, so it is NOT blind and is not counted as blind. The AI range was written from price history and news before any option data was viewed. Baseline here is 60-day realized volatility (no option quotes pulled for this batch); implied vol is added in the next blind batch. 6m, 1y and 5y resolve on target trading days. Some catalyst sides are thin and marked model_expectation.",
-    "status": "open"
+    "status": "open",
+    "baseline_realized": {
+      "method": "hist_vol_60d",
+      "vol": 0.2272,
+      "low": 292.2,
+      "high": 343.34,
+      "level": 0.8
+    }
   },
   {
     "id": "2026-11-26_JPM_6m",
@@ -10263,7 +10452,14 @@
       ]
     },
     "notes": "Made on Nov 26 (Thanksgiving, markets closed) from the Nov 25 close, so it is NOT blind and is not counted as blind. The AI range was written from price history and news before any option data was viewed. Baseline here is 60-day realized volatility (no option quotes pulled for this batch); implied vol is added in the next blind batch. 6m, 1y and 5y resolve on target trading days. Some catalyst sides are thin and marked model_expectation.",
-    "status": "open"
+    "status": "open",
+    "baseline_realized": {
+      "method": "hist_vol_60d",
+      "vol": 0.2272,
+      "low": 258.17,
+      "high": 388.59,
+      "level": 0.8
+    }
   },
   {
     "id": "2026-11-26_JPM_1y",
@@ -10307,7 +10503,14 @@
       ]
     },
     "notes": "Made on Nov 26 (Thanksgiving, markets closed) from the Nov 25 close, so it is NOT blind and is not counted as blind. The AI range was written from price history and news before any option data was viewed. Baseline here is 60-day realized volatility (no option quotes pulled for this batch); implied vol is added in the next blind batch. 6m, 1y and 5y resolve on target trading days. Some catalyst sides are thin and marked model_expectation.",
-    "status": "open"
+    "status": "open",
+    "baseline_realized": {
+      "method": "hist_vol_60d",
+      "vol": 0.2272,
+      "low": 236.92,
+      "high": 423.44,
+      "level": 0.8
+    }
   },
   {
     "id": "2026-11-26_JPM_5y",
@@ -10351,7 +10554,14 @@
       ]
     },
     "notes": "Made on Nov 26 (Thanksgiving, markets closed) from the Nov 25 close, so it is NOT blind and is not counted as blind. The AI range was written from price history and news before any option data was viewed. Baseline here is 60-day realized volatility (no option quotes pulled for this batch); implied vol is added in the next blind batch. 6m, 1y and 5y resolve on target trading days. Some catalyst sides are thin and marked model_expectation.",
-    "status": "open"
+    "status": "open",
+    "baseline_realized": {
+      "method": "hist_vol_60d",
+      "vol": 0.2272,
+      "low": 165.19,
+      "high": 607.34,
+      "level": 0.8
+    }
   },
   {
     "id": "2026-11-26_MSTR_1w",
@@ -10397,7 +10607,14 @@
       ]
     },
     "notes": "Made on Nov 26 (Thanksgiving, markets closed) from the Nov 25 close, so it is NOT blind and is not counted as blind. The AI range was written from price history and news before any option data was viewed. Baseline here is 60-day realized volatility (no option quotes pulled for this batch); implied vol is added in the next blind batch. 6m, 1y and 5y resolve on target trading days. Some catalyst sides are thin and marked model_expectation.",
-    "status": "open"
+    "status": "open",
+    "baseline_realized": {
+      "method": "hist_vol_60d",
+      "vol": 0.8694,
+      "low": 67.8,
+      "high": 94.3,
+      "level": 0.8
+    }
   },
   {
     "id": "2026-11-26_MSTR_1m",
@@ -10443,7 +10660,14 @@
       ]
     },
     "notes": "Made on Nov 26 (Thanksgiving, markets closed) from the Nov 25 close, so it is NOT blind and is not counted as blind. The AI range was written from price history and news before any option data was viewed. Baseline here is 60-day realized volatility (no option quotes pulled for this batch); implied vol is added in the next blind batch. 6m, 1y and 5y resolve on target trading days. Some catalyst sides are thin and marked model_expectation.",
-    "status": "open"
+    "status": "open",
+    "baseline_realized": {
+      "method": "hist_vol_60d",
+      "vol": 0.8694,
+      "low": 58.73,
+      "high": 108.87,
+      "level": 0.8
+    }
   },
   {
     "id": "2026-11-26_MSTR_6m",
@@ -10489,7 +10713,14 @@
       ]
     },
     "notes": "Made on Nov 26 (Thanksgiving, markets closed) from the Nov 25 close, so it is NOT blind and is not counted as blind. The AI range was written from price history and news before any option data was viewed. Baseline here is 60-day realized volatility (no option quotes pulled for this batch); implied vol is added in the next blind batch. 6m, 1y and 5y resolve on target trading days. Some catalyst sides are thin and marked model_expectation.",
-    "status": "open"
+    "status": "open",
+    "baseline_realized": {
+      "method": "hist_vol_60d",
+      "vol": 0.8694,
+      "low": 36.57,
+      "high": 174.85,
+      "level": 0.8
+    }
   },
   {
     "id": "2026-11-26_MSTR_1y",
@@ -10535,7 +10766,14 @@
       ]
     },
     "notes": "Made on Nov 26 (Thanksgiving, markets closed) from the Nov 25 close, so it is NOT blind and is not counted as blind. The AI range was written from price history and news before any option data was viewed. Baseline here is 60-day realized volatility (no option quotes pulled for this batch); implied vol is added in the next blind batch. 6m, 1y and 5y resolve on target trading days. Some catalyst sides are thin and marked model_expectation.",
-    "status": "open"
+    "status": "open",
+    "baseline_realized": {
+      "method": "hist_vol_60d",
+      "vol": 0.8694,
+      "low": 26.32,
+      "high": 242.89,
+      "level": 0.8
+    }
   },
   {
     "id": "2026-11-26_MSTR_5y",
@@ -10581,7 +10819,14 @@
       ]
     },
     "notes": "Made on Nov 26 (Thanksgiving, markets closed) from the Nov 25 close, so it is NOT blind and is not counted as blind. The AI range was written from price history and news before any option data was viewed. Baseline here is 60-day realized volatility (no option quotes pulled for this batch); implied vol is added in the next blind batch. 6m, 1y and 5y resolve on target trading days. Some catalyst sides are thin and marked model_expectation.",
-    "status": "open"
+    "status": "open",
+    "baseline_realized": {
+      "method": "hist_vol_60d",
+      "vol": 0.8694,
+      "low": 6.62,
+      "high": 965.68,
+      "level": 0.8
+    }
   },
   {
     "id": "2026-11-26_BRK.B_1w",
@@ -10625,7 +10870,14 @@
       ]
     },
     "notes": "Made on Nov 26 (Thanksgiving, markets closed) from the Nov 25 close, so it is NOT blind and is not counted as blind. The AI range was written from price history and news before any option data was viewed. Baseline here is 60-day realized volatility (no option quotes pulled for this batch); implied vol is added in the next blind batch. 6m, 1y and 5y resolve on target trading days. Some catalyst sides are thin and marked model_expectation.",
-    "status": "open"
+    "status": "open",
+    "baseline_realized": {
+      "method": "hist_vol_60d",
+      "vol": 0.1515,
+      "low": 562.9,
+      "high": 596.22,
+      "level": 0.8
+    }
   },
   {
     "id": "2026-11-26_BRK.B_1m",
@@ -10669,7 +10921,14 @@
       ]
     },
     "notes": "Made on Nov 26 (Thanksgiving, markets closed) from the Nov 25 close, so it is NOT blind and is not counted as blind. The AI range was written from price history and news before any option data was viewed. Baseline here is 60-day realized volatility (no option quotes pulled for this batch); implied vol is added in the next blind batch. 6m, 1y and 5y resolve on target trading days. Some catalyst sides are thin and marked model_expectation.",
-    "status": "open"
+    "status": "open",
+    "baseline_realized": {
+      "method": "hist_vol_60d",
+      "vol": 0.1515,
+      "low": 548.98,
+      "high": 611.33,
+      "level": 0.8
+    }
   },
   {
     "id": "2026-11-26_BRK.B_6m",
@@ -10713,7 +10972,14 @@
       ]
     },
     "notes": "Made on Nov 26 (Thanksgiving, markets closed) from the Nov 25 close, so it is NOT blind and is not counted as blind. The AI range was written from price history and news before any option data was viewed. Baseline here is 60-day realized volatility (no option quotes pulled for this batch); implied vol is added in the next blind batch. 6m, 1y and 5y resolve on target trading days. Some catalyst sides are thin and marked model_expectation.",
-    "status": "open"
+    "status": "open",
+    "baseline_realized": {
+      "method": "hist_vol_60d",
+      "vol": 0.1515,
+      "low": 505.47,
+      "high": 663.96,
+      "level": 0.8
+    }
   },
   {
     "id": "2026-11-26_BRK.B_1y",
@@ -10757,7 +11023,14 @@
       ]
     },
     "notes": "Made on Nov 26 (Thanksgiving, markets closed) from the Nov 25 close, so it is NOT blind and is not counted as blind. The AI range was written from price history and news before any option data was viewed. Baseline here is 60-day realized volatility (no option quotes pulled for this batch); implied vol is added in the next blind batch. 6m, 1y and 5y resolve on target trading days. Some catalyst sides are thin and marked model_expectation.",
-    "status": "open"
+    "status": "open",
+    "baseline_realized": {
+      "method": "hist_vol_60d",
+      "vol": 0.1515,
+      "low": 477.32,
+      "high": 703.11,
+      "level": 0.8
+    }
   },
   {
     "id": "2026-11-26_BRK.B_5y",
@@ -10801,7 +11074,14 @@
       ]
     },
     "notes": "Made on Nov 26 (Thanksgiving, markets closed) from the Nov 25 close, so it is NOT blind and is not counted as blind. The AI range was written from price history and news before any option data was viewed. Baseline here is 60-day realized volatility (no option quotes pulled for this batch); implied vol is added in the next blind batch. 6m, 1y and 5y resolve on target trading days. Some catalyst sides are thin and marked model_expectation.",
-    "status": "open"
+    "status": "open",
+    "baseline_realized": {
+      "method": "hist_vol_60d",
+      "vol": 0.1515,
+      "low": 375.26,
+      "high": 894.34,
+      "level": 0.8
+    }
   },
   {
     "id": "2026-11-26_LLY_1w",
@@ -10846,7 +11126,14 @@
       ]
     },
     "notes": "Made on Nov 26 (Thanksgiving, markets closed) from the Nov 25 close, so it is NOT blind and is not counted as blind. The AI range was written from price history and news before any option data was viewed. Baseline here is 60-day realized volatility (no option quotes pulled for this batch); implied vol is added in the next blind batch. 6m, 1y and 5y resolve on target trading days. Some catalyst sides are thin and marked model_expectation.",
-    "status": "open"
+    "status": "open",
+    "baseline_realized": {
+      "method": "hist_vol_60d",
+      "vol": 0.2966,
+      "low": 1316.04,
+      "high": 1472.81,
+      "level": 0.8
+    }
   },
   {
     "id": "2026-11-26_LLY_1m",
@@ -10891,7 +11178,14 @@
       ]
     },
     "notes": "Made on Nov 26 (Thanksgiving, markets closed) from the Nov 25 close, so it is NOT blind and is not counted as blind. The AI range was written from price history and news before any option data was viewed. Baseline here is 60-day realized volatility (no option quotes pulled for this batch); implied vol is added in the next blind batch. 6m, 1y and 5y resolve on target trading days. Some catalyst sides are thin and marked model_expectation.",
-    "status": "open"
+    "status": "open",
+    "baseline_realized": {
+      "method": "hist_vol_60d",
+      "vol": 0.2966,
+      "low": 1253.1,
+      "high": 1546.78,
+      "level": 0.8
+    }
   },
   {
     "id": "2026-11-26_LLY_6m",
@@ -10936,7 +11230,14 @@
       ]
     },
     "notes": "Made on Nov 26 (Thanksgiving, markets closed) from the Nov 25 close, so it is NOT blind and is not counted as blind. The AI range was written from price history and news before any option data was viewed. Baseline here is 60-day realized volatility (no option quotes pulled for this batch); implied vol is added in the next blind batch. 6m, 1y and 5y resolve on target trading days. Some catalyst sides are thin and marked model_expectation.",
-    "status": "open"
+    "status": "open",
+    "baseline_realized": {
+      "method": "hist_vol_60d",
+      "vol": 0.2966,
+      "low": 1066.06,
+      "high": 1818.17,
+      "level": 0.8
+    }
   },
   {
     "id": "2026-11-26_LLY_1y",
@@ -10981,7 +11282,14 @@
       ]
     },
     "notes": "Made on Nov 26 (Thanksgiving, markets closed) from the Nov 25 close, so it is NOT blind and is not counted as blind. The AI range was written from price history and news before any option data was viewed. Baseline here is 60-day realized volatility (no option quotes pulled for this batch); implied vol is added in the next blind batch. 6m, 1y and 5y resolve on target trading days. Some catalyst sides are thin and marked model_expectation.",
-    "status": "open"
+    "status": "open",
+    "baseline_realized": {
+      "method": "hist_vol_60d",
+      "vol": 0.2966,
+      "low": 952.98,
+      "high": 2033.92,
+      "level": 0.8
+    }
   },
   {
     "id": "2026-11-26_LLY_5y",
@@ -11026,7 +11334,14 @@
       ]
     },
     "notes": "Made on Nov 26 (Thanksgiving, markets closed) from the Nov 25 close, so it is NOT blind and is not counted as blind. The AI range was written from price history and news before any option data was viewed. Baseline here is 60-day realized volatility (no option quotes pulled for this batch); implied vol is added in the next blind batch. 6m, 1y and 5y resolve on target trading days. Some catalyst sides are thin and marked model_expectation.",
-    "status": "open"
+    "status": "open",
+    "baseline_realized": {
+      "method": "hist_vol_60d",
+      "vol": 0.2966,
+      "low": 595.09,
+      "high": 3257.12,
+      "level": 0.8
+    }
   },
   {
     "id": "2026-11-26_JNJ_1w",
@@ -11070,7 +11385,14 @@
       ]
     },
     "notes": "Made on Nov 26 (Thanksgiving, markets closed) from the Nov 25 close, so it is NOT blind and is not counted as blind. The AI range was written from price history and news before any option data was viewed. Baseline here is 60-day realized volatility (no option quotes pulled for this batch); implied vol is added in the next blind batch. 6m, 1y and 5y resolve on target trading days. Some catalyst sides are thin and marked model_expectation.",
-    "status": "open"
+    "status": "open",
+    "baseline_realized": {
+      "method": "hist_vol_60d",
+      "vol": 0.2507,
+      "low": 261.21,
+      "high": 287.29,
+      "level": 0.8
+    }
   },
   {
     "id": "2026-11-26_JNJ_1m",
@@ -11114,7 +11436,14 @@
       ]
     },
     "notes": "Made on Nov 26 (Thanksgiving, markets closed) from the Nov 25 close, so it is NOT blind and is not counted as blind. The AI range was written from price history and news before any option data was viewed. Baseline here is 60-day realized volatility (no option quotes pulled for this batch); implied vol is added in the next blind batch. 6m, 1y and 5y resolve on target trading days. Some catalyst sides are thin and marked model_expectation.",
-    "status": "open"
+    "status": "open",
+    "baseline_realized": {
+      "method": "hist_vol_60d",
+      "vol": 0.2507,
+      "low": 250.61,
+      "high": 299.44,
+      "level": 0.8
+    }
   },
   {
     "id": "2026-11-26_JNJ_6m",
@@ -11158,7 +11487,14 @@
       ]
     },
     "notes": "Made on Nov 26 (Thanksgiving, markets closed) from the Nov 25 close, so it is NOT blind and is not counted as blind. The AI range was written from price history and news before any option data was viewed. Baseline here is 60-day realized volatility (no option quotes pulled for this batch); implied vol is added in the next blind batch. 6m, 1y and 5y resolve on target trading days. Some catalyst sides are thin and marked model_expectation.",
-    "status": "open"
+    "status": "open",
+    "baseline_realized": {
+      "method": "hist_vol_60d",
+      "vol": 0.2507,
+      "low": 218.61,
+      "high": 343.28,
+      "level": 0.8
+    }
   },
   {
     "id": "2026-11-26_JNJ_1y",
@@ -11202,7 +11538,14 @@
       ]
     },
     "notes": "Made on Nov 26 (Thanksgiving, markets closed) from the Nov 25 close, so it is NOT blind and is not counted as blind. The AI range was written from price history and news before any option data was viewed. Baseline here is 60-day realized volatility (no option quotes pulled for this batch); implied vol is added in the next blind batch. 6m, 1y and 5y resolve on target trading days. Some catalyst sides are thin and marked model_expectation.",
-    "status": "open"
+    "status": "open",
+    "baseline_realized": {
+      "method": "hist_vol_60d",
+      "vol": 0.2507,
+      "low": 198.84,
+      "high": 377.41,
+      "level": 0.8
+    }
   },
   {
     "id": "2026-11-26_JNJ_5y",
@@ -11246,7 +11589,14 @@
       ]
     },
     "notes": "Made on Nov 26 (Thanksgiving, markets closed) from the Nov 25 close, so it is NOT blind and is not counted as blind. The AI range was written from price history and news before any option data was viewed. Baseline here is 60-day realized volatility (no option quotes pulled for this batch); implied vol is added in the next blind batch. 6m, 1y and 5y resolve on target trading days. Some catalyst sides are thin and marked model_expectation.",
-    "status": "open"
+    "status": "open",
+    "baseline_realized": {
+      "method": "hist_vol_60d",
+      "vol": 0.2507,
+      "low": 133.54,
+      "high": 561.94,
+      "level": 0.8
+    }
   },
   {
     "id": "2026-11-26_XOM_1w",
@@ -11290,7 +11640,14 @@
       ]
     },
     "notes": "Made on Nov 26 (Thanksgiving, markets closed) from the Nov 25 close, so it is NOT blind and is not counted as blind. The AI range was written from price history and news before any option data was viewed. Baseline here is 60-day realized volatility (no option quotes pulled for this batch); implied vol is added in the next blind batch. 6m, 1y and 5y resolve on target trading days. Some catalyst sides are thin and marked model_expectation.",
-    "status": "open"
+    "status": "open",
+    "baseline_realized": {
+      "method": "hist_vol_60d",
+      "vol": 0.2703,
+      "low": 150.18,
+      "high": 166.4,
+      "level": 0.8
+    }
   },
   {
     "id": "2026-11-26_XOM_1m",
@@ -11334,7 +11691,14 @@
       ]
     },
     "notes": "Made on Nov 26 (Thanksgiving, markets closed) from the Nov 25 close, so it is NOT blind and is not counted as blind. The AI range was written from price history and news before any option data was viewed. Baseline here is 60-day realized volatility (no option quotes pulled for this batch); implied vol is added in the next blind batch. 6m, 1y and 5y resolve on target trading days. Some catalyst sides are thin and marked model_expectation.",
-    "status": "open"
+    "status": "open",
+    "baseline_realized": {
+      "method": "hist_vol_60d",
+      "vol": 0.2703,
+      "low": 143.62,
+      "high": 174.0,
+      "level": 0.8
+    }
   },
   {
     "id": "2026-11-26_XOM_6m",
@@ -11378,7 +11742,14 @@
       ]
     },
     "notes": "Made on Nov 26 (Thanksgiving, markets closed) from the Nov 25 close, so it is NOT blind and is not counted as blind. The AI range was written from price history and news before any option data was viewed. Baseline here is 60-day realized volatility (no option quotes pulled for this batch); implied vol is added in the next blind batch. 6m, 1y and 5y resolve on target trading days. Some catalyst sides are thin and marked model_expectation.",
-    "status": "open"
+    "status": "open",
+    "baseline_realized": {
+      "method": "hist_vol_60d",
+      "vol": 0.2703,
+      "low": 123.94,
+      "high": 201.62,
+      "level": 0.8
+    }
   },
   {
     "id": "2026-11-26_XOM_1y",
@@ -11422,7 +11793,14 @@
       ]
     },
     "notes": "Made on Nov 26 (Thanksgiving, markets closed) from the Nov 25 close, so it is NOT blind and is not counted as blind. The AI range was written from price history and news before any option data was viewed. Baseline here is 60-day realized volatility (no option quotes pulled for this batch); implied vol is added in the next blind batch. 6m, 1y and 5y resolve on target trading days. Some catalyst sides are thin and marked model_expectation.",
-    "status": "open"
+    "status": "open",
+    "baseline_realized": {
+      "method": "hist_vol_60d",
+      "vol": 0.2703,
+      "low": 111.9,
+      "high": 223.32,
+      "level": 0.8
+    }
   },
   {
     "id": "2026-11-26_XOM_5y",
@@ -11466,7 +11844,14 @@
       ]
     },
     "notes": "Made on Nov 26 (Thanksgiving, markets closed) from the Nov 25 close, so it is NOT blind and is not counted as blind. The AI range was written from price history and news before any option data was viewed. Baseline here is 60-day realized volatility (no option quotes pulled for this batch); implied vol is added in the next blind batch. 6m, 1y and 5y resolve on target trading days. Some catalyst sides are thin and marked model_expectation.",
-    "status": "open"
+    "status": "open",
+    "baseline_realized": {
+      "method": "hist_vol_60d",
+      "vol": 0.2703,
+      "low": 72.85,
+      "high": 343.02,
+      "level": 0.8
+    }
   },
   {
     "id": "2026-11-26_CVX_1w",
@@ -11510,7 +11895,14 @@
       ]
     },
     "notes": "Made on Nov 26 (Thanksgiving, markets closed) from the Nov 25 close, so it is NOT blind and is not counted as blind. The AI range was written from price history and news before any option data was viewed. Baseline here is 60-day realized volatility (no option quotes pulled for this batch); implied vol is added in the next blind batch. 6m, 1y and 5y resolve on target trading days. Some catalyst sides are thin and marked model_expectation.",
-    "status": "open"
+    "status": "open",
+    "baseline_realized": {
+      "method": "hist_vol_60d",
+      "vol": 0.2508,
+      "low": 201.15,
+      "high": 221.23,
+      "level": 0.8
+    }
   },
   {
     "id": "2026-11-26_CVX_1m",
@@ -11554,7 +11946,14 @@
       ]
     },
     "notes": "Made on Nov 26 (Thanksgiving, markets closed) from the Nov 25 close, so it is NOT blind and is not counted as blind. The AI range was written from price history and news before any option data was viewed. Baseline here is 60-day realized volatility (no option quotes pulled for this batch); implied vol is added in the next blind batch. 6m, 1y and 5y resolve on target trading days. Some catalyst sides are thin and marked model_expectation.",
-    "status": "open"
+    "status": "open",
+    "baseline_realized": {
+      "method": "hist_vol_60d",
+      "vol": 0.2508,
+      "low": 192.98,
+      "high": 230.59,
+      "level": 0.8
+    }
   },
   {
     "id": "2026-11-26_CVX_6m",
@@ -11598,7 +11997,14 @@
       ]
     },
     "notes": "Made on Nov 26 (Thanksgiving, markets closed) from the Nov 25 close, so it is NOT blind and is not counted as blind. The AI range was written from price history and news before any option data was viewed. Baseline here is 60-day realized volatility (no option quotes pulled for this batch); implied vol is added in the next blind batch. 6m, 1y and 5y resolve on target trading days. Some catalyst sides are thin and marked model_expectation.",
-    "status": "open"
+    "status": "open",
+    "baseline_realized": {
+      "method": "hist_vol_60d",
+      "vol": 0.2508,
+      "low": 168.33,
+      "high": 264.36,
+      "level": 0.8
+    }
   },
   {
     "id": "2026-11-26_CVX_1y",
@@ -11642,7 +12048,14 @@
       ]
     },
     "notes": "Made on Nov 26 (Thanksgiving, markets closed) from the Nov 25 close, so it is NOT blind and is not counted as blind. The AI range was written from price history and news before any option data was viewed. Baseline here is 60-day realized volatility (no option quotes pulled for this batch); implied vol is added in the next blind batch. 6m, 1y and 5y resolve on target trading days. Some catalyst sides are thin and marked model_expectation.",
-    "status": "open"
+    "status": "open",
+    "baseline_realized": {
+      "method": "hist_vol_60d",
+      "vol": 0.2508,
+      "low": 153.1,
+      "high": 290.65,
+      "level": 0.8
+    }
   },
   {
     "id": "2026-11-26_CVX_5y",
@@ -11686,7 +12099,14 @@
       ]
     },
     "notes": "Made on Nov 26 (Thanksgiving, markets closed) from the Nov 25 close, so it is NOT blind and is not counted as blind. The AI range was written from price history and news before any option data was viewed. Baseline here is 60-day realized volatility (no option quotes pulled for this batch); implied vol is added in the next blind batch. 6m, 1y and 5y resolve on target trading days. Some catalyst sides are thin and marked model_expectation.",
-    "status": "open"
+    "status": "open",
+    "baseline_realized": {
+      "method": "hist_vol_60d",
+      "vol": 0.2508,
+      "low": 102.82,
+      "high": 432.8,
+      "level": 0.8
+    }
   },
   {
     "id": "2026-11-26_WMT_1w",
@@ -11731,7 +12151,14 @@
       ]
     },
     "notes": "Made on Nov 26 (Thanksgiving, markets closed) from the Nov 25 close, so it is NOT blind and is not counted as blind. The AI range was written from price history and news before any option data was viewed. Baseline here is 60-day realized volatility (no option quotes pulled for this batch); implied vol is added in the next blind batch. 6m, 1y and 5y resolve on target trading days. Some catalyst sides are thin and marked model_expectation.",
-    "status": "open"
+    "status": "open",
+    "baseline_realized": {
+      "method": "hist_vol_60d",
+      "vol": 0.2276,
+      "low": 126.36,
+      "high": 137.76,
+      "level": 0.8
+    }
   },
   {
     "id": "2026-11-26_WMT_1m",
@@ -11776,7 +12203,14 @@
       ]
     },
     "notes": "Made on Nov 26 (Thanksgiving, markets closed) from the Nov 25 close, so it is NOT blind and is not counted as blind. The AI range was written from price history and news before any option data was viewed. Baseline here is 60-day realized volatility (no option quotes pulled for this batch); implied vol is added in the next blind batch. 6m, 1y and 5y resolve on target trading days. Some catalyst sides are thin and marked model_expectation.",
-    "status": "open"
+    "status": "open",
+    "baseline_realized": {
+      "method": "hist_vol_60d",
+      "vol": 0.2276,
+      "low": 121.7,
+      "high": 143.04,
+      "level": 0.8
+    }
   },
   {
     "id": "2026-11-26_WMT_6m",
@@ -11821,7 +12255,14 @@
       ]
     },
     "notes": "Made on Nov 26 (Thanksgiving, markets closed) from the Nov 25 close, so it is NOT blind and is not counted as blind. The AI range was written from price history and news before any option data was viewed. Baseline here is 60-day realized volatility (no option quotes pulled for this batch); implied vol is added in the next blind batch. 6m, 1y and 5y resolve on target trading days. Some catalyst sides are thin and marked model_expectation.",
-    "status": "open"
+    "status": "open",
+    "baseline_realized": {
+      "method": "hist_vol_60d",
+      "vol": 0.2276,
+      "low": 107.51,
+      "high": 161.93,
+      "level": 0.8
+    }
   },
   {
     "id": "2026-11-26_WMT_1y",
@@ -11866,7 +12307,14 @@
       ]
     },
     "notes": "Made on Nov 26 (Thanksgiving, markets closed) from the Nov 25 close, so it is NOT blind and is not counted as blind. The AI range was written from price history and news before any option data was viewed. Baseline here is 60-day realized volatility (no option quotes pulled for this batch); implied vol is added in the next blind batch. 6m, 1y and 5y resolve on target trading days. Some catalyst sides are thin and marked model_expectation.",
-    "status": "open"
+    "status": "open",
+    "baseline_realized": {
+      "method": "hist_vol_60d",
+      "vol": 0.2276,
+      "low": 98.64,
+      "high": 176.47,
+      "level": 0.8
+    }
   },
   {
     "id": "2026-11-26_WMT_5y",
@@ -11911,7 +12359,14 @@
       ]
     },
     "notes": "Made on Nov 26 (Thanksgiving, markets closed) from the Nov 25 close, so it is NOT blind and is not counted as blind. The AI range was written from price history and news before any option data was viewed. Baseline here is 60-day realized volatility (no option quotes pulled for this batch); implied vol is added in the next blind batch. 6m, 1y and 5y resolve on target trading days. Some catalyst sides are thin and marked model_expectation.",
-    "status": "open"
+    "status": "open",
+    "baseline_realized": {
+      "method": "hist_vol_60d",
+      "vol": 0.2276,
+      "low": 68.73,
+      "high": 253.27,
+      "level": 0.8
+    }
   },
   {
     "id": "2026-11-26_COST_1w",
@@ -11957,7 +12412,14 @@
       ]
     },
     "notes": "Made on Nov 26 (Thanksgiving, markets closed) from the Nov 25 close, so it is NOT blind and is not counted as blind. The AI range was written from price history and news before any option data was viewed. Baseline here is 60-day realized volatility (no option quotes pulled for this batch); implied vol is added in the next blind batch. 6m, 1y and 5y resolve on target trading days. Some catalyst sides are thin and marked model_expectation.",
-    "status": "open"
+    "status": "open",
+    "baseline_realized": {
+      "method": "hist_vol_60d",
+      "vol": 0.1868,
+      "low": 1048.97,
+      "high": 1126.01,
+      "level": 0.8
+    }
   },
   {
     "id": "2026-11-26_COST_1m",
@@ -12003,7 +12465,14 @@
       ]
     },
     "notes": "Made on Nov 26 (Thanksgiving, markets closed) from the Nov 25 close, so it is NOT blind and is not counted as blind. The AI range was written from price history and news before any option data was viewed. Baseline here is 60-day realized volatility (no option quotes pulled for this batch); implied vol is added in the next blind batch. 6m, 1y and 5y resolve on target trading days. Some catalyst sides are thin and marked model_expectation.",
-    "status": "open"
+    "status": "open",
+    "baseline_realized": {
+      "method": "hist_vol_60d",
+      "vol": 0.1868,
+      "low": 1017.09,
+      "high": 1161.31,
+      "level": 0.8
+    }
   },
   {
     "id": "2026-11-26_COST_6m",
@@ -12049,7 +12518,14 @@
       ]
     },
     "notes": "Made on Nov 26 (Thanksgiving, markets closed) from the Nov 25 close, so it is NOT blind and is not counted as blind. The AI range was written from price history and news before any option data was viewed. Baseline here is 60-day realized volatility (no option quotes pulled for this batch); implied vol is added in the next blind batch. 6m, 1y and 5y resolve on target trading days. Some catalyst sides are thin and marked model_expectation.",
-    "status": "open"
+    "status": "open",
+    "baseline_realized": {
+      "method": "hist_vol_60d",
+      "vol": 0.1868,
+      "low": 918.65,
+      "high": 1285.75,
+      "level": 0.8
+    }
   },
   {
     "id": "2026-11-26_COST_1y",
@@ -12095,7 +12571,14 @@
       ]
     },
     "notes": "Made on Nov 26 (Thanksgiving, markets closed) from the Nov 25 close, so it is NOT blind and is not counted as blind. The AI range was written from price history and news before any option data was viewed. Baseline here is 60-day realized volatility (no option quotes pulled for this batch); implied vol is added in the next blind batch. 6m, 1y and 5y resolve on target trading days. Some catalyst sides are thin and marked model_expectation.",
-    "status": "open"
+    "status": "open",
+    "baseline_realized": {
+      "method": "hist_vol_60d",
+      "vol": 0.1868,
+      "low": 856.02,
+      "high": 1379.83,
+      "level": 0.8
+    }
   },
   {
     "id": "2026-11-26_COST_5y",
@@ -12141,7 +12624,14 @@
       ]
     },
     "notes": "Made on Nov 26 (Thanksgiving, markets closed) from the Nov 25 close, so it is NOT blind and is not counted as blind. The AI range was written from price history and news before any option data was viewed. Baseline here is 60-day realized volatility (no option quotes pulled for this batch); implied vol is added in the next blind batch. 6m, 1y and 5y resolve on target trading days. Some catalyst sides are thin and marked model_expectation.",
-    "status": "open"
+    "status": "open",
+    "baseline_realized": {
+      "method": "hist_vol_60d",
+      "vol": 0.1868,
+      "low": 636.36,
+      "high": 1856.12,
+      "level": 0.8
+    }
   },
   {
     "id": "2026-11-26_GE_1w",
@@ -12185,7 +12675,14 @@
       ]
     },
     "notes": "Made on Nov 26 (Thanksgiving, markets closed) from the Nov 25 close, so it is NOT blind and is not counted as blind. The AI range was written from price history and news before any option data was viewed. Baseline here is 60-day realized volatility (no option quotes pulled for this batch); implied vol is added in the next blind batch. 6m, 1y and 5y resolve on target trading days. Some catalyst sides are thin and marked model_expectation.",
-    "status": "open"
+    "status": "open",
+    "baseline_realized": {
+      "method": "hist_vol_60d",
+      "vol": 0.3249,
+      "low": 298.03,
+      "high": 337.14,
+      "level": 0.8
+    }
   },
   {
     "id": "2026-11-26_GE_1m",
@@ -12229,7 +12726,14 @@
       ]
     },
     "notes": "Made on Nov 26 (Thanksgiving, markets closed) from the Nov 25 close, so it is NOT blind and is not counted as blind. The AI range was written from price history and news before any option data was viewed. Baseline here is 60-day realized volatility (no option quotes pulled for this batch); implied vol is added in the next blind batch. 6m, 1y and 5y resolve on target trading days. Some catalyst sides are thin and marked model_expectation.",
-    "status": "open"
+    "status": "open",
+    "baseline_realized": {
+      "method": "hist_vol_60d",
+      "vol": 0.3249,
+      "low": 282.45,
+      "high": 355.73,
+      "level": 0.8
+    }
   },
   {
     "id": "2026-11-26_GE_6m",
@@ -12273,7 +12777,14 @@
       ]
     },
     "notes": "Made on Nov 26 (Thanksgiving, markets closed) from the Nov 25 close, so it is NOT blind and is not counted as blind. The AI range was written from price history and news before any option data was viewed. Baseline here is 60-day realized volatility (no option quotes pulled for this batch); implied vol is added in the next blind batch. 6m, 1y and 5y resolve on target trading days. Some catalyst sides are thin and marked model_expectation.",
-    "status": "open"
+    "status": "open",
+    "baseline_realized": {
+      "method": "hist_vol_60d",
+      "vol": 0.3249,
+      "low": 236.61,
+      "high": 424.64,
+      "level": 0.8
+    }
   },
   {
     "id": "2026-11-26_GE_1y",
@@ -12317,7 +12828,14 @@
       ]
     },
     "notes": "Made on Nov 26 (Thanksgiving, markets closed) from the Nov 25 close, so it is NOT blind and is not counted as blind. The AI range was written from price history and news before any option data was viewed. Baseline here is 60-day realized volatility (no option quotes pulled for this batch); implied vol is added in the next blind batch. 6m, 1y and 5y resolve on target trading days. Some catalyst sides are thin and marked model_expectation.",
-    "status": "open"
+    "status": "open",
+    "baseline_realized": {
+      "method": "hist_vol_60d",
+      "vol": 0.3249,
+      "low": 209.26,
+      "high": 480.15,
+      "level": 0.8
+    }
   },
   {
     "id": "2026-11-26_GE_5y",
@@ -12361,7 +12879,14 @@
       ]
     },
     "notes": "Made on Nov 26 (Thanksgiving, markets closed) from the Nov 25 close, so it is NOT blind and is not counted as blind. The AI range was written from price history and news before any option data was viewed. Baseline here is 60-day realized volatility (no option quotes pulled for this batch); implied vol is added in the next blind batch. 6m, 1y and 5y resolve on target trading days. Some catalyst sides are thin and marked model_expectation.",
-    "status": "open"
+    "status": "open",
+    "baseline_realized": {
+      "method": "hist_vol_60d",
+      "vol": 0.3249,
+      "low": 124.93,
+      "high": 804.26,
+      "level": 0.8
+    }
   },
   {
     "id": "2026-11-26_RTX_1w",
@@ -12406,7 +12931,14 @@
       ]
     },
     "notes": "Made on Nov 26 (Thanksgiving, markets closed) from the Nov 25 close, so it is NOT blind and is not counted as blind. The AI range was written from price history and news before any option data was viewed. Baseline here is 60-day realized volatility (no option quotes pulled for this batch); implied vol is added in the next blind batch. 6m, 1y and 5y resolve on target trading days. Some catalyst sides are thin and marked model_expectation.",
-    "status": "open"
+    "status": "open",
+    "baseline_realized": {
+      "method": "hist_vol_60d",
+      "vol": 0.2409,
+      "low": 187.42,
+      "high": 205.37,
+      "level": 0.8
+    }
   },
   {
     "id": "2026-11-26_RTX_1m",
@@ -12451,7 +12983,14 @@
       ]
     },
     "notes": "Made on Nov 26 (Thanksgiving, markets closed) from the Nov 25 close, so it is NOT blind and is not counted as blind. The AI range was written from price history and news before any option data was viewed. Baseline here is 60-day realized volatility (no option quotes pulled for this batch); implied vol is added in the next blind batch. 6m, 1y and 5y resolve on target trading days. Some catalyst sides are thin and marked model_expectation.",
-    "status": "open"
+    "status": "open",
+    "baseline_realized": {
+      "method": "hist_vol_60d",
+      "vol": 0.2409,
+      "low": 180.11,
+      "high": 213.7,
+      "level": 0.8
+    }
   },
   {
     "id": "2026-11-26_RTX_6m",
@@ -12496,7 +13035,14 @@
       ]
     },
     "notes": "Made on Nov 26 (Thanksgiving, markets closed) from the Nov 25 close, so it is NOT blind and is not counted as blind. The AI range was written from price history and news before any option data was viewed. Baseline here is 60-day realized volatility (no option quotes pulled for this batch); implied vol is added in the next blind batch. 6m, 1y and 5y resolve on target trading days. Some catalyst sides are thin and marked model_expectation.",
-    "status": "open"
+    "status": "open",
+    "baseline_realized": {
+      "method": "hist_vol_60d",
+      "vol": 0.2409,
+      "low": 157.95,
+      "high": 243.69,
+      "level": 0.8
+    }
   },
   {
     "id": "2026-11-26_RTX_1y",
@@ -12541,7 +13087,14 @@
       ]
     },
     "notes": "Made on Nov 26 (Thanksgiving, markets closed) from the Nov 25 close, so it is NOT blind and is not counted as blind. The AI range was written from price history and news before any option data was viewed. Baseline here is 60-day realized volatility (no option quotes pulled for this batch); implied vol is added in the next blind batch. 6m, 1y and 5y resolve on target trading days. Some catalyst sides are thin and marked model_expectation.",
-    "status": "open"
+    "status": "open",
+    "baseline_realized": {
+      "method": "hist_vol_60d",
+      "vol": 0.2409,
+      "low": 144.2,
+      "high": 266.93,
+      "level": 0.8
+    }
   },
   {
     "id": "2026-11-26_RTX_5y",
@@ -12586,7 +13139,14 @@
       ]
     },
     "notes": "Made on Nov 26 (Thanksgiving, markets closed) from the Nov 25 close, so it is NOT blind and is not counted as blind. The AI range was written from price history and news before any option data was viewed. Baseline here is 60-day realized volatility (no option quotes pulled for this batch); implied vol is added in the next blind batch. 6m, 1y and 5y resolve on target trading days. Some catalyst sides are thin and marked model_expectation.",
-    "status": "open"
+    "status": "open",
+    "baseline_realized": {
+      "method": "hist_vol_60d",
+      "vol": 0.2409,
+      "low": 98.37,
+      "high": 391.29,
+      "level": 0.8
+    }
   },
   {
     "id": "2026-11-26_LIN_1w",
@@ -12631,7 +13191,14 @@
       ]
     },
     "notes": "Made on Nov 26 (Thanksgiving, markets closed) from the Nov 25 close, so it is NOT blind and is not counted as blind. The AI range was written from price history and news before any option data was viewed. Baseline here is 60-day realized volatility (no option quotes pulled for this batch); implied vol is added in the next blind batch. 6m, 1y and 5y resolve on target trading days. Some catalyst sides are thin and marked model_expectation.",
-    "status": "open"
+    "status": "open",
+    "baseline_realized": {
+      "method": "hist_vol_60d",
+      "vol": 0.1692,
+      "low": 508.03,
+      "high": 541.73,
+      "level": 0.8
+    }
   },
   {
     "id": "2026-11-26_LIN_1m",
@@ -12676,7 +13243,14 @@
       ]
     },
     "notes": "Made on Nov 26 (Thanksgiving, markets closed) from the Nov 25 close, so it is NOT blind and is not counted as blind. The AI range was written from price history and news before any option data was viewed. Baseline here is 60-day realized volatility (no option quotes pulled for this batch); implied vol is added in the next blind batch. 6m, 1y and 5y resolve on target trading days. Some catalyst sides are thin and marked model_expectation.",
-    "status": "open"
+    "status": "open",
+    "baseline_realized": {
+      "method": "hist_vol_60d",
+      "vol": 0.1692,
+      "low": 494.02,
+      "high": 557.09,
+      "level": 0.8
+    }
   },
   {
     "id": "2026-11-26_LIN_6m",
@@ -12721,7 +13295,14 @@
       ]
     },
     "notes": "Made on Nov 26 (Thanksgiving, markets closed) from the Nov 25 close, so it is NOT blind and is not counted as blind. The AI range was written from price history and news before any option data was viewed. Baseline here is 60-day realized volatility (no option quotes pulled for this batch); implied vol is added in the next blind batch. 6m, 1y and 5y resolve on target trading days. Some catalyst sides are thin and marked model_expectation.",
-    "status": "open"
+    "status": "open",
+    "baseline_realized": {
+      "method": "hist_vol_60d",
+      "vol": 0.1692,
+      "low": 450.49,
+      "high": 610.92,
+      "level": 0.8
+    }
   },
   {
     "id": "2026-11-26_LIN_1y",
@@ -12766,7 +13347,14 @@
       ]
     },
     "notes": "Made on Nov 26 (Thanksgiving, markets closed) from the Nov 25 close, so it is NOT blind and is not counted as blind. The AI range was written from price history and news before any option data was viewed. Baseline here is 60-day realized volatility (no option quotes pulled for this batch); implied vol is added in the next blind batch. 6m, 1y and 5y resolve on target trading days. Some catalyst sides are thin and marked model_expectation.",
-    "status": "open"
+    "status": "open",
+    "baseline_realized": {
+      "method": "hist_vol_60d",
+      "vol": 0.1692,
+      "low": 422.57,
+      "high": 651.29,
+      "level": 0.8
+    }
   },
   {
     "id": "2026-11-26_LIN_5y",
@@ -12811,7 +13399,14 @@
       ]
     },
     "notes": "Made on Nov 26 (Thanksgiving, markets closed) from the Nov 25 close, so it is NOT blind and is not counted as blind. The AI range was written from price history and news before any option data was viewed. Baseline here is 60-day realized volatility (no option quotes pulled for this batch); implied vol is added in the next blind batch. 6m, 1y and 5y resolve on target trading days. Some catalyst sides are thin and marked model_expectation.",
-    "status": "open"
+    "status": "open",
+    "baseline_realized": {
+      "method": "hist_vol_60d",
+      "vol": 0.1692,
+      "low": 323.0,
+      "high": 852.06,
+      "level": 0.8
+    }
   },
   {
     "id": "2026-11-26_SCCO_1w",
@@ -12855,7 +13450,14 @@
       ]
     },
     "notes": "Made on Nov 26 (Thanksgiving, markets closed) from the Nov 25 close, so it is NOT blind and is not counted as blind. The AI range was written from price history and news before any option data was viewed. Baseline here is 60-day realized volatility (no option quotes pulled for this batch); implied vol is added in the next blind batch. 6m, 1y and 5y resolve on target trading days. Some catalyst sides are thin and marked model_expectation.",
-    "status": "open"
+    "status": "open",
+    "baseline_realized": {
+      "method": "hist_vol_60d",
+      "vol": 0.5107,
+      "low": 127.97,
+      "high": 155.33,
+      "level": 0.8
+    }
   },
   {
     "id": "2026-11-26_SCCO_1m",
@@ -12899,7 +13501,14 @@
       ]
     },
     "notes": "Made on Nov 26 (Thanksgiving, markets closed) from the Nov 25 close, so it is NOT blind and is not counted as blind. The AI range was written from price history and news before any option data was viewed. Baseline here is 60-day realized volatility (no option quotes pulled for this batch); implied vol is added in the next blind batch. 6m, 1y and 5y resolve on target trading days. Some catalyst sides are thin and marked model_expectation.",
-    "status": "open"
+    "status": "open",
+    "baseline_realized": {
+      "method": "hist_vol_60d",
+      "vol": 0.5107,
+      "low": 117.62,
+      "high": 169.01,
+      "level": 0.8
+    }
   },
   {
     "id": "2026-11-26_SCCO_6m",
@@ -12943,7 +13552,14 @@
       ]
     },
     "notes": "Made on Nov 26 (Thanksgiving, markets closed) from the Nov 25 close, so it is NOT blind and is not counted as blind. The AI range was written from price history and news before any option data was viewed. Baseline here is 60-day realized volatility (no option quotes pulled for this batch); implied vol is added in the next blind batch. 6m, 1y and 5y resolve on target trading days. Some catalyst sides are thin and marked model_expectation.",
-    "status": "open"
+    "status": "open",
+    "baseline_realized": {
+      "method": "hist_vol_60d",
+      "vol": 0.5107,
+      "low": 89.04,
+      "high": 223.25,
+      "level": 0.8
+    }
   },
   {
     "id": "2026-11-26_SCCO_1y",
@@ -12987,7 +13603,14 @@
       ]
     },
     "notes": "Made on Nov 26 (Thanksgiving, markets closed) from the Nov 25 close, so it is NOT blind and is not counted as blind. The AI range was written from price history and news before any option data was viewed. Baseline here is 60-day realized volatility (no option quotes pulled for this batch); implied vol is added in the next blind batch. 6m, 1y and 5y resolve on target trading days. Some catalyst sides are thin and marked model_expectation.",
-    "status": "open"
+    "status": "open",
+    "baseline_realized": {
+      "method": "hist_vol_60d",
+      "vol": 0.5107,
+      "low": 73.41,
+      "high": 270.79,
+      "level": 0.8
+    }
   },
   {
     "id": "2026-11-26_SCCO_5y",
@@ -13031,7 +13654,14 @@
       ]
     },
     "notes": "Made on Nov 26 (Thanksgiving, markets closed) from the Nov 25 close, so it is NOT blind and is not counted as blind. The AI range was written from price history and news before any option data was viewed. Baseline here is 60-day realized volatility (no option quotes pulled for this batch); implied vol is added in the next blind batch. 6m, 1y and 5y resolve on target trading days. Some catalyst sides are thin and marked model_expectation.",
-    "status": "open"
+    "status": "open",
+    "baseline_realized": {
+      "method": "hist_vol_60d",
+      "vol": 0.5107,
+      "low": 32.63,
+      "high": 609.16,
+      "level": 0.8
+    }
   },
   {
     "id": "2026-11-26_NEE_1w",
@@ -13077,7 +13707,14 @@
       ]
     },
     "notes": "Made on Nov 26 (Thanksgiving, markets closed) from the Nov 25 close, so it is NOT blind and is not counted as blind. The AI range was written from price history and news before any option data was viewed. Baseline here is 60-day realized volatility (no option quotes pulled for this batch); implied vol is added in the next blind batch. 6m, 1y and 5y resolve on target trading days. Some catalyst sides are thin and marked model_expectation.",
-    "status": "open"
+    "status": "open",
+    "baseline_realized": {
+      "method": "hist_vol_60d",
+      "vol": 0.2093,
+      "low": 82.09,
+      "high": 88.87,
+      "level": 0.8
+    }
   },
   {
     "id": "2026-11-26_NEE_1m",
@@ -13123,7 +13760,14 @@
       ]
     },
     "notes": "Made on Nov 26 (Thanksgiving, markets closed) from the Nov 25 close, so it is NOT blind and is not counted as blind. The AI range was written from price history and news before any option data was viewed. Baseline here is 60-day realized volatility (no option quotes pulled for this batch); implied vol is added in the next blind batch. 6m, 1y and 5y resolve on target trading days. Some catalyst sides are thin and marked model_expectation.",
-    "status": "open"
+    "status": "open",
+    "baseline_realized": {
+      "method": "hist_vol_60d",
+      "vol": 0.2093,
+      "low": 79.3,
+      "high": 92.0,
+      "level": 0.8
+    }
   },
   {
     "id": "2026-11-26_NEE_6m",
@@ -13169,7 +13813,14 @@
       ]
     },
     "notes": "Made on Nov 26 (Thanksgiving, markets closed) from the Nov 25 close, so it is NOT blind and is not counted as blind. The AI range was written from price history and news before any option data was viewed. Baseline here is 60-day realized volatility (no option quotes pulled for this batch); implied vol is added in the next blind batch. 6m, 1y and 5y resolve on target trading days. Some catalyst sides are thin and marked model_expectation.",
-    "status": "open"
+    "status": "open",
+    "baseline_realized": {
+      "method": "hist_vol_60d",
+      "vol": 0.2093,
+      "low": 70.75,
+      "high": 103.11,
+      "level": 0.8
+    }
   },
   {
     "id": "2026-11-26_NEE_1y",
@@ -13215,7 +13866,14 @@
       ]
     },
     "notes": "Made on Nov 26 (Thanksgiving, markets closed) from the Nov 25 close, so it is NOT blind and is not counted as blind. The AI range was written from price history and news before any option data was viewed. Baseline here is 60-day realized volatility (no option quotes pulled for this batch); implied vol is added in the next blind batch. 6m, 1y and 5y resolve on target trading days. Some catalyst sides are thin and marked model_expectation.",
-    "status": "open"
+    "status": "open",
+    "baseline_realized": {
+      "method": "hist_vol_60d",
+      "vol": 0.2093,
+      "low": 65.37,
+      "high": 111.6,
+      "level": 0.8
+    }
   },
   {
     "id": "2026-11-26_NEE_5y",
@@ -13261,7 +13919,14 @@
       ]
     },
     "notes": "Made on Nov 26 (Thanksgiving, markets closed) from the Nov 25 close, so it is NOT blind and is not counted as blind. The AI range was written from price history and news before any option data was viewed. Baseline here is 60-day realized volatility (no option quotes pulled for this batch); implied vol is added in the next blind batch. 6m, 1y and 5y resolve on target trading days. Some catalyst sides are thin and marked model_expectation.",
-    "status": "open"
+    "status": "open",
+    "baseline_realized": {
+      "method": "hist_vol_60d",
+      "vol": 0.2093,
+      "low": 46.89,
+      "high": 155.58,
+      "level": 0.8
+    }
   },
   {
     "id": "2026-11-26_SO_1w",
@@ -13305,7 +13970,14 @@
       ]
     },
     "notes": "Made on Nov 26 (Thanksgiving, markets closed) from the Nov 25 close, so it is NOT blind and is not counted as blind. The AI range was written from price history and news before any option data was viewed. Baseline here is 60-day realized volatility (no option quotes pulled for this batch); implied vol is added in the next blind batch. 6m, 1y and 5y resolve on target trading days. Some catalyst sides are thin and marked model_expectation.",
-    "status": "open"
+    "status": "open",
+    "baseline_realized": {
+      "method": "hist_vol_60d",
+      "vol": 0.1736,
+      "low": 91.92,
+      "high": 98.18,
+      "level": 0.8
+    }
   },
   {
     "id": "2026-11-26_SO_1m",
@@ -13349,7 +14021,14 @@
       ]
     },
     "notes": "Made on Nov 26 (Thanksgiving, markets closed) from the Nov 25 close, so it is NOT blind and is not counted as blind. The AI range was written from price history and news before any option data was viewed. Baseline here is 60-day realized volatility (no option quotes pulled for this batch); implied vol is added in the next blind batch. 6m, 1y and 5y resolve on target trading days. Some catalyst sides are thin and marked model_expectation.",
-    "status": "open"
+    "status": "open",
+    "baseline_realized": {
+      "method": "hist_vol_60d",
+      "vol": 0.1736,
+      "low": 89.32,
+      "high": 101.04,
+      "level": 0.8
+    }
   },
   {
     "id": "2026-11-26_SO_6m",
@@ -13393,7 +14072,14 @@
       ]
     },
     "notes": "Made on Nov 26 (Thanksgiving, markets closed) from the Nov 25 close, so it is NOT blind and is not counted as blind. The AI range was written from price history and news before any option data was viewed. Baseline here is 60-day realized volatility (no option quotes pulled for this batch); implied vol is added in the next blind batch. 6m, 1y and 5y resolve on target trading days. Some catalyst sides are thin and marked model_expectation.",
-    "status": "open"
+    "status": "open",
+    "baseline_realized": {
+      "method": "hist_vol_60d",
+      "vol": 0.1736,
+      "low": 81.26,
+      "high": 111.06,
+      "level": 0.8
+    }
   },
   {
     "id": "2026-11-26_SO_1y",
@@ -13437,7 +14123,14 @@
       ]
     },
     "notes": "Made on Nov 26 (Thanksgiving, markets closed) from the Nov 25 close, so it is NOT blind and is not counted as blind. The AI range was written from price history and news before any option data was viewed. Baseline here is 60-day realized volatility (no option quotes pulled for this batch); implied vol is added in the next blind batch. 6m, 1y and 5y resolve on target trading days. Some catalyst sides are thin and marked model_expectation.",
-    "status": "open"
+    "status": "open",
+    "baseline_realized": {
+      "method": "hist_vol_60d",
+      "vol": 0.1736,
+      "low": 76.1,
+      "high": 118.6,
+      "level": 0.8
+    }
   },
   {
     "id": "2026-11-26_SO_5y",
@@ -13481,7 +14174,14 @@
       ]
     },
     "notes": "Made on Nov 26 (Thanksgiving, markets closed) from the Nov 25 close, so it is NOT blind and is not counted as blind. The AI range was written from price history and news before any option data was viewed. Baseline here is 60-day realized volatility (no option quotes pulled for this batch); implied vol is added in the next blind batch. 6m, 1y and 5y resolve on target trading days. Some catalyst sides are thin and marked model_expectation.",
-    "status": "open"
+    "status": "open",
+    "baseline_realized": {
+      "method": "hist_vol_60d",
+      "vol": 0.1736,
+      "low": 57.77,
+      "high": 156.23,
+      "level": 0.8
+    }
   },
   {
     "id": "2026-11-26_WELL_1w",
@@ -13528,7 +14228,14 @@
       ]
     },
     "notes": "Made on Nov 26 (Thanksgiving, markets closed) from the Nov 25 close, so it is NOT blind and is not counted as blind. The AI range was written from price history and news before any option data was viewed. Baseline here is 60-day realized volatility (no option quotes pulled for this batch); implied vol is added in the next blind batch. 6m, 1y and 5y resolve on target trading days. Some catalyst sides are thin and marked model_expectation.",
-    "status": "open"
+    "status": "open",
+    "baseline_realized": {
+      "method": "hist_vol_60d",
+      "vol": 0.2207,
+      "low": 236.09,
+      "high": 256.71,
+      "level": 0.8
+    }
   },
   {
     "id": "2026-11-26_WELL_1m",
@@ -13575,7 +14282,14 @@
       ]
     },
     "notes": "Made on Nov 26 (Thanksgiving, markets closed) from the Nov 25 close, so it is NOT blind and is not counted as blind. The AI range was written from price history and news before any option data was viewed. Baseline here is 60-day realized volatility (no option quotes pulled for this batch); implied vol is added in the next blind batch. 6m, 1y and 5y resolve on target trading days. Some catalyst sides are thin and marked model_expectation.",
-    "status": "open"
+    "status": "open",
+    "baseline_realized": {
+      "method": "hist_vol_60d",
+      "vol": 0.2207,
+      "low": 227.63,
+      "high": 266.24,
+      "level": 0.8
+    }
   },
   {
     "id": "2026-11-26_WELL_6m",
@@ -13622,7 +14336,14 @@
       ]
     },
     "notes": "Made on Nov 26 (Thanksgiving, markets closed) from the Nov 25 close, so it is NOT blind and is not counted as blind. The AI range was written from price history and news before any option data was viewed. Baseline here is 60-day realized volatility (no option quotes pulled for this batch); implied vol is added in the next blind batch. 6m, 1y and 5y resolve on target trading days. Some catalyst sides are thin and marked model_expectation.",
-    "status": "open"
+    "status": "open",
+    "baseline_realized": {
+      "method": "hist_vol_60d",
+      "vol": 0.2207,
+      "low": 201.84,
+      "high": 300.26,
+      "level": 0.8
+    }
   },
   {
     "id": "2026-11-26_WELL_1y",
@@ -13669,7 +14390,14 @@
       ]
     },
     "notes": "Made on Nov 26 (Thanksgiving, markets closed) from the Nov 25 close, so it is NOT blind and is not counted as blind. The AI range was written from price history and news before any option data was viewed. Baseline here is 60-day realized volatility (no option quotes pulled for this batch); implied vol is added in the next blind batch. 6m, 1y and 5y resolve on target trading days. Some catalyst sides are thin and marked model_expectation.",
-    "status": "open"
+    "status": "open",
+    "baseline_realized": {
+      "method": "hist_vol_60d",
+      "vol": 0.2207,
+      "low": 185.68,
+      "high": 326.39,
+      "level": 0.8
+    }
   },
   {
     "id": "2026-11-26_WELL_5y",
@@ -13716,7 +14444,14 @@
       ]
     },
     "notes": "Made on Nov 26 (Thanksgiving, markets closed) from the Nov 25 close, so it is NOT blind and is not counted as blind. The AI range was written from price history and news before any option data was viewed. Baseline here is 60-day realized volatility (no option quotes pulled for this batch); implied vol is added in the next blind batch. 6m, 1y and 5y resolve on target trading days. Some catalyst sides are thin and marked model_expectation.",
-    "status": "open"
+    "status": "open",
+    "baseline_realized": {
+      "method": "hist_vol_60d",
+      "vol": 0.2207,
+      "low": 130.8,
+      "high": 463.32,
+      "level": 0.8
+    }
   },
   {
     "id": "2026-11-26_PLD_1w",
@@ -13762,7 +14497,14 @@
       ]
     },
     "notes": "Made on Nov 26 (Thanksgiving, markets closed) from the Nov 25 close, so it is NOT blind and is not counted as blind. The AI range was written from price history and news before any option data was viewed. Baseline here is 60-day realized volatility (no option quotes pulled for this batch); implied vol is added in the next blind batch. 6m, 1y and 5y resolve on target trading days. Some catalyst sides are thin and marked model_expectation.",
-    "status": "open"
+    "status": "open",
+    "baseline_realized": {
+      "method": "hist_vol_60d",
+      "vol": 0.2061,
+      "low": 122.16,
+      "high": 132.1,
+      "level": 0.8
+    }
   },
   {
     "id": "2026-11-26_PLD_1m",
@@ -13808,7 +14550,14 @@
       ]
     },
     "notes": "Made on Nov 26 (Thanksgiving, markets closed) from the Nov 25 close, so it is NOT blind and is not counted as blind. The AI range was written from price history and news before any option data was viewed. Baseline here is 60-day realized volatility (no option quotes pulled for this batch); implied vol is added in the next blind batch. 6m, 1y and 5y resolve on target trading days. Some catalyst sides are thin and marked model_expectation.",
-    "status": "open"
+    "status": "open",
+    "baseline_realized": {
+      "method": "hist_vol_60d",
+      "vol": 0.2061,
+      "low": 118.07,
+      "high": 136.67,
+      "level": 0.8
+    }
   },
   {
     "id": "2026-11-26_PLD_6m",
@@ -13854,7 +14603,14 @@
       ]
     },
     "notes": "Made on Nov 26 (Thanksgiving, markets closed) from the Nov 25 close, so it is NOT blind and is not counted as blind. The AI range was written from price history and news before any option data was viewed. Baseline here is 60-day realized volatility (no option quotes pulled for this batch); implied vol is added in the next blind batch. 6m, 1y and 5y resolve on target trading days. Some catalyst sides are thin and marked model_expectation.",
-    "status": "open"
+    "status": "open",
+    "baseline_realized": {
+      "method": "hist_vol_60d",
+      "vol": 0.2061,
+      "low": 105.52,
+      "high": 152.92,
+      "level": 0.8
+    }
   },
   {
     "id": "2026-11-26_PLD_1y",
@@ -13900,7 +14656,14 @@
       ]
     },
     "notes": "Made on Nov 26 (Thanksgiving, markets closed) from the Nov 25 close, so it is NOT blind and is not counted as blind. The AI range was written from price history and news before any option data was viewed. Baseline here is 60-day realized volatility (no option quotes pulled for this batch); implied vol is added in the next blind batch. 6m, 1y and 5y resolve on target trading days. Some catalyst sides are thin and marked model_expectation.",
-    "status": "open"
+    "status": "open",
+    "baseline_realized": {
+      "method": "hist_vol_60d",
+      "vol": 0.2061,
+      "low": 97.61,
+      "high": 165.32,
+      "level": 0.8
+    }
   },
   {
     "id": "2026-11-26_PLD_5y",
@@ -13946,6 +14709,13 @@
       ]
     },
     "notes": "Made on Nov 26 (Thanksgiving, markets closed) from the Nov 25 close, so it is NOT blind and is not counted as blind. The AI range was written from price history and news before any option data was viewed. Baseline here is 60-day realized volatility (no option quotes pulled for this batch); implied vol is added in the next blind batch. 6m, 1y and 5y resolve on target trading days. Some catalyst sides are thin and marked model_expectation.",
-    "status": "open"
+    "status": "open",
+    "baseline_realized": {
+      "method": "hist_vol_60d",
+      "vol": 0.2061,
+      "low": 70.37,
+      "high": 229.32,
+      "level": 0.8
+    }
   }
 ]
