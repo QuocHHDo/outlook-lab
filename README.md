@@ -1,6 +1,6 @@
 # Outlook Lab
 
-Scored AI forecast ranges for 30 symbols: SPY, QQQ, SMH, IWM, all eleven SPDR sector ETFs (XLK, XLF, XLE, XLV, XLY, XLP, XLI, XLB, XLU, XLRE, XLC), TLT, GLD, HYG, EFA, EEM and ten large stocks (AAPL, MSFT, NVDA, AMZN, GOOGL, META, TSLA, AVGO, JPM, MSTR), compared against no-view baselines. Every prediction is kept and scored when it comes due, including misses.
+Scored AI forecast ranges for 45 symbols: SPY, QQQ, SMH, IWM, all eleven SPDR sector ETFs (XLK, XLF, XLE, XLV, XLY, XLP, XLI, XLB, XLU, XLRE, XLC), TLT, GLD, HYG, EFA, EEM and 25 large stocks (AAPL, MSFT, NVDA, AMZN, GOOGL, META, TSLA, AVGO, JPM, MSTR, plus the second-largest name in each sector where not already listed: BRK.B, LLY, JNJ, XOM, CVX, WMT, COST, GE, RTX, LIN, SCCO, NEE, SO, WELL, PLD), compared against no-view baselines. Every prediction is kept and scored when it comes due, including misses.
 
 This is an evaluation project, not a trading signal and not financial advice.
 
