@@ -57,6 +57,7 @@ The volatility baseline is zero-drift (median = today's price), which is a weak 
 3. **Prefer hard data over commentary:** earnings guidance and revisions, rate-futures pricing, positioning, and official calendars.
 4. **Never edit catalysts after a prediction is committed.** Adding news afterward would rationalize a range that is already locked and would undermine the scoring.
 5. **Update `data/events.json`** (upcoming events and recent shocks). A change to that file alone does not trigger a rebuild, so commit it together with `data/predictions.json` or start the workflow by hand.
+   - Each recent shock gets a `cause` (`fed`, `rates`, `stocks`, `company`, `commodity` or `policy`) for its chip, and a `move` of `{label, tone}` when the sources give a number (`tone` is `good`, `bad` or `flat` for stocks). Use only figures the cited source states.
 
 
 ## Notes on the non-equity ETFs
