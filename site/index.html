@@ -1432,6 +1432,12 @@ th { font-weight: 700; font-size: 12.5px; color: var(--muted-2); }
     if (ea && (Date.now() - Date.parse(ea + "T00:00:00Z")) / 864e5 > 8) $("home-updated").textContent += ". Earnings dates last checked " + fmtDate(ea) + ", so the earnings flag may be out of date.";
   }
   function signed(v) { return (v >= 0 ? "+" : "\u2212") + Math.abs(v).toFixed(1) + "%"; }
+  function latestClose(sym) {
+    var m = state.prices[sym]; if (!m) return null;
+    var ds = Object.keys(m).sort(); if (!ds.length) return null;
+    return { date: ds[ds.length - 1], price: m[ds[ds.length - 1]] };
+  }
+  function lowHigh(r, base) { return "low " + signed((r.low / base - 1) * 100) + ", high " + signed((r.high / base - 1) * 100); }
   function moveText(r, start) { return signed((r.low / start - 1) * 100) + " to " + signed((r.high / start - 1) * 100); }
 
   function renderRows(rows) {
@@ -1479,7 +1485,11 @@ th { font-weight: 700; font-size: 12.5px; color: var(--muted-2); }
       var nums = el("div", undefined, "nums");
       var l1 = el("span"); l1.appendChild(el("span", "AI", "ai-k")); l1.appendChild(document.createTextNode(" " + range(p.ai)));
       nums.appendChild(l1);
-      nums.appendChild(el("span", moveText(p.ai, p.price_at_prediction) + " from start", "sub"));
+      nums.appendChild(el("span", "vs start " + money(p.price_at_prediction) + ": " + lowHigh(p.ai, p.price_at_prediction), "sub"));
+      var lc = !p.result && latestClose(p.symbol);
+      if (lc && Math.abs(lc.price / p.price_at_prediction - 1) >= 0.0005) {
+        nums.appendChild(el("span", "vs latest close " + money(lc.price) + " (" + fmtDate(lc.date) + "): " + lowHigh(p.ai, lc.price), "sub"));
+      }
       nums.appendChild(el("span", "Baseline " + range(p.baseline), "alt"));
       if (p.baseline_drift) nums.appendChild(el("span", "Drift baseline " + range(p.baseline_drift), "alt"));
       row.appendChild(nums);
