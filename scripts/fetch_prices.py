@@ -21,10 +21,12 @@ def main():
     predictions = load("predictions.json", [])
     symbols = sorted(set(DEFAULT_SYMBOLS) | {p["symbol"] for p in predictions if "symbol" in p})
     prices = load("prices.json", {})
+    ohlc = {}
 
     for sym in symbols:
         try:
-            hist = yf.Ticker(sym).history(period="5y", auto_adjust=False)["Close"]
+            frame = yf.Ticker(sym).history(period="5y", auto_adjust=False)
+            hist = frame["Close"]
         except Exception as exc:  # network, rate limit, schema change
             print(f"WARNING: could not fetch {sym}: {exc}")
             continue
@@ -34,9 +36,15 @@ def main():
         bucket = prices.setdefault(sym, {})
         for ts, close in hist.items():
             bucket[ts.date().isoformat()] = round(float(close), 4)
+        # Compact OHLC for the chart's candle view: last ~300 sessions, [date,o,h,l,c].
+        tail = frame.tail(300)
+        ohlc[sym] = [[ts.date().isoformat(), round(float(r["Open"]), 2), round(float(r["High"]), 2),
+                      round(float(r["Low"]), 2), round(float(r["Close"]), 2)] for ts, r in tail.iterrows()]
         print(f"{sym}: {len(hist)} closes merged, latest {max(bucket)}")
 
     save("prices.json", prices)
+    if ohlc:
+        save("ohlc.json", ohlc)
 
 
 if __name__ == "__main__":

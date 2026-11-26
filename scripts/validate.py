@@ -52,6 +52,13 @@ def validate(predictions, locks=None):
                 errors.append(f"{pid}: blind=true needs an entry in data/locks.json committed before the baseline")
             elif any(lock.get(k) != ai.get(k) for k in ("low", "high", "prob_up")):
                 errors.append(f"{pid}: ai range differs from its lock in data/locks.json")
+            else:
+                locked_at = lock.get("locked_at")
+                pulled = (p.get("baseline") or {}).get("iv_updated_at")
+                if not locked_at:
+                    errors.append(f"{pid}: lock has no locked_at timestamp")
+                elif pulled and locked_at >= pulled:
+                    errors.append(f"{pid}: lock ({locked_at}) must be earlier than the IV pull ({pulled})")
         prob = (p.get("ai") or {}).get("prob_up")
         if prob is not None and not (isinstance(prob, (int, float)) and 0 <= prob <= 1):
             errors.append(f"{pid}: ai.prob_up must be between 0 and 1")

@@ -15,7 +15,7 @@ the ranges are too wide to be useful; far below means overconfident.
 """
 from datetime import datetime, timezone
 
-from baseline import drift_range
+from baseline import baseline_range, drift_range, hist_vol
 from common import load, parse_date, save
 
 MIN_RESOLVED_FOR_COMPARISON = 10
@@ -75,11 +75,34 @@ def add_drift_baseline(pred):
                               "high": round(high, 2), "level": base.get("level", 0.8)}
 
 
+def add_realized_baseline(pred, symbol_prices):
+    """Attach baseline_realized: zero drift, vol from the 60 closes up to made_at.
+
+    A third yardstick that needs no options data. Skipped if history is too short
+    or doesn't cover made_at. Uses only closes dated on or before made_at.
+    """
+    if "baseline_realized" in pred or not symbol_prices:
+        return
+    base = pred.get("baseline") or {}
+    try:
+        dates = [d for d in sorted(symbol_prices) if d <= pred["made_at"]]
+        closes = [symbol_prices[d] for d in dates][-61:]
+        if len(closes) < 21 or (parse_date(pred["made_at"]) - parse_date(dates[-1])).days > MAX_GAP_DAYS:
+            return
+        vol = hist_vol(closes)
+        days = (parse_date(pred["resolves_on"]) - parse_date(pred["made_at"])).days
+        low, high = baseline_range(pred["price_at_prediction"], vol, days, base.get("level", 0.8))
+    except (KeyError, ValueError, IndexError):
+        return
+    pred["baseline_realized"] = {"method": "hist_vol_60d", "vol": round(vol, 4), "low": round(low, 2),
+                                 "high": round(high, 2), "level": base.get("level", 0.8)}
+
+
 def score_one(pred, close_date, close):
     start = pred["price_at_prediction"]
     out = {"close": close, "close_date": close_date}
     went_up = 1.0 if close > start else 0.0
-    for name in ("ai", "baseline", "baseline_drift"):
+    for name in ("ai", "baseline", "baseline_drift", "baseline_realized"):
         rng = pred.get(name)
         if rng is None:
             continue
@@ -101,7 +124,7 @@ def _mean(values):
 
 def summarize_group(resolved):
     summary = {"n": len(resolved)}
-    for name in ("ai", "baseline", "baseline_drift"):
+    for name in ("ai", "baseline", "baseline_drift", "baseline_realized"):
         rows = [p["result"][name] for p in resolved if name in p["result"]]
         if not rows:
             continue
@@ -135,6 +158,7 @@ def run(predictions, prices, now=None):
     needs_price = []
     for pred in predictions:
         add_drift_baseline(pred)
+        add_realized_baseline(pred, prices.get(pred["symbol"]))
         if pred.get("status") == "resolved":
             continue
         found = resolve_close(prices.get(pred["symbol"]), pred["resolves_on"])
@@ -164,6 +188,8 @@ def run(predictions, prices, now=None):
         "overall": summarize_group(resolved),
         "calibration": calibration(resolved),
         "by_horizon": by_horizon,
+        "by_blind": {"blind": summarize_group([p for p in resolved if p.get("blind")]),
+                     "not_blind": summarize_group([p for p in resolved if not p.get("blind")])},
         "needs_price": needs_price,
     }
     return predictions, summary
