@@ -12,6 +12,13 @@ import math
 
 from common import DEFAULT_SYMBOLS, load, save
 
+# Yahoo writes share-class tickers with a dash; data files and the site keep the dotted form.
+YF_ALIASES = {"BRK.B": "BRK-B"}
+
+
+def yf_ticker(sym):
+    return YF_ALIASES.get(sym, sym)
+
 
 def _finite(v):
     try:
@@ -34,7 +41,7 @@ def main():
 
     for sym in symbols:
         try:
-            frame = yf.Ticker(sym).history(period="5y", auto_adjust=False)
+            frame = yf.Ticker(yf_ticker(sym)).history(period="5y", auto_adjust=False)
             hist = frame["Close"]
         except Exception as exc:  # network, rate limit, schema change
             print(f"WARNING: could not fetch {sym}: {exc}")
