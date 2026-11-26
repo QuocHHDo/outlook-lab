@@ -195,3 +195,11 @@ def test_verify_lock_published_check():
     locks = {"a": {"low": 1, "high": 2, "prob_up": 0.5, "locked_at": "t"}, "b": {"low": 1}}
     assert v.check(locks, ["a"]) == []
     assert len(v.check(locks, ["b", "c"])) == 2
+
+
+def test_nan_close_is_ignored_when_resolving():
+    nan = float("nan")
+    # NaN on the due date must not be used as the close; the prior real close is within the gap rule
+    got = score.resolve_close({"2026-12-03": 100.0, "2026-12-04": nan}, "2026-12-04")
+    assert got is None or got[1] == 100.0
+    assert score.resolve_close({"2026-12-04": nan}, "2026-12-04") is None
