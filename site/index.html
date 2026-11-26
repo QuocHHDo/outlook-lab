@@ -199,6 +199,13 @@ tbody tr { border-top: 1px solid var(--line-2); }
 .ev-body { display: flex; flex-direction: column; gap: 4px; }
 .ev-title { font-weight: 600; }
 .ev-detail { font-size: 13px; color: var(--muted-2); }
+.tag.cause { background: color-mix(in oklch, var(--cc) 14%, transparent); color: var(--cc); }
+.tag.c-fed { --cc: oklch(0.5 0.14 285); } .tag.c-rates { --cc: oklch(0.5 0.13 235); } .tag.c-stocks { --cc: oklch(0.5 0.13 175); }
+.tag.c-company { --cc: oklch(0.5 0.14 330); } .tag.c-commodity { --cc: oklch(0.52 0.12 75); } .tag.c-policy { --cc: oklch(0.5 0.13 25); }
+:root[data-theme="dark"] .tag.c-fed { --cc: oklch(0.78 0.11 285); } :root[data-theme="dark"] .tag.c-rates { --cc: oklch(0.78 0.1 235); }
+:root[data-theme="dark"] .tag.c-stocks { --cc: oklch(0.78 0.1 175); } :root[data-theme="dark"] .tag.c-company { --cc: oklch(0.78 0.11 330); }
+:root[data-theme="dark"] .tag.c-commodity { --cc: oklch(0.8 0.1 75); } :root[data-theme="dark"] .tag.c-policy { --cc: oklch(0.78 0.11 25); }
+.mimp.good { color: var(--ok); } .mimp.bad { color: var(--bad); } .mimp.flat { color: var(--ink); }
 .tag.win { background: var(--tag-win-bg); color: var(--ok); }
 .note summary { cursor: pointer; font-weight: 600; }
 .note[open] summary { margin-bottom: 8px; }
@@ -1638,6 +1645,7 @@ th { font-weight: 700; font-size: 12.5px; color: var(--muted-2); }
     om.appendChild(el("span", cur.blind ? "Blind: range locked before the baseline" : "Written after seeing the baseline", cur.blind ? "blind-tag" : "seen-tag"));
   }
 
+  var CAUSE = { fed: "Fed", rates: "Rates", stocks: "Stocks", company: "Company", commodity: "Commodities", policy: "Policy" };
   var KIND = { fed: "Fed", macro: "Economic data", earnings: "Earnings", market: "Market hours", shock: "Market move", politics: "Politics" };
   function todayIso() {
     var d = new Date();
@@ -1753,6 +1761,9 @@ th { font-weight: 700; font-size: 12.5px; color: var(--muted-2); }
     box.appendChild(svg);
     return box;
   }
+  function causeTag(e) {
+    return e.cause && CAUSE[e.cause] ? el("span", CAUSE[e.cause], "tag cause c-" + e.cause) : el("span", KIND[e.kind] || e.kind, "tag");
+  }
   function evRow(e, rows, wax) {
     var li = el("li", undefined, "evc");
     var det = document.createElement("details");
@@ -1773,7 +1784,10 @@ th { font-weight: 700; font-size: 12.5px; color: var(--muted-2); }
         var end0 = e.end_date || e.date;
         var hit0 = rows.filter(function (p) { return p.resolves_on >= end0; })[0];
         if (hit0) meta.appendChild(el("span", "Inside the " + (HLABEL[hit0.horizon] || hit0.horizon) + " window", "tag win"));
-      } else meta.appendChild(el("span", KIND[e.kind] || e.kind, "tag"));
+      } else {
+        if (e.move) meta.appendChild(el("span", e.move.label, "mimp " + e.move.tone));
+        meta.appendChild(causeTag(e));
+      }
     }
     sum.appendChild(meta);
     det.appendChild(sum);
@@ -1785,7 +1799,7 @@ th { font-weight: 700; font-size: 12.5px; color: var(--muted-2); }
       if (e.impact && e.impact.basis) body.appendChild(el("small", e.impact.basis, "wnote"));
     }
     var tags = el("span", undefined, "tags");
-    tags.appendChild(el("span", KIND[e.kind] || e.kind, "tag"));
+    tags.appendChild(e.type === "shock" ? causeTag(e) : el("span", KIND[e.kind] || e.kind, "tag"));
     if (e.type === "watch") {
       tags.appendChild(el("span", WSTATUS[e.status] || e.status, "tag unv"));
       tags.appendChild(el("span", "Reported " + shortDate(e.date), "tag"));
@@ -1871,7 +1885,7 @@ th { font-weight: 700; font-size: 12.5px; color: var(--muted-2); }
       groups.appendChild(evGroup("watch", "Being watched", "Unconfirmed items, sorted by chance it happens, highest first",
         watching, 99, function (e) { return evRow(e, rows, wax); }, "", watchChart(watching, wax, groups.clientWidth), rows));
     }
-    groups.appendChild(evGroup("shock", "Recent shocks", "Context only, newest first",
+    groups.appendChild(evGroup("shock", "Recent shocks", "Already happened and priced in, newest first",
       recent, 3, function (e) { return evRow(e, rows, wax); }, "No recent shocks listed.", null, rows));
   }
 
