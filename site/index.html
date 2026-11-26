@@ -1216,6 +1216,7 @@ th { font-weight: 700; font-size: 12.5px; color: var(--muted-2); }
       : nRes + " of " + need + " predictions resolved. The comparison below unlocks at " + need + "; until then it is a preview of zeros and blanks, not evidence."));
     var bar = el("div", undefined, "sc-bar"); var f = el("i"); f.style.width = Math.min(100, nRes / need * 100) + "%"; bar.appendChild(f); pg.appendChild(bar);
     pg.appendChild(el("p", state.preds.length + " predictions total, " + (s.n_open != null ? s.n_open : state.preds.length - nRes) + " still open.", "sc-note"));
+    pg.appendChild(el("p", "Read the count with care: predictions made in the same week for different symbols move together, so they are not independent tests. The number of truly independent weeks, not the number of rows, is what sets how much to trust a result.", "sc-note"));
 
     var names = [["ai", "AI range"], ["baseline", "Implied-vol baseline"], ["baseline_drift", "Drift baseline (6%/yr)"], ["baseline_realized", "Realized-vol baseline (60d)"]];
     var cols = [["coverage", "Held (target 80%)", function (v) { return pct(v); }, null],
@@ -1427,6 +1428,8 @@ th { font-weight: 700; font-size: 12.5px; color: var(--muted-2); }
     r.appendChild(el("strong", "Track record:"));
     r.appendChild(document.createTextNode(s && s.n_total ? " " + s.n_resolved + " of " + s.n_total + " predictions have resolved." + (s.comparison_ready ? "" : " Too few to compare with the baseline yet.") : " no predictions yet."));
     $("home-updated").textContent = s && s.generated_at ? "Scores updated " + fmtDate(s.generated_at.slice(0, 10)) : "";
+    var ea = state.earnings && state.earnings.as_of;
+    if (ea && (Date.now() - Date.parse(ea + "T00:00:00Z")) / 864e5 > 8) $("home-updated").textContent += ". Earnings dates last checked " + fmtDate(ea) + ", so the earnings flag may be out of date.";
   }
   function signed(v) { return (v >= 0 ? "+" : "\u2212") + Math.abs(v).toFixed(1) + "%"; }
   function moveText(r, start) { return signed((r.low / start - 1) * 100) + " to " + signed((r.high / start - 1) * 100); }
