@@ -150,6 +150,7 @@ tbody tr { border-top: 1px solid var(--line-2); }
 .r-open { color: var(--muted); font-weight: 500; }
 .r-held { color: var(--ok); font-weight: 500; }
 .r-miss { color: var(--bad); font-weight: 500; }
+.hlabel .earn { color: var(--accent, currentColor); font-weight: 600; }
 .foot { font-size: 12px; color: var(--soft); border-top: 1px solid var(--line-2); padding-top: 14px; }
 .timeline { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; }
 .ev { display: grid; grid-template-columns: 120px minmax(0, 1fr); gap: 16px; padding: 12px 0; border-top: 1px solid var(--line-2); }
@@ -549,7 +550,7 @@ th { font-weight: 700; font-size: 12.5px; color: var(--muted-2); }
 <script src="lightweight-charts.js"></script>
 <script>
 (function () {
-  var NAMES = { SPY: "SPDR S&P 500 ETF", QQQ: "Invesco QQQ Trust", SMH: "VanEck Semiconductor ETF", IWM: "iShares Russell 2000 ETF", XLF: "Financial Select Sector SPDR", XLE: "Energy Select Sector SPDR", XLV: "Health Care Select Sector SPDR", TLT: "iShares 20+ Year Treasury Bond ETF", GLD: "SPDR Gold Shares", XLK: "Technology Select Sector SPDR", XLY: "Consumer Discretionary Select Sector SPDR", XLP: "Consumer Staples Select Sector SPDR", XLI: "Industrial Select Sector SPDR", XLB: "Materials Select Sector SPDR", XLU: "Utilities Select Sector SPDR", XLRE: "Real Estate Select Sector SPDR", XLC: "Communication Services Select Sector SPDR", AAPL: "Apple", MSFT: "Microsoft", NVDA: "NVIDIA", AMZN: "Amazon", GOOGL: "Alphabet (Class A)", META: "Meta Platforms" };
+  var NAMES = { SPY: "SPDR S&P 500 ETF", QQQ: "Invesco QQQ Trust", SMH: "VanEck Semiconductor ETF", IWM: "iShares Russell 2000 ETF", XLF: "Financial Select Sector SPDR", XLE: "Energy Select Sector SPDR", XLV: "Health Care Select Sector SPDR", TLT: "iShares 20+ Year Treasury Bond ETF", GLD: "SPDR Gold Shares", XLK: "Technology Select Sector SPDR", XLY: "Consumer Discretionary Select Sector SPDR", XLP: "Consumer Staples Select Sector SPDR", XLI: "Industrial Select Sector SPDR", XLB: "Materials Select Sector SPDR", XLU: "Utilities Select Sector SPDR", XLRE: "Real Estate Select Sector SPDR", XLC: "Communication Services Select Sector SPDR", AAPL: "Apple", MSFT: "Microsoft", NVDA: "NVIDIA", AMZN: "Amazon", GOOGL: "Alphabet (Class A)", META: "Meta Platforms", EFA: "iShares MSCI EAFE ETF", EEM: "iShares MSCI Emerging Markets ETF", HYG: "iShares iBoxx High Yield Corporate Bond ETF", TSLA: "Tesla", AVGO: "Broadcom", JPM: "JPMorgan Chase" };
   var HLABEL = { "1w": "1 week", "1m": "1 month", "3m": "3 months", "6m": "6 months", "1y": "1 year", "5y": "5 years" };
   var HORDER = ["1w", "1m", "3m", "6m", "1y", "5y"];
   var state = { preds: [], summary: null, prices: {}, events: [], symbol: null, horizon: null, evTab: "scheduled", evAll: false, homeGroup: "all", homeSort: "default", chartWin: "1m", chartLog: false };
@@ -596,9 +597,15 @@ th { font-weight: 700; font-size: 12.5px; color: var(--muted-2); }
   function symbols() {
     var seen = {};
     state.preds.forEach(function (p) { seen[p.symbol] = true; });
-    var pref = ["SPY", "QQQ", "IWM", "SMH", "XLK", "XLF", "XLE", "XLV", "XLY", "XLP", "XLI", "XLB", "XLU", "XLRE", "XLC", "TLT", "GLD", "AAPL", "MSFT", "NVDA", "AMZN", "GOOGL", "META"];
+    var pref = ["SPY", "QQQ", "IWM", "SMH", "XLK", "XLF", "XLE", "XLV", "XLY", "XLP", "XLI", "XLB", "XLU", "XLRE", "XLC", "TLT", "GLD", "EFA", "EEM", "HYG", "AAPL", "MSFT", "NVDA", "AMZN", "GOOGL", "META", "TSLA", "AVGO", "JPM"];
     var all = Object.keys(seen);
     return pref.filter(function (s) { return seen[s]; }).concat(all.filter(function (s) { return pref.indexOf(s) < 0; }).sort());
+  }
+  function earningsIn(p) {
+    var d = state.earnings && state.earnings.dates && state.earnings.dates[p.symbol];
+    if (!d) return null;
+    for (var i = 0; i < d.length; i++) if (d[i] > p.made_at && d[i] <= p.resolves_on) return d[i];
+    return null;
   }
   function forSymbol(sym) { return state.preds.filter(function (p) { return p.symbol === sym; }); }
   function latestByHorizon(list) {
@@ -830,7 +837,8 @@ th { font-weight: 700; font-size: 12.5px; color: var(--muted-2); }
   function groupOf(s) {
     if (s === "SPY" || s === "QQQ" || s === "IWM") return "index";
     if (/^XL/.test(s) || s === "SMH") return "sector";
-    if (s === "TLT" || s === "GLD") return "other";
+    if (s === "EFA" || s === "EEM") return "intl";
+    if (s === "TLT" || s === "GLD" || s === "HYG") return "other";
     return "stock";
   }
   function seg2(host, opts, key, after) {
@@ -1385,7 +1393,7 @@ th { font-weight: 700; font-size: 12.5px; color: var(--muted-2); }
     if (!state.homeSize) state.homeSize = "width";
     seg($("home-view"), [["map", "Map"], ["cards", "Cards"]], "homeView");
     seg($("home-size"), [["width", "Size: AI range width"]].concat(state.meta && state.meta.market_cap ? [["cap", "Size: market value"]] : []).concat([["equal", "Size: equal"]]), "homeSize");
-    seg2($("home-group"), [["all", "All"], ["index", "Broad indexes"], ["sector", "Sectors"], ["other", "Bonds & gold"]].concat(per.some(function (d) { return groupOf(d.s) === "stock"; }) ? [["stock", "Stocks"]] : []), "homeGroup", renderHome);
+    seg2($("home-group"), [["all", "All"], ["index", "Broad indexes"], ["sector", "Sectors"], ["other", "Bonds & gold"]].concat(per.some(function (d) { return groupOf(d.s) === "intl"; }) ? [["intl", "International"]] : []).concat(per.some(function (d) { return groupOf(d.s) === "stock"; }) ? [["stock", "Stocks"]] : []), "homeGroup", renderHome);
     seg2($("home-sort"), [["default", "Sort: default"], ["up", "Sort: chance up"], ["width", "Sort: widest range"]], "homeSort", renderHome);
     if (state.homeGroup !== "all") data = data.filter(function (d) { return groupOf(d.s) === state.homeGroup; });
     var isMap = state.homeView === "map";
@@ -1445,6 +1453,8 @@ th { font-weight: 700; font-size: 12.5px; color: var(--muted-2); }
       var label = el("div", undefined, "hlabel");
       label.appendChild(el("b", HLABEL[p.horizon] || p.horizon));
       label.appendChild(el("small", (p.result ? "Resolved " : "Resolves ") + fmtDate(p.resolves_on)));
+      var eq = earningsIn(p);
+      if (eq) { var en = el("small", "Earnings " + fmtDate(eq)); en.className = "earn"; en.title = "Earnings are reported inside this window, so the range may need to be wider than usual."; label.appendChild(en); }
       row.appendChild(label);
 
       var chart = el("div");
@@ -1673,7 +1683,7 @@ th { font-weight: 700; font-size: 12.5px; color: var(--muted-2); }
       var ai = resultCell(res && res.ai.result), bl = resultCell(res && res.baseline.result);
       var tr = el("tr");
       [fmtDate(p.made_at), HLABEL[p.horizon] || p.horizon, range(p.ai), range(p.baseline),
-       res ? money(res.close) + " (" + fmtDate(res.close_date) + ")" : "Due " + fmtDate(p.resolves_on)
+       res ? money(res.close) + " (" + fmtDate(res.close_date) + ")" : "Due " + fmtDate(p.resolves_on) + (earningsIn(p) ? " (earnings " + fmtDate(earningsIn(p)) + ")" : "")
       ].forEach(function (t) { tr.appendChild(el("td", t)); });
       tr.appendChild(el("td", ai[0], ai[1]));
       tr.appendChild(el("td", bl[0], bl[1]));
@@ -1742,9 +1752,11 @@ th { font-weight: 700; font-size: 12.5px; color: var(--muted-2); }
     load("data/summary.json").catch(function () { return null; }),
     load("data/prices.json").catch(function () { return {}; }),
     load("data/events.json").catch(function () { return { events: [] }; }),
-    load("data/meta.json").catch(function () { return null; })
+    load("data/meta.json").catch(function () { return null; }),
+    load("data/earnings.json").catch(function () { return null; })
   ]).then(function (r) {
     state.meta = r[4];
+    state.earnings = r[5];
     state.preds = Array.isArray(r[0]) ? r[0] : [];
     state.summary = r[1];
     state.prices = r[2] || {};
