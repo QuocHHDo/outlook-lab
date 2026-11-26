@@ -71,6 +71,52 @@ WATCH_DIRECTION = {"bull", "bear", "mixed"}
 EVENT_KINDS = {"fed", "macro", "earnings", "market", "shock", "politics"}
 
 
+IMPACT_CONFIDENCE = {"low", "medium"}
+
+
+def _num(v):
+    return isinstance(v, (int, float)) and not isinstance(v, bool)
+
+
+def validate_watch_extras(eid, e):
+    errors = []
+    if "market_prob" in e:
+        mp = e["market_prob"]
+        if not (_num(mp) and 0 <= mp <= 1):
+            errors.append(f"{eid}: market_prob must be a number between 0 and 1")
+        if e.get("market_prob_bound", "max") not in ("max", "exact"):
+            errors.append(f"{eid}: market_prob_bound must be max or exact")
+    for key in ("resolves_if", "short"):
+        if key in e and not (isinstance(e[key], str) and e[key].strip()):
+            errors.append(f"{eid}: {key} must be a non-empty string")
+    if "checked" in e:
+        try:
+            parse_date(e["checked"])
+        except (TypeError, ValueError):
+            errors.append(f"{eid}: checked must be a YYYY-MM-DD date")
+    imp = e.get("impact")
+    if imp is None:
+        return errors
+    if not isinstance(imp, dict):
+        return errors + [f"{eid}: impact must be an object"]
+    if imp.get("confidence") not in IMPACT_CONFIDENCE:
+        errors.append(f"{eid}: impact.confidence must be one of {sorted(IMPACT_CONFIDENCE)}")
+    if not (isinstance(imp.get("basis"), str) and imp["basis"].strip()):
+        errors.append(f"{eid}: impact.basis must say where the range comes from")
+    ranges = imp.get("ranges")
+    if not isinstance(ranges, dict) or "SPY" not in ranges:
+        errors.append(f"{eid}: impact.ranges must be an object that includes SPY")
+    else:
+        for sym, r in ranges.items():
+            ok = isinstance(r, list) and len(r) == 2 and all(_num(x) for x in r) and r[0] <= r[1] and all(-50 <= x <= 50 for x in r)
+            if not ok:
+                errors.append(f"{eid}: impact.ranges.{sym} must be [low, high] in percent, low <= high")
+    for s in imp.get("sources", []):
+        if not str(s.get("url", "")).startswith("https://"):
+            errors.append(f"{eid}: every impact source needs an https url")
+    return errors
+
+
 def validate_events(doc):
     errors = []
     events = doc.get("events", []) if isinstance(doc, dict) else None
@@ -105,6 +151,8 @@ def validate_events(doc):
                 parse_date(e.get("by"))
             except (TypeError, ValueError):
                 errors.append(f"{eid}: by must be a YYYY-MM-DD date the item is judged on")
+        if e.get("type") == "watch":
+            errors += validate_watch_extras(eid, e)
         if not e.get("sources") and not e.get("note"):
             errors.append(f"{eid}: needs a source link or a note saying where the date came from")
     return errors
