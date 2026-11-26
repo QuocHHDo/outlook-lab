@@ -58,6 +58,7 @@ The volatility baseline is zero-drift (median = today's price), which is a weak 
 4. **Never edit catalysts after a prediction is committed.** Adding news afterward would rationalize a range that is already locked and would undermine the scoring.
 5. **Update `data/events.json`** (upcoming events and recent shocks). A change to that file alone does not trigger a rebuild, so commit it together with `data/predictions.json` or start the workflow by hand.
    - Each recent shock gets a `cause` (`fed`, `rates`, `stocks`, `company`, `commodity` or `policy`) for its chip, and a `move` of `{label, tone}` when the sources give a number (`tone` is `good`, `bad` or `flat` for stocks). Use only figures the cited source states.
+   - Each shock also needs a `scope` that decides which symbol pages show it: `market` (all), `tech` (index and mega-cap tech names), `chips` (SMH, NVDA, AVGO, QQQ, XLK) or `gold` (GLD). The symbol lists live in `site/index.html`; scope is judgment, so pick the narrowest that is true.
 
 
 ## Notes on the non-equity ETFs
