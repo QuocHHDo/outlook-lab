@@ -6,6 +6,8 @@
 <title>How Outlook Lab works</title>
 <meta name="description" content="How the forecast ranges are made, scored, and what the project can and cannot tell you.">
 <meta property="og:title" content="How Outlook Lab works">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&amp;family=Hanken+Grotesk:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
 <meta property="og:image" content="https://quochhdo.github.io/outlook-lab/og.png">
 <script>
 (function () {
@@ -16,34 +18,75 @@
 })();
 </script>
 <style>
-:root { --ink: #16181d; --muted: #5b6070; --line: #e3e5ec; --bg: #f5f6fa; --card: #fff; --accent: #2a45b8; --panel: #eef0f6; --warn-bg: #fdf3dc; --warn-ink: #6b4a0d; color-scheme: light; }
-:root[data-theme="dark"] { --ink: #eceef4; --muted: #a3a9ba; --line: #2b2f3b; --bg: #14161c; --card: #1b1e26; --accent: #8fa6ff; --panel: #232733; --warn-bg: #3a3118; --warn-ink: #f1d58a; color-scheme: dark; }
+:root {
+  --display: "Bricolage Grotesque", "Hanken Grotesk", system-ui, sans-serif;
+  --ink: oklch(0.22 0.03 255);
+  --muted: oklch(0.5 0.02 255);
+  --muted-2: oklch(0.4 0.02 255);
+  --bg: oklch(0.965 0.008 150);
+  --panel: oklch(0.935 0.01 150);
+  --card: oklch(0.99 0.004 150);
+  --line: oklch(0.86 0.012 200);
+  --line-2: oklch(0.91 0.01 200);
+  --accent: oklch(0.42 0.2 270);
+  --accent-ink: oklch(0.38 0.2 270);
+  --ai-fill: oklch(0.42 0.2 270 / 0.2);
+  --base-fill: oklch(0.82 0.012 230);
+  --ok: oklch(0.42 0.1 175);
+  --bad: oklch(0.5 0.17 28);
+  --mark: oklch(0.9 0.15 98);
+  --mark-ink: oklch(0.3 0.06 90);
+}
+:root[data-theme="dark"] {
+  --ink: oklch(0.94 0.012 150);
+  --muted: oklch(0.72 0.02 230);
+  --muted-2: oklch(0.8 0.015 230);
+  --bg: oklch(0.2 0.025 255);
+  --panel: oklch(0.25 0.028 255);
+  --card: oklch(0.23 0.026 255);
+  --line: oklch(0.36 0.03 255);
+  --line-2: oklch(0.3 0.028 255);
+  --accent: oklch(0.76 0.13 270);
+  --accent-ink: oklch(0.82 0.1 270);
+  --ai-fill: oklch(0.76 0.13 270 / 0.28);
+  --base-fill: oklch(0.4 0.025 250);
+  --ok: oklch(0.8 0.12 175);
+  --bad: oklch(0.78 0.12 30);
+  --mark: oklch(0.42 0.09 98);
+  --mark-ink: oklch(0.93 0.08 98);
+}
 * { box-sizing: border-box; }
-body { margin: 0; background: var(--bg); color: var(--ink); font: 16px/1.6 -apple-system, "Segoe UI", Inter, system-ui, sans-serif; }
-main { max-width: 760px; margin: 0 auto; padding: 28px 18px 60px; }
-a { color: var(--accent); }
-h1 { font-size: 30px; margin: 10px 0 6px; }
-h2 { font-size: 20px; margin: 34px 0 8px; }
-p, li { color: var(--ink); }
-.lede { color: var(--muted); margin-top: 0; }
-.card { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 4px 22px 22px; }
-.warn { background: var(--warn-bg); color: var(--warn-ink); border-radius: 10px; padding: 12px 14px; font-size: 14.5px; margin: 14px 0; }
+body { margin: 0; background: var(--bg); color: var(--ink); font: 16px/1.62 "Hanken Grotesk", system-ui, sans-serif; font-variant-numeric: tabular-nums; }
+main { max-width: 740px; margin: 0 auto; padding: 36px 20px 72px; }
+a { color: var(--accent-ink); }
+h1, h2 { font-family: var(--display); letter-spacing: -0.02em; line-height: 1.15; }
+h1 { font-size: 44px; margin: 18px 0 10px; font-weight: 700; }
+h2 { font-size: 23px; margin: 38px 0 10px; font-weight: 700; border-top: 1px solid var(--line); padding-top: 22px; }
+.card h2:first-child { border-top: 0; padding-top: 0; margin-top: 0; }
+.lede { color: var(--muted); margin-top: 0; font-size: 18px; max-width: 60ch; }
+p, li { max-width: 68ch; }
+.card { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 26px 26px 24px; }
+.warn { background: var(--warn-bg); color: var(--warn-ink); border: 1px solid var(--warn-line); border-radius: 10px; padding: 12px 14px; font-size: 15px; margin: 14px 0; }
 code { background: var(--panel); padding: 1px 6px; border-radius: 5px; font-size: 14px; }
 table { border-collapse: collapse; width: 100%; font-size: 14.5px; margin: 8px 0; }
-th, td { text-align: left; padding: 7px 10px; border-bottom: 1px solid var(--line); vertical-align: top; }
+th, td { text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--line-2); vertical-align: top; }
 th { color: var(--muted); font-weight: 600; }
+.back { display: inline-block; font-weight: 600; text-decoration: none; padding: 6px 10px; margin-left: -10px; border-radius: 6px; }
+.back:hover { background: var(--panel); }
+a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+@media (max-width: 560px) { h1 { font-size: 34px; } .card { padding: 20px 16px; } }
 </style>
 </head>
 <body>
 <main>
-<p><a href="./">&larr; Back to Outlook Lab</a></p>
+<p><a class="back" href="./">&larr; Back to Outlook Lab</a> <a class="back" href="./#scorecard">Scorecard</a></p>
 <h1>How Outlook Lab works</h1>
 <p class="lede">A public experiment: can an AI's forecast ranges beat a forecast that has no opinion? Every prediction is kept, and graded when its date arrives.</p>
 
 <div class="card">
 
 <h2>What a prediction is</h2>
-<p>For each ETF and each horizon (1 week, 1 month, 6 months, 1 year, 5 years) the model writes an <strong>80% range</strong>: a low and high price it expects the close to land between, plus the <strong>chance the price finishes above where it started</strong>. An honest 80% range should hold about 80% of the time. Ranges that hold far less are overconfident; ranges that hold far more are too wide to be useful.</p>
+<p>For each ETF and large stock (23 symbols) and each horizon (1 week, 1 month, 6 months, 1 year, 5 years) the model writes an <strong>80% range</strong>: a low and high price it expects the close to land between, plus the <strong>chance the price finishes above where it started</strong>. An honest 80% range should hold about 80% of the time. Ranges that hold far less are overconfident; ranges that hold far more are too wide to be useful.</p>
 <p>Each prediction also lists bull, base and bear catalysts with source links. The catalysts explain the model's reasoning; they are not scored on their own.</p>
 
 <h2>What it is scored against</h2>
@@ -51,9 +94,10 @@ th { color: var(--muted); font-weight: 600; }
 <table>
 <tr><th>Baseline</th><th>How it is built</th></tr>
 <tr><td><strong>Volatility baseline</strong></td><td>Uses the average of call and put implied volatility at the strike nearest the price, from the option expiry closest to the horizon. The range is log-normal with the median at today's price: low = price &times; exp(&minus;1.2816&sigma;), high = price &times; exp(+1.2816&sigma;), where &sigma; = IV &times; &radic;(days / 365).</td></tr>
+<tr><td><strong>Realized-volatility baseline</strong></td><td>Same shape as the volatility baseline, but volatility is measured from the 60 trading days of closes before the prediction date instead of from options. It needs no option data, so it checks whether the implied-vol baseline is a fair yardstick or just a hard one. It is added automatically when scoring.</td></tr>
 <tr><td><strong>Drift baseline</strong></td><td>Same volatility, but the middle moves up with an assumed 6% a year price return, the same for every symbol. It exists to check whether the AI only looks good because markets tend to rise. It is crude, especially for bonds and gold.</td></tr>
 </table>
-<p>The weakness of both: at 1 year and 5 years the options market has little data behind the implied volatility, and the volatility baseline ignores drift entirely, so it is easy to beat on the upside. Treat long-horizon comparisons with suspicion.</p>
+<p>The weakness of all three: at 1 year and 5 years the options market has little data behind the implied volatility, and the volatility baseline ignores drift entirely, so it is easy to beat on the upside. Treat long-horizon comparisons with suspicion.</p>
 
 <h2>How results are graded</h2>
 <ul>
@@ -64,24 +108,26 @@ th { color: var(--muted); font-weight: 600; }
 <p>Closes are raw, unadjusted prices, because the starting price is a raw quote. ETFs that pay a dividend inside the window will drop by the dividend on the ex-date, which slightly favors ranges centered lower. Comparisons against the baselines only appear after 10 predictions have resolved. Before that the sample is too small to mean anything, and the site says so.</p>
 
 <h2>Blind and non-blind predictions</h2>
-<p>The most obvious way to cheat, even by accident, is to write the AI range after seeing the baseline. The first 85 predictions were <strong>not blind</strong>: the baseline was visible when the ranges were written, and each one says so. From the next update the process is:</p>
+<p>The most obvious way to cheat, even by accident, is to write the AI range after seeing the baseline. The first batches were <strong>not blind</strong>: the baseline was visible when the ranges were written, and each one says so. Blind predictions follow this process:</p>
 <ol>
 <li>Pull prices only (no implied volatility).</li>
 <li>Write the AI ranges and chances, and commit them to <code>data/locks.json</code>.</li>
+<li>Check that the lock is public (<code>scripts/verify_lock_published.py</code> fetches it from GitHub). If it is not, stop.</li>
 <li>Only then pull implied volatility, compute the baselines, and commit <code>data/predictions.json</code>.</li>
 </ol>
-<p>A prediction marked blind must match its lock exactly, or the validation step fails. The two commits and their timestamps are public in the repository history.</p>
+<p>A prediction marked blind must match its lock exactly, and the lock's timestamp must be earlier than the time implied volatility was read, or the validation step fails. The two commits and their timestamps are public in the repository history.</p>
 
 <h2>Where the data comes from</h2>
 <ul>
 <li>Prices, quotes and option implied volatility: read-only access through Robinhood's MCP connection.</li>
-<li>Daily closes for scoring: Yahoo Finance via the free <code>yfinance</code> library, fetched on a weekday schedule by GitHub Actions. It is an unofficial source and can lag or break; predictions that cannot be scored are listed rather than hidden.</li>
+<li>Market value for the overview map's size option: Robinhood fundamentals (stock market cap, fund net assets), refreshed by hand.</li>
+<li>Daily closes for scoring and the candle view: Yahoo Finance via the free <code>yfinance</code> library, fetched on a weekday schedule by GitHub Actions. It is an unofficial source and can lag or break; predictions that cannot be scored are listed rather than hidden.</li>
 <li>News and catalysts: public web pages, linked from each prediction. Some are undated or headline-only, and the notes say so.</li>
 <li>Scheduled events: BLS, the Federal Reserve, NYSE, and company earnings dates from Robinhood's calendar (which can change).</li>
 </ul>
 
 <h2>What this cannot tell you</h2>
-<div class="warn"><strong>Not investment advice.</strong> These are an AI model's judgments, kept for evaluation. One week of data, or even a few months, cannot separate skill from luck. Forecasts for different symbols on the same date are strongly correlated (a market-wide drop misses many ranges at once), so 85 predictions are far fewer than 85 independent tests.</div>
+<div class="warn"><strong>Not investment advice.</strong> These are an AI model's judgments, kept for evaluation. One week of data, or even a few months, cannot separate skill from luck. Forecasts for different symbols on the same date are strongly correlated (a market-wide drop misses many ranges at once), so a hundred predictions are far fewer than 85 independent tests.</div>
 <ul>
 <li>Several of the sector ranges were made intraday, not at a close, and the notes state the time.</li>
 <li>The model's forecasts are subjective and unrepeatable: asking again could give different ranges.</li>
