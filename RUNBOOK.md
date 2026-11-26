@@ -9,7 +9,7 @@ Run once a week, in Claude, with the Robinhood MCP connected. Do the steps in or
 - **Sources for every catalyst claim.** If a claim has no source, mark it as the model's expectation or leave it out.
 - **Blind process.** The AI range is written and committed to `data/locks.json` *before* any implied volatility or baseline is looked at. Predictions made this way get `"blind": true`; `validate.py` fails if a blind prediction has no matching lock. Anything written after seeing a baseline must leave `blind` out and say so in `notes`.
 
-## Steps (per symbol: SPY, QQQ, SMH, IWM, XLK, XLF, XLE, XLV, XLY, XLP, XLI, XLB, XLU, XLRE, XLC, TLT, GLD, EFA, EEM, HYG, AAPL, MSFT, NVDA, AMZN, GOOGL, META, TSLA, AVGO, JPM, plus any others listed in `scripts/common.py`; horizons 1w, 1m, 6m, 1y, 5y)
+## Steps (per symbol: SPY, QQQ, SMH, IWM, XLK, XLF, XLE, XLV, XLY, XLP, XLI, XLB, XLU, XLRE, XLC, TLT, GLD, EFA, EEM, HYG, AAPL, MSFT, NVDA, AMZN, GOOGL, META, TSLA, AVGO, JPM, MSTR, plus any others listed in `scripts/common.py`; horizons 1w, 1m, 6m, 1y, 5y)
 
 **Phase 1: lock the AI view (no option data yet)**
 
