@@ -22,7 +22,7 @@ def load(name, default):
 
 def save(name, obj):
     DATA.mkdir(exist_ok=True)
-    (DATA / name).write_text(json.dumps(obj, indent=2) + "\n")
+    (DATA / name).write_text(json.dumps(obj, indent=2, allow_nan=False) + "\n")
 
 
 def parse_date(text):

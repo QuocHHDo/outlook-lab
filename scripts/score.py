@@ -13,6 +13,7 @@ available, record whether the AI range and the baseline range held, plus:
 Coverage of an 80% range should be near 80% over many predictions. Far above means
 the ranges are too wide to be useful; far below means overconfident.
 """
+import math
 from datetime import datetime, timezone
 
 from baseline import baseline_range, drift_range, hist_vol
@@ -28,6 +29,8 @@ def resolve_close(symbol_prices, resolves_on):
     Returns (date_str, close), or None if prices don't yet reach resolves_on or the
     nearest earlier close is more than MAX_GAP_DAYS away (treated as missing data).
     """
+    symbol_prices = {d: v for d, v in (symbol_prices or {}).items()
+                     if isinstance(v, (int, float)) and math.isfinite(v)}
     if not symbol_prices:
         return None
     dates = sorted(symbol_prices)
