@@ -203,3 +203,13 @@ def test_nan_close_is_ignored_when_resolving():
     got = score.resolve_close({"2026-12-03": 100.0, "2026-12-04": nan}, "2026-12-04")
     assert got is None or got[1] == 100.0
     assert score.resolve_close({"2026-12-04": nan}, "2026-12-04") is None
+
+
+def test_watch_items_need_status_prob_and_by_date():
+    base = {"type": "watch", "kind": "politics", "date": "2026-11-20", "title": "Tariff talk",
+            "status": "rumor", "direction": "bear", "prob": 0.3, "by": "2026-12-31",
+            "sources": [{"label": "x", "url": "https://example.com/"}]}
+    assert validate.validate_events({"events": [base]}) == []
+    bad = dict(base, status="confirmed", prob=1.5, by="soon", direction="up")
+    errors = validate.validate_events({"events": [bad]})
+    assert len(errors) == 4
