@@ -65,7 +65,9 @@ def validate(predictions, locks=None):
     return errors
 
 
-EVENT_TYPES = {"scheduled", "shock"}
+EVENT_TYPES = {"scheduled", "shock", "watch"}
+WATCH_STATUS = {"rumor", "reported", "disputed"}
+WATCH_DIRECTION = {"bull", "bear", "mixed"}
 EVENT_KINDS = {"fed", "macro", "earnings", "market", "shock", "politics"}
 
 
@@ -91,6 +93,18 @@ def validate_events(doc):
         for src in e.get("sources", []):
             if not str(src.get("url", "")).startswith("https://"):
                 errors.append(f"{eid}: every source needs an https url")
+        if e.get("type") == "watch":
+            if e.get("status") not in WATCH_STATUS:
+                errors.append(f"{eid}: status must be one of {sorted(WATCH_STATUS)}")
+            if e.get("direction") not in WATCH_DIRECTION:
+                errors.append(f"{eid}: direction must be one of {sorted(WATCH_DIRECTION)}")
+            prob = e.get("prob")
+            if not (isinstance(prob, (int, float)) and not isinstance(prob, bool) and 0 <= prob <= 1):
+                errors.append(f"{eid}: prob must be a number between 0 and 1")
+            try:
+                parse_date(e.get("by"))
+            except (TypeError, ValueError):
+                errors.append(f"{eid}: by must be a YYYY-MM-DD date the item is judged on")
         if not e.get("sources") and not e.get("note"):
             errors.append(f"{eid}: needs a source link or a note saying where the date came from")
     return errors
