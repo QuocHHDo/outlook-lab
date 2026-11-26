@@ -1048,7 +1048,7 @@ th { font-weight: 700; font-size: 12.5px; color: var(--muted-2); }
     });
     outMarks.sort(function (x, y) { return x.time < y.time ? -1 : x.time > y.time ? 1 : 0; });
     var evs = evOn ? (state.events || []).filter(function (e) {
-      return e.type !== "watch" && e.date && (!e.symbols || !e.symbols.length || e.symbols.indexOf(state.symbol) >= 0) && e.kind !== "market";
+      return e.type !== "watch" && e.date && appliesTo(e, state.symbol) && e.kind !== "market";
     }) : [];
     var evByDay = {};
     var priceDays = {}; histData.concat(afterData).forEach(function (q) { priceDays[q.time] = q.value; });
@@ -1645,6 +1645,14 @@ th { font-weight: 700; font-size: 12.5px; color: var(--muted-2); }
     om.appendChild(el("span", cur.blind ? "Blind: range locked before the baseline" : "Written after seeing the baseline", cur.blind ? "blind-tag" : "seen-tag"));
   }
 
+  var TECH = ["SPY", "QQQ", "XLK", "XLC", "XLY", "SMH", "AAPL", "MSFT", "NVDA", "AMZN", "GOOGL", "META", "TSLA", "AVGO"];
+  var SCOPE = { market: { label: "Whole market" }, tech: { label: "Tech and mega-caps", syms: TECH },
+    chips: { label: "Chips", syms: ["SMH", "NVDA", "AVGO", "QQQ", "XLK"] }, gold: { label: "Gold", syms: ["GLD"] } };
+  function appliesTo(e, sym) {
+    if (e.type === "shock" && SCOPE[e.scope]) return !SCOPE[e.scope].syms || SCOPE[e.scope].syms.indexOf(sym) >= 0;
+    if (e.type === "shock") return true;
+    return !e.symbols || !e.symbols.length || e.symbols.indexOf(sym) >= 0;
+  }
   var CAUSE = { fed: "Fed", rates: "Rates", stocks: "Stocks", company: "Company", commodity: "Commodities", policy: "Policy" };
   var KIND = { fed: "Fed", macro: "Economic data", earnings: "Earnings", market: "Market hours", shock: "Market move", politics: "Politics" };
   function todayIso() {
@@ -1800,6 +1808,7 @@ th { font-weight: 700; font-size: 12.5px; color: var(--muted-2); }
     }
     var tags = el("span", undefined, "tags");
     tags.appendChild(e.type === "shock" ? causeTag(e) : el("span", KIND[e.kind] || e.kind, "tag"));
+    if (e.type === "shock" && SCOPE[e.scope]) tags.appendChild(el("span", "Applies to: " + SCOPE[e.scope].label, "tag"));
     if (e.type === "watch") {
       tags.appendChild(el("span", WSTATUS[e.status] || e.status, "tag unv"));
       tags.appendChild(el("span", "Reported " + shortDate(e.date), "tag"));
@@ -1851,7 +1860,7 @@ th { font-weight: 700; font-size: 12.5px; color: var(--muted-2); }
   function renderEvents(rows) {
     var host = $("events"), groups = $("event-groups");
     var all = (state.events || []).filter(function (e) {
-      return e.type === "shock" || !e.symbols || e.symbols.indexOf(state.symbol) >= 0;
+      return appliesTo(e, state.symbol);
     });
     if (!all.length) { host.hidden = true; return; }
     host.hidden = false;
