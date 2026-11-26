@@ -234,7 +234,9 @@ def test_watch_impact_fields_are_checked():
 def test_shock_cause_and_move_are_checked():
     base = {"type": "shock", "kind": "shock", "date": "2026-11-16", "title": "Nasdaq-100 fell",
             "sources": [{"label": "x", "url": "https://example.com/"}],
-            "cause": "stocks", "move": {"label": "QQQ -2.7%", "tone": "bad"}}
+            "cause": "stocks", "scope": "tech", "move": {"label": "QQQ -2.7%", "tone": "bad"}}
     assert validate.validate_events({"events": [base]}) == []
     bad = dict(base, cause="vibes", move={"label": " ", "tone": "red"})
     assert len(validate.validate_events({"events": [bad]})) == 2
+    no_scope = {k: v for k, v in base.items() if k != "scope"}
+    assert len(validate.validate_events({"events": [no_scope]})) == 1
