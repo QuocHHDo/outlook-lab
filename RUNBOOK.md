@@ -70,3 +70,7 @@ The volatility baseline is zero-drift (median = today's price), which is a weak 
 ## Weekly: refresh earnings dates
 
 Before predicting, pull the next ~60 days of earnings for the single stocks with `get_earnings_calendar` (31-day windows, so two calls) and update `data/earnings.json`. The site flags any prediction window that contains a report date. Commit it with the lock commit; it does not trigger a workflow run.
+
+## Weekly: update the watchlist (rumors and unconfirmed risks)
+
+Add items to `data/events.json` with `"type": "watch"` for things that could move markets but are not confirmed, such as a reported tariff plan. Each needs `status` (`rumor`, `reported` or `disputed`), `direction` (`bull`, `bear`, `mixed`), `prob` (your chance it actually happens), `by` (the date it is judged on), `date` (first reported) and a source link or a note. Search for current coverage first and cite it. Never write an item from memory. Retire items by deleting them once `by` passes, and record whether each one happened in your weekly notes so the probabilities can be scored later. Edits to `events.json` do not trigger a workflow run.
