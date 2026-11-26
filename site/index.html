@@ -781,7 +781,7 @@ th { font-weight: 700; font-size: 12.5px; color: var(--muted-2); }
     if (!window.LightweightCharts) { renderChartSvg(rows); return; }
     state.lastRows = rows;
     var LW = window.LightweightCharts;
-    var chart, lastApply = 0, applyWin, controls;
+    var chart, lastApply = 0, lastTouch = 0, applyWin, controls;
     var host = $("chart"); clear(host);
     if (state.tv) { try { state.tv.remove(); } catch (e) {} state.tv = null; }
     var cone = rows.slice().sort(function (a, b) { return a.resolves_on < b.resolves_on ? -1 : 1; });
@@ -821,6 +821,7 @@ th { font-weight: 700; font-size: 12.5px; color: var(--muted-2); }
       crosshair: { mode: LW.CrosshairMode.Normal, vertLine: { color: muted, style: 3, width: 1, labelBackgroundColor: ink }, horzLine: { color: muted, style: 3, width: 1, labelBackgroundColor: ink } }
     });
     state.tv = chart;
+    ["wheel", "pointerdown", "touchstart", "touchmove", "keydown"].forEach(function (ev) { box.addEventListener(ev, function () { lastTouch = Date.now(); }, { passive: true }); });
     function lineOpts(color, width, style, last) {
       return { color: color, lineWidth: width, lineStyle: style, lastValueVisible: !!last, priceLineVisible: false, crosshairMarkerVisible: false };
     }
@@ -891,7 +892,7 @@ th { font-weight: 700; font-size: 12.5px; color: var(--muted-2); }
     setLegend(null);
     chart.subscribeCrosshairMove(function (param) { setLegend(param && param.time ? String(param.time) : null); });
     chart.timeScale().subscribeVisibleTimeRangeChange(function () {
-      if (Date.now() - lastApply > 500 && state.chartWin) { state.chartWin = null; controls(); }
+      if (Date.now() - lastTouch < 1500 && Date.now() - lastApply > 300 && state.chartWin) { state.chartWin = null; controls(); }
       updateEnds();
     });
     applyWin(state.chartWin || "1m");
