@@ -113,3 +113,85 @@ class ValidateTests(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+# ---- second baseline, calibration, blind locks ----
+import baseline as _bl
+import validate as _val
+
+
+def test_drift_range_shifts_up_and_matches_zero_drift_when_mu_zero():
+    lo0, hi0 = _bl.baseline_range(100, 0.2, 365)
+    lo1, hi1 = _bl.drift_range(100, 0.2, 365, mu=0.0)
+    # mu=0 still has the -vol^2/2 term, so it sits slightly below zero-drift
+    assert lo1 < lo0 and hi1 < hi0
+    lo2, hi2 = _bl.drift_range(100, 0.2, 365, mu=0.06)
+    assert lo2 > lo1 and hi2 > hi1
+
+
+def test_drift_baseline_added_and_scored():
+    pred = {"id": "x", "symbol": "A", "made_at": "2026-01-01", "resolves_on": "2026-01-31",
+            "horizon": "1m", "price_at_prediction": 100.0, "status": "open",
+            "ai": {"low": 90, "high": 110, "level": 0.8, "prob_up": 0.6},
+            "baseline": {"method": "implied_vol", "iv": 0.2, "low": 92, "high": 108, "level": 0.8}}
+    preds, summary = score.run([pred], {"A": {"2026-01-31": 104.0}})
+    assert "baseline_drift" in preds[0]
+    assert "baseline_drift" in preds[0]["result"]
+    assert summary["overall"]["baseline_drift"]["n_brier"] == 1
+    cal = {(b["lo"], b["hi"]): b for b in summary["calibration"]}
+    assert cal[(0.6, 0.7)]["n"] == 1 and cal[(0.6, 0.7)]["freq_up"] == 1.0
+
+
+def test_blind_requires_matching_lock():
+    base = {"id": "x", "symbol": "A", "made_at": "2026-01-01", "resolves_on": "2026-01-08", "horizon": "1w",
+            "price_at_prediction": 100.0, "blind": True,
+            "ai": {"low": 95, "high": 105, "level": 0.8, "prob_up": 0.5},
+            "baseline": {"method": "implied_vol", "low": 96, "high": 104, "level": 0.8}}
+    assert any("blind" in e for e in _val.validate([base], {}))
+    ok = {"low": 95, "high": 105, "prob_up": 0.5, "locked_at": "2026-01-01T10:00:00Z"}
+    assert not _val.validate([base], {"x": ok})
+    assert any("locked_at" in e for e in _val.validate([base], {"x": {k: v for k, v in ok.items() if k != "locked_at"}}))
+    assert any("differs" in e for e in _val.validate([base], {"x": {"low": 94, "high": 105, "prob_up": 0.5}}))
+
+
+def test_lock_must_precede_iv_pull():
+    base = {"id": "x", "symbol": "A", "made_at": "2026-01-01", "resolves_on": "2026-01-08", "horizon": "1w",
+            "price_at_prediction": 100.0, "blind": True,
+            "ai": {"low": 95, "high": 105, "level": 0.8, "prob_up": 0.5},
+            "baseline": {"method": "implied_vol", "iv_updated_at": "2026-01-01T10:05:00Z",
+                         "low": 96, "high": 104, "level": 0.8}}
+    lock = {"low": 95, "high": 105, "prob_up": 0.5, "locked_at": "2026-01-01T10:00:00Z"}
+    assert not _val.validate([base], {"x": lock})
+    late = dict(lock, locked_at="2026-01-01T10:10:00Z")
+    assert any("earlier" in e for e in _val.validate([base], {"x": late}))
+
+
+def test_realized_baseline_added_from_history_and_scored():
+    import math
+    closes = {}
+    d0 = __import__("datetime").date(2025, 10, 1)
+    for i in range(100):
+        d = d0 + __import__("datetime").timedelta(days=i)
+        if d.weekday() < 5:
+            closes[d.isoformat()] = 100 * math.exp(0.01 * math.sin(i))
+    closes["2026-01-08"] = 101.0
+    pred = {"id": "x", "symbol": "A", "made_at": "2026-01-01", "resolves_on": "2026-01-08",
+            "horizon": "1w", "price_at_prediction": 100.0, "status": "open",
+            "ai": {"low": 95, "high": 105, "level": 0.8, "prob_up": 0.5},
+            "baseline": {"method": "implied_vol", "low": 96, "high": 104, "level": 0.8}}
+    preds, summary = score.run([pred], {"A": closes})
+    br = preds[0]["baseline_realized"]
+    assert br["low"] < 100.0 < br["high"]
+    assert "baseline_realized" in preds[0]["result"]
+    assert summary["by_blind"]["not_blind"]["n"] == 1
+    # no history -> no baseline, no crash
+    p2 = dict(pred, id="y"); p2.pop("baseline_realized", None)
+    preds2, _ = score.run([p2], {"A": {"2026-01-08": 101.0}})
+    assert "baseline_realized" not in preds2[0]
+
+
+def test_verify_lock_published_check():
+    import verify_lock_published as v
+    locks = {"a": {"low": 1, "high": 2, "prob_up": 0.5, "locked_at": "t"}, "b": {"low": 1}}
+    assert v.check(locks, ["a"]) == []
+    assert len(v.check(locks, ["b", "c"])) == 2
