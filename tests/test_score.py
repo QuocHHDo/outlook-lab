@@ -213,3 +213,19 @@ def test_watch_items_need_status_prob_and_by_date():
     bad = dict(base, status="confirmed", prob=1.5, by="soon", direction="up")
     errors = validate.validate_events({"events": [bad]})
     assert len(errors) == 4
+
+
+def test_watch_impact_fields_are_checked():
+    base = {"type": "watch", "kind": "politics", "date": "2026-11-20", "title": "Tariff talk",
+            "status": "rumor", "direction": "bear", "prob": 0.3, "by": "2026-12-31",
+            "sources": [{"label": "x", "url": "https://example.com/"}],
+            "market_prob": 0.02, "market_prob_bound": "max", "resolves_if": "It happens.",
+            "checked": "2026-11-26", "short": "Tariffs",
+            "impact": {"confidence": "low", "basis": "Analogue.", "ranges": {"SPY": [-3.0, -0.3], "META": [-4.8, -0.5]},
+                       "sources": [{"label": "y", "url": "https://example.com/y"}]}}
+    assert validate.validate_events({"events": [base]}) == []
+    bad = dict(base, market_prob=2, resolves_if=" ", checked="soon",
+               impact={"confidence": "high", "basis": "", "ranges": {"SPY": [1, -1]}, "sources": [{"url": "http://x"}]})
+    assert len(validate.validate_events({"events": [bad]})) == 7
+    no_spy = dict(base, impact=dict(base["impact"], ranges={"META": [-1, 0]}))
+    assert len(validate.validate_events({"events": [no_spy]})) == 1
