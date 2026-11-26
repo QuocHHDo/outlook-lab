@@ -69,6 +69,7 @@ EVENT_TYPES = {"scheduled", "shock", "watch"}
 WATCH_STATUS = {"rumor", "reported", "disputed"}
 WATCH_DIRECTION = {"bull", "bear", "mixed"}
 EVENT_CAUSES = {"fed", "rates", "stocks", "company", "commodity", "policy"}
+EVENT_SCOPES = {"market", "tech", "chips", "gold"}
 EVENT_KINDS = {"fed", "macro", "earnings", "market", "shock", "politics"}
 
 
@@ -152,6 +153,8 @@ def validate_events(doc):
                 parse_date(e.get("by"))
             except (TypeError, ValueError):
                 errors.append(f"{eid}: by must be a YYYY-MM-DD date the item is judged on")
+        if e.get("type") == "shock" and e.get("scope") not in EVENT_SCOPES:
+            errors.append(f"{eid}: a shock needs a scope, one of {sorted(EVENT_SCOPES)}")
         if "cause" in e and e["cause"] not in EVENT_CAUSES:
             errors.append(f"{eid}: cause must be one of {sorted(EVENT_CAUSES)}")
         if "move" in e:
