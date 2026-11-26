@@ -1,414 +1,516 @@
 {
- "updated": "2026-11-25",
- "events": [
-  {
-   "type": "scheduled",
-   "kind": "market",
-   "date": "2026-11-26",
-   "title": "US stock markets closed (Thanksgiving)",
-   "sources": [
+  "updated": "2026-11-25",
+  "events": [
     {
-     "label": "NYSE",
-     "url": "https://www.nyse.com/markets/hours-calendars"
-    }
-   ]
-  },
-  {
-   "type": "scheduled",
-   "kind": "market",
-   "date": "2026-11-27",
-   "time": "Closes 1:00 PM ET",
-   "title": "Early close after Thanksgiving",
-   "sources": [
-    {
-     "label": "NYSE",
-     "url": "https://www.nyse.com/markets/hours-calendars"
-    }
-   ]
-  },
-  {
-   "type": "scheduled",
-   "kind": "macro",
-   "date": "2026-12-01",
-   "time": "10:00 AM ET",
-   "title": "JOLTS job openings (October)",
-   "sources": [
-    {
-     "label": "BLS",
-     "url": "https://www.bls.gov/schedule/2026/12_sched_list.htm"
-    }
-   ]
-  },
-  {
-   "type": "scheduled",
-   "kind": "macro",
-   "date": "2026-12-04",
-   "time": "8:30 AM ET",
-   "title": "Employment Situation: November jobs report",
-   "detail": "The 1-week predictions are scored on the close of this day, so the jobs report is inside their window.",
-   "sources": [
-    {
-     "label": "BLS",
-     "url": "https://www.bls.gov/schedule/2026/12_sched_list.htm"
-    }
-   ]
-  },
-  {
-   "type": "scheduled",
-   "kind": "fed",
-   "date": "2026-12-08",
-   "end_date": "2026-12-09",
-   "title": "Fed meeting with new economic projections",
-   "detail": "Futures priced a 96% chance of a quarter-point hike as of Nov 17 (CME FedWatch via Khaleej Times). That figure may have changed.",
-   "sources": [
-    {
-     "label": "Federal Reserve",
-     "url": "https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm"
+      "type": "scheduled",
+      "kind": "market",
+      "date": "2026-11-26",
+      "title": "US stock markets closed (Thanksgiving)",
+      "sources": [
+        {
+          "label": "NYSE",
+          "url": "https://www.nyse.com/markets/hours-calendars"
+        }
+      ]
     },
     {
-     "label": "Hike odds (247WallSt, Nov 13)",
-     "url": "https://247wallst.com/investing/2026/11/13/kevin-warshs-fed-will-vote-on-rates-only-7-times-in-2027/"
+      "type": "scheduled",
+      "kind": "market",
+      "date": "2026-11-27",
+      "time": "Closes 1:00 PM ET",
+      "title": "Early close after Thanksgiving",
+      "sources": [
+        {
+          "label": "NYSE",
+          "url": "https://www.nyse.com/markets/hours-calendars"
+        }
+      ]
     },
     {
-     "label": "Hike odds (Khaleej Times, Nov 17)",
-     "url": "https://www.khaleejtimes.com/business/gold-inches-up-from-over-one-year-low-fed-outlook-caps-gains"
-    }
-   ]
-  },
-  {
-   "type": "scheduled",
-   "kind": "earnings",
-   "date": "2026-12-09",
-   "time": "After the close",
-   "title": "Broadcom earnings",
-   "symbols": [
-    "SPY",
-    "QQQ",
-    "SMH"
-   ],
-   "note": "Robinhood calendar · tentative"
-  },
-  {
-   "type": "scheduled",
-   "kind": "macro",
-   "date": "2026-12-10",
-   "time": "8:30 AM ET",
-   "title": "Consumer Price Index (November)",
-   "sources": [
-    {
-     "label": "BLS",
-     "url": "https://www.bls.gov/schedule/2026/12_sched_list.htm"
-    }
-   ]
-  },
-  {
-   "type": "scheduled",
-   "kind": "earnings",
-   "date": "2026-12-14",
-   "time": "After the close",
-   "title": "Oracle earnings",
-   "symbols": [
-    "SPY"
-   ],
-   "note": "Robinhood calendar · tentative"
-  },
-  {
-   "type": "scheduled",
-   "kind": "macro",
-   "date": "2026-12-15",
-   "time": "8:30 AM ET",
-   "title": "Producer Price Index (November)",
-   "sources": [
-    {
-     "label": "BLS",
-     "url": "https://www.bls.gov/schedule/2026/12_sched_list.htm"
-    }
-   ]
-  },
-  {
-   "type": "scheduled",
-   "kind": "earnings",
-   "date": "2026-12-17",
-   "time": "After the close",
-   "title": "Micron earnings",
-   "symbols": [
-    "SPY",
-    "QQQ",
-    "SMH"
-   ],
-   "note": "Robinhood calendar · tentative"
-  },
-  {
-   "type": "scheduled",
-   "kind": "market",
-   "date": "2026-12-24",
-   "time": "Closes 1:00 PM ET",
-   "title": "Early close before Christmas",
-   "detail": "The 1-month predictions are scored on this day's close, which will be a half-day close.",
-   "sources": [
-    {
-     "label": "NYSE",
-     "url": "https://www.nyse.com/markets/hours-calendars"
-    }
-   ]
-  },
-  {
-   "type": "shock",
-   "kind": "fed",
-   "date": "2026-10-28",
-   "title": "Fed held rates and left a December hike on the table",
-   "detail": "The rate stayed at 3.75% to 4%.",
-   "sources": [
-    {
-     "label": "Portfolio Adviser",
-     "url": "https://portfolio-adviser.com/warsh-sticks-to-the-script-as-fed-holds-rates-but-december-hike-highly-likely/"
-    }
-   ]
-  },
-  {
-   "type": "shock",
-   "kind": "politics",
-   "date": "2026-11-03",
-   "title": "Midterm elections: Democrats won both chambers",
-   "detail": "Chip stocks fell over the following days on data-center skepticism, according to Stocktwits.",
-   "sources": [
-    {
-     "label": "Stocktwits",
-     "url": "https://stocktwits.com/news-articles/markets/equity/soxx-etf-semiconductor-is-set-for-its-worst-week-in-over-18-months/cNG1sEhR94Z"
-    }
-   ]
-  },
-  {
-   "type": "shock",
-   "kind": "shock",
-   "date": "2026-11-05",
-   "title": "Chip crash: semiconductor index fell 12.25%",
-   "detail": "SMH fell 11.2% to $447.73. The Nasdaq had its worst session in 19 months.",
-   "symbols": [
-    "QQQ",
-    "SMH"
-   ],
-   "sources": [
-    {
-     "label": "24/7 Wall St",
-     "url": "https://247wallst.com/investing/2026/11/06/chip-stocks-just-had-their-second-worst-day-on-record/"
+      "type": "scheduled",
+      "kind": "macro",
+      "date": "2026-12-01",
+      "time": "10:00 AM ET",
+      "title": "JOLTS job openings (October)",
+      "sources": [
+        {
+          "label": "BLS",
+          "url": "https://www.bls.gov/schedule/2026/12_sched_list.htm"
+        }
+      ]
     },
     {
-     "label": "IBTimes",
-     "url": "https://www.ibtimes.co.uk/nvidia-qualcomm-shares-nasdaq-ai-selloff-1830635"
-    }
-   ]
-  },
-  {
-   "type": "shock",
-   "kind": "shock",
-   "date": "2026-11-09",
-   "title": "QQQ rebounded 3.54%, its best day since May 2025",
-   "symbols": [
-    "QQQ"
-   ],
-   "sources": [
-    {
-     "label": "24/7 Wall St",
-     "url": "https://247wallst.com/investing/2026/11/10/the-nasdaq-100-just-had-its-best-day-since-march-without-nvidias-help/"
-    }
-   ]
-  },
-  {
-   "type": "shock",
-   "kind": "shock",
-   "date": "2026-11-12",
-   "title": "Jensen Huang resigned as Nvidia CEO",
-   "detail": "CFO Colette Kress became interim CEO.",
-   "symbols": [
-    "QQQ",
-    "SMH"
-   ],
-   "sources": [
-    {
-     "label": "24/7 Wall St via Webull",
-     "url": "https://www.webull.com/news/15939186383319040"
-    }
-   ]
-  },
-  {
-   "type": "shock",
-   "kind": "shock",
-   "date": "2026-11-16",
-   "title": "Nasdaq-100 fell 2.67%, on pace for its worst November since 2008",
-   "symbols": [
-    "QQQ"
-   ],
-   "sources": [
-    {
-     "label": "24/7 Wall St via Webull",
-     "url": "https://www.webull.com/news/15939186383319040"
-    }
-   ]
-  },
-  {
-   "type": "shock",
-   "kind": "shock",
-   "date": "2026-11-23",
-   "title": "Huang returned as Nvidia CEO; Nvidia rose 31.5%",
-   "symbols": [
-    "QQQ",
-    "SMH"
-   ],
-   "sources": [
-    {
-     "label": "StockAnalysis",
-     "url": "https://stockanalysis.com/news/nvidia-gives-back-half-huang-rally/"
-    }
-   ]
-  },
-  {
-   "type": "shock",
-   "kind": "shock",
-   "date": "2026-11-25",
-   "title": "Chip sell-off, new 20% tariffs, hotter October PCE",
-   "detail": "Nvidia fell 5.9% Tuesday and about 8% Wednesday morning; the semiconductor index hit a seven-month low.",
-   "sources": [
-    {
-     "label": "StockAnalysis",
-     "url": "https://stockanalysis.com/news/nvidia-gives-back-half-huang-rally/"
+      "type": "scheduled",
+      "kind": "macro",
+      "date": "2026-12-04",
+      "time": "8:30 AM ET",
+      "title": "Employment Situation: November jobs report",
+      "detail": "The 1-week predictions are scored on the close of this day, so the jobs report is inside their window.",
+      "sources": [
+        {
+          "label": "BLS",
+          "url": "https://www.bls.gov/schedule/2026/12_sched_list.htm"
+        }
+      ]
     },
     {
-     "label": "Yahoo Finance",
-     "url": "https://finance.yahoo.com/markets/live/stock-market-today-wednesday-november-25-dow-sp-500-nasdaq-pce-inflation-data-091428237.html"
-    }
-   ]
-  },
-  {
-   "type": "scheduled",
-   "kind": "macro",
-   "date": "2026-11-29",
-   "title": "OPEC+ ministerial meeting on the 2027 production framework",
-   "detail": "Rystad called it the much more important test than the December quota decision.",
-   "symbols": [
-    "XLE",
-    "SPY"
-   ],
-   "sources": [
-    {
-     "label": "Reuters via Star-Advertiser",
-     "url": "https://www.staradvertiser.com/2026/11/01/breaking-news/opec-keeps-december-oil-output-targets-steady-as-iran-war-disrupt-flows/"
-    }
-   ]
-  },
-  {
-   "type": "shock",
-   "kind": "shock",
-   "date": "2026-11-13",
-   "title": "10-year Treasury yield jumped nearly 30 bp to 5.14% in a week",
-   "detail": "Hotter inflation and hawkish Fed talk; the 2-year rose 35 bp, its biggest weekly jump in over two years.",
-   "sources": [
-    {
-     "label": "StockTwits",
-     "url": "https://stocktwits.com/news-articles/markets/equity/what-shaped-us-treasury-yields-and-the-dollar-in-week-ended-november-13/cNb2sojR9Qd"
-    }
-   ]
-  },
-  {
-   "type": "shock",
-   "kind": "shock",
-   "date": "2026-11-18",
-   "title": "Gold fell to a 14-month low near $3,720",
-   "detail": "The dollar hit a 19-month high and yields rose on expectations of more rate hikes.",
-   "sources": [
-    {
-     "label": "Nation Thailand (Reuters)",
-     "url": "https://www.nationthailand.com/business/trading-investment/40073658"
-    }
-   ]
-  },
-  {
-   "type": "watch",
-   "kind": "politics",
-   "date": "2026-11-25",
-   "by": "2027-03-31",
-   "status": "reported",
-   "direction": "bear",
-   "prob": 0.4,
-   "title": "New overcapacity tariffs of up to 20% on China, the EU and 12 other partners take effect",
-   "detail": "Proposed Nov 25 to start next year. The administration called the China rate a 'deal rate' that could go higher or lower with talks, and it would stack on some existing tariffs. The start date and final rates are not set, so the model's 40% covers taking effect in roughly this form by Mar 31.",
-   "sources": [
-    {
-     "label": "Yahoo Finance",
-     "url": "https://finance.yahoo.com/markets/article/us-announces-new-tariffs-of-up-to-20-on-china-the-eu-and-12-other-nations-131802359.html"
+      "type": "scheduled",
+      "kind": "fed",
+      "date": "2026-12-08",
+      "end_date": "2026-12-09",
+      "title": "Fed meeting with new economic projections",
+      "detail": "Futures priced a 96% chance of a quarter-point hike as of Nov 17 (CME FedWatch via Khaleej Times). That figure may have changed.",
+      "sources": [
+        {
+          "label": "Federal Reserve",
+          "url": "https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm"
+        },
+        {
+          "label": "Hike odds (247WallSt, Nov 13)",
+          "url": "https://247wallst.com/investing/2026/11/13/kevin-warshs-fed-will-vote-on-rates-only-7-times-in-2027/"
+        },
+        {
+          "label": "Hike odds (Khaleej Times, Nov 17)",
+          "url": "https://www.khaleejtimes.com/business/gold-inches-up-from-over-one-year-low-fed-outlook-caps-gains"
+        }
+      ]
     },
     {
-     "label": "Washington Post",
-     "url": "https://www.washingtonpost.com/politics/2026/11/25/trump-proposes-new-tariffs-china-europe-other-trade-partners/"
-    }
-   ]
-  },
-  {
-   "type": "watch",
-   "kind": "politics",
-   "date": "2026-11-09",
-   "by": "2027-01-10",
-   "status": "reported",
-   "direction": "bear",
-   "prob": 0.25,
-   "title": "US-China trade truce lapses on Jan 10 without a new extension",
-   "detail": "The truce has been extended twice, most recently to Jan 10. It would let China's suspended 24% tariff return. The new US tariff proposal on China makes a lapse more plausible than a month ago, but both sides have kept extending it.",
-   "sources": [
-    {
-     "label": "Reuters via Yahoo Finance",
-     "url": "https://finance.yahoo.com/economy/policy/articles/china-extends-suspension-24-tariff-030006090.html"
+      "type": "scheduled",
+      "kind": "earnings",
+      "date": "2026-12-09",
+      "time": "After the close",
+      "title": "Broadcom earnings",
+      "symbols": [
+        "SPY",
+        "QQQ",
+        "SMH"
+      ],
+      "note": "Robinhood calendar · tentative"
     },
     {
-     "label": "NBC News",
-     "url": "https://www.nbcnews.com/business/economy/us-china-extend-trade-truce-trump-rcna599525"
-    }
-   ]
-  },
-  {
-   "type": "watch",
-   "kind": "fed",
-   "date": "2026-11-18",
-   "by": "2026-12-09",
-   "status": "reported",
-   "direction": "bear",
-   "prob": 0.1,
-   "title": "Fed raises rates by 0.50 points on Dec 9 instead of 0.25",
-   "detail": "Futures price a 0.25-point hike at about 98%. A 0.50-point move was floated by Governor Waller on Nov 18 per Wikipedia's rate page, and Citi flags it as a higher risk. That claim has a single, secondary source here, so treat it as thinly sourced.",
-   "sources": [
-    {
-     "label": "Wikipedia: Federal funds rate",
-     "url": "https://en.wikipedia.org/wiki/Federal_funds_rate"
+      "type": "scheduled",
+      "kind": "macro",
+      "date": "2026-12-10",
+      "time": "8:30 AM ET",
+      "title": "Consumer Price Index (November)",
+      "sources": [
+        {
+          "label": "BLS",
+          "url": "https://www.bls.gov/schedule/2026/12_sched_list.htm"
+        }
+      ]
     },
     {
-     "label": "Admirals",
-     "url": "https://admiralmarkets.com/analytics/traders-blog/fed-rate-decision-december-2026-preview"
+      "type": "scheduled",
+      "kind": "earnings",
+      "date": "2026-12-14",
+      "time": "After the close",
+      "title": "Oracle earnings",
+      "symbols": [
+        "SPY"
+      ],
+      "note": "Robinhood calendar · tentative"
     },
     {
-     "label": "Gate (CME FedWatch)",
-     "url": "https://www.gate.com/news/detail/cme-fedwatch-978-probability-of-25bp-fed-rate-hike-in-december-2026-25860188"
-    }
-   ]
-  },
-  {
-   "type": "watch",
-   "kind": "politics",
-   "date": "2026-09-04",
-   "by": "2027-03-31",
-   "status": "reported",
-   "direction": "bull",
-   "prob": 0.2,
-   "title": "US and Canada agree an interim deal that lowers tariffs on steel, aluminum, autos or lumber",
-   "detail": "Canada is seeking it and the US trade representative has talked about interim arrangements instead of a full deal. Canada had not opened formal talks as of early September, and the US declined to renew the USMCA on Jul 1.",
-   "sources": [
-    {
-     "label": "PharmaSource",
-     "url": "https://pharmasource.global/content/regulation/usmca-annual-reviews-a-year-to-year-pact-leaves-canadian-and-mexican-drug-plants-exposed/"
+      "type": "scheduled",
+      "kind": "macro",
+      "date": "2026-12-15",
+      "time": "8:30 AM ET",
+      "title": "Producer Price Index (November)",
+      "sources": [
+        {
+          "label": "BLS",
+          "url": "https://www.bls.gov/schedule/2026/12_sched_list.htm"
+        }
+      ]
     },
     {
-     "label": "Prince Manufacturing",
-     "url": "https://princemanufacturing.com/usmca-september-2026-update-manufacturing-mexico-canada/"
+      "type": "scheduled",
+      "kind": "earnings",
+      "date": "2026-12-17",
+      "time": "After the close",
+      "title": "Micron earnings",
+      "symbols": [
+        "SPY",
+        "QQQ",
+        "SMH"
+      ],
+      "note": "Robinhood calendar · tentative"
+    },
+    {
+      "type": "scheduled",
+      "kind": "market",
+      "date": "2026-12-24",
+      "time": "Closes 1:00 PM ET",
+      "title": "Early close before Christmas",
+      "detail": "The 1-month predictions are scored on this day's close, which will be a half-day close.",
+      "sources": [
+        {
+          "label": "NYSE",
+          "url": "https://www.nyse.com/markets/hours-calendars"
+        }
+      ]
+    },
+    {
+      "type": "shock",
+      "kind": "fed",
+      "date": "2026-10-28",
+      "title": "Fed held rates and left a December hike on the table",
+      "detail": "The rate stayed at 3.75% to 4%.",
+      "sources": [
+        {
+          "label": "Portfolio Adviser",
+          "url": "https://portfolio-adviser.com/warsh-sticks-to-the-script-as-fed-holds-rates-but-december-hike-highly-likely/"
+        }
+      ]
+    },
+    {
+      "type": "shock",
+      "kind": "politics",
+      "date": "2026-11-03",
+      "title": "Midterm elections: Democrats won both chambers",
+      "detail": "Chip stocks fell over the following days on data-center skepticism, according to Stocktwits.",
+      "sources": [
+        {
+          "label": "Stocktwits",
+          "url": "https://stocktwits.com/news-articles/markets/equity/soxx-etf-semiconductor-is-set-for-its-worst-week-in-over-18-months/cNG1sEhR94Z"
+        }
+      ]
+    },
+    {
+      "type": "shock",
+      "kind": "shock",
+      "date": "2026-11-05",
+      "title": "Chip crash: semiconductor index fell 12.25%",
+      "detail": "SMH fell 11.2% to $447.73. The Nasdaq had its worst session in 19 months.",
+      "symbols": [
+        "QQQ",
+        "SMH"
+      ],
+      "sources": [
+        {
+          "label": "24/7 Wall St",
+          "url": "https://247wallst.com/investing/2026/11/06/chip-stocks-just-had-their-second-worst-day-on-record/"
+        },
+        {
+          "label": "IBTimes",
+          "url": "https://www.ibtimes.co.uk/nvidia-qualcomm-shares-nasdaq-ai-selloff-1830635"
+        }
+      ]
+    },
+    {
+      "type": "shock",
+      "kind": "shock",
+      "date": "2026-11-09",
+      "title": "QQQ rebounded 3.54%, its best day since May 2025",
+      "symbols": [
+        "QQQ"
+      ],
+      "sources": [
+        {
+          "label": "24/7 Wall St",
+          "url": "https://247wallst.com/investing/2026/11/10/the-nasdaq-100-just-had-its-best-day-since-march-without-nvidias-help/"
+        }
+      ]
+    },
+    {
+      "type": "shock",
+      "kind": "shock",
+      "date": "2026-11-12",
+      "title": "Jensen Huang resigned as Nvidia CEO",
+      "detail": "CFO Colette Kress became interim CEO.",
+      "symbols": [
+        "QQQ",
+        "SMH"
+      ],
+      "sources": [
+        {
+          "label": "24/7 Wall St via Webull",
+          "url": "https://www.webull.com/news/15939186383319040"
+        }
+      ]
+    },
+    {
+      "type": "shock",
+      "kind": "shock",
+      "date": "2026-11-16",
+      "title": "Nasdaq-100 fell 2.67%, on pace for its worst November since 2008",
+      "symbols": [
+        "QQQ"
+      ],
+      "sources": [
+        {
+          "label": "24/7 Wall St via Webull",
+          "url": "https://www.webull.com/news/15939186383319040"
+        }
+      ]
+    },
+    {
+      "type": "shock",
+      "kind": "shock",
+      "date": "2026-11-23",
+      "title": "Huang returned as Nvidia CEO; Nvidia rose 31.5%",
+      "symbols": [
+        "QQQ",
+        "SMH"
+      ],
+      "sources": [
+        {
+          "label": "StockAnalysis",
+          "url": "https://stockanalysis.com/news/nvidia-gives-back-half-huang-rally/"
+        }
+      ]
+    },
+    {
+      "type": "shock",
+      "kind": "shock",
+      "date": "2026-11-25",
+      "title": "Chip sell-off, new 20% tariffs, hotter October PCE",
+      "detail": "Nvidia fell 5.9% Tuesday and about 8% Wednesday morning; the semiconductor index hit a seven-month low.",
+      "sources": [
+        {
+          "label": "StockAnalysis",
+          "url": "https://stockanalysis.com/news/nvidia-gives-back-half-huang-rally/"
+        },
+        {
+          "label": "Yahoo Finance",
+          "url": "https://finance.yahoo.com/markets/live/stock-market-today-wednesday-november-25-dow-sp-500-nasdaq-pce-inflation-data-091428237.html"
+        }
+      ]
+    },
+    {
+      "type": "scheduled",
+      "kind": "macro",
+      "date": "2026-11-29",
+      "title": "OPEC+ ministerial meeting on the 2027 production framework",
+      "detail": "Rystad called it the much more important test than the December quota decision.",
+      "symbols": [
+        "XLE",
+        "SPY"
+      ],
+      "sources": [
+        {
+          "label": "Reuters via Star-Advertiser",
+          "url": "https://www.staradvertiser.com/2026/11/01/breaking-news/opec-keeps-december-oil-output-targets-steady-as-iran-war-disrupt-flows/"
+        }
+      ]
+    },
+    {
+      "type": "shock",
+      "kind": "shock",
+      "date": "2026-11-13",
+      "title": "10-year Treasury yield jumped nearly 30 bp to 5.14% in a week",
+      "detail": "Hotter inflation and hawkish Fed talk; the 2-year rose 35 bp, its biggest weekly jump in over two years.",
+      "sources": [
+        {
+          "label": "StockTwits",
+          "url": "https://stocktwits.com/news-articles/markets/equity/what-shaped-us-treasury-yields-and-the-dollar-in-week-ended-november-13/cNb2sojR9Qd"
+        }
+      ]
+    },
+    {
+      "type": "shock",
+      "kind": "shock",
+      "date": "2026-11-18",
+      "title": "Gold fell to a 14-month low near $3,720",
+      "detail": "The dollar hit a 19-month high and yields rose on expectations of more rate hikes.",
+      "sources": [
+        {
+          "label": "Nation Thailand (Reuters)",
+          "url": "https://www.nationthailand.com/business/trading-investment/40073658"
+        }
+      ]
+    },
+    {
+      "type": "watch",
+      "kind": "politics",
+      "date": "2026-11-25",
+      "by": "2027-03-31",
+      "status": "reported",
+      "direction": "bear",
+      "prob": 0.4,
+      "title": "New overcapacity tariffs of up to 20% on China, the EU and 12 other partners take effect",
+      "detail": "Proposed Nov 25 to start next year. The administration called the China rate a 'deal rate' that could go higher or lower with talks, and it would stack on some existing tariffs. The start date and final rates are not set, so the model's 40% covers taking effect in roughly this form by Mar 31.",
+      "sources": [
+        {
+          "label": "Yahoo Finance",
+          "url": "https://finance.yahoo.com/markets/article/us-announces-new-tariffs-of-up-to-20-on-china-the-eu-and-12-other-nations-131802359.html"
+        },
+        {
+          "label": "Washington Post",
+          "url": "https://www.washingtonpost.com/politics/2026/11/25/trump-proposes-new-tariffs-china-europe-other-trade-partners/"
+        }
+      ],
+      "short": "Tariffs",
+      "resolves_if": "The new tariffs of up to 20% take effect in roughly this form by Mar 31.",
+      "impact": {
+        "confidence": "low",
+        "ranges": {
+          "SPY": [
+            -3.0,
+            -0.3
+          ],
+          "META": [
+            -4.8,
+            -0.5
+          ]
+        },
+        "basis": "Analogues: Apr 3, 2025 tariff shock (SPY -4.8%, Meta about -9%) and Oct 10, 2025 China threat (SPY -2.7%). Smaller here because the Nov 25 proposal is already known.",
+        "sources": [
+          {
+            "label": "ABC News: Apr 3, 2025 selloff",
+            "url": "https://abc7.com/post/world-leaders-blast-trump-tariffs-markets-slump/16121694/"
+          },
+          {
+            "label": "AP: Oct 10, 2025 selloff",
+            "url": "https://www.pbs.org/newshour/economy/wall-street-tumbles-in-its-worst-day-since-april-after-trump-threatens-more-tariffs-on-china"
+          }
+        ]
+      },
+      "checked": "2026-11-26"
+    },
+    {
+      "type": "watch",
+      "kind": "politics",
+      "date": "2026-11-09",
+      "by": "2027-01-10",
+      "status": "reported",
+      "direction": "bear",
+      "prob": 0.25,
+      "title": "US-China trade truce lapses on Jan 10 without a new extension",
+      "detail": "The truce has been extended twice, most recently to Jan 10. It would let China's suspended 24% tariff return. The new US tariff proposal on China makes a lapse more plausible than a month ago, but both sides have kept extending it.",
+      "sources": [
+        {
+          "label": "Reuters via Yahoo Finance",
+          "url": "https://finance.yahoo.com/economy/policy/articles/china-extends-suspension-24-tariff-030006090.html"
+        },
+        {
+          "label": "NBC News",
+          "url": "https://www.nbcnews.com/business/economy/us-china-extend-trade-truce-trump-rcna599525"
+        }
+      ],
+      "short": "China truce",
+      "resolves_if": "Jan 10 passes with no extension or replacement deal announced.",
+      "impact": {
+        "confidence": "low",
+        "ranges": {
+          "SPY": [
+            -2.5,
+            -0.3
+          ],
+          "META": [
+            -4.0,
+            -0.5
+          ]
+        },
+        "basis": "Analogue: Oct 10, 2025, when the truce was threatened (SPY -2.7%). A lapse is partly expected because the truce was extended twice.",
+        "sources": [
+          {
+            "label": "AP: Oct 10, 2025 selloff",
+            "url": "https://www.pbs.org/newshour/economy/wall-street-tumbles-in-its-worst-day-since-april-after-trump-threatens-more-tariffs-on-china"
+          },
+          {
+            "label": "ABC News: Apr 3, 2025 selloff",
+            "url": "https://abc7.com/post/world-leaders-blast-trump-tariffs-markets-slump/16121694/"
+          }
+        ]
+      },
+      "checked": "2026-11-26"
+    },
+    {
+      "type": "watch",
+      "kind": "fed",
+      "date": "2026-11-18",
+      "by": "2026-12-09",
+      "status": "reported",
+      "direction": "bear",
+      "prob": 0.03,
+      "title": "Fed raises rates by 0.50 points on Dec 9 instead of 0.25",
+      "detail": "Futures price a 0.25-point hike at about 98%, which leaves the market at most 2% for any other outcome. A 0.50-point move was floated by Governor Waller on Nov 18 per Wikipedia's rate page, and Citi flags it as a higher risk, so the model sits a little above the market's ceiling. That claim has a single, secondary source here, so treat it as thinly sourced.",
+      "sources": [
+        {
+          "label": "Wikipedia: Federal funds rate",
+          "url": "https://en.wikipedia.org/wiki/Federal_funds_rate"
+        },
+        {
+          "label": "Admirals",
+          "url": "https://admiralmarkets.com/analytics/traders-blog/fed-rate-decision-december-2026-preview"
+        },
+        {
+          "label": "Gate (CME FedWatch)",
+          "url": "https://www.gate.com/news/detail/cme-fedwatch-978-probability-of-25bp-fed-rate-hike-in-december-2026-25860188"
+        }
+      ],
+      "short": "Fed 0.50",
+      "market_prob": 0.02,
+      "market_prob_bound": "max",
+      "resolves_if": "The Dec 9 hike is 0.50 points or more.",
+      "impact": {
+        "confidence": "low",
+        "ranges": {
+          "SPY": [
+            -3.0,
+            -0.5
+          ],
+          "META": [
+            -4.8,
+            -0.8
+          ]
+        },
+        "basis": "Weak analogue: Jun 13, 2022, when a larger hike became likely (SPY -3.9%, mixed with a hot inflation report). Today's market already prices 98% for 0.25.",
+        "sources": [
+          {
+            "label": "CNBC: Jun 13, 2022 selloff",
+            "url": "https://www.cnbc.com/2022/06/13/stock-market-futures-open-to-close-news.html"
+          }
+        ]
+      },
+      "checked": "2026-11-26"
+    },
+    {
+      "type": "watch",
+      "kind": "politics",
+      "date": "2026-09-04",
+      "by": "2027-03-31",
+      "status": "reported",
+      "direction": "bull",
+      "prob": 0.2,
+      "title": "US and Canada agree an interim deal that lowers tariffs on steel, aluminum, autos or lumber",
+      "detail": "Canada is seeking it and the US trade representative has talked about interim arrangements instead of a full deal. Canada had not opened formal talks as of early September, and the US declined to renew the USMCA on Jul 1.",
+      "sources": [
+        {
+          "label": "PharmaSource",
+          "url": "https://pharmasource.global/content/regulation/usmca-annual-reviews-a-year-to-year-pact-leaves-canadian-and-mexican-drug-plants-exposed/"
+        },
+        {
+          "label": "Prince Manufacturing",
+          "url": "https://princemanufacturing.com/usmca-september-2026-update-manufacturing-mexico-canada/"
+        }
+      ],
+      "short": "Canada deal",
+      "resolves_if": "Both governments announce a signed interim deal that lowers US tariffs on Canadian goods.",
+      "impact": {
+        "confidence": "low",
+        "ranges": {
+          "SPY": [
+            0.0,
+            0.8
+          ],
+          "META": [
+            0.0,
+            1.3
+          ]
+        },
+        "basis": "No close analogue. The May 12, 2025 US-China pause moved SPY +3.3% and Meta about +8%, but it was far larger in scope, so this range is much smaller.",
+        "sources": [
+          {
+            "label": "ABC News: May 12, 2025 rally",
+            "url": "https://www.goodmorningamerica.com/news/story/us-stocks-soar-us-china-agree-slash-tariffs-121708443"
+          }
+        ]
+      },
+      "checked": "2026-11-26"
     }
-   ]
-  }
- ]
+  ]
 }
