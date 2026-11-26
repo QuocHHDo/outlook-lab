@@ -68,6 +68,7 @@ def validate(predictions, locks=None):
 EVENT_TYPES = {"scheduled", "shock", "watch"}
 WATCH_STATUS = {"rumor", "reported", "disputed"}
 WATCH_DIRECTION = {"bull", "bear", "mixed"}
+EVENT_CAUSES = {"fed", "rates", "stocks", "company", "commodity", "policy"}
 EVENT_KINDS = {"fed", "macro", "earnings", "market", "shock", "politics"}
 
 
@@ -151,6 +152,13 @@ def validate_events(doc):
                 parse_date(e.get("by"))
             except (TypeError, ValueError):
                 errors.append(f"{eid}: by must be a YYYY-MM-DD date the item is judged on")
+        if "cause" in e and e["cause"] not in EVENT_CAUSES:
+            errors.append(f"{eid}: cause must be one of {sorted(EVENT_CAUSES)}")
+        if "move" in e:
+            mv = e["move"]
+            if not (isinstance(mv, dict) and isinstance(mv.get("label"), str) and mv["label"].strip()
+                    and mv.get("tone") in ("good", "bad", "flat")):
+                errors.append(f"{eid}: move must be {{label, tone}} with tone good, bad or flat")
         if e.get("type") == "watch":
             errors += validate_watch_extras(eid, e)
         if not e.get("sources") and not e.get("note"):
