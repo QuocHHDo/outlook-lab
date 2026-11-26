@@ -10,7 +10,7 @@ DATA = ROOT / "data"
 # prediction stores its own resolves_on date (e.g. the matching option expiry).
 HORIZONS = {"1w": 7, "1m": 30, "3m": 91, "6m": 182, "1y": 365, "5y": 1826}
 
-DEFAULT_SYMBOLS = ["SPY", "QQQ", "SMH", "IWM", "XLK", "XLF", "XLE", "XLV", "XLY", "XLP", "XLI", "XLB", "XLU", "XLRE", "XLC", "TLT", "GLD", "AAPL", "MSFT", "NVDA", "AMZN", "GOOGL", "META"]
+DEFAULT_SYMBOLS = ["SPY", "QQQ", "SMH", "IWM", "XLK", "XLF", "XLE", "XLV", "XLY", "XLP", "XLI", "XLB", "XLU", "XLRE", "XLC", "TLT", "GLD", "EFA", "EEM", "HYG", "AAPL", "MSFT", "NVDA", "AMZN", "GOOGL", "META", "TSLA", "AVGO", "JPM"]
 
 
 def load(name, default):
