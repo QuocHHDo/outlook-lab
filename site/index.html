@@ -590,7 +590,7 @@ th { font-weight: 700; font-size: 12.5px; color: var(--muted-2); }
     return HORDER.filter(function (h) { return map[h]; }).map(function (h) { return map[h]; });
   }
 
-  function makeScale(rows) {
+  function makeScale(rows, centered) {
     var vals = [];
     rows.forEach(function (p) {
       vals.push(p.ai.low, p.ai.high, p.baseline.low, p.baseline.high, p.price_at_prediction);
@@ -599,6 +599,11 @@ th { font-weight: 700; font-size: 12.5px; color: var(--muted-2); }
     var lo = Math.min.apply(null, vals), hi = Math.max.apply(null, vals);
     var pad = (hi - lo) * 0.08 || 1;
     lo -= pad; hi += pad;
+    if (centered && rows.length === 1) {
+      // symmetric around the start price so it sits in the middle of the bar
+      var c = rows[0].price_at_prediction, half = Math.max(c - lo, hi - c);
+      lo = c - half; hi = c + half;
+    }
     var steps = [1, 2, 5, 10, 20, 25, 50, 100, 200, 250, 500, 1000];
     var step = steps[steps.length - 1];
     for (var i = 0; i < steps.length; i++) { if ((hi - lo) / steps[i] <= 6) { step = steps[i]; break; } }
@@ -1360,7 +1365,7 @@ th { font-weight: 700; font-size: 12.5px; color: var(--muted-2); }
       });
 
     rows.forEach(function (p) {
-      var sc = makeScale([p]);
+      var sc = makeScale([p], true);
       var row = el("div", undefined, "hrow");
       var label = el("div", undefined, "hlabel");
       label.appendChild(el("b", HLABEL[p.horizon] || p.horizon));
