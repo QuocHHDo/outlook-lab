@@ -168,7 +168,8 @@
       "move": {
         "label": "Held 3.75–4%",
         "tone": "flat"
-      }
+      },
+      "scope": "market"
     },
     {
       "type": "shock",
@@ -182,7 +183,8 @@
           "url": "https://stocktwits.com/news-articles/markets/equity/soxx-etf-semiconductor-is-set-for-its-worst-week-in-over-18-months/cNG1sEhR94Z"
         }
       ],
-      "cause": "policy"
+      "cause": "policy",
+      "scope": "market"
     },
     {
       "type": "shock",
@@ -208,7 +210,8 @@
       "move": {
         "label": "SMH −11.2%",
         "tone": "bad"
-      }
+      },
+      "scope": "tech"
     },
     {
       "type": "shock",
@@ -228,7 +231,8 @@
       "move": {
         "label": "QQQ +3.54%",
         "tone": "good"
-      }
+      },
+      "scope": "tech"
     },
     {
       "type": "shock",
@@ -246,7 +250,8 @@
           "url": "https://www.webull.com/news/15939186383319040"
         }
       ],
-      "cause": "company"
+      "cause": "company",
+      "scope": "chips"
     },
     {
       "type": "shock",
@@ -266,7 +271,8 @@
       "move": {
         "label": "Nasdaq-100 −2.67%",
         "tone": "bad"
-      }
+      },
+      "scope": "tech"
     },
     {
       "type": "shock",
@@ -287,7 +293,8 @@
       "move": {
         "label": "NVDA +31.5%",
         "tone": "good"
-      }
+      },
+      "scope": "chips"
     },
     {
       "type": "shock",
@@ -309,7 +316,8 @@
       "move": {
         "label": "NVDA −5.9%",
         "tone": "bad"
-      }
+      },
+      "scope": "market"
     },
     {
       "type": "scheduled",
@@ -344,7 +352,8 @@
       "move": {
         "label": "10-yr +30 bp",
         "tone": "bad"
-      }
+      },
+      "scope": "market"
     },
     {
       "type": "shock",
@@ -362,7 +371,8 @@
       "move": {
         "label": "Gold $3,720",
         "tone": "flat"
-      }
+      },
+      "scope": "gold"
     },
     {
       "type": "watch",
