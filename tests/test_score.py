@@ -229,3 +229,12 @@ def test_watch_impact_fields_are_checked():
     assert len(validate.validate_events({"events": [bad]})) == 7
     no_spy = dict(base, impact=dict(base["impact"], ranges={"META": [-1, 0]}))
     assert len(validate.validate_events({"events": [no_spy]})) == 1
+
+
+def test_shock_cause_and_move_are_checked():
+    base = {"type": "shock", "kind": "shock", "date": "2026-11-16", "title": "Nasdaq-100 fell",
+            "sources": [{"label": "x", "url": "https://example.com/"}],
+            "cause": "stocks", "move": {"label": "QQQ -2.7%", "tone": "bad"}}
+    assert validate.validate_events({"events": [base]}) == []
+    bad = dict(base, cause="vibes", move={"label": " ", "tone": "red"})
+    assert len(validate.validate_events({"events": [bad]})) == 2
