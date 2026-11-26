@@ -968,7 +968,7 @@ th { font-weight: 700; font-size: 12.5px; color: var(--muted-2); }
     sHi.attachPrimitive(new BandPrimitive(chart, sHi, sLo, aiHi, aiLo, cssRgb("--accent", 0.28)));
     var dotsHi = [], dotsLo = [];
     // label each horizon end with its % distance from the current (latest close) price
-    var refPx = afterData.length ? afterData[afterData.length - 1].value : s0;
+    var lcNow = latestClose(state.symbol), refPx = lcNow ? lcNow.price : s0;
     cone.forEach(function (p) {
       dotsHi.push({ time: p.resolves_on, position: "aboveBar", shape: "circle", color: accent, size: 0.7, text: signed((p.ai.high / refPx - 1) * 100) });
       dotsLo.push({ time: p.resolves_on, position: "belowBar", shape: "circle", color: accent, size: 0.7, text: signed((p.ai.low / refPx - 1) * 100) });
@@ -1093,7 +1093,7 @@ th { font-weight: 700; font-size: 12.5px; color: var(--muted-2); }
     var rangeTxt = function (a, b) { return "$" + a.toFixed(2) + " – $" + b.toFixed(2); };
     function setLegend(t) {
       var out = state.symbol + " · ";
-      if (!t) { legend.textContent = out + "predicted " + fmtDate(base.made_at) + " at $" + s0.toFixed(2) + " · labels show % from " + (afterData.length ? "latest close" : "start") + " $" + refPx.toFixed(2); return; }
+      if (!t) { legend.textContent = out + "predicted " + fmtDate(base.made_at) + " at $" + s0.toFixed(2) + " · labels show % from " + (lcNow ? "latest close" : "start") + " $" + refPx.toFixed(2); return; }
       out += fmtDate(t);
       if (mHist[t] !== undefined && t <= base.made_at) out += " · close $" + mHist[t].toFixed(2);
       else if (mAiHi[t] !== undefined) out += " · AI " + rangeTxt(mAiLo[t], mAiHi[t]) + " (" + signed((mAiLo[t] / refPx - 1) * 100) + " to " + signed((mAiHi[t] / refPx - 1) * 100) + ") · baseline " + rangeTxt(mBLo[t], mBHi[t]) + (mHist[t] !== undefined ? " · actual $" + mHist[t].toFixed(2) : "");
