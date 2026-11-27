@@ -11,7 +11,8 @@ available, record whether the AI range and the baseline range held, plus:
                   starting price. The zero-drift and realized-vol baselines have
                   no view, so they use 0.5. The drift baseline uses the chance of
                   finishing up implied by its own range (above 0.5), so it is a
-                  directional yardstick for the AI's chance-up number.
+                  directional yardstick for the AI's chance-up number. So does the
+                  analyst baseline (Street mean target; see add_analyst_baseline).
 
 Coverage of an 80% range should be near 80% over many predictions. Far above means
 the ranges are too wide to be useful; far below means overconfident.
@@ -105,6 +106,40 @@ def add_realized_baseline(pred, symbol_prices):
                                  "high": round(high, 2), "level": base.get("level", 0.8)}
 
 
+ANALYST_MAX_STALE_DAYS = 7
+
+
+def add_analyst_baseline(pred, history):
+    """Attach baseline_analyst: the options-implied range re-centred on the Street's mean price target.
+
+    The target is a 12-month view, so its implied log-return is scaled linearly to the
+    prediction's horizon. Width is the implied-vol baseline's width. Only a target snapshot
+    dated strictly before made_at (and at most ANALYST_MAX_STALE_DAYS older) is used, so
+    nothing the prediction could not have known leaks in. Predictions with no such snapshot
+    are skipped, not back-filled.
+    """
+    if "baseline_analyst" in pred or not history:
+        return
+    base = pred.get("baseline") or {}
+    try:
+        usable = [d for d in history if d < pred["made_at"]
+                  and (parse_date(pred["made_at"]) - parse_date(d)).days <= ANALYST_MAX_STALE_DAYS]
+        if not usable:
+            return
+        snap_date = max(usable)
+        target = float(history[snap_date]["mean"])
+        start = pred["price_at_prediction"]
+        days = (parse_date(pred["resolves_on"]) - parse_date(pred["made_at"])).days
+        if target <= 0 or start <= 0 or days <= 0:
+            return
+        shift = math.exp(math.log(target / start) * days / 365.0)
+        low, high = base["low"] * shift, base["high"] * shift
+    except (KeyError, ValueError, TypeError):
+        return
+    pred["baseline_analyst"] = {"method": "analyst_target", "target_mean": round(target, 2), "target_date": snap_date,
+                                "low": round(low, 2), "high": round(high, 2), "level": base.get("level", 0.8)}
+
+
 def implied_prob_up(rng, start):
     """Chance of closing above `start` implied by a log-normal range (median = sqrt(low*high))."""
     try:
@@ -121,7 +156,7 @@ def score_one(pred, close_date, close):
     start = pred["price_at_prediction"]
     out = {"close": close, "close_date": close_date}
     went_up = 1.0 if close > start else 0.0
-    for name in ("ai", "baseline", "baseline_drift", "baseline_realized"):
+    for name in ("ai", "baseline", "baseline_drift", "baseline_realized", "baseline_analyst"):
         rng = pred.get(name)
         if rng is None:
             continue
@@ -132,7 +167,7 @@ def score_one(pred, close_date, close):
         }
         if name == "ai":
             prob = rng.get("prob_up")
-        elif name == "baseline_drift":
+        elif name in ("baseline_drift", "baseline_analyst"):
             prob = implied_prob_up(rng, start)
             if prob is None:
                 prob = 0.5
@@ -151,7 +186,7 @@ def _mean(values):
 
 def summarize_group(resolved):
     summary = {"n": len(resolved)}
-    for name in ("ai", "baseline", "baseline_drift", "baseline_realized"):
+    for name in ("ai", "baseline", "baseline_drift", "baseline_realized", "baseline_analyst"):
         rows = [p["result"][name] for p in resolved if name in p["result"]]
         if not rows:
             continue
@@ -181,10 +216,11 @@ def calibration(resolved):
     return bins
 
 
-def run(predictions, prices, now=None):
+def run(predictions, prices, now=None, ratings_history=None):
     needs_price = []
     for pred in predictions:
         add_drift_baseline(pred)
+        add_analyst_baseline(pred, (ratings_history or {}).get(pred["symbol"]))
         add_realized_baseline(pred, prices.get(pred["symbol"]))
         if pred.get("status") == "resolved":
             continue
@@ -225,7 +261,7 @@ def run(predictions, prices, now=None):
 def main():
     predictions = load("predictions.json", [])
     prices = load("prices.json", {})
-    predictions, summary = run(predictions, prices)
+    predictions, summary = run(predictions, prices, ratings_history=load("ratings_history.json", {}))
     save("predictions.json", predictions)
     save("summary.json", summary)
     print(f"{summary['n_resolved']} resolved, {summary['n_open']} open, "

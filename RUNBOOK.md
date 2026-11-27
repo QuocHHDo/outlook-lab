@@ -26,7 +26,7 @@ Run once a week, in Claude, with the Robinhood MCP connected. Do the steps in or
    ```
    python scripts/baseline.py --price <price> --vol <iv> --days <calendar days to resolves_on> --level 0.8
    ```
-   The drift baseline (`baseline_drift`) and the 60-day realized-vol baseline (`baseline_realized`) are added automatically by `score.py`.
+   The drift baseline (`baseline_drift`) and the 60-day realized-vol baseline (`baseline_realized`) are added automatically by `score.py`, and so is the analyst-target baseline (`baseline_analyst`) when `data/ratings_history.json` has a Street target dated before the prediction.
 8. **Append the predictions** to `data/predictions.json` using the shape in `docs/example_prediction.json`, copying the AI numbers exactly from the locks and setting `"blind": true`. Use the id `YYYY-MM-DD_SYMBOL_horizon`.
 9. **Validate and commit:**
    ```

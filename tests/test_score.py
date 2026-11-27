@@ -261,3 +261,28 @@ def test_drift_baseline_brier_uses_its_implied_chance_up():
     assert abs(res["baseline_drift"]["brier_up"] - (p - 1.0) ** 2) < 1e-3
     assert res["baseline"]["brier_up"] == 0.25 and res["baseline_realized"]["brier_up"] == 0.25
     assert score.implied_prob_up({"low": 80, "high": 125, "level": 0.8}, 100.0) is not None
+
+
+def _analyst_pred(made="2026-12-01"):
+    return {"id": "z", "symbol": "A", "made_at": made, "resolves_on": "2026-12-31", "horizon": "1m",
+            "price_at_prediction": 100.0, "status": "open",
+            "ai": {"low": 95, "high": 108, "level": 0.8, "prob_up": 0.55},
+            "baseline": {"method": "implied_vol", "low": 92, "high": 108, "level": 0.8}}
+
+
+def test_analyst_baseline_uses_only_earlier_snapshots_and_shifts_range():
+    import math
+    hist = {"A": {"2026-11-27": {"mean": 120.0}, "2026-12-01": {"mean": 999.0}}}
+    preds, _ = score.run([_analyst_pred()], {"A": {"2026-12-31": 105.0}}, ratings_history=hist)
+    b = preds[0]["baseline_analyst"]
+    assert b["target_date"] == "2026-11-27" and b["target_mean"] == 120.0  # not the same-day 999
+    shift = math.exp(math.log(1.2) * 30 / 365)
+    assert abs(b["low"] - 92 * shift) < 0.01 and abs(b["high"] - 108 * shift) < 0.01
+    assert "baseline_analyst" in preds[0]["result"]
+    assert preds[0]["result"]["baseline_analyst"]["brier_up"] < 0.25  # bullish target, close went up
+
+
+def test_analyst_baseline_skipped_without_fresh_prior_snapshot():
+    assert "baseline_analyst" not in score.run([_analyst_pred()], {}, ratings_history={"A": {"2026-12-01": {"mean": 120}}})[0][0]
+    assert "baseline_analyst" not in score.run([_analyst_pred()], {}, ratings_history={"A": {"2026-11-01": {"mean": 120}}})[0][0]
+    assert "baseline_analyst" not in score.run([_analyst_pred()], {})[0][0]

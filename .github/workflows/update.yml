@@ -28,6 +28,8 @@ jobs:
         run: python scripts/validate.py
       - name: Fetch closes (free, best effort)
         run: python scripts/fetch_prices.py
+      - name: Fetch analyst consensus (free, best effort)
+        run: python scripts/fetch_ratings.py
       - name: Score predictions that are due
         run: python scripts/score.py
       - name: Commit updated data

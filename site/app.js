@@ -772,7 +772,7 @@
     pg.appendChild(el("p", state.preds.length + " predictions total, " + (s.n_open != null ? s.n_open : state.preds.length - nRes) + " still open.", "sc-note"));
     pg.appendChild(el("p", "Read the count with care: predictions made in the same week for different symbols move together, so they are not independent tests. The number of truly independent weeks, not the number of rows, is what sets how much to trust a result.", "sc-note"));
 
-    var names = [["ai", "AI range"], ["baseline", "Implied-vol baseline"], ["baseline_drift", "Drift baseline (6%/yr)"], ["baseline_realized", "Realized-vol baseline (60d)"]];
+    var names = [["ai", "AI range"], ["baseline", "Implied-vol baseline"], ["baseline_drift", "Drift baseline (6%/yr)"], ["baseline_realized", "Realized-vol baseline (60d)"], ["baseline_analyst", "Analyst-target baseline (Street)"]];
     var cols = [["coverage", "Held (target 80%)", function (v) { return pct(v); }, null],
       ["mean_width_pct", "Avg width", function (v) { return v == null ? "\u2014" : v.toFixed(1) + "%"; }, null],
       ["mean_interval_score", "Interval score", function (v) { return v == null ? "\u2014" : v.toFixed(3); }, "min"],
@@ -1048,6 +1048,7 @@
       if (useLc) more.appendChild(el("span", "vs latest close " + money(lc.price) + " (" + fmtDate(lc.date) + "): " + lowHigh(p.ai, lc.price), "sub"));
       more.appendChild(el("span", "Baseline " + range(p.baseline), "alt"));
       if (p.baseline_drift) more.appendChild(el("span", "Drift baseline " + range(p.baseline_drift), "alt"));
+      if (p.baseline_analyst) more.appendChild(el("span", "Analyst-target baseline " + range(p.baseline_analyst) + " (mean target " + money(p.baseline_analyst.target_mean) + ", " + fmtDate(p.baseline_analyst.target_date) + ")", "alt"));
       more.appendChild(el("span", "Baseline chance above start 50%", "alt"));
       nums.appendChild(more);
       row.appendChild(nums);
@@ -1369,6 +1370,44 @@
       g.appendChild(btn);
     }
     return g;
+  }
+
+  function renderStreet(rows) {
+    var cur = rows.filter(function (p) { return p.horizon === state.horizon; })[0] || rows[0];
+    var host = $("street"), body = $("street-body");
+    var r = state.ratings && state.ratings.symbols && state.ratings.symbols[state.symbol];
+    clear(body);
+    if (!r) { host.hidden = true; return; }
+    host.hidden = false;
+    var c = r.counts;
+    if (c) {
+      var tot = c.strongBuy + c.buy + c.hold + c.sell + c.strongSell;
+      var bar = el("div", undefined, "street-bar");
+      [["strongBuy", "Strong buy"], ["buy", "Buy"], ["hold", "Hold"], ["sell", "Sell"], ["strongSell", "Strong sell"]].forEach(function (k) {
+        if (!c[k[0]]) return;
+        var seg = el("span", String(c[k[0]]), "seg seg-" + k[0]);
+        seg.style.flexGrow = c[k[0]];
+        seg.title = k[1] + ": " + c[k[0]];
+        bar.appendChild(seg);
+      });
+      body.appendChild(bar);
+      var buys = c.strongBuy + c.buy, sells = c.sell + c.strongSell;
+      body.appendChild(el("p", tot + " analysts: " + buys + " buy (" + Math.round(buys / tot * 100) + "%), " + c.hold + " hold, " + sells + " sell.", "street-line"));
+    }
+    var t = r.target;
+    var px = state.prices[state.symbol], last = null;
+    if (px) { var ds = Object.keys(px).sort(); last = px[ds[ds.length - 1]]; }
+    if (t && t.mean) {
+      var up = last ? (t.mean / last - 1) * 100 : null;
+      var line = "Mean price target " + money(t.mean) + (t.low && t.high ? " (range " + money(t.low) + " to " + money(t.high) + ")" : "");
+      if (last) line += ", " + (up >= 0 ? "+" : "") + up.toFixed(1) + "% from the last close of " + money(last);
+      body.appendChild(el("p", line + ".", "street-line"));
+      if (cur && cur.price_at_prediction) {
+        var aiMove = (Math.sqrt(cur.ai.low * cur.ai.high) / cur.price_at_prediction - 1) * 100;
+        body.appendChild(el("p", "For comparison, the AI's " + cur.horizon + " range midpoint implies " + (aiMove >= 0 ? "+" : "") + aiMove.toFixed(1) + "%. Analyst targets are usually 12-month views, so the 1y forecast is the closest match.", "street-line muted"));
+      }
+    }
+    $("street-note").textContent = (state.ratings.source || "Analyst consensus") + ", as of " + fmtDate(r.as_of) + ". Shown for context only: it is not an input to the forecasts and is not scored. Ratings and targets are the brokers' own and can be stale.";
   }
 
   function renderEvents(rows) {
@@ -1878,6 +1917,7 @@
     renderRecord();
     renderAnalysis(rows);
     renderEvents(rows);
+    renderStreet(rows);
     renderPast(list);
     var up = $("updated");
     up.textContent = state.summary && state.summary.generated_at ? "Scores updated " + fmtDate(state.summary.generated_at.slice(0, 10)) : "";
@@ -1898,8 +1938,10 @@
     load("data/prices.json").catch(function () { return {}; }),
     load("data/events.json").catch(function () { return { events: [] }; }),
     load("data/meta.json").catch(function () { return null; }),
-    load("data/earnings.json").catch(function () { return null; })
+    load("data/earnings.json").catch(function () { return null; }),
+    load("data/ratings.json").catch(function () { return null; })
   ]).then(function (r) {
+    state.ratings = r[6];
     state.meta = r[4];
     state.earnings = r[5];
     state.preds = Array.isArray(r[0]) ? r[0] : [];

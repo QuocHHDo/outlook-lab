@@ -1,0 +1,389 @@
+{
+  "source": "Yahoo Finance consensus (via yfinance)",
+  "symbols": {
+    "AAPL": {
+      "counts": {
+        "strongBuy": 6,
+        "buy": 20,
+        "hold": 13,
+        "sell": 3,
+        "strongSell": 3
+      },
+      "target": {
+        "mean": 345.63,
+        "median": 355.0,
+        "high": 425.0,
+        "low": 250.0
+      },
+      "as_of": "2026-11-27"
+    },
+    "AMD": {
+      "counts": {
+        "strongBuy": 6,
+        "buy": 42,
+        "hold": 6,
+        "sell": 0,
+        "strongSell": 0
+      },
+      "target": {
+        "mean": 649.89,
+        "median": 650.0,
+        "high": 1250.0,
+        "low": 525.0
+      },
+      "as_of": "2026-11-27"
+    },
+    "AMZN": {
+      "counts": {
+        "strongBuy": 14,
+        "buy": 45,
+        "hold": 3,
+        "sell": 0,
+        "strongSell": 0
+      },
+      "target": {
+        "mean": 326.34,
+        "median": 328.0,
+        "high": 405.0,
+        "low": 230.0
+      },
+      "as_of": "2026-11-27"
+    },
+    "AVGO": {
+      "counts": {
+        "strongBuy": 8,
+        "buy": 39,
+        "hold": 3,
+        "sell": 0,
+        "strongSell": 0
+      },
+      "target": {
+        "mean": 523.28,
+        "median": 525.0,
+        "high": 660.0,
+        "low": 398.47
+      },
+      "as_of": "2026-11-27"
+    },
+    "BRK.B": {
+      "counts": {
+        "strongBuy": 0,
+        "buy": 1,
+        "hold": 2,
+        "sell": 0,
+        "strongSell": 1
+      },
+      "target": {
+        "mean": 564.67,
+        "median": 556.0,
+        "high": 628.0,
+        "low": 510.0
+      },
+      "as_of": "2026-11-27"
+    },
+    "GE": {
+      "counts": {
+        "strongBuy": 3,
+        "buy": 16,
+        "hold": 3,
+        "sell": 0,
+        "strongSell": 1
+      },
+      "target": {
+        "mean": 378.43,
+        "median": 380.0,
+        "high": 431.0,
+        "low": 280.0
+      },
+      "as_of": "2026-11-27"
+    },
+    "GOOGL": {
+      "counts": {
+        "strongBuy": 11,
+        "buy": 43,
+        "hold": 6,
+        "sell": 0,
+        "strongSell": 0
+      },
+      "target": {
+        "mean": 395.11,
+        "median": 388.5,
+        "high": 500.0,
+        "low": 300.0
+      },
+      "as_of": "2026-11-27"
+    },
+    "JNJ": {
+      "counts": {
+        "strongBuy": 5,
+        "buy": 11,
+        "hold": 5,
+        "sell": 2,
+        "strongSell": 0
+      },
+      "target": {
+        "mean": 279.85,
+        "median": 280.5,
+        "high": 320.0,
+        "low": 190.0
+      },
+      "as_of": "2026-11-27"
+    },
+    "JPM": {
+      "counts": {
+        "strongBuy": 5,
+        "buy": 10,
+        "hold": 11,
+        "sell": 0,
+        "strongSell": 0
+      },
+      "target": {
+        "mean": 373.65,
+        "median": 372.0,
+        "high": 425.0,
+        "low": 312.0
+      },
+      "as_of": "2026-11-27"
+    },
+    "LIN": {
+      "counts": {
+        "strongBuy": 6,
+        "buy": 18,
+        "hold": 4,
+        "sell": 1,
+        "strongSell": 0
+      },
+      "target": {
+        "mean": 555.89,
+        "median": 565.0,
+        "high": 601.0,
+        "low": 420.0
+      },
+      "as_of": "2026-11-27"
+    },
+    "LLY": {
+      "counts": {
+        "strongBuy": 5,
+        "buy": 20,
+        "hold": 4,
+        "sell": 1,
+        "strongSell": 1
+      },
+      "target": {
+        "mean": 1470.06,
+        "median": 1573.0,
+        "high": 1700.0,
+        "low": 940.0
+      },
+      "as_of": "2026-11-27"
+    },
+    "META": {
+      "counts": {
+        "strongBuy": 10,
+        "buy": 45,
+        "hold": 6,
+        "sell": 1,
+        "strongSell": 0
+      },
+      "target": {
+        "mean": 842.54,
+        "median": 850.0,
+        "high": 1050.0,
+        "low": 650.0
+      },
+      "as_of": "2026-11-27"
+    },
+    "MSFT": {
+      "counts": {
+        "strongBuy": 14,
+        "buy": 41,
+        "hold": 3,
+        "sell": 0,
+        "strongSell": 0
+      },
+      "target": {
+        "mean": 637.36,
+        "median": 631.0,
+        "high": 870.0,
+        "low": 440.0
+      },
+      "as_of": "2026-11-27"
+    },
+    "MU": {
+      "counts": {
+        "strongBuy": 8,
+        "buy": 36,
+        "hold": 5,
+        "sell": 0,
+        "strongSell": 0
+      },
+      "target": {
+        "mean": 1529.69,
+        "median": 1540.0,
+        "high": 3000.0,
+        "low": 361.0
+      },
+      "as_of": "2026-11-27"
+    },
+    "NEE": {
+      "counts": {
+        "strongBuy": 2,
+        "buy": 12,
+        "hold": 7,
+        "sell": 1,
+        "strongSell": 0
+      },
+      "target": {
+        "mean": 94.47,
+        "median": 99.0,
+        "high": 117.0,
+        "low": 56.0
+      },
+      "as_of": "2026-11-27"
+    },
+    "NVDA": {
+      "counts": {
+        "strongBuy": 10,
+        "buy": 39,
+        "hold": 12,
+        "sell": 2,
+        "strongSell": 0
+      },
+      "target": {
+        "mean": 242.43,
+        "median": 240.0,
+        "high": 425.0,
+        "low": 130.0
+      },
+      "as_of": "2026-11-27"
+    },
+    "ORCL": {
+      "counts": {
+        "strongBuy": 7,
+        "buy": 29,
+        "hold": 5,
+        "sell": 1,
+        "strongSell": 0
+      },
+      "target": {
+        "mean": 236.18,
+        "median": 225.0,
+        "high": 400.0,
+        "low": 110.0
+      },
+      "as_of": "2026-11-27"
+    },
+    "PLD": {
+      "counts": {
+        "strongBuy": 6,
+        "buy": 8,
+        "hold": 3,
+        "sell": 0,
+        "strongSell": 0
+      },
+      "target": {
+        "mean": 152.07,
+        "median": 151.5,
+        "high": 170.0,
+        "low": 136.0
+      },
+      "as_of": "2026-11-27"
+    },
+    "RTX": {
+      "counts": {
+        "strongBuy": 6,
+        "buy": 10,
+        "hold": 9,
+        "sell": 0,
+        "strongSell": 0
+      },
+      "target": {
+        "mean": 227.88,
+        "median": 233.0,
+        "high": 250.0,
+        "low": 200.0
+      },
+      "as_of": "2026-11-27"
+    },
+    "TSLA": {
+      "counts": {
+        "strongBuy": 6,
+        "buy": 16,
+        "hold": 22,
+        "sell": 1,
+        "strongSell": 0
+      },
+      "target": {
+        "mean": 419.05,
+        "median": 442.0,
+        "high": 600.0,
+        "low": 128.11
+      },
+      "as_of": "2026-11-27"
+    },
+    "UNH": {
+      "counts": {
+        "strongBuy": 7,
+        "buy": 16,
+        "hold": 3,
+        "sell": 0,
+        "strongSell": 0
+      },
+      "target": {
+        "mean": 478.48,
+        "median": 490.0,
+        "high": 531.0,
+        "low": 385.0
+      },
+      "as_of": "2026-11-27"
+    },
+    "V": {
+      "counts": {
+        "strongBuy": 9,
+        "buy": 28,
+        "hold": 3,
+        "sell": 0,
+        "strongSell": 1
+      },
+      "target": {
+        "mean": 454.1,
+        "median": 462.5,
+        "high": 500.0,
+        "low": 330.0
+      },
+      "as_of": "2026-11-27"
+    },
+    "WMT": {
+      "counts": {
+        "strongBuy": 10,
+        "buy": 28,
+        "hold": 5,
+        "sell": 1,
+        "strongSell": 0
+      },
+      "target": {
+        "mean": 136.8,
+        "median": 140.0,
+        "high": 155.0,
+        "low": 81.0
+      },
+      "as_of": "2026-11-27"
+    },
+    "XOM": {
+      "counts": {
+        "strongBuy": 3,
+        "buy": 6,
+        "hold": 17,
+        "sell": 0,
+        "strongSell": 0
+      },
+      "target": {
+        "mean": 184.18,
+        "median": 184.5,
+        "high": 213.0,
+        "low": 160.0
+      },
+      "as_of": "2026-11-27"
+    }
+  }
+}
