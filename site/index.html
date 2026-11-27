@@ -473,6 +473,22 @@ th { font-weight: 700; font-size: 12.5px; color: var(--muted-2); }
 .cmp-table td:first-child a { color: var(--ink); font-weight: 600; text-decoration: none; }
 .cmp-table .sw { width: 10px; height: 10px; border-radius: 50%; display: inline-block; margin-right: 8px; }
 .cmp-scroll { overflow-x: auto; }
+
+.an-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; }
+.an-stat { border: 1px solid var(--line); border-radius: 8px; padding: 12px 14px; }
+.an-stat b { display: block; font-size: 22px; font-variant-numeric: tabular-nums; }
+.an-stat span { font-size: 12px; color: var(--muted); }
+.an-cols { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; }
+.an-card { min-width: 0; overflow-x: auto; }
+.an-table td.nm { max-width: 150px; overflow: hidden; text-overflow: ellipsis; }
+@media (max-width: 760px) { .an-cols { grid-template-columns: 1fr; } }
+.an-card h3 { margin: 0 0 8px; font-size: 14px; }
+.an-card p.an-note { margin: 8px 0 0; padding: 0; background: none; border: 0; font-size: 12px; color: var(--muted); }
+.an-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+.an-table th, .an-table td { text-align: left; padding: 6px 8px; border-bottom: 1px solid var(--line-2); white-space: nowrap; font-variant-numeric: tabular-nums; }
+.an-table th { color: var(--muted); font-weight: 500; font-size: 12px; }
+.an-table a { color: var(--ink); font-weight: 600; text-decoration: none; }
+.an-up { color: var(--ok); } .an-down { color: var(--bad); }
 </style>
 </head>
 <body>
@@ -525,6 +541,34 @@ th { font-weight: 700; font-size: 12.5px; color: var(--muted-2); }
     <ul id="home-events" class="mini-ev"></ul>
   </div>
   <div class="record"><p id="home-record"></p><a href="#all-predictions" id="home-all">Pick a symbol for scores →</a></div>
+</section>
+
+<section id="analysis" class="card" aria-label="Analysis of all forecasts" hidden>
+  <div class="card-head">
+    <div>
+      <h2 style="margin:0;font-size:18px">What the AI thinks across all symbols</h2>
+      <p class="muted" style="font-size:13px;margin:4px 0 0">A cross-section of the latest forecast for each symbol. This describes the forecasts, not how accurate they are; see the Scorecard for results.</p>
+    </div>
+    <div id="an-h" class="horizon-pick" role="group" aria-label="Horizon"></div>
+  </div>
+  <div id="an-group" class="horizon-pick" role="group" aria-label="Which symbols"></div>
+  <div id="an-stats" class="an-stats"></div>
+  <div class="an-cols">
+    <div class="an-card"><h3>By group</h3><div class="cmp-scroll"><table class="an-table"><thead><tr><th>Group</th><th>Symbols</th><th>Bullish</th><th>Median drift</th><th>AI vs baseline width</th></tr></thead><tbody id="an-groups"></tbody></table></div></div>
+    <div class="an-card"><h3>By horizon (all symbols)</h3><div class="cmp-scroll"><table class="an-table"><thead><tr><th>Horizon</th><th>Symbols</th><th>Bullish</th><th>Median chance up</th><th>Median drift</th></tr></thead><tbody id="an-horizons"></tbody></table></div><p class="an-note">If short horizons lean bearish and long ones bullish, the AI expects a dip before recovery.</p></div>
+  </div>
+  <div class="an-cols">
+    <div class="an-card"><h3>Most bullish (highest implied drift)</h3><table class="an-table"><tbody id="an-top"></tbody></table></div>
+    <div class="an-card"><h3>Most bearish (lowest implied drift)</h3><table class="an-table"><tbody id="an-bottom"></tbody></table></div>
+  </div>
+  <div class="an-cols">
+    <div class="an-card"><h3>Most confident vs the market</h3><table class="an-table"><tbody id="an-narrow"></tbody></table><p class="an-note">AI range narrower than the options-implied baseline.</p></div>
+    <div class="an-card"><h3>Sees more risk than the market</h3><table class="an-table"><tbody id="an-wide"></tbody></table><p class="an-note">AI range wider than the baseline.</p></div>
+  </div>
+  <div class="an-card"><h3>What changed since the last run</h3><div class="cmp-scroll"><table class="an-table"><thead id="an-chg-head"></thead><tbody id="an-chg"></tbody></table></div><p class="an-note" id="an-chg-note"></p></div>
+  <div class="an-card"><h3>Where the AI disagrees with the market</h3><div class="cmp-scroll"><table class="an-table"><thead><tr><th>Symbol</th><th></th><th>AI drift</th><th>Baseline drift</th><th>Gap</th><th>AI width vs baseline</th><th>Chance up</th></tr></thead><tbody id="an-dis"></tbody></table></div><p class="an-note">Ranked by the gap between the AI range midpoint and the options-implied baseline midpoint, in percentage points. A large gap is a real directional view; a small one means the AI is mostly echoing the market.</p></div>
+  <div class="an-card"><h3>Checks</h3><ul id="an-checks" class="mini-ev"></ul></div>
+  <p class="muted" style="font-size:12px;margin:0">Drift is the middle of the AI range as a % move from the start price. Bullish means the chance of finishing up is above 50%. Not financial advice.</p>
 </section>
 
 <section id="compare" class="card" aria-label="Compare forecasts" hidden>
@@ -599,7 +643,7 @@ th { font-weight: 700; font-size: 12.5px; color: var(--muted-2); }
   <div id="events" class="section" hidden>
     <h3 class="eyebrow">Events that can move the market</h3>
     <div id="event-groups"></div>
-    <p class="note">Scheduled dates come from official calendars (BLS, Federal Reserve, NYSE). Earnings dates come from Robinhood's calendar and can change. Recent shocks are context only: they do not show that these events predict price moves. Items under Being watched are rumors or unconfirmed reports. Impact ranges are judgment, not scored; META's are SPY's times 1.6, because on two extreme 2025 days META moved about 1.9x and 2.5x SPY's move. The percentage is the model's own estimate, it is judged against what happens, and a rumor can be wrong.</p>
+    <p class="an-note">Scheduled dates come from official calendars (BLS, Federal Reserve, NYSE). Earnings dates come from Robinhood's calendar and can change. Recent shocks are context only: they do not show that these events predict price moves. Items under Being watched are rumors or unconfirmed reports. Impact ranges are judgment, not scored; META's are SPY's times 1.6, because on two extreme 2025 days META moved about 1.9x and 2.5x SPY's move. The percentage is the model's own estimate, it is judged against what happens, and a rumor can be wrong.</p>
   </div>
 
   <div id="all" class="section">
@@ -733,6 +777,9 @@ th { font-weight: 700; font-size: 12.5px; color: var(--muted-2); }
     var cm = el("a", "Compare"); cm.href = "#compare";
     if (state.view === "compare") cm.setAttribute("aria-current", "page");
     nav.appendChild(cm);
+    var an = el("a", "Analysis"); an.href = "#analysis";
+    if (state.view === "analysis") an.setAttribute("aria-current", "page");
+    nav.appendChild(an);
 
     var wrap = el("div", undefined, "symmenu");
     var btn = el("button", state.symbol ? state.symbol : "Symbols"); btn.type = "button"; btn.className = "symbtn";
@@ -2103,6 +2150,169 @@ th { font-weight: 700; font-size: 12.5px; color: var(--muted-2); }
     });
   }
 
+  function median(a) {
+    var b = a.filter(function (v) { return v != null && isFinite(v); }).sort(function (x, y) { return x - y; });
+    if (!b.length) return null;
+    var m = b.length >> 1;
+    return b.length % 2 ? b[m] : (b[m - 1] + b[m]) / 2;
+  }
+  function pc1(v) {
+    if (v == null) return "n/a";
+    var r = Math.round(v * 1000) / 10;
+    return r === 0 ? "0.0%" : (r > 0 ? "+" : "−") + Math.abs(r).toFixed(1) + "%";
+  }
+  function anMetrics(p) {
+    var st = p.price_at_prediction, mid = (p.ai.low + p.ai.high) / 2;
+    var bw = p.baseline.high - p.baseline.low;
+    return { drift: mid / st - 1, up: p.ai.prob_up, ratio: bw > 0 ? (p.ai.high - p.ai.low) / bw : null, width: (p.ai.high - p.ai.low) / st, baseMid: (p.baseline.low + p.baseline.high) / 2 / st - 1 };
+  }
+  var GROUP_LABEL = { index: "Broad indexes", sector: "Sectors", intl: "International", other: "Bonds & commodities", stock: "Stocks" };
+  function renderAnalysisPage() {
+    var syms = symbols();
+    var latest = {};
+    syms.forEach(function (s) { latest[s] = latestByHorizon(forSymbol(s)); });
+    var hs = HORDER.filter(function (h) { return syms.some(function (s) { return latest[s].some(function (r) { return r.horizon === h; }); }); });
+    if (hs.indexOf(state.anH) < 0) state.anH = hs.indexOf("1m") >= 0 ? "1m" : hs[0];
+    seg2($("an-h"), hs.map(function (h) { return [h, HLABEL[h]]; }), "anH", renderAnalysisPage);
+    var groups = ["index", "sector", "intl", "other", "stock"].filter(function (g) { return syms.some(function (s) { return groupOf(s) === g; }); });
+    if (!state.anGroup) state.anGroup = "all";
+    seg2($("an-group"), [["all", "All"]].concat(groups.map(function (g) { return [g, GROUP_LABEL[g]]; })), "anGroup", renderAnalysisPage);
+
+    function rowsFor(h) {
+      var out = [];
+      syms.forEach(function (s) {
+        var p = latest[s].filter(function (r) { return r.horizon === h; })[0];
+        if (p) out.push({ s: s, p: p, m: anMetrics(p) });
+      });
+      return out;
+    }
+    var all = rowsFor(state.anH);
+    var data = state.anGroup === "all" ? all : all.filter(function (d) { return groupOf(d.s) === state.anGroup; });
+    function bullish(list) { return list.filter(function (d) { return d.m.up != null && d.m.up > 0.5; }).length; }
+    function withUp(list) { return list.filter(function (d) { return d.m.up != null; }).length; }
+    function share(list) { var n = withUp(list); return n ? Math.round(bullish(list) / n * 100) + "%" : "n/a"; }
+    function med(list, k) { return median(list.map(function (d) { return d.m[k]; })); }
+
+    var stats = $("an-stats"); clear(stats);
+    var ratioMed = med(data, "ratio");
+    [[data.length + "", "symbols with a " + HLABEL[state.anH] + " forecast"],
+     [share(data), "bullish (chance up above 50%)"],
+     [pct(med(data, "up")), "median chance up"],
+     [pc1(med(data, "drift")), "median implied drift"],
+     [ratioMed == null ? "n/a" : Math.round(ratioMed * 100) + "%", "median AI width vs baseline"]].forEach(function (c) {
+      var d = el("div", undefined, "an-stat"); d.appendChild(el("b", c[0])); d.appendChild(el("span", c[1])); stats.appendChild(d);
+    });
+
+    function fillGroups() {
+      var tb = $("an-groups"); clear(tb);
+      groups.forEach(function (g) {
+        var list = all.filter(function (d) { return groupOf(d.s) === g; });
+        if (!list.length) return;
+        var tr = el("tr"), r = med(list, "ratio");
+        tr.appendChild(el("td", GROUP_LABEL[g])); tr.appendChild(el("td", String(list.length)));
+        tr.appendChild(el("td", share(list))); tr.appendChild(el("td", pc1(med(list, "drift"))));
+        tr.appendChild(el("td", r == null ? "n/a" : Math.round(r * 100) + "%"));
+        tb.appendChild(tr);
+      });
+      var th = $("an-horizons"); clear(th);
+      hs.forEach(function (h) {
+        var list = rowsFor(h);
+        if (state.anGroup !== "all") list = list.filter(function (d) { return groupOf(d.s) === state.anGroup; });
+        if (!list.length) return;
+        var tr = el("tr"); tr.appendChild(el("td", HLABEL[h])); tr.appendChild(el("td", String(list.length)));
+        tr.appendChild(el("td", share(list))); tr.appendChild(el("td", pct(med(list, "up")))); tr.appendChild(el("td", pc1(med(list, "drift"))));
+        th.appendChild(tr);
+      });
+    }
+    fillGroups();
+
+    function list5(id, arr, valFn, cls) {
+      var tb = $(id); clear(tb);
+      arr.slice(0, 5).forEach(function (d) {
+        var tr = el("tr"), td = el("td"), a = el("a", d.s); a.href = "#" + d.s; td.appendChild(a); tr.appendChild(td);
+        tr.appendChild(el("td", NAMES[d.s] || "", "muted nm"));
+        var v = valFn(d); tr.appendChild(el("td", v[0], v[1] || ""));
+        tr.appendChild(el("td", d.m.up == null ? "" : pct(d.m.up) + " up", "muted"));
+        tb.appendChild(tr);
+      });
+      if (!arr.length) { var r0 = el("tr"); r0.appendChild(el("td", "No data", "muted")); tb.appendChild(r0); }
+    }
+    function dcls(d) { return d.m.drift >= 0 ? "an-up" : "an-down"; }
+    var byDrift = data.slice().sort(function (a, b) { return b.m.drift - a.m.drift; });
+    list5("an-top", byDrift, function (d) { return [pc1(d.m.drift), dcls(d)]; });
+    list5("an-bottom", byDrift.slice().reverse(), function (d) { return [pc1(d.m.drift), dcls(d)]; });
+    var byRatio = data.filter(function (d) { return d.m.ratio != null; }).sort(function (a, b) { return a.m.ratio - b.m.ratio; });
+    list5("an-narrow", byRatio, function (d) { return [Math.round(d.m.ratio * 100) + "% of baseline"]; });
+    list5("an-wide", byRatio.slice().reverse(), function (d) { return [Math.round(d.m.ratio * 100) + "% of baseline"]; });
+
+    // disagreement with the market
+    var dis = $("an-dis"); clear(dis);
+    data.slice().sort(function (a, b) { return Math.abs(b.m.drift - b.m.baseMid) - Math.abs(a.m.drift - a.m.baseMid); }).slice(0, 8).forEach(function (d) {
+      var gap = d.m.drift - d.m.baseMid, tr = el("tr"), td = el("td"), a = el("a", d.s); a.href = "#" + d.s; td.appendChild(a); tr.appendChild(td);
+      tr.appendChild(el("td", NAMES[d.s] || "", "muted nm"));
+      tr.appendChild(el("td", pc1(d.m.drift))); tr.appendChild(el("td", pc1(d.m.baseMid)));
+      tr.appendChild(el("td", (gap >= 0 ? "+" : "−") + Math.abs(gap * 100).toFixed(1) + " pts", gap >= 0 ? "an-up" : "an-down"));
+      tr.appendChild(el("td", d.m.ratio == null ? "n/a" : Math.round(d.m.ratio * 100) + "%"));
+      tr.appendChild(el("td", d.m.up == null ? "n/a" : pct(d.m.up)));
+      dis.appendChild(tr);
+    });
+
+    // change since the previous forecast for the same symbol and horizon
+    var chg = [];
+    data.forEach(function (d) {
+      var hist = forSymbol(d.s).filter(function (p) { return p.horizon === state.anH; }).sort(function (a, b) { return a.made_at < b.made_at ? -1 : a.made_at > b.made_at ? 1 : 0; });
+      if (hist.length < 2) return;
+      var cur = hist[hist.length - 1], prev = hist[hist.length - 2], a = anMetrics(cur), b = anMetrics(prev);
+      chg.push({ s: d.s, cur: cur, prev: prev, du: a.up != null && b.up != null ? a.up - b.up : null, dd: a.drift - b.drift, dw: a.width / b.width - 1 });
+    });
+    var ch = $("an-chg"), chh = $("an-chg-head"); clear(ch); clear(chh);
+    if (!chg.length) {
+      $("an-chg-note").textContent = "Every symbol has only one forecast at this horizon so far, so there is nothing to compare. This fills in after the next weekly run.";
+    } else {
+      var hr = el("tr");
+      ["Symbol", "", "Chance up", "Drift", "Range width", "Previous run"].forEach(function (t) { hr.appendChild(el("th", t)); });
+      chh.appendChild(hr);
+      chg.sort(function (x, y) { return (Math.abs(y.du || 0) * 3 + Math.abs(y.dd)) - (Math.abs(x.du || 0) * 3 + Math.abs(x.dd)); }).slice(0, 10).forEach(function (c) {
+        var tr = el("tr"), td = el("td"), a = el("a", c.s); a.href = "#" + c.s; td.appendChild(a); tr.appendChild(td);
+        tr.appendChild(el("td", NAMES[c.s] || "", "muted nm"));
+        tr.appendChild(el("td", c.du == null ? "n/a" : (c.du >= 0 ? "+" : "−") + Math.abs(Math.round(c.du * 100)) + " pts", c.du > 0 ? "an-up" : c.du < 0 ? "an-down" : ""));
+        tr.appendChild(el("td", (c.dd >= 0 ? "+" : "−") + Math.abs(c.dd * 100).toFixed(1) + " pts", c.dd > 0 ? "an-up" : c.dd < 0 ? "an-down" : ""));
+        tr.appendChild(el("td", (c.dw >= 0 ? "+" : "−") + Math.abs(Math.round(c.dw * 100)) + "%"));
+        tr.appendChild(el("td", fmtDate(c.prev.made_at), "muted"));
+        ch.appendChild(tr);
+      });
+      $("an-chg-note").textContent = "Latest forecast vs the one before it, " + HLABEL[state.anH] + " horizon. Chance up and drift are in percentage points; width is the relative change in range size. Biggest movers first.";
+    }
+
+    var ck = $("an-checks"); clear(ck);
+    function addCheck(ok, text, items) {
+      var li = el("li"); li.appendChild(el("b", ok ? "OK" : "Look", ok ? "an-up" : "an-down"));
+      var sp = el("span", text); if (items && items.length) sp.appendChild(el("small", "  " + items.join(", "), "muted"));
+      li.appendChild(sp); ck.appendChild(li);
+    }
+    var mism = data.filter(function (d) { return d.m.up != null && ((d.m.up > 0.5 && d.m.drift < 0) || (d.m.up < 0.5 && d.m.drift > 0)); });
+    addCheck(!mism.length, mism.length ? mism.length + " forecast(s) where chance up and the range midpoint disagree on direction." : "Chance up agrees with the range midpoint for every symbol.", mism.map(function (d) { return d.s; }));
+    var allAt = {};
+    var nest = [];
+    syms.forEach(function (s) {
+      var rs = latest[s].map(function (p) { return { h: p.horizon, w: p.ai.high - p.ai.low, st: p.price_at_prediction }; });
+      for (var i = 1; i < rs.length; i++) if (rs[i].w / rs[i].st < rs[i - 1].w / rs[i - 1].st) { nest.push(s); break; }
+    });
+    addCheck(!nest.length, nest.length ? nest.length + " symbol(s) whose range is narrower at a longer horizon than a shorter one." : "Ranges widen with horizon for every symbol.", nest);
+    var tight = data.filter(function (d) { return d.m.ratio != null && d.m.ratio < 0.6; }).map(function (d) { return d.s; });
+    addCheck(!tight.length, tight.length ? tight.length + " range(s) under 60% of the baseline width: a strong claim to beat the market." : "No range is far tighter than the baseline.", tight);
+    var earn = data.filter(function (d) { return earningsIn(d.p); });
+    var noEarn = data.filter(function (d) { return !earningsIn(d.p); });
+    var me = med(earn, "width"), mn = med(noEarn, "width");
+    addCheck(true, earn.length + " of " + data.length + " forecasts include an earnings date." + (me != null && mn != null ? " Median range width " + (me * 100).toFixed(1) + "% with earnings vs " + (mn * 100).toFixed(1) + "% without." : ""), []);
+    var tot = 0, unsrc = 0;
+    data.forEach(function (d) {
+      var c = d.p.catalysts || {};
+      ["bull", "base", "bear"].forEach(function (k) { (c[k] || []).forEach(function (it) { tot++; if (!it.source) unsrc++; }); });
+    });
+    addCheck(true, tot ? Math.round((tot - unsrc) / tot * 100) + "% of catalysts cite a source; " + unsrc + " are the model's own expectation." : "No catalysts listed.", []);
+  }
+
   function render() {
     var syms = symbols();
     var status = $("status"), outlook = $("outlook");
@@ -2112,8 +2322,20 @@ th { font-weight: 700; font-size: 12.5px; color: var(--muted-2); }
       return;
     }
     var wanted = decodeURIComponent((location.hash || "").replace("#", ""));
-    state.view = wanted === "scorecard" ? "scorecard" : wanted.indexOf("compare") === 0 ? "compare" : null;
+    state.view = wanted === "scorecard" ? "scorecard" : wanted.indexOf("compare") === 0 ? "compare" : wanted === "analysis" ? "analysis" : null;
     $("scorecard").hidden = state.view !== "scorecard";
+    $("analysis").hidden = state.view !== "analysis";
+    $("compare").hidden = state.view !== "compare";
+    if (state.view === "analysis") {
+      state.symbol = null;
+      status.hidden = true; outlook.hidden = true; $("home").hidden = true;
+      renderTabs();
+      $("sym-title").textContent = "Analysis";
+      $("sym-name").textContent = "What the AI forecasts say across every symbol";
+      $("sym-price").hidden = true;
+      renderAnalysisPage();
+      return;
+    }
     $("compare").hidden = state.view !== "compare";
     if (state.view === "compare") {
       state.symbol = null;
