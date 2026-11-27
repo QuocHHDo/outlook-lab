@@ -121,6 +121,9 @@ h1, h2, h3, h4 { margin: 0; }
 .nums .sub { font-size: 12px; color: var(--muted); }
 .ai-k { font-weight: 600; color: var(--accent-ink); }
 .alt { color: var(--soft); }
+.hmore { margin-top: 4px; font-size: 12px; }
+.hmore summary { cursor: pointer; color: var(--muted); }
+.hmore > span { display: block; margin-top: 2px; }
 .record { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px; background: var(--panel); border-radius: 8px; padding: 12px 16px; }
 .record p { font-size: 13px; }
 .record a { font-size: 13px; font-weight: 500; }
@@ -353,6 +356,7 @@ h1, h2, h3, h4, .tile b, .hc-top b, .cal b, .price { font-family: var(--display)
 .tile .wk u { position: absolute; top: 0; bottom: 0; width: 1px; background: rgba(255,255,255,.75); }
 .tile .wk s { position: absolute; top: 1px; height: 6px; background: #fff; border-radius: 1px; text-decoration: none; }
 .tile.xs .wk { display: none; }
+.tile .nm { position: absolute; left: 11px; right: 11px; bottom: 21px; font-size: 11px; line-height: 1.2; opacity: .85; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; pointer-events: none; }
 .scalebar i { background: linear-gradient(90deg, oklch(0.5 0.17 28), oklch(0.42 0.03 250), oklch(0.5 0.11 175)); }
 .cal > div { background: transparent; border-left: 3px solid var(--line); border-radius: 0; padding: 4px 0 4px 12px; }
 .cal b { font-size: 22px; letter-spacing: -0.02em; }
@@ -452,6 +456,23 @@ th { font-weight: 700; font-size: 12.5px; color: var(--muted-2); }
 @media (max-width: 640px) { .symmenu { position: static; } .sympanel { left: 0; right: 0; width: auto; } .symgrid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 @media (prefers-reduced-motion: reduce) { .tile.enter { animation: none; } }
 @media (max-width: 560px) { .tmap { height: 560px; } .head h1 { font-size: 36px; } }
+
+.cmp-controls { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+.cmp-chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.cmp-chip { display: inline-flex; align-items: center; gap: 6px; min-height: 34px; padding: 0 6px 0 10px; border: 1px solid var(--line); border-radius: 999px; font-size: 13px; font-weight: 600; background: var(--card); }
+.cmp-chip i { width: 10px; height: 10px; border-radius: 50%; display: inline-block; }
+.cmp-chip button { font: inherit; border: 0; background: transparent; color: var(--muted); cursor: pointer; width: 24px; height: 24px; border-radius: 50%; }
+.cmp-chip button:hover { background: var(--panel); color: var(--ink); }
+.cmp-add { font: inherit; font-size: 13px; min-height: 34px; padding: 0 10px; border: 1px solid var(--line); border-radius: 8px; background: var(--card); color: var(--ink); }
+#cmp-chart svg { width: 100%; height: auto; display: block; }
+#cmp-chart text { fill: var(--muted); font-size: 11px; font-family: inherit; }
+#cmp-chart .lbl { font-weight: 600; font-size: 12px; }
+.cmp-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+.cmp-table th, .cmp-table td { text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--line-2); white-space: nowrap; }
+.cmp-table th { color: var(--muted); font-weight: 500; font-size: 12px; }
+.cmp-table td:first-child a { color: var(--ink); font-weight: 600; text-decoration: none; }
+.cmp-table .sw { width: 10px; height: 10px; border-radius: 50%; display: inline-block; margin-right: 8px; }
+.cmp-scroll { overflow-x: auto; }
 </style>
 </head>
 <body>
@@ -504,6 +525,20 @@ th { font-weight: 700; font-size: 12.5px; color: var(--muted-2); }
     <ul id="home-events" class="mini-ev"></ul>
   </div>
   <div class="record"><p id="home-record"></p><a href="#all-predictions" id="home-all">Pick a symbol for scores →</a></div>
+</section>
+
+<section id="compare" class="card" aria-label="Compare forecasts" hidden>
+  <div class="card-head">
+    <div>
+      <h2 style="margin:0;font-size:18px">Compare forecasts</h2>
+      <p class="muted" style="font-size:13px;margin:4px 0 0">Every line starts at 0% on the day its forecast was made, so symbols with different prices sit on one scale. The shaded area is the AI 80% range at the end of the horizon.</p>
+    </div>
+    <div id="cmp-h" class="horizon-pick" role="group" aria-label="Horizon"></div>
+  </div>
+  <div class="cmp-controls"><div id="cmp-chips" class="cmp-chips"></div><select id="cmp-add" class="cmp-add" aria-label="Add a symbol"></select></div>
+  <div id="cmp-chart"></div>
+  <div class="cmp-scroll"><table class="cmp-table"><thead><tr><th>Symbol</th><th>Start</th><th>AI range</th><th>AI move</th><th>Baseline move</th><th>AI vs baseline width</th><th>Chance up</th><th>Resolves</th></tr></thead><tbody id="cmp-body"></tbody></table></div>
+  <p class="muted" style="font-size:12px;margin:0">The past line is the actual close. Only the end of the cone is forecast; the curve between is drawn at the usual square-root-of-time widening for illustration. Not financial advice.</p>
 </section>
 
 <section id="scorecard" class="card" aria-label="Scorecard" hidden>
@@ -690,11 +725,14 @@ th { font-weight: 700; font-size: 12.5px; color: var(--muted-2); }
     clear(nav);
     var syms = symbols();
     var home = el("a", "Overview"); home.href = "#home";
-    if (!state.symbol && state.view !== "scorecard") home.setAttribute("aria-current", "page");
+    if (!state.symbol && !state.view) home.setAttribute("aria-current", "page");
     nav.appendChild(home);
     var sc = el("a", "Scorecard"); sc.href = "#scorecard";
     if (state.view === "scorecard") sc.setAttribute("aria-current", "page");
     nav.appendChild(sc);
+    var cm = el("a", "Compare"); cm.href = "#compare";
+    if (state.view === "compare") cm.setAttribute("aria-current", "page");
+    nav.appendChild(cm);
 
     var wrap = el("div", undefined, "symmenu");
     var btn = el("button", state.symbol ? state.symbol : "Symbols"); btn.type = "button"; btn.className = "symbtn";
@@ -705,7 +743,7 @@ th { font-weight: 700; font-size: 12.5px; color: var(--muted-2); }
     var input = el("input"); input.type = "search"; input.placeholder = "Find a symbol or company"; input.setAttribute("aria-label", "Find a symbol or company");
     panel.appendChild(input);
     var groups = el("div", undefined, "symgroups");
-    var labels = { index: "Indexes", sector: "Sectors", other: "Bonds and gold", stock: "Stocks" };
+    var labels = { index: "Indexes", sector: "Sectors", other: "Bonds and commodities", stock: "Stocks" };
     var order = ["index", "sector", "stock", "other"], links = [];
     order.forEach(function (g) {
       var members = syms.filter(function (x) { return groupOf(x) === g; });
@@ -867,6 +905,7 @@ th { font-weight: 700; font-size: 12.5px; color: var(--muted-2); }
       a.appendChild(el("b", d.s));
       a.appendChild(el("span", up != null ? pct(up) + " up" : ""));
       a.appendChild(el("span", moveText(p.ai, st)));
+      if (NAMES[d.s] && t.w >= 110 && t.h >= 104) a.appendChild(el("span", NAMES[d.s], "nm"));
       var wk = el("div", undefined, "wk"); wk.setAttribute("aria-hidden", "true");
       var pos = function (v) { return Math.max(0, Math.min(100, (v / st - 1) / (2 * mx) * 100 + 50)); };
       var lo = pos(p.ai.low), hi = pos(p.ai.high);
@@ -880,9 +919,9 @@ th { font-weight: 700; font-size: 12.5px; color: var(--muted-2); }
 
   function groupOf(s) {
     if (s === "SPY" || s === "QQQ" || s === "IWM") return "index";
-    if (/^XL/.test(s) || s === "SMH") return "sector";
+    if (/^XL/.test(s) || s === "SMH" || s === "XBI" || s === "KRE" || s === "ITB") return "sector";
     if (s === "EFA" || s === "EEM") return "intl";
-    if (s === "TLT" || s === "GLD" || s === "HYG") return "other";
+    if (s === "TLT" || s === "IEF" || s === "HYG" || s === "GLD" || s === "SLV" || s === "USO" || s === "IBIT") return "other";
     return "stock";
   }
   function seg2(host, opts, key, after) {
@@ -1440,7 +1479,7 @@ th { font-weight: 700; font-size: 12.5px; color: var(--muted-2); }
     if (!state.homeSize) state.homeSize = "width";
     seg($("home-view"), [["map", "Map"], ["cards", "Cards"]], "homeView");
     seg($("home-size"), [["width", "Size: AI range width"]].concat(state.meta && state.meta.market_cap ? [["cap", "Size: market value"]] : []).concat([["equal", "Size: equal"]]), "homeSize");
-    seg2($("home-group"), [["all", "All"], ["index", "Broad indexes"], ["sector", "Sectors"], ["other", "Bonds & gold"]].concat(per.some(function (d) { return groupOf(d.s) === "intl"; }) ? [["intl", "International"]] : []).concat(per.some(function (d) { return groupOf(d.s) === "stock"; }) ? [["stock", "Stocks"]] : []), "homeGroup", renderHome);
+    seg2($("home-group"), [["all", "All"], ["index", "Broad indexes"], ["sector", "Sectors"], ["other", "Bonds & commodities"]].concat(per.some(function (d) { return groupOf(d.s) === "intl"; }) ? [["intl", "International"]] : []).concat(per.some(function (d) { return groupOf(d.s) === "stock"; }) ? [["stock", "Stocks"]] : []), "homeGroup", renderHome);
     seg2($("home-sort"), [["default", "Sort: default"], ["up", "Sort: chance up"], ["width", "Sort: widest range"]], "homeSort", renderHome);
     if (state.homeGroup !== "all") data = data.filter(function (d) { return groupOf(d.s) === state.homeGroup; });
     var isMap = state.homeView === "map";
@@ -1531,21 +1570,23 @@ th { font-weight: 700; font-size: 12.5px; color: var(--muted-2); }
       var nums = el("div", undefined, "nums");
       var l1 = el("span"); l1.appendChild(el("span", "AI", "ai-k")); l1.appendChild(document.createTextNode(" " + range(p.ai)));
       nums.appendChild(l1);
-      nums.appendChild(el("span", "vs start " + money(p.price_at_prediction) + ": " + lowHigh(p.ai, p.price_at_prediction), "sub"));
       var lc = !p.result && latestClose(p.symbol);
-      if (lc && Math.abs(lc.price / p.price_at_prediction - 1) >= 0.0005) {
-        nums.appendChild(el("span", "vs latest close " + money(lc.price) + " (" + fmtDate(lc.date) + "): " + lowHigh(p.ai, lc.price), "sub"));
-      }
-      nums.appendChild(el("span", "Baseline " + range(p.baseline), "alt"));
-      if (p.baseline_drift) nums.appendChild(el("span", "Drift baseline " + range(p.baseline_drift), "alt"));
+      var useLc = lc && Math.abs(lc.price / p.price_at_prediction - 1) >= 0.0005;
+      nums.appendChild(el("span", lowHigh(p.ai, useLc ? lc.price : p.price_at_prediction) + " vs " + (useLc ? "latest close" : "start"), "sub"));
+      var more = el("details", undefined, "hmore");
+      more.appendChild(el("summary", "Details"));
+      more.appendChild(el("span", "vs start " + money(p.price_at_prediction) + ": " + lowHigh(p.ai, p.price_at_prediction), "sub"));
+      if (useLc) more.appendChild(el("span", "vs latest close " + money(lc.price) + " (" + fmtDate(lc.date) + "): " + lowHigh(p.ai, lc.price), "sub"));
+      more.appendChild(el("span", "Baseline " + range(p.baseline), "alt"));
+      if (p.baseline_drift) more.appendChild(el("span", "Drift baseline " + range(p.baseline_drift), "alt"));
+      more.appendChild(el("span", "Baseline chance above start 50%", "alt"));
+      nums.appendChild(more);
       row.appendChild(nums);
 
       var up = el("div", undefined, "nums");
-      up.appendChild(el("span", "Chance above start", "sub"));
+      var upl = el("span", "Chance above start", "sub"); upl.title = "50% is a coin flip, which is what the baseline assumes."; up.appendChild(upl);
       var l2 = el("span");
       l2.appendChild(el("span", "AI " + pct(p.ai.prob_up), "ai-k"));
-      l2.appendChild(document.createTextNode(" · "));
-      l2.appendChild(el("span", "baseline 50%", "alt"));
       up.appendChild(l2);
       row.appendChild(up);
       host.appendChild(row);
@@ -1936,6 +1977,132 @@ th { font-weight: 700; font-size: 12.5px; color: var(--muted-2); }
     });
   }
 
+  var CMP_COLORS = ["oklch(0.62 0.17 264)", "oklch(0.64 0.17 35)", "oklch(0.62 0.14 155)", "oklch(0.7 0.14 85)", "oklch(0.6 0.18 325)", "oklch(0.64 0.11 205)"];
+  var CMP_MAX = CMP_COLORS.length;
+  function cmpHash() {
+    var h = "#compare/" + state.cmpSyms.join(",") + (state.cmpH ? "/" + state.cmpH : "");
+    if (location.hash !== h) history.replaceState(null, "", h);
+  }
+  function cmpRedo() { cmpHash(); renderCompare(location.hash.replace("#", "")); }
+  function dayMs(iso) { return Date.parse(iso + "T00:00:00Z"); }
+  function renderCompare(wanted) {
+    var parts = wanted.split("/");
+    var avail = symbols();
+    if (!state.cmpInit || parts[1]) {
+      var want = (parts[1] || "SPY,QQQ,SMH,NVDA").split(",").filter(function (x) { return avail.indexOf(x) >= 0; });
+      state.cmpSyms = want.slice(0, CMP_MAX);
+      if (parts[2] && HLABEL[parts[2]]) state.cmpH = parts[2];
+      state.cmpInit = true;
+    }
+    var allH = HORDER.filter(function (h) { return avail.some(function (s) { return latestByHorizon(forSymbol(s)).some(function (r) { return r.horizon === h; }); }); });
+    if (allH.indexOf(state.cmpH) < 0) state.cmpH = allH.indexOf("1m") >= 0 ? "1m" : allH[0];
+    seg2($("cmp-h"), allH.map(function (h) { return [h, HLABEL[h]]; }), "cmpH", cmpRedo);
+
+    var chips = $("cmp-chips"); clear(chips);
+    state.cmpSyms.forEach(function (s, i) {
+      var c = el("span", undefined, "cmp-chip");
+      var dot = el("i"); dot.style.background = CMP_COLORS[i]; c.appendChild(dot);
+      c.appendChild(document.createTextNode(s));
+      var x = el("button", "×"); x.type = "button"; x.setAttribute("aria-label", "Remove " + s);
+      x.addEventListener("click", function () { state.cmpSyms.splice(i, 1); cmpRedo(); });
+      c.appendChild(x); chips.appendChild(c);
+    });
+    var add = $("cmp-add"); clear(add);
+    var full = state.cmpSyms.length >= CMP_MAX;
+    add.disabled = full;
+    var o0 = el("option", full ? "Up to " + CMP_MAX + " symbols" : "Add a symbol…"); o0.value = ""; add.appendChild(o0);
+    avail.filter(function (s) { return state.cmpSyms.indexOf(s) < 0; }).forEach(function (s) {
+      var o = el("option", s + (NAMES[s] ? " – " + NAMES[s] : "")); o.value = s; add.appendChild(o);
+    });
+    add.onchange = function () {
+      if (add.value && state.cmpSyms.length < CMP_MAX) { state.cmpSyms.push(add.value); cmpRedo(); }
+    };
+
+    var data = [];
+    state.cmpSyms.forEach(function (s, i) {
+      var p = latestByHorizon(forSymbol(s)).filter(function (r) { return r.horizon === state.cmpH; })[0];
+      if (p) data.push({ s: s, p: p, color: CMP_COLORS[i] });
+    });
+
+    var host = $("cmp-chart"); clear(host);
+    var body = $("cmp-body"); clear(body);
+    if (!data.length) { host.appendChild(el("p", "Pick at least one symbol with a forecast for this horizon.", "muted")); return; }
+
+    var t0 = Math.max.apply(null, data.map(function (d) { return dayMs(d.p.made_at); }));
+    var t1 = Math.max.apply(null, data.map(function (d) { return dayMs(d.p.resolves_on); }));
+    var span = t1 - t0, tmin = t0 - span * 1.2;
+    var W = Math.max(host.clientWidth || 760, 320), H = W < 560 ? 320 : 400;
+    var m = { l: 46, r: W < 560 ? 52 : 70, t: 14, b: 26 };
+    var lines = data.map(function (d) {
+      var st = d.p.price_at_prediction, ser = state.prices[d.s] || {}, pts = [];
+      Object.keys(ser).sort().forEach(function (dt) {
+        var ms = dayMs(dt);
+        if (ms >= tmin && dt < d.p.made_at) pts.push([ms, ser[dt] / st - 1]);
+      });
+      pts.push([dayMs(d.p.made_at), 0]);
+      return pts;
+    });
+    var vals = [0];
+    lines.forEach(function (l) { l.forEach(function (q) { vals.push(q[1]); }); });
+    data.forEach(function (d) { var st = d.p.price_at_prediction; vals.push(d.p.ai.low / st - 1, d.p.ai.high / st - 1); });
+    var lo = Math.min.apply(null, vals), hi = Math.max.apply(null, vals), pad = (hi - lo) * 0.06 || 0.01;
+    lo -= pad; hi += pad;
+    function X(ms) { return m.l + (ms - tmin) / (t1 - tmin) * (W - m.l - m.r); }
+    function Y(v) { return m.t + (hi - v) / (hi - lo) * (H - m.t - m.b); }
+    var svg = svgEl("svg", { viewBox: "0 0 " + W + " " + H, role: "img", "aria-label": "Rebased price history and AI forecast ranges for " + data.map(function (d) { return d.s; }).join(", ") });
+    var stepP = [0.005, 0.01, 0.02, 0.025, 0.05, 0.1, 0.2, 0.5], sp = 1;
+    for (var i = 0; i < stepP.length; i++) { if ((hi - lo) / stepP[i] <= 7) { sp = stepP[i]; break; } }
+    for (var v = Math.ceil(lo / sp) * sp; v <= hi + 1e-9; v += sp) {
+      var yv = Y(v), isZ = Math.abs(v) < 1e-9;
+      var ga = { x1: m.l, x2: W - m.r, y1: yv, y2: yv, stroke: isZ ? "var(--muted)" : "var(--line-2)", "stroke-width": isZ ? 1.2 : 1 };
+      if (isZ) ga["stroke-dasharray"] = "4 3";
+      svg.appendChild(svgEl("line", ga));
+      var tl = svgEl("text", { x: m.l - 6, y: yv + 4, "text-anchor": "end" });
+      tl.textContent = (v > 0.0000001 ? "+" : v < -0.0000001 ? "−" : "") + Math.abs(v * 100).toFixed(sp < 0.01 ? 1 : 0) + "%";
+      svg.appendChild(tl);
+    }
+    [[tmin, "start"], [t0, "mid"], [t1, "end"]].forEach(function (a) {
+      var tx = svgEl("text", { x: X(a[0]), y: H - 8, "text-anchor": a[1] === "start" ? "start" : a[1] === "end" ? "end" : "middle" });
+      tx.textContent = a[1] === "mid" ? "Forecast made" : new Date(a[0]).toLocaleDateString("en-US", { month: "short", day: "numeric", timeZone: "UTC" });
+      svg.appendChild(tx);
+    });
+    svg.appendChild(svgEl("line", { x1: X(t0), x2: X(t0), y1: m.t, y2: H - m.b, stroke: "var(--line)", "stroke-width": 1 }));
+    var ends = [];
+    data.forEach(function (d, i) {
+      var st = d.p.price_at_prediction, a = dayMs(d.p.made_at), b = dayMs(d.p.resolves_on);
+      var l = d.p.ai.low / st - 1, h = d.p.ai.high / st - 1, up = [], dn = [];
+      for (var k = 0; k <= 16; k++) {
+        var f = k / 16, r = Math.sqrt(f), x = X(a + f * (b - a));
+        up.push(x.toFixed(1) + "," + Y(h * r).toFixed(1)); dn.unshift(x.toFixed(1) + "," + Y(l * r).toFixed(1));
+      }
+      svg.appendChild(svgEl("polygon", { points: up.concat(dn).join(" "), fill: d.color, "fill-opacity": 0.16, stroke: d.color, "stroke-opacity": 0.7, "stroke-width": 1.2 }));
+      var pts = lines[i];
+      if (pts.length > 1) svg.appendChild(svgEl("polyline", { points: pts.map(function (q) { return X(q[0]).toFixed(1) + "," + Y(q[1]).toFixed(1); }).join(" "), fill: "none", stroke: d.color, "stroke-width": 1.8, "stroke-linejoin": "round" }));
+      ends.push({ y: Y((l + h) / 2), d: d, x: X(b) });
+    });
+    ends.sort(function (a, b) { return a.y - b.y; });
+    for (var j = 1; j < ends.length; j++) if (ends[j].y - ends[j - 1].y < 14) ends[j].y = ends[j - 1].y + 14;
+    ends.forEach(function (e) {
+      var tx = svgEl("text", { x: e.x + 6, y: e.y + 4 }, "lbl"); tx.style.fill = e.d.color; tx.textContent = e.d.s; svg.appendChild(tx);
+    });
+    host.appendChild(svg);
+
+    data.forEach(function (d) {
+      var p = d.p, st = p.price_at_prediction, tr = el("tr");
+      var c0 = el("td"), sw = el("i", undefined, "sw"); sw.style.background = d.color;
+      var a = el("a", d.s); a.href = "#" + d.s; c0.appendChild(sw); c0.appendChild(a); tr.appendChild(c0);
+      tr.appendChild(el("td", money(st)));
+      tr.appendChild(el("td", range(p.ai)));
+      tr.appendChild(el("td", moveText(p.ai, st)));
+      tr.appendChild(el("td", moveText(p.baseline, st)));
+      var bw = p.baseline.high - p.baseline.low;
+      tr.appendChild(el("td", bw > 0 ? Math.round((p.ai.high - p.ai.low) / bw * 100) + "%" : "n/a"));
+      tr.appendChild(el("td", p.ai.prob_up != null ? pct(p.ai.prob_up) : "n/a"));
+      tr.appendChild(el("td", fmtDate(p.resolves_on)));
+      body.appendChild(tr);
+    });
+  }
+
   function render() {
     var syms = symbols();
     var status = $("status"), outlook = $("outlook");
@@ -1945,8 +2112,19 @@ th { font-weight: 700; font-size: 12.5px; color: var(--muted-2); }
       return;
     }
     var wanted = decodeURIComponent((location.hash || "").replace("#", ""));
-    state.view = wanted === "scorecard" ? "scorecard" : null;
+    state.view = wanted === "scorecard" ? "scorecard" : wanted.indexOf("compare") === 0 ? "compare" : null;
     $("scorecard").hidden = state.view !== "scorecard";
+    $("compare").hidden = state.view !== "compare";
+    if (state.view === "compare") {
+      state.symbol = null;
+      status.hidden = true; outlook.hidden = true; $("home").hidden = true;
+      renderTabs();
+      $("sym-title").textContent = "Compare";
+      $("sym-name").textContent = "Forecast ranges side by side, as % moves from each start price";
+      $("sym-price").hidden = true;
+      renderCompare(wanted);
+      return;
+    }
     if (state.view === "scorecard") {
       state.symbol = null;
       status.hidden = true; outlook.hidden = true; $("home").hidden = true;
@@ -1989,7 +2167,7 @@ th { font-weight: 700; font-size: 12.5px; color: var(--muted-2); }
     e.preventDefault();
     $("all").scrollIntoView({ behavior: "smooth", block: "start" });
   });
-  window.addEventListener("resize", function () { if (!$("home").hidden && state.homeView === "map") renderHome(); });
+  window.addEventListener("resize", function () { if (!$("home").hidden && state.homeView === "map") renderHome(); if (!$("compare").hidden) renderCompare(location.hash.replace("#", "")); });
   window.addEventListener("hashchange", function () { state.horizon = state.fromHome || null; state.fromHome = null; render(); window.scrollTo(0, 0); });
 
   Promise.all([
