@@ -55,24 +55,21 @@
     <div class="filters">
       <div id="home-group" class="horizon-pick" role="group" aria-label="Which symbols"></div>
       <div id="home-sort" class="horizon-pick" role="group" aria-label="Sort cards"></div>
+      <a id="home-cmp" class="cmp-link" hidden>Compare watched</a>
     </div>
     <div id="home-map" class="tmap" role="img" aria-label="Treemap of AI chance of going up, by symbol"></div>
     <div id="home-grid" class="hgrid"></div>
     <p class="muted" style="font-size:12px">Map: color is the AI's chance of finishing up (teal above 50%, red below, gray near 50%). The white bar in each tile is the AI's 80% range on one shared scale, with the thin line marking the price when predicted. Tile size is the AI's range width (how uncertain the forecast is), or market value (square root of market cap for stocks, fund size for ETFs, so mega-caps do not swallow the map) when you pick that option. Fund size and stock market cap are not comparable measures, so treat the map as a picture, not a ranking. Cards: all share one scale, so ranges compare directly. Click any tile or card for the full analysis.</p>
   </div>
   <div class="section">
-    <h3 class="eyebrow">What changed</h3>
-    <div id="home-changes"></div>
-  </div>
-  <div class="section">
-    <h3 class="eyebrow">Calibration: are the ranges honest?</h3>
-    <div id="home-cal"></div>
+    <h3 class="eyebrow">Status</h3>
+    <div id="home-brief"></div>
   </div>
   <div class="section">
     <h3 class="eyebrow">Coming up, across the market</h3>
     <ul id="home-events" class="mini-ev"></ul>
   </div>
-  <div class="record"><p id="home-record"></p><a href="#all-predictions" id="home-all">Pick a symbol for scores →</a></div>
+  <div class="record"><p id="home-record"></p><a href="#predictions" id="home-all">All predictions →</a></div>
 </section>
 
 <section id="analysis" class="card" aria-label="Analysis of all forecasts" hidden>
@@ -90,16 +87,9 @@
     <div class="an-card"><h3>By horizon (all symbols)</h3><div class="cmp-scroll"><table class="an-table"><thead><tr><th>Horizon</th><th>Symbols</th><th>Bullish</th><th>Median chance up</th><th>Median drift</th></tr></thead><tbody id="an-horizons"></tbody></table></div><p class="an-note">If short horizons lean bearish and long ones bullish, the AI expects a dip before recovery.</p></div>
   </div>
   <div class="an-card"><h3>Heatmap: every symbol and horizon</h3><div id="an-metric" class="horizon-pick" role="group" aria-label="Heatmap metric"></div><div class="cmp-scroll"><div id="an-heat" class="an-heat"></div></div><p class="an-note" id="an-heat-note"></p></div>
-  <div class="an-cols">
-    <div class="an-card"><h3>Most bullish (highest implied drift)</h3><table class="an-table"><tbody id="an-top"></tbody></table></div>
-    <div class="an-card"><h3>Most bearish (lowest implied drift)</h3><table class="an-table"><tbody id="an-bottom"></tbody></table></div>
-  </div>
-  <div class="an-cols">
-    <div class="an-card"><h3>Most confident vs the market</h3><table class="an-table"><tbody id="an-narrow"></tbody></table><p class="an-note">AI range narrower than the options-implied baseline.</p></div>
-    <div class="an-card"><h3>Sees more risk than the market</h3><table class="an-table"><tbody id="an-wide"></tbody></table><p class="an-note">AI range wider than the baseline.</p></div>
-  </div>
   <div class="an-card"><h3>What changed since the last run</h3><div class="cmp-scroll"><table class="an-table"><thead id="an-chg-head"></thead><tbody id="an-chg"></tbody></table></div><p class="an-note" id="an-chg-note"></p></div>
-  <div class="an-card"><h3>Where the AI disagrees with the market</h3><div class="cmp-scroll"><table class="an-table"><thead><tr><th>Symbol</th><th></th><th>AI drift</th><th>Baseline drift</th><th>Gap</th><th>AI width vs baseline</th><th>Chance up</th></tr></thead><tbody id="an-dis"></tbody></table></div><p class="an-note">Ranked by the gap between the AI median and the options-implied baseline median, in percentage points. A large gap is a real directional view; a small one means the AI is mostly echoing the market.</p></div>
+  <div class="an-card"><h3>Where the AI disagrees with the market</h3><div class="cmp-scroll"><table class="an-table an-sort"><thead id="an-dis-head"></thead><tbody id="an-dis"></tbody></table></div><div class="an-foot"><button id="an-dis-more" type="button" class="an-more"></button></div><p class="an-note" id="an-dis-note"></p></div>
+  <div class="an-card" id="an-street-card" hidden><h3>AI vs Wall Street (stocks, 1 year)</h3><div class="cmp-scroll"><table class="an-table"><thead><tr><th>Symbol</th><th></th><th>Analysts</th><th>Street mean target</th><th>Street vs close</th><th>AI 1y median</th><th>AI vs close</th><th>Gap</th></tr></thead><tbody id="an-street"></tbody></table></div><p class="an-note" id="an-street-note"></p></div>
   <div class="an-card"><h3>Checks</h3><ul id="an-checks" class="mini-ev"></ul></div>
   <p class="muted" style="font-size:12px;margin:0">Implied drift is the AI median, the geometric middle of its range (√(low × high)), as a % move from the start price. A plain midpoint would overstate long-horizon drift because price ranges are skewed upward. Bullish means the chance of finishing up is above 50%. Not financial advice.</p>
 </section>
@@ -118,16 +108,38 @@
   <p class="muted" style="font-size:12px;margin:0">The past line is the actual close. Only the end of the cone is forecast; the curve between is drawn at the usual square-root-of-time widening for illustration. Not financial advice.</p>
 </section>
 
-<section id="watchlist" class="card" aria-label="Watchlist" hidden>
+
+<section id="predictions" class="card" aria-label="All predictions" hidden>
   <div class="card-head">
-    <div class="title-row"><h2>Watchlist</h2><span class="chip">Saved in this browser only</span></div>
-    <p id="wl-updated" class="muted" style="font-size:12px"></p>
+    <div class="title-row"><h2>All predictions</h2><span class="chip">Every forecast is kept, including misses</span></div>
+    <p id="pd-updated" class="muted" style="font-size:12px"></p>
   </div>
   <div class="section">
-    <div id="wl-pick" class="horizon-pick" role="group" aria-label="Horizon for the watchlist"></div>
-    <div class="wl-add"><select id="wl-select" aria-label="Add a symbol"></select><button id="wl-addbtn" type="button">Add to watchlist</button><a id="wl-compare" class="cmp-link" hidden>Compare all</a></div>
-    <div id="wl-grid" class="hgrid"></div>
-    <p id="wl-empty" class="wl-empty" hidden>Nothing saved yet. Pick a symbol above, or press “Watch” on any symbol page.</p>
+    <div class="pd-bar">
+      <select id="pd-sym" aria-label="Symbol"></select>
+      <select id="pd-made" aria-label="Date made"></select>
+      <button id="pd-csv" type="button">Download CSV</button>
+    </div>
+    <div class="filters">
+      <div id="pd-h" class="horizon-pick" role="group" aria-label="Horizon"></div>
+      <div id="pd-status" class="horizon-pick" role="group" aria-label="Status"></div>
+      <div id="pd-blind" class="horizon-pick" role="group" aria-label="Blind or not"></div>
+    </div>
+    <p id="pd-count" class="muted" style="font-size:13px;margin:0"></p>
+    <div class="tablewrap">
+      <table>
+        <thead>
+          <tr>
+            <th scope="col">Made</th><th scope="col">Symbol</th><th scope="col">Horizon</th><th scope="col">Start</th>
+            <th scope="col">AI range</th><th scope="col">Chance up</th><th scope="col">Baseline range</th>
+            <th scope="col">Close at horizon</th><th scope="col">AI</th><th scope="col">Baseline</th><th scope="col">Blind</th>
+          </tr>
+        </thead>
+        <tbody id="pd-body"></tbody>
+      </table>
+    </div>
+    <div class="an-foot"><button id="pd-more" type="button" class="an-more" hidden></button></div>
+    <p class="muted" style="font-size:12px;margin:0">Open forecasts show their due date. Held means the close landed inside the 80% range. Blind forecasts were locked in a public commit before any baseline was computed. The CSV holds the rows matching the current filters. Not financial advice.</p>
   </div>
 </section>
 
@@ -179,7 +191,7 @@
     <div id="rows"></div>
     <div class="record">
       <p id="record-text"></p>
-      <a id="all-link" href="#all">All predictions and scores →</a>
+      <a id="all-link" href="#all">Past outlooks for this symbol ↓</a>
     </div>
   </div>
 
@@ -206,7 +218,7 @@
   </div>
 
   <div id="all" class="section">
-    <h3 id="past-title" class="eyebrow">Past outlooks</h3>
+    <div class="section-top"><h3 id="past-title" class="eyebrow">Past outlooks</h3><a id="past-all" class="cmp-link">All predictions →</a></div>
     <div class="tablewrap">
       <table>
         <thead>

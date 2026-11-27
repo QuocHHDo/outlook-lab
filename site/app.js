@@ -106,58 +106,7 @@
     b.hidden = false;
     b.textContent = on ? "★ Watching" : "☆ Watch";
     b.setAttribute("aria-pressed", on ? "true" : "false");
-    b.title = on ? "Remove " + state.symbol + " from your watchlist" : "Add " + state.symbol + " to your watchlist";
-  }
-  function renderWatchlist() {
-    var syms = symbols(), list = watchList().filter(function (s) { return syms.indexOf(s) >= 0; });
-    var per = list.map(function (s) { return { s: s, rows: latestByHorizon(forSymbol(s)) }; });
-    var hs = HORDER.filter(function (h) { return state.preds.some(function (p) { return p.horizon === h; }); });
-    if (hs.indexOf(state.wlH) < 0) state.wlH = hs.indexOf("1m") >= 0 ? "1m" : hs[0];
-    var pick = $("wl-pick"); clear(pick);
-    hs.forEach(function (h) {
-      var b = el("button", HLABEL[h]); b.type = "button";
-      b.setAttribute("aria-pressed", h === state.wlH ? "true" : "false");
-      b.addEventListener("click", function () { state.wlH = h; renderWatchlist(); });
-      pick.appendChild(b);
-    });
-    var sel = $("wl-select"); clear(sel);
-    syms.filter(function (s) { return list.indexOf(s) < 0; }).forEach(function (s) {
-      var o = el("option", s + (NAMES[s] ? " – " + NAMES[s] : "")); o.value = s; sel.appendChild(o);
-    });
-    $("wl-addbtn").disabled = !sel.options.length;
-    $("wl-addbtn").onclick = function () {
-      if (!sel.value) return;
-      var a = watchList(); if (a.indexOf(sel.value) < 0) a.push(sel.value);
-      saveWatch(a); renderTabs(); renderWatchlist();
-    };
-    var data = per.map(function (d) { return { s: d.s, p: d.rows.filter(function (r) { return r.horizon === state.wlH; })[0] }; });
-    var vals = [0];
-    data.forEach(function (d) { if (!d.p) return; var st = d.p.price_at_prediction; vals.push(d.p.ai.low / st - 1, d.p.ai.high / st - 1, d.p.baseline.low / st - 1, d.p.baseline.high / st - 1); });
-    var lo = Math.min.apply(null, vals), hi = Math.max.apply(null, vals), pad = (hi - lo) * 0.06 || 0.01;
-    var sc = { lo: lo - pad, hi: hi + pad };
-    var grid = $("wl-grid"); clear(grid);
-    data.forEach(function (d) {
-      var wrap = el("div", undefined, "wl-item");
-      if (d.p) {
-        var card = homeCard(d, sc, false);
-        card.addEventListener("click", function () { state.fromHome = state.wlH; });
-        wrap.appendChild(card);
-        var lc = latestClose(d.s);
-        if (lc) wrap.appendChild(el("div", "Last close " + money(lc.price) + " on " + fmtDate(lc.date) + " (" + signed((lc.price / d.p.price_at_prediction - 1) * 100) + " since the " + fmtDate(d.p.made_at.slice(0, 10)) + " forecast)", "wl-price"));
-      } else {
-        wrap.appendChild(el("div", d.s + ": no " + HLABEL[state.wlH] + " forecast.", "wl-price"));
-      }
-      var rm = el("button", "Remove", "wl-rm"); rm.type = "button";
-      rm.addEventListener("click", function () { saveWatch(watchList().filter(function (x) { return x !== d.s; })); renderTabs(); renderWatchlist(); });
-      wrap.appendChild(rm);
-      grid.appendChild(wrap);
-    });
-    $("wl-empty").hidden = list.length > 0;
-    var cl = $("wl-compare");
-    cl.hidden = list.length < 2;
-    if (list.length >= 2) cl.href = cmpLink(list, state.wlH);
-    var s = state.summary;
-    $("wl-updated").textContent = s && s.generated_at ? "Scores updated " + fmtDate(s.generated_at.slice(0, 10)) : "";
+    b.title = on ? "Stop watching " + state.symbol : "Watch " + state.symbol + ": it shows under Overview, Watching (saved in this browser only)";
   }
   function renderMethod() {
     var host = $("method-body");
@@ -190,15 +139,12 @@
     var sc = el("a", "Scorecard"); sc.href = "#scorecard";
     if (state.view === "scorecard") sc.setAttribute("aria-current", "page");
     nav.appendChild(sc);
-    var cm = el("a", "Compare"); cm.href = "#compare";
-    if (state.view === "compare") cm.setAttribute("aria-current", "page");
-    nav.appendChild(cm);
+    var pd = el("a", "Predictions"); pd.href = "#predictions";
+    if (state.view === "predictions") pd.setAttribute("aria-current", "page");
+    nav.appendChild(pd);
     var an = el("a", "Analysis"); an.href = "#analysis";
     if (state.view === "analysis") an.setAttribute("aria-current", "page");
     nav.appendChild(an);
-    var wl = el("a", "Watchlist" + (watchList().length ? " (" + watchList().length + ")" : "")); wl.href = "#watchlist";
-    if (state.view === "watchlist") wl.setAttribute("aria-current", "page");
-    nav.appendChild(wl);
     var me = el("a", "Methodology"); me.href = "#methodology";
     if (state.view === "methodology") me.setAttribute("aria-current", "page");
     nav.appendChild(me);
@@ -870,77 +816,36 @@
     due.appendChild(dd);
   }
 
-  function renderCalibration() {
-    var host = $("home-cal"); clear(host);
-    var s = state.summary || {};
-    var open = state.preds.filter(function (p) { return p.status !== "resolved"; });
-    var nRes = s.n_resolved || 0, nTot = state.preds.length;
-    var due = open.map(function (p) { return p.resolves_on; }).sort()[0];
-    var intro = el("p", nRes
-      ? nRes + " of " + nTot + " predictions have resolved. An honest 80% range should hold about 80% of the time; far below means overconfident, far above means too wide to be useful."
-      : "Nothing has resolved yet, so there is nothing to grade. " + nTot + " predictions are open; the first ones (1 week) come due " + (due ? fmtDate(due) : "soon") + ". Results appear here as they resolve, and the comparison with the baselines unlocks at " + (s.min_resolved_for_comparison || 10) + " resolved predictions.");
-    intro.style.fontSize = "13px"; intro.style.margin = "0 0 8px";
-    host.appendChild(intro);
-    var wrap = el("div", undefined, "cal");
-    var bh = s.by_horizon || {};
-    HORDER.forEach(function (h) {
-      var g = bh[h], total = state.preds.filter(function (p) { return p.horizon === h; }).length;
-      if (!total) return;
-      var box = el("div");
-      box.appendChild(el("b", g && g.ai.coverage != null ? pct(g.ai.coverage) : "\u2014"));
-      box.appendChild(el("span", HLABEL[h] + " coverage"));
-      var bar = el("div", undefined, "covbar");
-      if (g && g.ai.coverage != null) { var f = el("i"); f.style.width = (g.ai.coverage * 100) + "%"; bar.appendChild(f); }
-      var tgt = el("u"); tgt.style.left = "80%"; bar.appendChild(tgt);
-      box.appendChild(bar);
-      box.appendChild(el("small", g ? g.n + " resolved of " + total + " (line = 80% target)" : "0 resolved of " + total + " (line = 80% target)"));
-      wrap.appendChild(box);
-    });
-    host.appendChild(wrap);
-    var cal = (s.calibration || []).filter(function (b) { return b.n; });
-    if (cal.length) {
-      var t = el("p", "Chance-up calibration: " + cal.map(function (b) { return "when the AI said " + Math.round(b.lo * 100) + "\u2013" + Math.round(b.hi * 100) + "%, price finished up " + pct(b.freq_up) + " of the time (" + b.n + ")"; }).join("; ") + ".");
-      t.style.fontSize = "12.5px"; t.className = "muted"; host.appendChild(t);
-    }
-    var nb = s.n_blind || 0;
-    var b2 = el("p", nb ? nb + " of " + nTot + " predictions were locked in a public commit before the baseline was computed (blind). The rest were written after seeing a baseline, so beating it counts for less."
-      : "None of the current predictions are blind: they were written after seeing the baseline, so beating it counts for less. From the next update the AI range is committed before the baseline is computed.");
-    b2.style.fontSize = "12.5px"; b2.className = "muted"; host.appendChild(b2);
-  }
-
-  function renderChanges() {
-    var host = $("home-changes"); clear(host);
+  function renderBrief() {
+    var host = $("home-brief"); clear(host);
+    var s = state.summary || {}, nTot = state.preds.length, nRes = s.n_resolved || 0;
     var dates = {}; state.preds.forEach(function (p) { dates[p.made_at] = true; });
-    var ds = Object.keys(dates).sort(), last = ds[ds.length - 1], prev = ds[ds.length - 2];
-    if (!last) return;
-    var batch = state.preds.filter(function (p) { return p.made_at === last; });
-    var syms = {}; batch.forEach(function (p) { syms[p.symbol] = true; });
-    var p1 = el("p", "Latest update " + fmtDate(last) + ": " + batch.length + " predictions across " + Object.keys(syms).length + " symbols." + (prev ? "" : " This is the first batch, so week-over-week changes will show here after the next update."));
-    p1.style.fontSize = "13px"; p1.style.margin = "0 0 6px"; host.appendChild(p1);
-    if (prev) {
-      var ch = [];
-      Object.keys(syms).forEach(function (sym) {
-        var a = state.preds.filter(function (p) { return p.symbol === sym && p.made_at === last && p.horizon === "1m"; })[0];
-        var b = state.preds.filter(function (p) { return p.symbol === sym && p.made_at === prev && p.horizon === "1m"; })[0];
-        if (a && b) ch.push({ s: sym, d: ((a.ai.low + a.ai.high) / 2 / a.price_at_prediction) - ((b.ai.low + b.ai.high) / 2 / b.price_at_prediction), du: (a.ai.prob_up != null && b.ai.prob_up != null) ? a.ai.prob_up - b.ai.prob_up : 0 });
-      });
-      ch.sort(function (x, y) { return Math.abs(y.du) - Math.abs(x.du); });
-      var ul = el("ul", undefined, "changes");
-      ch.slice(0, 5).forEach(function (c) {
-        var li = el("li"); li.appendChild(el("b", c.s));
-        li.appendChild(el("span", "1-month chance up " + (c.du >= 0 ? "raised" : "cut") + " by " + Math.abs(Math.round(c.du * 100)) + " points; AI range midpoint moved " + signed(c.d * 100) + " vs last update"));
-        ul.appendChild(li);
-      });
-      host.appendChild(ul);
+    var ds = Object.keys(dates).sort(), last = ds[ds.length - 1];
+    var ul = el("ul", undefined, "changes");
+    function item(label, text, href, linkText) {
+      var li = el("li"); li.appendChild(el("b", label));
+      var sp = el("span", text + " ");
+      if (href) { var a = el("a", linkText); a.href = href; sp.appendChild(a); }
+      li.appendChild(sp); ul.appendChild(li);
     }
-    var cut = new Date(Date.now() - 14 * 86400000).toISOString().slice(0, 10);
-    var shocks = (state.events || []).filter(function (e) { return e.type === "shock" && e.date >= cut; }).sort(function (a, b) { return a.date < b.date ? 1 : -1; }).slice(0, 3);
-    if (shocks.length) {
-      var h = el("p", "Recent market shocks logged:"); h.style.fontSize = "13px"; h.style.margin = "8px 0 0"; host.appendChild(h);
-      var ul2 = el("ul", undefined, "changes");
-      shocks.forEach(function (e) { var li = el("li"); li.appendChild(el("b", dateLabel(e))); li.appendChild(el("span", e.title)); ul2.appendChild(li); });
-      host.appendChild(ul2);
+    if (last) {
+      var batch = state.preds.filter(function (p) { return p.made_at === last; }), syms = {};
+      batch.forEach(function (p) { syms[p.symbol] = true; });
+      item("Latest", fmtDate(last) + ": " + batch.length + " predictions across " + Object.keys(syms).length + " symbols.", ds.length > 1 ? "#analysis" : null, "What changed →");
     }
+    var open = state.preds.filter(function (p) { return p.status !== "resolved"; });
+    var due = open.map(function (p) { return p.resolves_on; }).sort()[0];
+    var cov = s.overall && s.overall.ai ? s.overall.ai.coverage : null;
+    item("Scores", nRes
+      ? nRes + " of " + nTot + " resolved; AI ranges held " + pct(cov) + " of the time (target 80%)."
+      : "Nothing has resolved yet. The first come due " + (due ? fmtDate(due) : "soon") + "; the baseline comparison unlocks at " + (s.min_resolved_for_comparison || 10) + ".", "#scorecard", "Scorecard →");
+    var nb = s.n_blind || 0;
+    item("Blind", nb ? nb + " of " + nTot + " were locked publicly before the baseline was computed." : "None of the current predictions are blind, so beating the baseline counts for less.", "#methodology", "How it works →");
+    var cutD = new Date(Date.now() - 14 * 86400000).toISOString().slice(0, 10);
+    (state.events || []).filter(function (e) { return e.type === "shock" && e.date >= cutD; })
+      .sort(function (a, b) { return a.date < b.date ? 1 : -1; }).slice(0, 3)
+      .forEach(function (e) { item("Shock", dateLabel(e) + ": " + e.title); });
+    host.appendChild(ul);
   }
   function renderHome() {
     var syms = symbols();
@@ -965,13 +870,19 @@
         host.appendChild(b);
       });
     }
+    var watched = watchList().filter(function (x) { return syms.indexOf(x) >= 0; });
+    if (state.homeGroup === "watch" && !watched.length) state.homeGroup = "all";
     if (!state.homeView) state.homeView = "map";
     if (!state.homeSize) state.homeSize = "width";
     seg($("home-view"), [["map", "Map"], ["cards", "Cards"]], "homeView");
     seg($("home-size"), [["width", "Size: AI range width"]].concat(state.meta && state.meta.market_cap ? [["cap", "Size: market value"]] : []).concat([["equal", "Size: equal"]]), "homeSize");
-    seg2($("home-group"), [["all", "All"], ["index", "Broad indexes"], ["sector", "Sectors"], ["other", "Bonds & commodities"]].concat(per.some(function (d) { return groupOf(d.s) === "intl"; }) ? [["intl", "International"]] : []).concat(per.some(function (d) { return groupOf(d.s) === "stock"; }) ? [["stock", "Stocks"]] : []), "homeGroup", renderHome);
+    seg2($("home-group"), [["all", "All"], ["index", "Broad indexes"], ["sector", "Sectors"], ["other", "Bonds & commodities"]].concat(per.some(function (d) { return groupOf(d.s) === "intl"; }) ? [["intl", "International"]] : []).concat(per.some(function (d) { return groupOf(d.s) === "stock"; }) ? [["stock", "Stocks"]] : []).concat(watched.length ? [["watch", "Watching (" + watched.length + ")"]] : []), "homeGroup", renderHome);
     seg2($("home-sort"), [["default", "Sort: default"], ["up", "Sort: chance up"], ["width", "Sort: widest range"]], "homeSort", renderHome);
-    if (state.homeGroup !== "all") data = data.filter(function (d) { return groupOf(d.s) === state.homeGroup; });
+    if (state.homeGroup === "watch") data = data.filter(function (d) { return watched.indexOf(d.s) >= 0; });
+    else if (state.homeGroup !== "all") data = data.filter(function (d) { return groupOf(d.s) === state.homeGroup; });
+    var hc = $("home-cmp");
+    hc.hidden = !(state.homeGroup === "watch" && watched.length >= 2);
+    if (!hc.hidden) hc.href = cmpLink(watched, state.homeH);
     var isMap = state.homeView === "map";
     $("home-sort").hidden = isMap;
     $("home-map").hidden = !isMap; $("home-scale").hidden = !isMap; $("home-size").hidden = !isMap;
@@ -988,7 +899,7 @@
     else data.sort(function (x, y) { return (x.s === "SPY" ? 0 : 1) - (y.s === "SPY" ? 0 : 1); });
     var heroOn = state.homeSort === "default";
     data.forEach(function (d) { grid.appendChild(homeCard(d, sc, heroOn && d.s === "SPY")); });
-    renderChanges(); renderCalibration();
+    renderBrief();
     var today = todayIso();
     var ev = (state.events || []).filter(function (e) { return e.type === "scheduled" && (e.end_date || e.date) >= today; })
       .sort(function (a, b) { return a.date < b.date ? -1 : a.date > b.date ? 1 : 0; }).slice(0, 5);
@@ -1506,6 +1417,101 @@
     });
   }
 
+
+  var PD_PAGE = 200;
+  function pdStatus(p) {
+    if (p.status !== "resolved" || !p.result || !p.result.ai) return "open";
+    return p.result.ai.result === "held" ? "held" : "missed";
+  }
+  function pdRows() {
+    return state.preds.filter(function (p) {
+      if (state.pdSym !== "all" && p.symbol !== state.pdSym) return false;
+      if (state.pdH !== "all" && p.horizon !== state.pdH) return false;
+      if (state.pdMade !== "all" && p.made_at !== state.pdMade) return false;
+      if (state.pdStatus !== "all" && pdStatus(p) !== state.pdStatus) return false;
+      if (state.pdBlind === "blind" && !p.blind) return false;
+      if (state.pdBlind === "not" && p.blind) return false;
+      return true;
+    }).sort(function (a, b) {
+      if (a.made_at !== b.made_at) return a.made_at < b.made_at ? 1 : -1;
+      if (a.symbol !== b.symbol) return a.symbol < b.symbol ? -1 : 1;
+      return HORDER.indexOf(a.horizon) - HORDER.indexOf(b.horizon);
+    });
+  }
+  function pdHash() {
+    var h = "#predictions" + (state.pdSym && state.pdSym !== "all" ? "/" + state.pdSym : "");
+    if (location.hash !== h) history.replaceState(null, "", h);
+  }
+  function pdCsv(rows) {
+    function q(v) { v = v == null ? "" : String(v); return /[",\n]/.test(v) ? '"' + v.replace(/"/g, '""') + '"' : v; }
+    var head = ["id", "made_at", "symbol", "horizon", "resolves_on", "price_at_prediction", "ai_low", "ai_high", "ai_level", "ai_prob_up",
+      "baseline_low", "baseline_high", "blind", "status", "close", "close_date", "ai_result", "baseline_result"];
+    var lines = [head.join(",")];
+    rows.forEach(function (p) {
+      var r = p.result || {};
+      lines.push([p.id, p.made_at, p.symbol, p.horizon, p.resolves_on, p.price_at_prediction, p.ai.low, p.ai.high, p.ai.level, p.ai.prob_up,
+        p.baseline.low, p.baseline.high, p.blind ? "yes" : "no", pdStatus(p), r.close, r.close_date,
+        r.ai && r.ai.result, r.baseline && r.baseline.result].map(q).join(","));
+    });
+    return lines.join("\n") + "\n";
+  }
+  function renderPredictions() {
+    ["pdSym", "pdH", "pdStatus", "pdBlind", "pdMade"].forEach(function (k) { if (!state[k]) state[k] = "all"; });
+    if (!state.pdLimit) state.pdLimit = PD_PAGE;
+    var redo = function () { state.pdLimit = PD_PAGE; pdHash(); renderPredictions(); };
+    var syms = symbols(), sel = $("pd-sym"); clear(sel);
+    var o0 = el("option", "All symbols"); o0.value = "all"; sel.appendChild(o0);
+    syms.forEach(function (s) { var o = el("option", s + (NAMES[s] ? " – " + NAMES[s] : "")); o.value = s; sel.appendChild(o); });
+    if (state.pdSym !== "all" && syms.indexOf(state.pdSym) < 0) state.pdSym = "all";
+    sel.value = state.pdSym;
+    sel.onchange = function () { state.pdSym = sel.value; redo(); };
+    var dates = {}; state.preds.forEach(function (p) { dates[p.made_at] = true; });
+    var ms = $("pd-made"); clear(ms);
+    var d0 = el("option", "All dates"); d0.value = "all"; ms.appendChild(d0);
+    Object.keys(dates).sort().reverse().forEach(function (d) { var o = el("option", "Made " + fmtDate(d)); o.value = d; ms.appendChild(o); });
+    if (!dates[state.pdMade]) state.pdMade = "all";
+    ms.value = state.pdMade;
+    ms.onchange = function () { state.pdMade = ms.value; redo(); };
+    var hs = HORDER.filter(function (h) { return state.preds.some(function (p) { return p.horizon === h; }); });
+    seg2($("pd-h"), [["all", "All horizons"]].concat(hs.map(function (h) { return [h, HLABEL[h]]; })), "pdH", redo);
+    seg2($("pd-status"), [["all", "Any status"], ["open", "Open"], ["held", "Held"], ["missed", "Missed"]], "pdStatus", redo);
+    seg2($("pd-blind"), [["all", "Blind or not"], ["blind", "Blind"], ["not", "Not blind"]], "pdBlind", redo);
+
+    var rows = pdRows(), body = $("pd-body"); clear(body);
+    rows.slice(0, state.pdLimit).forEach(function (p) {
+      var res = p.result || null;
+      var ai = resultCell(res && res.ai && res.ai.result), bl = resultCell(res && res.baseline && res.baseline.result);
+      var tr = el("tr");
+      tr.appendChild(el("td", fmtDate(p.made_at)));
+      var td = el("td"), a = el("a", p.symbol); a.href = "#" + p.symbol; td.appendChild(a); tr.appendChild(td);
+      [HLABEL[p.horizon] || p.horizon, money(p.price_at_prediction), range(p.ai), p.ai.prob_up == null ? "n/a" : pct(p.ai.prob_up), range(p.baseline),
+       res ? money(res.close) + " (" + fmtDate(res.close_date) + ")" : "Due " + fmtDate(p.resolves_on)
+      ].forEach(function (t) { tr.appendChild(el("td", t)); });
+      tr.appendChild(el("td", ai[0], ai[1]));
+      tr.appendChild(el("td", bl[0], bl[1]));
+      tr.appendChild(el("td", p.blind ? "Yes" : "No", p.blind ? "" : "muted"));
+      body.appendChild(tr);
+    });
+    if (!rows.length) { var r0 = el("tr"), c0 = el("td", "No predictions match these filters.", "muted"); c0.colSpan = 11; r0.appendChild(c0); body.appendChild(r0); }
+    var nRes = rows.filter(function (p) { return pdStatus(p) !== "open"; }).length;
+    var nHeld = rows.filter(function (p) { return pdStatus(p) === "held"; }).length;
+    $("pd-count").textContent = "Showing " + Math.min(rows.length, state.pdLimit) + " of " + rows.length + " matching (" + state.preds.length + " in total). "
+      + (nRes ? nRes + " resolved, " + nHeld + " held (" + pct(nHeld / nRes) + ")." : "None of these has resolved yet.");
+    var more = $("pd-more");
+    more.hidden = rows.length <= state.pdLimit;
+    more.textContent = "Show " + Math.min(PD_PAGE, rows.length - state.pdLimit) + " more";
+    more.onclick = function () { state.pdLimit += PD_PAGE; renderPredictions(); };
+    $("pd-csv").disabled = !rows.length;
+    $("pd-csv").onclick = function () {
+      var blob = new Blob([pdCsv(rows)], { type: "text/csv" }), url = URL.createObjectURL(blob), dl = document.createElement("a");
+      dl.href = url; dl.download = "outlook-lab-predictions" + (state.pdSym !== "all" ? "-" + state.pdSym : "") + ".csv";
+      document.body.appendChild(dl); dl.click(); document.body.removeChild(dl);
+      setTimeout(function () { URL.revokeObjectURL(url); }, 1000);
+    };
+    var s = state.summary;
+    $("pd-updated").textContent = s && s.generated_at ? "Scores updated " + fmtDate(s.generated_at.slice(0, 10)) : "";
+  }
+
   var CMP_COLORS = ["oklch(0.62 0.17 264)", "oklch(0.64 0.17 35)", "oklch(0.62 0.14 155)", "oklch(0.7 0.14 85)", "oklch(0.6 0.18 325)", "oklch(0.64 0.11 205)"];
   var CMP_MAX = CMP_COLORS.length;
   function cmpLink(syms, h) {
@@ -1714,31 +1720,6 @@
     }
     fillGroups();
 
-    function list5(id, arr, valFn, cls) {
-      var tb = $(id); clear(tb);
-      arr.slice(0, 5).forEach(function (d) {
-        var tr = el("tr"), td = el("td"), a = el("a", d.s); a.href = "#" + d.s; td.appendChild(a); tr.appendChild(td);
-        tr.appendChild(el("td", NAMES[d.s] || "", "muted nm"));
-        var v = valFn(d); tr.appendChild(el("td", v[0], v[1] || ""));
-        tr.appendChild(el("td", d.m.up == null ? "" : pct(d.m.up) + " up", "muted"));
-        tb.appendChild(tr);
-      });
-      if (!arr.length) { var r0 = el("tr"); r0.appendChild(el("td", "No data", "muted")); tb.appendChild(r0); }
-      var card = tb.parentNode.parentNode, old = card.querySelector(".cmp-go");
-      if (old) card.removeChild(old);
-      if (arr.length > 1) {
-        var go = el("a", "Compare these " + Math.min(5, arr.length) + " \u2192", "cmp-go");
-        go.href = cmpLink(arr.slice(0, 5).map(function (d) { return d.s; }), state.anH);
-        card.appendChild(go);
-      }
-    }
-    function dcls(d) { return d.m.drift >= 0 ? "an-up" : "an-down"; }
-    var byDrift = data.slice().sort(function (a, b) { return b.m.drift - a.m.drift; });
-    list5("an-top", byDrift, function (d) { return [pc1(d.m.drift), dcls(d)]; });
-    list5("an-bottom", byDrift.slice().reverse(), function (d) { return [pc1(d.m.drift), dcls(d)]; });
-    var byRatio = data.filter(function (d) { return d.m.ratio != null; }).sort(function (a, b) { return a.m.ratio - b.m.ratio; });
-    list5("an-narrow", byRatio, function (d) { return [Math.round(d.m.ratio * 100) + "% of baseline"]; });
-    list5("an-wide", byRatio.slice().reverse(), function (d) { return [Math.round(d.m.ratio * 100) + "% of baseline"]; });
 
     // heatmap
     if (!state.anMetric) state.anMetric = "up";
@@ -1775,17 +1756,86 @@
     });
     $("an-heat-note").textContent = state.anMetric === "up" ? "Green leans up, red leans down, grey is near 50%. Same colour scale as the Overview map. Click a cell to compare that symbol with SPY." : "Colour shows where the AI median sits inside the AI range (green above the start price, red below), so short and long horizons are comparable. The number is the drift in %.";
 
-    // disagreement with the market
+
+    // disagreement with the market: one sortable table (also covers most bullish/bearish and narrow/wide vs baseline)
+    function dcls(d) { return d.m.drift >= 0 ? "an-up" : "an-down"; }
+    var DIS_COLS = [["drift", "AI drift", -1], ["base", "Baseline drift", -1], ["gap", "Gap", -1], ["ratio", "AI width vs baseline", 1], ["up", "Chance up", -1]];
+    if (!state.disSort) { state.disSort = "gap"; state.disDir = -1; }
+    function disVal(d, k) {
+      if (k === "drift") return d.m.drift;
+      if (k === "base") return d.m.baseMid;
+      if (k === "gap") return Math.abs(d.m.drift - d.m.baseMid);
+      if (k === "ratio") return d.m.ratio;
+      return d.m.up;
+    }
+    var disHead = $("an-dis-head"); clear(disHead);
+    var dhr = el("tr"); dhr.appendChild(el("th", "Symbol")); dhr.appendChild(el("th", ""));
+    DIS_COLS.forEach(function (c) {
+      var th = el("th"), b = el("button", c[1] + (state.disSort === c[0] ? (state.disDir < 0 ? " \u25BE" : " \u25B4") : ""), "an-sortbtn");
+      b.type = "button";
+      th.setAttribute("aria-sort", state.disSort === c[0] ? (state.disDir < 0 ? "descending" : "ascending") : "none");
+      b.addEventListener("click", function () {
+        if (state.disSort === c[0]) state.disDir = -state.disDir; else { state.disSort = c[0]; state.disDir = c[2]; }
+        renderAnalysisPage();
+      });
+      th.appendChild(b); dhr.appendChild(th);
+    });
+    disHead.appendChild(dhr);
+    var disRows = data.filter(function (d) { return disVal(d, state.disSort) != null; }).sort(function (a, b) { return (disVal(a, state.disSort) - disVal(b, state.disSort)) * state.disDir; });
+    var shown = state.disAll ? disRows : disRows.slice(0, 10);
     var dis = $("an-dis"); clear(dis);
-    data.slice().sort(function (a, b) { return Math.abs(b.m.drift - b.m.baseMid) - Math.abs(a.m.drift - a.m.baseMid); }).slice(0, 8).forEach(function (d) {
+    shown.forEach(function (d) {
       var gap = d.m.drift - d.m.baseMid, tr = el("tr"), td = el("td"), a = el("a", d.s); a.href = "#" + d.s; td.appendChild(a); tr.appendChild(td);
       tr.appendChild(el("td", NAMES[d.s] || "", "muted nm"));
-      tr.appendChild(el("td", pc1(d.m.drift))); tr.appendChild(el("td", pc1(d.m.baseMid)));
-      tr.appendChild(el("td", (gap >= 0 ? "+" : "−") + Math.abs(gap * 100).toFixed(1) + " pts", gap >= 0 ? "an-up" : "an-down"));
+      tr.appendChild(el("td", pc1(d.m.drift), dcls(d))); tr.appendChild(el("td", pc1(d.m.baseMid)));
+      tr.appendChild(el("td", (gap >= 0 ? "+" : "\u2212") + Math.abs(gap * 100).toFixed(1) + " pts", gap >= 0 ? "an-up" : "an-down"));
       tr.appendChild(el("td", d.m.ratio == null ? "n/a" : Math.round(d.m.ratio * 100) + "%"));
       tr.appendChild(el("td", d.m.up == null ? "n/a" : pct(d.m.up)));
       dis.appendChild(tr);
     });
+    if (!shown.length) { var dr0 = el("tr"); dr0.appendChild(el("td", "No data", "muted")); dis.appendChild(dr0); }
+    var dm = $("an-dis-more");
+    dm.hidden = disRows.length <= 10;
+    dm.textContent = state.disAll ? "Show top 10" : "Show all " + disRows.length;
+    dm.onclick = function () { state.disAll = !state.disAll; renderAnalysisPage(); };
+    var dcard = dis.parentNode.parentNode.parentNode, oldGo = dcard.querySelector(".cmp-go");
+    if (oldGo) oldGo.parentNode.removeChild(oldGo);
+    if (disRows.length > 1) {
+      var go = el("a", "Compare the top " + Math.min(5, disRows.length) + " \u2192", "cmp-go");
+      go.href = cmpLink(disRows.slice(0, 5).map(function (d) { return d.s; }), state.anH);
+      dcard.querySelector(".an-foot").appendChild(go);
+    }
+    $("an-dis-note").textContent = "Click a column to sort; click again to reverse. Gap is the AI median minus the options-implied baseline median, in percentage points, ranked by size: a large gap is a real directional view, a small one means the AI is mostly echoing the market. Sort by AI drift for the most bullish or bearish forecasts, and by width for where the AI is more confident (narrower) or sees more risk (wider) than the market.";
+
+    // AI vs Wall Street: stocks only, always the 1-year forecast (analyst targets are 12-month views)
+    var stCard = $("an-street-card"), stBody = $("an-street"); clear(stBody);
+    var rts = state.ratings && state.ratings.symbols;
+    var stRows = [];
+    if (rts && (state.anGroup === "all" || state.anGroup === "stock")) {
+      syms.forEach(function (s) {
+        var r = rts[s], p = latest[s].filter(function (x) { return x.horizon === "1y"; })[0], lc = latestClose(s);
+        if (!r || !r.target || !r.target.mean || !p || !lc) return;
+        var aiMid = Math.sqrt(p.ai.low * p.ai.high), st = r.target.mean / lc.price - 1, ai = aiMid / lc.price - 1;
+        stRows.push({ s: s, r: r, aiMid: aiMid, st: st, ai: ai, gap: ai - st });
+      });
+    }
+    stCard.hidden = !stRows.length;
+    stRows.sort(function (a, b) { return a.gap - b.gap; }).forEach(function (d) {
+      var c = d.r.counts, tot = c ? c.strongBuy + c.buy + c.hold + c.sell + c.strongSell : 0;
+      var tr = el("tr"), td = el("td"), a = el("a", d.s); a.href = "#" + d.s; td.appendChild(a); tr.appendChild(td);
+      tr.appendChild(el("td", NAMES[d.s] || "", "muted nm"));
+      tr.appendChild(el("td", tot ? tot + " (" + Math.round((c.strongBuy + c.buy) / tot * 100) + "% buy)" : "n/a"));
+      tr.appendChild(el("td", money(d.r.target.mean)));
+      tr.appendChild(el("td", pc1(d.st), d.st >= 0 ? "an-up" : "an-down"));
+      tr.appendChild(el("td", money(d.aiMid)));
+      tr.appendChild(el("td", pc1(d.ai), d.ai >= 0 ? "an-up" : "an-down"));
+      tr.appendChild(el("td", (d.gap >= 0 ? "+" : "\u2212") + Math.abs(d.gap * 100).toFixed(1) + " pts", d.gap >= 0 ? "an-up" : "an-down"));
+      stBody.appendChild(tr);
+    });
+    if (stRows.length) {
+      var asOf = stRows.map(function (d) { return d.r.as_of; }).sort()[0];
+      $("an-street-note").textContent = "AI below the Street first. Both columns are measured from the latest close, so they compare directly: the AI's 1-year range median vs the Wall Street mean price target (a 12-month view). This ignores the horizon picker above. " + (state.ratings.source || "Analyst consensus") + ", oldest entry " + fmtDate(asOf) + ". The analyst numbers are context, not an input to the forecasts; the analyst-target baseline on the Scorecard is where they are scored. Not financial advice.";
+    }
 
     // change since the previous forecast for the same symbol and horizon
     var chg = [];
@@ -1853,21 +1903,25 @@
       return;
     }
     var wanted = decodeURIComponent((location.hash || "").replace("#", ""));
-    state.view = wanted === "scorecard" ? "scorecard" : wanted.indexOf("compare") === 0 ? "compare" : wanted === "analysis" ? "analysis" : wanted === "watchlist" ? "watchlist" : wanted === "methodology" ? "methodology" : null;
+    state.view = wanted === "scorecard" ? "scorecard" : wanted.indexOf("compare") === 0 ? "compare" : wanted === "analysis" ? "analysis" : (wanted === "predictions" || wanted.indexOf("predictions/") === 0) ? "predictions" : wanted === "methodology" ? "methodology" : null;
+    if (wanted === "watchlist") { state.homeGroup = "watch"; state.homeView = "cards"; history.replaceState(null, "", "#home"); }
     $("scorecard").hidden = state.view !== "scorecard";
     $("analysis").hidden = state.view !== "analysis";
-    $("watchlist").hidden = state.view !== "watchlist";
+    $("predictions").hidden = state.view !== "predictions";
     $("method").hidden = state.view !== "methodology";
     $("sym-star").hidden = true;
     $("compare").hidden = state.view !== "compare";
-    if (state.view === "watchlist") {
+    if (state.view === "predictions") {
       state.symbol = null;
       status.hidden = true; outlook.hidden = true; $("home").hidden = true;
+      var pp = wanted.split("/");
+      state.pdSym = pp[1] && syms.indexOf(pp[1]) >= 0 ? pp[1] : "all";
+      state.pdLimit = PD_PAGE;
       renderTabs();
-      $("sym-title").textContent = "Watchlist";
-      $("sym-name").textContent = "The symbols you follow, at a glance";
+      $("sym-title").textContent = "Predictions";
+      $("sym-name").textContent = "Every forecast, open and resolved, including misses";
       $("sym-price").hidden = true;
-      renderWatchlist();
+      renderPredictions();
       return;
     }
     if (state.view === "methodology") {
@@ -1940,12 +1994,12 @@
     renderEvents(rows);
     renderStreet(rows);
     renderPast(list);
+    $("past-all").href = "#predictions/" + encodeURIComponent(state.symbol);
     var up = $("updated");
     up.textContent = state.summary && state.summary.generated_at ? "Scores updated " + fmtDate(state.summary.generated_at.slice(0, 10)) : "";
   }
 
   $("sym-star").addEventListener("click", function () { if (state.symbol) { toggleWatch(state.symbol); syncStar(); renderTabs(); } });
-  $("home-all").addEventListener("click", function (e) { e.preventDefault(); location.hash = "#SPY"; });
   $("all-link").addEventListener("click", function (e) {
     e.preventDefault();
     $("all").scrollIntoView({ behavior: "smooth", block: "start" });

@@ -31,10 +31,13 @@ Running cost: $0. The model step is run by you inside Claude on your own subscri
 
 ## What the site shows
 
-- **Overview:** a treemap of every symbol (color is the AI chance of finishing up; size is range width, market value, or equal), a card view with sorting and filters, what changed since the last update, and a calibration panel.
+- **Overview:** a treemap of every symbol (color is the AI chance of finishing up; size is range width, market value, or equal), a card view with sorting and filters (including Watching), a short status block (latest update, scores so far, blind count, recent shocks) linking to Analysis and the Scorecard, and upcoming events.
 - **Scorecard (`#scorecard`):** progress toward the 10-resolved unlock, AI vs three baselines, coverage by horizon, a reliability diagram for the chance-up number, blind vs not blind, and when predictions come due.
 - **Symbol pages:** a TradingView-style chart (self-hosted Lightweight Charts) with the forecast cone, zoom from 1 month to 5 years, log scale, optional layers (earlier forecasts, events, resolved outcomes, candles), plus ranges, catalysts with sources, events and past predictions.
-- **Watchlist (`#watchlist`):** symbols you star with the Watch button on any symbol page, shown as cards with a horizon picker and last close. Saved in your browser's localStorage only.
+- **Predictions (`#predictions`, or `#predictions/SYMBOL`):** every forecast in one table, open and resolved, filterable by symbol, date made, horizon, status and blind, with a CSV download of the filtered rows.
+- **Analysis (`#analysis`):** the latest forecasts across all symbols: group and horizon summaries, a heatmap, a sortable table of where the AI disagrees with the options-implied baseline, an AI-vs-Wall-Street table for stocks, what changed since the last run, and consistency checks.
+- **Watching:** star symbols with the Watch button on any symbol page; they show under the Overview's Watching filter (localStorage only). `#watchlist` redirects there.
+- **Compare (`#compare/SYM1,SYM2/horizon`):** not in the nav; opened from the Compare shortcuts on symbol pages, Analysis and the heatmap.
 - **Methodology (`#methodology`):** the content of `site/methodology.html` shown inside the app; the standalone page still works.
 
 Three baselines are scored: zero-drift implied-vol, a drift baseline (6% a year), and a realized-vol baseline (60-day history, no options). Predictions marked blind were locked in `data/locks.json` before any baseline was computed; `scripts/verify_lock_published.py` confirms the lock is public before option data is pulled, and `validate.py` requires the lock to predate the IV read.
