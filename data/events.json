@@ -31,6 +31,23 @@
       "kind": "macro",
       "date": "2026-12-01",
       "time": "10:00 AM ET",
+      "reaction": {
+        "session": "2026-12-01",
+        "p_up": 0.53,
+        "up": [
+          0.2,
+          2.3
+        ],
+        "down": [
+          -2.5,
+          -0.2
+        ],
+        "implied": 1.1,
+        "normal": 1.0,
+        "as_of": "2026-11-27",
+        "confidence": "low",
+        "basis": "Implied move from the Dec 1 vs Nov 30 SPY 726 straddles, barely above an ordinary day. JOLTS is a lagged, low-impact release, so the call stays at the base rate of up days."
+      },
       "title": "JOLTS job openings (October)",
       "sources": [
         {
@@ -45,6 +62,33 @@
       "kind": "macro",
       "date": "2026-12-04",
       "time": "8:30 AM ET",
+      "reaction": {
+        "session": "2026-12-04",
+        "p_up": 0.47,
+        "up": [
+          0.2,
+          2.4
+        ],
+        "down": [
+          -2.6,
+          -0.2
+        ],
+        "implied": 1.2,
+        "normal": 1.0,
+        "as_of": "2026-11-27",
+        "confidence": "low",
+        "basis": "Implied move from the Dec 4 vs Dec 3 SPY 726 straddles. Historically, SPY's average move on jobs days is about zero, but the typical move is about 0.8% either way, and beats or misses do not reliably set the direction (ETFdb, 2009–2014). The slight bearish lean is because, with the Fed hiking and the 10-year near 5.1%, a hot report adds to the hike path, and a weak one can read as a slowdown.",
+        "sources": [
+          {
+            "label": "ETFdb: SPY on jobs days",
+            "url": "https://etfdb.com/equity-etfs/how-the-sp-500-reacts-to-unemployment-reports-spy/"
+          },
+          {
+            "label": "CXO Advisory: employment releases",
+            "url": "https://cxoadvisory.com/economic-indicators/are-monthly-non-farm-employment-announcements-tradable-events"
+          }
+        ]
+      },
       "title": "Employment Situation: November jobs report",
       "detail": "The 1-week predictions are scored on the close of this day, so the jobs report is inside their window.",
       "sources": [
@@ -60,6 +104,23 @@
       "kind": "fed",
       "date": "2026-12-08",
       "end_date": "2026-12-09",
+      "reaction": {
+        "session": "2026-12-09",
+        "p_up": 0.47,
+        "up": [
+          0.2,
+          2.4
+        ],
+        "down": [
+          -2.6,
+          -0.2
+        ],
+        "implied": 1.2,
+        "normal": 1.0,
+        "as_of": "2026-11-27",
+        "confidence": "low",
+        "basis": "Implied move from the Dec 9 vs Dec 8 SPY 726 straddles. Those contracts have almost no open interest yet, so the figure is rough. A 0.25-point hike is about 98% priced, so the decision itself should not surprise. The risk is in the new projections, and a hawkish dot plot is more likely than a dovish one while inflation runs hot."
+      },
       "title": "Fed meeting with new economic projections",
       "detail": "Futures priced a 96% chance of a quarter-point hike as of Nov 17 (CME FedWatch via Khaleej Times). That figure may have changed.",
       "sources": [
@@ -331,6 +392,33 @@
       "type": "scheduled",
       "kind": "macro",
       "date": "2026-11-29",
+      "reaction": {
+        "session": "2026-11-30",
+        "p_up": 0.5,
+        "up": [
+          0.2,
+          2.7
+        ],
+        "down": [
+          -3.0,
+          -0.2
+        ],
+        "implied": 1.3,
+        "normal": 1.0,
+        "as_of": "2026-11-27",
+        "confidence": "low",
+        "basis": "Implied move from the Nov 30 SPY 726 straddle (it also covers the last hour of Nov 27). OPEC+ decisions mostly move oil and energy stocks: the surprise Apr 2023 cut sent the energy sector up 4.9% while the S&P 500 ended only slightly higher. A bigger 2027 surplus would lower oil, which helps inflation but hurts XLE, so there is no clear lean for SPY.",
+        "sources": [
+          {
+            "label": "Bloomberg: Apr 3, 2023 OPEC+ cut",
+            "url": "https://www.bloomberg.com/news/articles/2023-04-03/energy-sector-notches-its-best-day-since-october-on-opec-cut"
+          },
+          {
+            "label": "Reuters via Devdiscourse: the 2027 call",
+            "url": "https://www.devdiscourse.com/article/international/4000316-opec-keeps-december-oil-output-targets-steady-ahead-of-tougher-call-for-2027"
+          }
+        ]
+      },
       "title": "OPEC+ ministerial meeting on the 2027 production framework",
       "detail": "Rystad called it the much more important test than the December quota decision.",
       "symbols": [
