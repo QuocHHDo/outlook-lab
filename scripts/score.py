@@ -8,13 +8,17 @@ available, record whether the AI range and the baseline range held, plus:
                   the outcome landed outside it. Divided by the starting price so
                   different symbols are comparable.
   brier (up)      squared error of ai.prob_up vs whether the close beat the
-                  starting price. The baseline has no view, so it uses 0.5.
+                  starting price. The zero-drift and realized-vol baselines have
+                  no view, so they use 0.5. The drift baseline uses the chance of
+                  finishing up implied by its own range (above 0.5), so it is a
+                  directional yardstick for the AI's chance-up number.
 
 Coverage of an 80% range should be near 80% over many predictions. Far above means
 the ranges are too wide to be useful; far below means overconfident.
 """
 import math
 from datetime import datetime, timezone
+from statistics import NormalDist
 
 from baseline import baseline_range, drift_range, hist_vol
 from common import load, parse_date, save
@@ -101,6 +105,18 @@ def add_realized_baseline(pred, symbol_prices):
                                  "high": round(high, 2), "level": base.get("level", 0.8)}
 
 
+def implied_prob_up(rng, start):
+    """Chance of closing above `start` implied by a log-normal range (median = sqrt(low*high))."""
+    try:
+        z = NormalDist().inv_cdf(0.5 + rng["level"] / 2)
+        sigma = math.log(rng["high"] / rng["low"]) / (2 * z)
+        if sigma <= 0:
+            return None
+        return NormalDist().cdf(math.log(math.sqrt(rng["low"] * rng["high"]) / start) / sigma)
+    except (KeyError, ValueError, ZeroDivisionError):
+        return None
+
+
 def score_one(pred, close_date, close):
     start = pred["price_at_prediction"]
     out = {"close": close, "close_date": close_date}
@@ -114,7 +130,15 @@ def score_one(pred, close_date, close):
             "interval_score": round(interval_score(rng["low"], rng["high"], close, rng["level"]) / start, 6),
             "width_pct": round((rng["high"] - rng["low"]) / start * 100, 3),
         }
-        prob = rng.get("prob_up") if name == "ai" else 0.5
+        if name == "ai":
+            prob = rng.get("prob_up")
+        elif name == "baseline_drift":
+            prob = implied_prob_up(rng, start)
+            if prob is None:
+                prob = 0.5
+            entry["prob_up"] = round(prob, 4)
+        else:
+            prob = 0.5
         if prob is not None:
             entry["brier_up"] = round((prob - went_up) ** 2, 6)
         out[name] = entry

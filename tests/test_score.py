@@ -246,3 +246,18 @@ def test_share_class_tickers_map_to_yahoo_and_symbols_are_unique():
     import fetch_prices, common
     assert fetch_prices.yf_ticker("BRK.B") == "BRK-B" and fetch_prices.yf_ticker("SPY") == "SPY"
     assert len(common.DEFAULT_SYMBOLS) == len(set(common.DEFAULT_SYMBOLS)) == 45
+
+
+def test_drift_baseline_brier_uses_its_implied_chance_up():
+    low, high = _bl.drift_range(100, 0.2, 365, mu=0.06)
+    pred = {"price_at_prediction": 100.0,
+            "ai": {"low": 90, "high": 110, "level": 0.8, "prob_up": 0.6},
+            "baseline": {"low": 80, "high": 120, "level": 0.8},
+            "baseline_drift": {"low": low, "high": high, "level": 0.8},
+            "baseline_realized": {"low": 85, "high": 118, "level": 0.8}}
+    res = score.score_one(pred, "2027-01-01", 110.0)
+    p = res["baseline_drift"]["prob_up"]
+    assert 0.5 < p < 0.7  # a 6% yearly drift tilts the chance of finishing up above a coin flip
+    assert abs(res["baseline_drift"]["brier_up"] - (p - 1.0) ** 2) < 1e-3
+    assert res["baseline"]["brier_up"] == 0.25 and res["baseline_realized"]["brier_up"] == 0.25
+    assert score.implied_prob_up({"low": 80, "high": 125, "level": 0.8}, 100.0) is not None
