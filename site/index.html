@@ -489,6 +489,12 @@ th { font-weight: 700; font-size: 12.5px; color: var(--muted-2); }
 .an-table th { color: var(--muted); font-weight: 500; font-size: 12px; }
 .an-table a { color: var(--ink); font-weight: 600; text-decoration: none; }
 .an-up { color: var(--ok); } .an-down { color: var(--bad); }
+.an-heat { display: grid; gap: 3px; font-variant-numeric: tabular-nums; }
+.an-heat .hh { font-size: 12px; color: var(--muted); padding: 2px 6px; text-align: center; }
+.an-heat .hs { font-size: 12px; font-weight: 600; padding: 6px 8px 6px 0; white-space: nowrap; }
+.an-heat .hs a { color: var(--ink); text-decoration: none; }
+.an-heat a.hc { display: block; text-align: center; font-size: 12px; padding: 6px 4px; border-radius: 4px; color: #fff; text-decoration: none; }
+.an-heat .na { background: var(--panel); color: var(--muted); }
 </style>
 </head>
 <body>
@@ -557,6 +563,7 @@ th { font-weight: 700; font-size: 12.5px; color: var(--muted-2); }
     <div class="an-card"><h3>By group</h3><div class="cmp-scroll"><table class="an-table"><thead><tr><th>Group</th><th>Symbols</th><th>Bullish</th><th>Median drift</th><th>AI vs baseline width</th></tr></thead><tbody id="an-groups"></tbody></table></div></div>
     <div class="an-card"><h3>By horizon (all symbols)</h3><div class="cmp-scroll"><table class="an-table"><thead><tr><th>Horizon</th><th>Symbols</th><th>Bullish</th><th>Median chance up</th><th>Median drift</th></tr></thead><tbody id="an-horizons"></tbody></table></div><p class="an-note">If short horizons lean bearish and long ones bullish, the AI expects a dip before recovery.</p></div>
   </div>
+  <div class="an-card"><h3>Heatmap: every symbol and horizon</h3><div id="an-metric" class="horizon-pick" role="group" aria-label="Heatmap metric"></div><div class="cmp-scroll"><div id="an-heat" class="an-heat"></div></div><p class="an-note" id="an-heat-note"></p></div>
   <div class="an-cols">
     <div class="an-card"><h3>Most bullish (highest implied drift)</h3><table class="an-table"><tbody id="an-top"></tbody></table></div>
     <div class="an-card"><h3>Most bearish (lowest implied drift)</h3><table class="an-table"><tbody id="an-bottom"></tbody></table></div>
@@ -2166,9 +2173,10 @@ th { font-weight: 700; font-size: 12.5px; color: var(--muted-2); }
     var bw = p.baseline.high - p.baseline.low;
     return { drift: mid / st - 1, up: p.ai.prob_up, ratio: bw > 0 ? (p.ai.high - p.ai.low) / bw : null, width: (p.ai.high - p.ai.low) / st, baseMid: (p.baseline.low + p.baseline.high) / 2 / st - 1 };
   }
+  var RETIRED = ["MSTR", "SCCO", "WELL", "SO", "CVX", "COST"];
   var GROUP_LABEL = { index: "Broad indexes", sector: "Sectors", intl: "International", other: "Bonds & commodities", stock: "Stocks" };
   function renderAnalysisPage() {
-    var syms = symbols();
+    var syms = symbols().filter(function (s) { return RETIRED.indexOf(s) < 0; });
     var latest = {};
     syms.forEach(function (s) { latest[s] = latestByHorizon(forSymbol(s)); });
     var hs = HORDER.filter(function (h) { return syms.some(function (s) { return latest[s].some(function (r) { return r.horizon === h; }); }); });
@@ -2244,6 +2252,35 @@ th { font-weight: 700; font-size: 12.5px; color: var(--muted-2); }
     var byRatio = data.filter(function (d) { return d.m.ratio != null; }).sort(function (a, b) { return a.m.ratio - b.m.ratio; });
     list5("an-narrow", byRatio, function (d) { return [Math.round(d.m.ratio * 100) + "% of baseline"]; });
     list5("an-wide", byRatio.slice().reverse(), function (d) { return [Math.round(d.m.ratio * 100) + "% of baseline"]; });
+
+    // heatmap
+    if (!state.anMetric) state.anMetric = "up";
+    seg2($("an-metric"), [["up", "Chance up"], ["drift", "Implied drift"]], "anMetric", renderAnalysisPage);
+    var heat = $("an-heat"); clear(heat);
+    var hsyms = syms.filter(function (s) { return state.anGroup === "all" || groupOf(s) === state.anGroup; });
+    heat.style.gridTemplateColumns = "minmax(54px, auto) repeat(" + hs.length + ", minmax(64px, 1fr))";
+    heat.appendChild(el("div"));
+    hs.forEach(function (h) { heat.appendChild(el("div", HLABEL[h], "hh")); });
+    hsyms.forEach(function (sym) {
+      var lab = el("div", undefined, "hs"), la = el("a", sym); la.href = "#" + sym; lab.appendChild(la); heat.appendChild(lab);
+      hs.forEach(function (h) {
+        var p = latest[sym].filter(function (r) { return r.horizon === h; })[0];
+        if (!p) { heat.appendChild(el("div", "–", "hc na")); return; }
+        var m = anMetrics(p), c = el("a", undefined, "hc"); c.href = "#" + sym;
+        if (state.anMetric === "up") {
+          c.textContent = m.up == null ? "n/a" : pct(m.up);
+          c.style.background = tileColor(m.up);
+        } else {
+          c.textContent = pc1(m.drift);
+          var half = (p.ai.high - p.ai.low) / 2 / p.price_at_prediction;
+          var z = half > 0 ? Math.max(-1, Math.min(1, m.drift / half)) : 0, a2 = Math.abs(z);
+          c.style.background = a2 < 0.06 ? "oklch(0.44 0.03 250)" : "oklch(" + (0.44 + a2 * 0.06).toFixed(3) + " " + (0.04 + a2 * 0.1).toFixed(3) + " " + (z > 0 ? 175 : 28) + ")";
+        }
+        c.title = sym + ", " + HLABEL[h] + ": " + range(p.ai) + ", chance up " + pct(m.up);
+        heat.appendChild(c);
+      });
+    });
+    $("an-heat-note").textContent = state.anMetric === "up" ? "Green leans up, red leans down, grey is near 50%. Same colour scale as the Overview map." : "Colour shows where the range midpoint sits inside the AI range (green above the start price, red below), so short and long horizons are comparable. The number is the drift in %.";
 
     // disagreement with the market
     var dis = $("an-dis"); clear(dis);
