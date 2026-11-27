@@ -132,6 +132,8 @@ def validate_events(doc):
             errors.append(f"{eid}: kind must be one of {sorted(EVENT_KINDS)}")
         if not e.get("title"):
             errors.append(f"{eid}: missing title")
+        if "importance" in e and e["importance"] not in ("high", "low"):
+            errors.append(f"{eid}: importance must be high or low")
         for key in ("date", "end_date"):
             if key in e:
                 try:

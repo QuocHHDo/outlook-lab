@@ -37,7 +37,8 @@
           "label": "BLS",
           "url": "https://www.bls.gov/schedule/2026/12_sched_list.htm"
         }
-      ]
+      ],
+      "importance": "low"
     },
     {
       "type": "scheduled",
@@ -51,7 +52,8 @@
           "label": "BLS",
           "url": "https://www.bls.gov/schedule/2026/12_sched_list.htm"
         }
-      ]
+      ],
+      "importance": "high"
     },
     {
       "type": "scheduled",
@@ -73,7 +75,8 @@
           "label": "Hike odds (Khaleej Times, Nov 17)",
           "url": "https://www.khaleejtimes.com/business/gold-inches-up-from-over-one-year-low-fed-outlook-caps-gains"
         }
-      ]
+      ],
+      "importance": "high"
     },
     {
       "type": "scheduled",
@@ -84,7 +87,8 @@
       "symbols": [
         "SPY",
         "QQQ",
-        "SMH"
+        "SMH",
+        "AVGO"
       ],
       "note": "Robinhood calendar · tentative"
     },
@@ -99,7 +103,8 @@
           "label": "BLS",
           "url": "https://www.bls.gov/schedule/2026/12_sched_list.htm"
         }
-      ]
+      ],
+      "importance": "high"
     },
     {
       "type": "scheduled",
@@ -108,7 +113,8 @@
       "time": "After the close",
       "title": "Oracle earnings",
       "symbols": [
-        "SPY"
+        "SPY",
+        "ORCL"
       ],
       "note": "Robinhood calendar · tentative"
     },
@@ -123,7 +129,8 @@
           "label": "BLS",
           "url": "https://www.bls.gov/schedule/2026/12_sched_list.htm"
         }
-      ]
+      ],
+      "importance": "low"
     },
     {
       "type": "scheduled",
@@ -134,7 +141,8 @@
       "symbols": [
         "SPY",
         "QQQ",
-        "SMH"
+        "SMH",
+        "MU"
       ],
       "note": "Robinhood calendar · tentative"
     },
@@ -327,7 +335,8 @@
       "detail": "Rystad called it the much more important test than the December quota decision.",
       "symbols": [
         "XLE",
-        "SPY"
+        "SPY",
+        "USO"
       ],
       "sources": [
         {
