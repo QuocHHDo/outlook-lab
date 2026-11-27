@@ -467,7 +467,7 @@ th { font-weight: 700; font-size: 12.5px; color: var(--muted-2); }
 #cmp-chart svg { width: 100%; height: auto; display: block; }
 #cmp-chart text { fill: var(--muted); font-size: 11px; font-family: inherit; }
 #cmp-chart .lbl { font-weight: 600; font-size: 12px; }
-.cmp-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+.cmp-table { width: 100%; min-width: 0; border-collapse: collapse; font-size: 13px; }
 .cmp-table th, .cmp-table td { text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--line-2); white-space: nowrap; }
 .cmp-table th { color: var(--muted); font-weight: 500; font-size: 12px; }
 .cmp-table td:first-child a { color: var(--ink); font-weight: 600; text-decoration: none; }
@@ -480,12 +480,13 @@ th { font-weight: 700; font-size: 12.5px; color: var(--muted-2); }
 .an-stat span { font-size: 12px; color: var(--muted); }
 .an-cols { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; }
 .an-card { min-width: 0; overflow-x: auto; }
-.an-table td.nm { max-width: 150px; overflow: hidden; text-overflow: ellipsis; }
+.an-table td.nm { width: 100%; max-width: 0; overflow: hidden; text-overflow: ellipsis; }
+.an-table th { white-space: normal; vertical-align: bottom; }
 @media (max-width: 760px) { .an-cols { grid-template-columns: 1fr; } }
 .an-card h3 { margin: 0 0 8px; font-size: 14px; }
 .an-card p.an-note { margin: 8px 0 0; padding: 0; background: none; border: 0; font-size: 12px; color: var(--muted); }
-.an-table { width: 100%; border-collapse: collapse; font-size: 13px; }
-.an-table th, .an-table td { text-align: left; padding: 6px 8px; border-bottom: 1px solid var(--line-2); white-space: nowrap; font-variant-numeric: tabular-nums; }
+.an-table { width: 100%; min-width: 0; border-collapse: collapse; font-size: 13px; }
+.an-table th, .an-table td { text-align: left; padding: 6px 6px; border-bottom: 1px solid var(--line-2); white-space: nowrap; font-variant-numeric: tabular-nums; }
 .an-table th { color: var(--muted); font-weight: 500; font-size: 12px; }
 .an-table a { color: var(--ink); font-weight: 600; text-decoration: none; }
 .an-up { color: var(--ok); } .an-down { color: var(--bad); }
