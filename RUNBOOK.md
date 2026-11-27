@@ -82,3 +82,15 @@ Add items to `data/events.json` with `"type": "watch"` for things that could mov
 - `short` (a chart label up to about 12 characters) and `checked` (the date you last verified it).
 
 `scripts/validate.py` checks these fields. Impact ranges are judgment and are not scored yet; once a few items resolve, compare each range with SPY's actual move over the same window and say how rough that comparison is. Edits to `events.json` do not trigger a workflow run: run the workflow from Actions to publish them, or publish them together with a `site/` change.
+
+## Weekly: bull/bear calls on scheduled events
+
+Scheduled events with `importance: "high"`, plus any non-market event in the next two weeks, can carry a `reaction` object. It is the model's call on SPY's close-to-close move in the first session that trades on the event:
+- `session`: that trading day (the event day for 8:30 AM releases and Fed decisions, the next trading day for weekend meetings and after-close earnings).
+- `p_up` (0 to 1): the chance SPY closes that session above the previous close. Start from about 0.53 (the share of up days) and move away from it only for a reason you can write in `basis`. Most data releases are close to a toss-up, and the page labels 45–55% as "Toss-up".
+- `up` and `down`: 80% ranges in percent for the day's move in each case, such as `[0.2, 2.4]` and `[-2.7, -0.2]`.
+- `implied`: the options-implied move for that session. Take ATM SPY straddle mids (call + put) for the expiration on `session` and the one before it, and compute `sqrt(S_session² − S_before²) / price × 100`. `normal` is the same figure for an ordinary nearby day with no event. Set `as_of` to the day you priced them. If the strike is missing for either expiration, leave `implied` out.
+- `up` and `down` follow from `implied`: with `σ = implied / 0.8`, the up range is about `[0.13σ, 1.65σ]`. Widen the down range by about 10% for the usual downside skew.
+- `confidence`, `basis` and `sources`, as for `impact` above.
+
+After the session closes, record SPY's actual move next to `p_up` in your weekly notes. Then delete the event or leave it in place, since it drops off the page once its date passes. These calls are not scored yet; once there are about 20, compare their Brier score with a flat 0.53.

@@ -119,6 +119,47 @@ def validate_watch_extras(eid, e):
     return errors
 
 
+def validate_reaction(eid, e):
+    """A scheduled event's call on SPY's close-to-close move in the session that reacts to it."""
+    r = e["reaction"]
+    if e.get("type") != "scheduled":
+        return [f"{eid}: reaction is only for scheduled events"]
+    if not isinstance(r, dict):
+        return [f"{eid}: reaction must be an object"]
+    errors = []
+    try:
+        session = parse_date(r.get("session"))
+        if session < parse_date(e.get("date")):
+            errors.append(f"{eid}: reaction.session cannot be before the event date")
+    except (TypeError, ValueError):
+        errors.append(f"{eid}: reaction.session must be the YYYY-MM-DD trading day whose close is judged")
+    pu = r.get("p_up")
+    if not (_num(pu) and 0 < pu < 1):
+        errors.append(f"{eid}: reaction.p_up must be a number strictly between 0 and 1")
+    for key, sign in (("up", 1), ("down", -1)):
+        rg = r.get(key)
+        ok = (isinstance(rg, list) and len(rg) == 2 and all(_num(x) for x in rg) and rg[0] <= rg[1]
+              and all(x * sign >= 0 and abs(x) <= 20 for x in rg))
+        if not ok:
+            errors.append(f"{eid}: reaction.{key} must be [low, high] in percent, on the {'positive' if sign > 0 else 'negative'} side")
+    for key in ("implied", "normal"):
+        if key in r and not (_num(r[key]) and 0 < r[key] <= 20):
+            errors.append(f"{eid}: reaction.{key} must be a positive percent")
+    if "as_of" in r:
+        try:
+            parse_date(r["as_of"])
+        except (TypeError, ValueError):
+            errors.append(f"{eid}: reaction.as_of must be a YYYY-MM-DD date")
+    if r.get("confidence") not in IMPACT_CONFIDENCE:
+        errors.append(f"{eid}: reaction.confidence must be one of {sorted(IMPACT_CONFIDENCE)}")
+    if not (isinstance(r.get("basis"), str) and r["basis"].strip()):
+        errors.append(f"{eid}: reaction.basis must say where the numbers come from")
+    for s in r.get("sources", []):
+        if not str(s.get("url", "")).startswith("https://"):
+            errors.append(f"{eid}: every reaction source needs an https url")
+    return errors
+
+
 def validate_events(doc):
     errors = []
     events = doc.get("events", []) if isinstance(doc, dict) else None
@@ -166,6 +207,8 @@ def validate_events(doc):
                 errors.append(f"{eid}: move must be {{label, tone}} with tone good, bad or flat")
         if e.get("type") == "watch":
             errors += validate_watch_extras(eid, e)
+        if "reaction" in e:
+            errors += validate_reaction(eid, e)
         if not e.get("sources") and not e.get("note"):
             errors.append(f"{eid}: needs a source link or a note saying where the date came from")
     return errors

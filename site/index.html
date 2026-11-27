@@ -31,8 +31,9 @@
   <div>
     <h1 id="sym-title">Outlook Lab</h1>
     <p id="sym-name" class="muted">AI forecast ranges scored against a no-view volatility baseline</p>
+    <p id="sym-price" class="price" hidden></p>
   </div>
-  <div class="head-right"><button id="sym-star" class="star-btn" type="button" aria-pressed="false" hidden>☆ Watch</button><a id="sym-compare" class="cmp-link" hidden>Compare</a><button id="theme-btn" type="button" aria-label="Switch colour theme"></button><p id="sym-price" class="price" hidden></p></div>
+  <div class="head-right"><div class="head-actions"><button id="sym-star" class="star-btn" type="button" aria-pressed="false" hidden>☆ Watch</button><a id="sym-compare" class="cmp-link" hidden>Compare</a><button id="theme-btn" type="button" aria-label="Switch colour theme"></button></div></div>
 </header>
 
 <nav id="tabs" class="tabs" aria-label="Symbols"></nav>
@@ -164,27 +165,28 @@
 </section>
 
 <section id="outlook" class="card" aria-labelledby="outlook-title" hidden>
-  <div class="card-head">
-    <div>
-      <div class="title-row">
-        <svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" style="color:var(--accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polygon points="16.2 7.8 14.1 14.1 7.8 16.2 9.9 9.9 16.2 7.8"></polygon></svg>
-        <h2 id="outlook-title">Outlook</h2>
-        <span class="chip">Prediction · the model's judgment, not a fact or advice</span>
-      </div>
+  <div class="glance">
+    <div class="glance-top">
+      <h2 id="outlook-title">At a glance</h2>
+      <span class="chip">Prediction · the model's judgment, not a fact or advice</span>
+      <p id="updated" class="muted glance-upd"></p>
     </div>
-    <p id="updated" class="muted" style="font-size:12px"></p>
+    <div id="kpis" class="kpis"></div>
   </div>
+  <nav id="secnav" class="secnav" aria-label="Sections on this page"></nav>
 
-  <div class="section hero-chart">
+  <div id="sec-chart" class="section hero-chart">
     <h3 class="eyebrow">Where the price could go</h3>
-    <div id="chart-pick" class="horizon-pick" role="group" aria-label="Chart window"></div>
-    <div id="chart-tools" class="horizon-pick tools" role="group" aria-label="Chart layers"></div>
+    <div class="chart-bar">
+      <div id="chart-pick" class="horizon-pick" role="group" aria-label="Chart window"></div>
+      <div id="chart-tools" class="horizon-pick tools" role="group" aria-label="Chart layers"></div>
+    </div>
     <div id="chart" class="chartwrap"></div>
-    <p class="muted" style="font-size:12px;margin-top:6px">Dark line: daily closes. Blue band: the AI's 80% range; gray dashed band: the volatility baseline (no view). Dots mark the stored horizon ranges (1 week, 1 month and so on); the curve between them is a smooth guide that widens with the square root of time, not a separate forecast. Zoom out (scroll or pinch) to see the longer horizons out to 5 years, or use the buttons; drag to pan and hover for exact values. Optional layers: faint bands from earlier forecasts, small squares for dated events (red for shocks; hover to read them), green or red dots where a past forecast resolved inside or outside its range, candles for the last ~300 sessions, and (stocks only) the Wall Street mean price target as a dot about 12 months out, with the high and low targets as small squares. It is context, not a forecast range, and is not scored on the chart. Chart by TradingView Lightweight Charts.</p>
+    <details class="note chart-help"><summary>How to read this chart</summary><p>Dark line: daily closes. Blue band: the AI's 80% range; gray dashed band: the volatility baseline (no view). Dots mark the stored horizon ranges (1 week, 1 month and so on); the curve between them is a smooth guide that widens with the square root of time, not a separate forecast. Zoom out (scroll or pinch) to see the longer horizons out to 5 years, or use the buttons; drag to pan and hover for exact values. Optional layers: faint bands from earlier forecasts, small squares for dated events (red for shocks; hover to read them), green or red dots where a past forecast resolved inside or outside its range, candles for the last ~300 sessions, and (stocks only) the Wall Street mean price target as a dot about 12 months out, with the high and low targets as small squares. It is context, not a forecast range, and is not scored on the chart. Chart by TradingView Lightweight Charts.</p></details>
   </div>
 
-  <div class="section">
-        <div class="section-top">
+  <div id="sec-ranges" class="section">
+    <div class="section-top">
       <h3 class="eyebrow">Range for each horizon</h3>
       <div id="legend" class="legend"></div>
     </div>
@@ -196,7 +198,7 @@
   </div>
 
 
-  <div class="section">
+  <div id="sec-analysis" class="section">
     <h3 class="eyebrow">The model's analysis</h3>
     <div id="horizon-pick" class="horizon-pick" role="group" aria-label="Horizon for the analysis" hidden></div>
     <p id="outlook-meta" class="meta" style="margin-top:0"></p>
@@ -214,7 +216,15 @@
   <div id="events" class="section" hidden>
     <h3 class="eyebrow">Events that can move the market</h3>
     <div id="event-groups"></div>
-    <p class="an-note">Scheduled dates come from official calendars (BLS, Federal Reserve, NYSE). Earnings dates come from Robinhood's calendar and can change. Recent shocks are context only: they do not show that these events predict price moves. Items under Being watched are rumors or unconfirmed reports. Impact ranges are judgment, not scored; META's are SPY's times 1.6, because on two extreme 2025 days META moved about 1.9x and 2.5x SPY's move. The percentage is the model's own estimate, it is judged against what happens, and a rumor can be wrong.</p>
+    <details class="note ev-howto">
+      <summary>How to read this section</summary>
+      <ul>
+        <li><b>Coming up:</b> dates come from official calendars (BLS, Federal Reserve, NYSE). Earnings dates come from Robinhood's calendar and can change. A bull/bear call is the model's chance that SPY closes up or down in the first session that trades on the event, next to the move the options market prices for that day.</li>
+        <li><b>Being watched:</b> rumors or unconfirmed reports. The percentage is the model's own estimate of whether it happens, and it is judged against what does happen. A rumor can be wrong.</li>
+        <li><b>Move ranges</b> are judgment and are not scored yet. META's are SPY's times 1.6, because on two extreme 2025 days META moved about 1.9x and 2.5x SPY's move.</li>
+        <li><b>Recent shocks</b> are context only: they do not show that these events predict price moves. "Since" is the fund's change from the close on the shock day to the latest close.</li>
+      </ul>
+    </details>
   </div>
 
   <div id="all" class="section">

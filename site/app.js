@@ -7,8 +7,10 @@
   function syncTheme() {
     var d = document.documentElement.getAttribute("data-theme") === "dark";
     var b = document.getElementById("theme-btn");
-    b.textContent = d ? "\u2600 Light" : "\u263E Dark";
+    b.textContent = d ? "\u2600" : "\u263E";
     b.setAttribute("aria-pressed", d ? "true" : "false");
+    b.setAttribute("aria-label", d ? "Switch to light theme" : "Switch to dark theme");
+    b.title = d ? "Light theme" : "Dark theme";
   }
   document.getElementById("theme-btn").addEventListener("click", function () {
     var next = document.documentElement.getAttribute("data-theme") === "dark" ? "light" : "dark";
@@ -226,8 +228,23 @@
     }
     if (!text && rows.length) { text = money(rows[rows.length - 1].price_at_prediction); sub = "At prediction"; }
     clear(p);
-    if (text) { p.appendChild(document.createTextNode(text)); p.appendChild(el("small", sub)); p.hidden = false; }
-    else { p.hidden = true; }
+    if (!text) { p.hidden = true; return; }
+    p.appendChild(el("span", text, "price-v"));
+    var meta = el("span", undefined, "price-meta");
+    meta.appendChild(document.createTextNode(sub));
+    // where the price stands against the latest forecast, since every % on the page is measured from a price like this
+    var made = rows.map(function (r) { return r.made_at; }).sort().pop();
+    var f = rows.filter(function (r) { return r.made_at === made; })[0];
+    var last = series && Object.keys(series).length ? series[Object.keys(series).sort().pop()] : null;
+    if (f && last != null && sub.indexOf("Close") === 0) {
+      var ch = (last / f.price_at_prediction - 1) * 100;
+      meta.appendChild(document.createTextNode(" · "));
+      var flat = Math.abs(ch) < 0.05;
+      meta.appendChild(el("span", flat ? "unchanged" : signed(ch), flat ? "" : ch > 0 ? "an-up" : "an-down"));
+      meta.appendChild(document.createTextNode(" since the " + shortDate(made) + " forecast (" + money(f.price_at_prediction) + ")"));
+    }
+    p.appendChild(meta);
+    p.hidden = false;
   }
 
 
@@ -907,6 +924,7 @@
     ev.forEach(function (e) {
       var li = el("li"); li.appendChild(el("b", dateLabel(e)));
       var t = el("span", e.title); t.appendChild(el("small", "  " + (e.symbols ? e.symbols.join(", ") : "Whole market"), "muted"));
+      if (e.reaction) t.appendChild(el("small", "  · SPY: " + leanText(Math.round(e.reaction.p_up * 100)) + (e.reaction.implied != null ? ", ±" + e.reaction.implied.toFixed(1) + "%" : ""), "muted"));
       li.appendChild(t); ul.appendChild(li);
     });
     if (!ev.length) ul.appendChild(el("li", "No scheduled events listed.", "muted"));
@@ -964,7 +982,7 @@
       chart.appendChild(bars);
       var ticks = el("div", undefined, "ticks");
       ticks.setAttribute("aria-hidden", "true");
-      sc.ticks.forEach(function (v) { var s = el("span", "$" + v); s.style.left = pos(sc, v); ticks.appendChild(s); });
+      sc.ticks.filter(function (v) { return v >= 0; }).forEach(function (v) { var s = el("span", "$" + v); s.style.left = pos(sc, v); ticks.appendChild(s); });
       chart.appendChild(ticks);
       row.appendChild(chart);
 
@@ -993,6 +1011,70 @@
       row.appendChild(up);
       host.appendChild(row);
     });
+  }
+
+
+  // Ticker page: summary tiles under the header
+  function renderKpis(rows) {
+    var host = $("kpis"); clear(host);
+    if (!rows.length) return;
+    var p = rows.filter(function (r) { return r.horizon === "1m"; })[0] || rows[0];
+    var lc = latestClose(state.symbol), ref = lc ? lc.price : p.price_at_prediction, refName = lc ? "latest close" : "start";
+    function tile(label, value, sub, target, cls) {
+      var t = el(target ? "a" : "div", undefined, "kpi" + (cls ? " " + cls : ""));
+      if (target) { t.href = "#" + target; t.addEventListener("click", function (e) { e.preventDefault(); goSection(target); }); }
+      t.appendChild(el("span", label, "kpi-l"));
+      t.appendChild(el("b", value));
+      if (sub) t.appendChild(el("small", sub));
+      host.appendChild(t);
+    }
+    var hl = HLABEL[p.horizon] || p.horizon;
+    tile("AI range, " + hl, money(p.ai.low) + " – " + money(p.ai.high), signed((p.ai.low / ref - 1) * 100) + " to " + signed((p.ai.high / ref - 1) * 100) + " vs " + refName, "sec-ranges");
+    tile("Chance above start, " + hl, p.ai.prob_up == null ? "n/a" : pct(p.ai.prob_up), "The baseline assumes 50%", "sec-ranges");
+    var m = anMetrics(p);
+    if (m.ratio != null) tile("AI range vs baseline", Math.round(m.ratio * 100) + "% of its width", m.ratio < 0.95 ? "Narrower: more confident than the options market" : m.ratio > 1.05 ? "Wider: sees more risk than the options market" : "About the same as the options market", "sec-ranges");
+    var y1 = rows.filter(function (r) { return r.horizon === "1y"; })[0];
+    var rt = state.ratings && state.ratings.symbols && state.ratings.symbols[state.symbol];
+    if (y1) {
+      var aiMove = (Math.sqrt(y1.ai.low * y1.ai.high) / ref - 1) * 100;
+      if (rt && rt.target && rt.target.mean) tile("1 year: AI vs Wall Street", "AI " + signed(aiMove), "Street mean " + money(rt.target.mean) + " (" + signed((rt.target.mean / ref - 1) * 100) + ")", "street");
+      else tile("1 year: AI median", signed(aiMove), "Range midpoint vs " + refName, "sec-ranges");
+    }
+    var today = todayIso();
+    var nx = (state.events || []).filter(function (e) { return e.type === "scheduled" && e.kind !== "market" && (e.end_date || e.date) >= today && appliesTo(e, state.symbol); })
+      .sort(function (a, b) { return a.date < b.date ? -1 : a.date > b.date ? 1 : 0; })[0];
+    var eq = earningsIn(p);
+    if (eq && (!nx || eq < nx.date)) tile("Next event", fmtDate(eq), "Earnings, inside the " + hl + " window", "events");
+    else if (nx) tile("Next event", dateLabel(nx), nx.title, "events", "kpi-text");
+  }
+
+  // Ticker page: sticky in-page section nav with the current section highlighted
+  function goSection(id) {
+    var t = $(id); if (!t) return;
+    var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    t.scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "start" });
+  }
+  function renderSecnav() {
+    var nav = $("secnav"); clear(nav);
+    if (state.secObs) { state.secObs.disconnect(); state.secObs = null; }
+    var items = [["sec-chart", "Chart"], ["sec-ranges", "Ranges"], ["sec-analysis", "Analysis"], ["street", "Wall Street"], ["events", "Events"], ["all", "History"]]
+      .filter(function (x) { var n = $(x[0]); return n && !n.hidden; });
+    var links = {};
+    items.forEach(function (x) {
+      var a = el("a", x[1]); a.href = "#" + x[0];
+      a.addEventListener("click", function (e) { e.preventDefault(); goSection(x[0]); });
+      nav.appendChild(a); links[x[0]] = a;
+    });
+    function setActive(id) { Object.keys(links).forEach(function (k) { if (k === id) links[k].setAttribute("aria-current", "true"); else links[k].removeAttribute("aria-current"); }); }
+    setActive(items.length ? items[0][0] : null);
+    if (!("IntersectionObserver" in window)) return;
+    var seen = {};
+    state.secObs = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) { seen[en.target.id] = en.isIntersecting; });
+      var first = items.filter(function (x) { return seen[x[0]]; })[0];
+      if (first) setActive(first[0]);
+    }, { rootMargin: "-64px 0px -55% 0px" });
+    items.forEach(function (x) { state.secObs.observe($(x[0])); });
   }
 
   function renderRecord() {
@@ -1106,6 +1188,9 @@
     var d = new Date();
     return d.getFullYear() + "-" + ("0" + (d.getMonth() + 1)).slice(-2) + "-" + ("0" + d.getDate()).slice(-2);
   }
+  function isoPlus(iso, days) {
+    return new Date(Date.parse(iso + "T12:00:00Z") + days * 864e5).toISOString().slice(0, 10);
+  }
   function shortDate(iso) {
     return new Date(iso + "T12:00:00Z").toLocaleDateString("en-US", { month: "short", day: "numeric", timeZone: "UTC" });
   }
@@ -1123,7 +1208,7 @@
     return key ? { key: key, r: r[key] } : null;
   }
   function watchAxis(items) {
-    var lo = -6, hi = 3, pm = 0.5;
+    var lo = -1, hi = 1, pm = 0.5; // fit the axis to the data so ranges are not squashed
     items.forEach(function (e) {
       var im = impactFor(e);
       if (im) { lo = Math.min(lo, Math.floor(im.r[0])); hi = Math.max(hi, Math.ceil(im.r[1])); }
@@ -1134,40 +1219,60 @@
   function marketText(e) {
     return e.market_prob == null ? "No market price" : "Market " + (e.market_prob_bound === "bounded" || e.market_prob_bound === "max" ? "up to " : "") + Math.round(e.market_prob * 100) + "%";
   }
-  function watchBars(e, ax) {
-    var wrap = el("div", undefined, "wrow");
-    var pc = Math.round(e.prob * 100), mk = marketText(e);
-    var a = el("div");
-    var l1 = el("div", undefined, "wlab");
-    l1.appendChild(el("span", "Chance it happens by " + shortDate(e.by)));
-    var rt = el("span"); rt.appendChild(el("b", "Model " + pc + "%")); rt.appendChild(document.createTextNode(" \u00b7 " + mk));
-    l1.appendChild(rt); a.appendChild(l1);
-    var tr = el("div", undefined, "wtrack");
-    tr.setAttribute("role", "img");
-    tr.setAttribute("aria-label", "Model " + pc + "%. " + mk + ". Bar runs 0 to " + ax.pmax + "%.");
-    var f = el("div", undefined, "wfill"); f.style.width = Math.min(pc / ax.pmax * 100, 100) + "%"; tr.appendChild(f);
-    if (e.market_prob != null) { var t = el("div", undefined, "wtick"); t.style.left = Math.min(e.market_prob * 100 / ax.pmax * 100, 100) + "%"; tr.appendChild(t); }
-    a.appendChild(tr); a.appendChild(el("small", "Bar runs 0 to " + ax.pmax + "%", "wnote"));
-    wrap.appendChild(a);
-    var im = impactFor(e);
+  // Being watched: the list is its own chart. Every row shares one chance scale and one move axis.
+  function moveName(key) { return key === "SPY" && state.symbol !== "SPY" ? "SPY (the market)" : key; }
+  function watchPos(ax, v) { return (v - ax.A) / (ax.B - ax.A) * 100; }
+  function watchHead(items, ax) {
+    var im0 = null; items.some(function (e) { return (im0 = impactFor(e)); });
+    var h = el("div", undefined, "wtable-h");
+    h.setAttribute("aria-hidden", "true");
+    h.appendChild(el("span", "What could happen", "wh-t"));
+    var hp = el("span", "Model chance", "wh-p"); hp.appendChild(el("small", "bar scale 0–" + ax.pmax + "%")); h.appendChild(hp);
+    var mv = el("span", undefined, "wh-i");
+    mv.appendChild(el("span", (im0 ? moveName(im0.key) : "SPY") + " move if it happens", "wh-il"));
+    var sc = el("span", undefined, "wscale");
+    [ax.A, 0, ax.B].forEach(function (v) {
+      var t = el("span", v === 0 ? "0" : signed(v).replace(".0", "")); t.style.left = watchPos(ax, v) + "%"; sc.appendChild(t);
+    });
+    mv.appendChild(sc);
+    h.appendChild(mv);
+    return h;
+  }
+  function watchCells(e, ax, sum) {
+    var pc = Math.round((e.prob || 0) * 100);
+    var t = el("span", undefined, "evw-t");
+    t.appendChild(el("span", e.title, "evc-title"));
+    t.appendChild(el("small", "By " + shortDate(e.by) + " · " + (WSTATUS[e.status] || e.status)));
+    sum.appendChild(t);
+    var p = el("span", undefined, "evw-p");
+    p.appendChild(el("b", pc + "%"));
+    var mb = el("span", undefined, "mbar"); var fi = el("i"); fi.style.width = Math.min(pc / ax.pmax * 100, 100) + "%"; mb.appendChild(fi);
+    if (e.market_prob != null) { var tk = el("b", undefined, "mtick"); tk.style.left = Math.min(e.market_prob * 100 / ax.pmax * 100, 100) + "%"; mb.appendChild(tk); }
+    mb.setAttribute("role", "img"); mb.setAttribute("aria-label", "Model chance " + pc + "%. " + marketText(e) + ".");
+    p.appendChild(mb);
+    sum.appendChild(p);
+    var im = impactFor(e), m = el("span", undefined, "evw-i");
     if (im) {
-      var b = el("div");
-      var l2 = el("div", undefined, "wlab");
-      l2.appendChild(el("span", (im.key === "SPY" && state.symbol !== "SPY" ? "SPY (the market)" : im.key) + " if it happens, beyond what is priced in"));
-      b.appendChild(l2);
-      var span = ax.B - ax.A, pos = function (v) { return (v - ax.A) / span * 100; };
-      var tr2 = el("div", undefined, "wtrack");
-      tr2.setAttribute("role", "img");
-      tr2.setAttribute("aria-label", im.key + " moves " + signed(im.r[0]) + " to " + signed(im.r[1]) + " if it happens, an 80% range.");
-      var z = el("div", undefined, "wzero"); z.style.left = pos(0) + "%"; tr2.appendChild(z);
-      var rg = el("div", undefined, "wrange " + (e.direction === "bull" ? "bull" : "bear"));
-      rg.style.left = pos(im.r[0]) + "%"; rg.style.width = Math.max(pos(im.r[1]) - pos(im.r[0]), 0.6) + "%"; tr2.appendChild(rg);
-      b.appendChild(tr2);
-      var line = el("small", signed(im.r[0]) + " to " + signed(im.r[1]) + " \u00b7 80% range \u00b7 " + e.impact.confidence + " confidence \u00b7 judgment, not scored", "wnote");
-      b.appendChild(line);
-      wrap.appendChild(b);
-    }
-    return wrap;
+      var tr = el("span", undefined, "wtrack");
+      tr.setAttribute("role", "img");
+      tr.setAttribute("aria-label", im.key + " moves " + signed(im.r[0]) + " to " + signed(im.r[1]) + " if it happens, an 80% range.");
+      var z = el("span", undefined, "wzero"); z.style.left = watchPos(ax, 0) + "%"; tr.appendChild(z);
+      var rg = el("span", undefined, "wrange " + (e.direction === "bull" ? "bull" : "bear"));
+      rg.style.left = watchPos(ax, im.r[0]) + "%"; rg.style.width = Math.max(watchPos(ax, im.r[1]) - watchPos(ax, im.r[0]), 1) + "%";
+      tr.appendChild(rg); m.appendChild(tr);
+      m.appendChild(el("small", signed(im.r[0]) + " to " + signed(im.r[1]), "mimp " + (e.direction === "bull" ? "bull" : "bear")));
+    } else m.appendChild(el("small", "No estimate", "muted"));
+    sum.appendChild(m);
+  }
+  function watchDetails(e) {
+    var dl = el("dl", undefined, "evdl");
+    function row(k, v) { if (!v) return; dl.appendChild(el("dt", k)); dl.appendChild(el("dd", v)); }
+    row("Counts if", e.resolves_if);
+    row("Chance", "Model " + Math.round(e.prob * 100) + "% by " + shortDate(e.by) + " · " + marketText(e));
+    var im = impactFor(e);
+    if (im) row("Move", moveName(im.key) + " " + signed(im.r[0]) + " to " + signed(im.r[1]) + " if it happens, beyond what is already priced in. 80% range, " + e.impact.confidence + " confidence.");
+    row("Why", e.impact && e.impact.basis);
+    return dl;
   }
   function svgEl(tag, attrs, text) {
     var n = document.createElementNS("http://www.w3.org/2000/svg", tag);
@@ -1175,113 +1280,128 @@
     if (text !== undefined) n.textContent = text;
     return n;
   }
-  function watchChart(items, ax, width) {
-    var pts = items.filter(function (e) { return impactFor(e); });
-    if (!pts.length) return null;
-    var box = el("div", undefined, "wchart"); box.id = "watch-chart";
-    var sym = impactFor(pts[0]).key;
-    box.appendChild(el("p", "Across: chance it happens. Up and down: " + (sym === "SPY" && state.symbol !== "SPY" ? "SPY" : sym) + " move if it happens, with its range."));
-    var W = Math.max(280, Math.round(width || 640)), H = 150, X0 = 38, X1 = W - 10, Y0 = 8, Y1 = H - 22;
-    var svg = svgEl("svg", { viewBox: "0 0 " + W + " " + H, width: W, height: H, role: "img" });
-    svg.appendChild(svgEl("title", {}, "Chance of each watched item against its likely market move"));
-    var px = function (p) { return X0 + p / ax.pmax * (X1 - X0); };
-    var py = function (v) { return Y0 + (ax.B - v) / (ax.B - ax.A) * (Y1 - Y0); };
-    var line = function (x1, y1, x2, y2, col, w, dash) {
-      var n = svgEl("line", { x1: x1, y1: y1, x2: x2, y2: y2, "stroke-linecap": "round" });
-      n.style.stroke = col; n.style.strokeWidth = w; if (dash) n.setAttribute("stroke-dasharray", dash); return n;
-    };
-    var txt = function (x, y, t, anchor, col) {
-      var n = svgEl("text", { x: x, y: y, "text-anchor": anchor, "font-size": 11 }, t); n.style.fill = col; return n;
-    };
-    for (var v = Math.ceil(ax.A / 2) * 2; v <= ax.B; v += 2) {
-      svg.appendChild(line(X0, py(v), X1, py(v), v === 0 ? "var(--muted)" : "var(--line)", v === 0 ? 1 : 1, v === 0 ? null : "2 3"));
-      svg.appendChild(txt(X0 - 6, py(v) + 4, (v > 0 ? "+" : v < 0 ? "\u2212" : "") + Math.abs(v) + "%", "end", "var(--muted-2)"));
-    }
-    [0, ax.pmax / 2, ax.pmax].forEach(function (t, i) {
-      svg.appendChild(txt(px(t), H - 6, t + "%", i === 0 ? "start" : i === 2 ? "end" : "middle", "var(--muted-2)"));
-    });
-    pts.forEach(function (e) {
-      var im = impactFor(e), x = px(Math.min(e.prob * 100, ax.pmax)), col = e.direction === "bull" ? "var(--ok)" : "var(--bad)";
-      var mid = (im.r[0] + im.r[1]) / 2;
-      svg.appendChild(line(x, py(im.r[1]), x, py(im.r[0]), col, 2));
-      var c = svgEl("circle", { cx: x, cy: py(mid), r: 4.5 }); c.style.fill = col; svg.appendChild(c);
-      var right = e.prob * 100 / ax.pmax > 0.62, name = e.short || e.title.slice(0, 18);
-      if (W < 460) {
-        var edge = x < X0 + 50 ? "start" : x > X1 - 50 ? "end" : "middle";
-        svg.appendChild(txt(edge === "start" ? x - 4 : edge === "end" ? x + 4 : x, py(im.r[1]) - 7, name, edge, "var(--ink)"));
-      } else {
-        svg.appendChild(txt(x + (right ? -9 : 9), py(mid) + 4, name, right ? "end" : "start", "var(--ink)"));
-      }
-    });
-    box.appendChild(svg);
-    return box;
-  }
   function causeTag(e) {
     return e.cause && CAUSE[e.cause] ? el("span", CAUSE[e.cause], "tag cause c-" + e.cause) : el("span", KIND[e.kind] || e.kind, "tag");
   }
+  // Recent shocks: did it stick? The scope's fund from the close on the shock day (or the last close before it) to the latest close.
+  var SCOPE_FUND = { market: "SPY", tech: "QQQ", chips: "SMH", gold: "GLD" };
+  function shockSince(e) {
+    var sym = SCOPE_FUND[e.scope] || "SPY", m = state.prices[sym];
+    if (!m) return null;
+    var ds = Object.keys(m).sort(), d0 = null;
+    for (var k = 0; k < ds.length && ds[k] <= e.date; k++) d0 = ds[k];
+    var d1 = ds[ds.length - 1];
+    if (!d0 || d1 <= e.date) return null;
+    return { sym: sym, d0: d0, d1: d1, p0: m[d0], p1: m[d1], pct: (m[d1] / m[d0] - 1) * 100 };
+  }
+  function linkTo(src) {
+    var u = safeUrl(src && src.url); if (!u) return null;
+    var a = el("a", src.label || domain(u));
+    a.href = u; a.target = "_blank"; a.rel = "noopener noreferrer"; return a;
+  }
+  // Footer: one line of plain facts, then one line per kind of link, instead of a wall of chips
+  function evFoot(e) {
+    var foot = el("div", undefined, "evfoot"), facts = el("p", undefined, "evfacts");
+    function fact(x) {
+      if (facts.childNodes.length) facts.appendChild(document.createTextNode(" · "));
+      facts.appendChild(typeof x === "string" ? document.createTextNode(x) : x);
+    }
+    function links(label, list) {
+      var ls = (list || []).map(linkTo).filter(Boolean);
+      if (!ls.length) return 0;
+      var p = el("p", undefined, "evlinks"); p.appendChild(el("span", label, "evl-k"));
+      ls.forEach(function (a, k) { if (k) p.appendChild(document.createTextNode(", ")); p.appendChild(a); });
+      foot.appendChild(p); return ls.length;
+    }
+    if (e.type === "shock") {
+      fact(causeTag(e)); if (SCOPE[e.scope]) fact("Applies to " + SCOPE[e.scope].label);
+      var sn = shockSince(e);
+      if (sn) fact(sn.sym + " " + signed(sn.pct) + " from the " + shortDate(sn.d0) + " close (" + money(sn.p0) + ") to " + shortDate(sn.d1) + " (" + money(sn.p1) + ")");
+    }
+    else fact(KIND[e.kind] || e.kind);
+    if (e.type === "watch") { fact("Reported " + shortDate(e.date)); if (e.checked) fact("Checked " + shortDate(e.checked)); }
+    if (e.type === "watch" || e.reaction) fact("Not yet scored");
+    if (e.note) fact(e.note);
+    foot.appendChild(facts);
+    var n = links("Sources", e.sources);
+    if (e.type === "watch") links("Past analogues", e.impact && e.impact.sources);
+    else if (e.reaction) links("Basis", e.reaction.sources);
+    if (!n && !e.note) fact(el("span", "Unverified", "unv-t"));
+    return foot;
+  }
   function evRow(e, rows, wax) {
-    var li = el("li", undefined, "evc");
+    var li = el("li", undefined, "evc" + (e.type === "watch" ? " evw" : ""));
     var det = document.createElement("details");
     var sum = document.createElement("summary");
-    sum.appendChild(el("span", e.type === "watch" ? "By " + shortDate(e.by) : dateLabel(e), "evc-date"));
-    sum.appendChild(el("span", e.title, "evc-title"));
-    var meta = el("span", undefined, "evc-meta");
-    if (e.type === "watch") {
-      var pc = Math.round((e.prob || 0) * 100);
-      var mb = el("span", undefined, "mbar"); var fi = el("i"); fi.style.width = Math.min(pc / wax.pmax * 100, 100) + "%"; mb.appendChild(fi);
-      mb.setAttribute("role", "img"); mb.setAttribute("aria-label", "Model chance " + pc + "%");
-      meta.appendChild(mb); meta.appendChild(el("span", pc + "% chance"));
-      var im = impactFor(e);
-      if (im) meta.appendChild(el("span", signed(im.r[0]) + " to " + signed(im.r[1]), "mimp " + (e.direction === "bull" ? "bull" : "bear")));
-    } else {
+    if (e.type === "watch") watchCells(e, wax, sum);
+    else {
+      sum.appendChild(el("span", dateLabel(e), "evc-date"));
+      sum.appendChild(el("span", e.title, "evc-title"));
+      var meta = el("span", undefined, "evc-meta");
       if (e.time) meta.appendChild(el("span", e.time));
       if (e.type === "scheduled") {
-        var end0 = e.end_date || e.date;
-        var hit0 = rows.filter(function (p) { return p.resolves_on >= end0; })[0];
-        if (hit0) meta.appendChild(el("span", "Inside the " + (HLABEL[hit0.horizon] || hit0.horizon) + " window", "tag win"));
+        if (e.reaction) meta.appendChild(reactionMeta(e.reaction));
       } else {
-        if (e.move) meta.appendChild(el("span", e.move.label, "mimp " + e.move.tone));
-        meta.appendChild(causeTag(e));
+        li.className += " evs";
+        meta.appendChild(el("span", e.move ? e.move.label : "—", "scol-m" + (e.move ? " mimp " + e.move.tone : " muted")));
+        var sn = shockSince(e), sc = el("span", sn ? signed(sn.pct) + " since" : "too soon", "scol-s" + (sn ? (sn.pct >= 0 ? " an-up" : " an-down") : " muted"));
+        if (sn) { sc.title = sn.sym + ": " + money(sn.p0) + " at the " + shortDate(sn.d0) + " close, " + money(sn.p1) + " on " + shortDate(sn.d1); sc.insertBefore(el("small", sn.sym + " "), sc.firstChild); }
+        else sc.title = "Too recent to measure";
+        meta.appendChild(sc);
+        var ct = causeTag(e); ct.className += " scol-c"; meta.appendChild(ct);
       }
+      sum.appendChild(meta);
     }
-    sum.appendChild(meta);
     det.appendChild(sum);
     var body = el("div", undefined, "evc-full");
-    if (e.detail) body.appendChild(el("span", e.detail, "ev-detail"));
-    if (e.type === "watch") {
-      body.appendChild(watchBars(e, wax));
-      if (e.resolves_if) body.appendChild(el("span", e.resolves_if, "ev-detail"));
-      if (e.impact && e.impact.basis) body.appendChild(el("small", e.impact.basis, "wnote"));
-    }
-    var tags = el("span", undefined, "tags");
-    tags.appendChild(e.type === "shock" ? causeTag(e) : el("span", KIND[e.kind] || e.kind, "tag"));
-    if (e.type === "shock" && SCOPE[e.scope]) tags.appendChild(el("span", "Applies to: " + SCOPE[e.scope].label, "tag"));
-    if (e.type === "watch") {
-      tags.appendChild(el("span", WSTATUS[e.status] || e.status, "tag unv"));
-      tags.appendChild(el("span", "Reported " + shortDate(e.date), "tag"));
-      if (e.checked) tags.appendChild(el("span", "Checked " + shortDate(e.checked), "tag"));
-      tags.appendChild(el("span", "Not yet scored", "tag model"));
-      ((e.impact && e.impact.sources) || []).forEach(function (src) {
-        var u = safeUrl(src.url); if (!u) return;
-        var a = el("a", "Analogue: " + (src.label || domain(u)), "tag");
-        a.href = u; a.target = "_blank"; a.rel = "noopener noreferrer"; tags.appendChild(a);
-      });
-    }
-    var any = false;
-    (e.sources || []).forEach(function (src) {
-      var u = safeUrl(src.url);
-      if (!u) return;
-      any = true;
-      var a = el("a", src.label || domain(u), "tag");
-      a.href = u; a.target = "_blank"; a.rel = "noopener noreferrer";
-      tags.appendChild(a);
-    });
-    if (e.note) { any = true; tags.appendChild(el("span", e.note, "tag model")); }
-    if (!any) tags.appendChild(el("span", "unverified", "tag unv"));
-    body.appendChild(tags);
+    if (e.detail) body.appendChild(el("p", e.detail, "ev-detail"));
+    if (e.type === "watch") body.appendChild(watchDetails(e));
+    if (e.type === "scheduled" && e.reaction) body.appendChild(reactionBlock(e.reaction));
+    body.appendChild(evFoot(e));
     det.appendChild(body);
     li.appendChild(det);
     return li;
+  }
+
+  // Scheduled events: the model's call on SPY's close-to-close move in the session that first trades on the event
+  function leanText(pu) {
+    return pu >= 45 && pu <= 55 ? "Toss-up" : pu > 55 ? pu + "% bullish" : (100 - pu) + "% bearish";
+  }
+  function reactionMeta(r) {
+    var pu = Math.round(r.p_up * 100), wrap = el("span", undefined, "rmeta");
+    var sb = el("span", undefined, "rsplit");
+    var u = el("i", undefined, "up"); u.style.width = pu + "%"; sb.appendChild(u);
+    var d = el("i", undefined, "dn"); d.style.width = (100 - pu) + "%"; sb.appendChild(d);
+    sb.setAttribute("role", "img");
+    sb.setAttribute("aria-label", "Model: " + pu + "% chance SPY closes up, " + (100 - pu) + "% down");
+    wrap.appendChild(sb);
+    wrap.appendChild(el("span", leanText(pu), "mimp" + (pu > 55 ? " bull" : pu < 45 ? " bear" : "")));
+    if (r.implied != null) wrap.appendChild(el("span", "±" + r.implied.toFixed(1) + "%"));
+    return wrap;
+  }
+  function reactionBlock(r) {
+    var pu = Math.round(r.p_up * 100), box = el("div", undefined, "rblock");
+    var l = el("div", undefined, "wlab");
+    l.appendChild(el("span", "SPY on " + shortDate(r.session) + ", close vs the previous close"));
+    var rt = el("span"); rt.appendChild(el("b", "Model call")); rt.appendChild(document.createTextNode(" · " + r.confidence + " confidence"));
+    l.appendChild(rt); box.appendChild(l);
+    var g = el("div", undefined, "rgrid");
+    [["up", "Bullish: closes up", pu, r.up], ["dn", "Bearish: closes down", 100 - pu, r.down]].forEach(function (x) {
+      var c = el("div", undefined, "rcase " + x[0]);
+      c.appendChild(el("span", x[1], "rk"));
+      c.appendChild(el("b", x[2] + "%"));
+      c.appendChild(el("small", "If so, " + signed(x[3][0]) + " to " + signed(x[3][1])));
+      g.appendChild(c);
+    });
+    box.appendChild(g);
+    var dl = el("dl", undefined, "evdl");
+    function row(k, v) { if (!v) return; dl.appendChild(el("dt", k)); dl.appendChild(el("dd", v)); }
+    if (r.implied != null) row("Priced in", "Options price a move of about ±" + r.implied.toFixed(1) + "% that day" +
+      (r.normal != null ? ", against ±" + r.normal.toFixed(1) + "% for an ordinary day" : "") + (r.as_of ? " (as of " + shortDate(r.as_of) + ")" : "") + ".");
+    row("Ranges", "Each covers 80% of outcomes in that case. Judgment, not scored yet.");
+    row("Why", r.basis);
+    box.appendChild(dl);
+    return box;
   }
 
   function evGroup(key, title, sub, items, limit, mk, emptyText, chart, rows) {
@@ -1296,7 +1416,8 @@
     (open ? items : items.slice(0, limit)).forEach(function (e) { ol.appendChild(mk(e)); });
     g.appendChild(ol);
     if (items.length > limit) {
-      var btn = el("button", open ? "Show fewer" : "Show all " + items.length, "more evg-more");
+      var nReal = items.filter(function (x) { return !x.divider; }).length;
+      var btn = el("button", open ? "Show fewer" : "Show all " + nReal, "more evg-more");
       btn.type = "button";
       btn.addEventListener("click", function () { state.evOpen[key] = !open; renderEvents(rows); });
       g.appendChild(btn);
@@ -1361,31 +1482,33 @@
     var watching = all.filter(function (e) { return e.type === "watch" && (e.by || "") >= today; })
       .sort(function (a, b) { return (b.prob || 0) - (a.prob || 0); });
     var wax = watchAxis(watching);
-    state.evWatch = { items: watching, ax: wax };
-    if (!window._evResize) {
-      window._evResize = true;
-      var tmr = null;
-      window.addEventListener("resize", function () {
-        clearTimeout(tmr);
-        tmr = setTimeout(function () {
-          var old = $("watch-chart"), g = $("event-groups");
-          if (!old || !state.evWatch || !g.clientWidth || Math.abs(g.clientWidth - old.firstChild.nextSibling.getAttribute("width")) < 24) return;
-          var nu = watchChart(state.evWatch.items, state.evWatch.ax, g.clientWidth);
-          if (nu) old.replaceWith(nu);
-        }, 150);
-      });
-    }
     clear(groups);
-    groups.appendChild(evGroup("scheduled", "Coming up", upcoming.length > 3 ? "Next 3 of " + upcoming.length + ", soonest first" : "Soonest first",
-      upcoming, 3, function (e) { return evRow(e, rows, wax); }, "No scheduled events listed.", null, rows));
+    // Show the next two weeks in full (at least 3 events), so a Fed meeting is never hidden behind a minor release.
+    var soon = isoPlus(today, 14), nSoon = Math.max(3, upcoming.filter(function (e) { return e.date <= soon; }).length);
+    // A divider where each prediction window closes, instead of a tag repeated on every row inside it.
+    var cuts = rows.filter(function (p) { return p.resolves_on >= today && upcoming.length && p.resolves_on < upcoming[upcoming.length - 1].date; })
+      .sort(function (a, b) { return a.resolves_on < b.resolves_on ? -1 : 1; });
+    var list = [], shown = 0;
+    upcoming.forEach(function (e, k) {
+      while (cuts.length && (e.end_date || e.date) > cuts[0].resolves_on) {
+        var c = cuts.shift();
+        list.push({ divider: (HLABEL[c.horizon] || c.horizon).replace(" ", "-") + " predictions are scored at the " + shortDate(c.resolves_on) + " close" });
+      }
+      list.push(e);
+      if (k < nSoon) shown = list.length;
+    });
+    var sub = nSoon < upcoming.length ? "The next two weeks, soonest first. " + (upcoming.length - nSoon) + " more later." : "Soonest first";
+    groups.appendChild(evGroup("scheduled", "Coming up", sub, list, shown, function (e) {
+      return e.divider ? el("li", e.divider, "evdiv") : evRow(e, rows, wax);
+    }, "No scheduled events listed.", null, rows));
     if (hours.length) {
       groups.lastChild.appendChild(el("small", "Market hours: " + hours.map(function (e) {
-        return shortDate(e.date) + " " + (e.time ? e.title.toLowerCase() + ", " + e.time.toLowerCase() : e.title.toLowerCase());
+        return shortDate(e.date) + ": " + e.title + (e.time ? " (" + e.time + ")" : "");
       }).join(" · "), "wnote"));
     }
     if (watching.length) {
-      groups.appendChild(evGroup("watch", "Being watched", "Unconfirmed items, sorted by chance it happens, highest first",
-        watching, 99, function (e) { return evRow(e, rows, wax); }, "", watchChart(watching, wax, groups.clientWidth), rows));
+      groups.appendChild(evGroup("watch", "Being watched", "Not confirmed yet. Most likely first. Open a row for the reasoning and sources.",
+        watching, 99, function (e) { return evRow(e, rows, wax); }, "", watchHead(watching, wax), rows));
     }
     groups.appendChild(evGroup("shock", "Recent shocks", "Already happened and priced in, newest first",
       recent, 3, function (e) { return evRow(e, rows, wax); }, "No recent shocks listed.", null, rows));
@@ -1987,6 +2110,7 @@
     status.hidden = true; outlook.hidden = false;
     renderTabs();
     renderHeader(rows);
+    renderKpis(rows);
     renderRows(rows);
     renderChart(rows);
     renderRecord();
@@ -1995,6 +2119,7 @@
     renderStreet(rows);
     renderPast(list);
     $("past-all").href = "#predictions/" + encodeURIComponent(state.symbol);
+    renderSecnav();
     var up = $("updated");
     up.textContent = state.summary && state.summary.generated_at ? "Scores updated " + fmtDate(state.summary.generated_at.slice(0, 10)) : "";
   }
@@ -2002,7 +2127,7 @@
   $("sym-star").addEventListener("click", function () { if (state.symbol) { toggleWatch(state.symbol); syncStar(); renderTabs(); } });
   $("all-link").addEventListener("click", function (e) {
     e.preventDefault();
-    $("all").scrollIntoView({ behavior: "smooth", block: "start" });
+    goSection("all");
   });
   window.addEventListener("resize", function () { if (!$("home").hidden && state.homeView === "map") renderHome(); if (!$("compare").hidden) renderCompare(location.hash.replace("#", "")); });
   window.addEventListener("hashchange", function () { state.horizon = state.fromHome || null; state.fromHome = null; render(); window.scrollTo(0, 0); });
