@@ -575,6 +575,25 @@
       var eo = lineOpts("rgba(0,0,0,0)", 1, 0, false); eo.lineVisible = false;
       var sEv = chart.addSeries(LW.LineSeries, eo); sEv.setData(evPts); LW.createSeriesMarkers(sEv, evMarks);
     }
+    // Street target: one dot at about +12 months (targets are 12-month views). Not a range, not scored on the chart.
+    var rt = state.ratings && state.ratings.symbols && state.ratings.symbols[state.symbol];
+    var streetOk = !!(rt && rt.target && rt.target.mean && span >= 360), tgtDay = null, tgtTxt = "";
+    if (streetOk && (state.chartStreet === undefined ? false : state.chartStreet)) {
+      var tn = t0 + 365, tg;
+      for (tg = 0; tg < 4; tg++) { var tw = new Date(tn * 86400000).getUTCDay(); if (tw !== 0 && tw !== 6) break; tn -= 1; }
+      tgtDay = isoOf(tn);
+      var tt = rt.target, noScale = function () { return null; };
+      var sTg = chart.addSeries(LW.LineSeries, (function () { var o = lineOpts("rgba(0,0,0,0)", 1, 0, false); o.lineVisible = false; return o; })());
+      sTg.setData([{ time: tgtDay, value: tt.mean }]);
+      LW.createSeriesMarkers(sTg, [{ time: tgtDay, position: "inBar", shape: "circle", color: cssRgb("--ink"), size: 2, text: "Street $" + Math.round(tt.mean) }]);
+      [["high", tt.high], ["low", tt.low]].forEach(function (x) {
+        if (!x[1]) return;
+        var o2 = lineOpts("rgba(0,0,0,0)", 1, 0, false); o2.lineVisible = false; o2.autoscaleInfoProvider = noScale;
+        var sx = chart.addSeries(LW.LineSeries, o2); sx.setData([{ time: tgtDay, value: x[1] }]);
+        LW.createSeriesMarkers(sx, [{ time: tgtDay, position: "inBar", shape: "square", color: cssRgb("--ink", 0.5), size: 0.6 }]);
+      });
+      tgtTxt = "Street (Yahoo Finance, " + fmtDate(rt.as_of) + "): mean " + money(tt.mean) + (tt.low && tt.high ? ", range " + money(tt.low) + " to " + money(tt.high) : "") + ". A 12-month view; context only, not an input to the forecast";
+    }
     if (outMarks.length) LW.createSeriesMarkers(sHist, outMarks);
     if (candleOn) {
       var oh = state.ohlc[state.symbol], first = oh[0][0];
@@ -591,7 +610,7 @@
     var PRESET = { "1m": [68, 31], "6m": [165, 183], "1y": [330, 365], "5y": [back, span] };
     applyWin = function (win) {
       var pr = PRESET[win]; if (!pr) return;
-      var fwd = pr[1], fromD = Math.max(firstDay, t0 - pr[0]), toD = Math.min(lastDay, t0 + fwd + Math.max(6, Math.round(fwd * 0.06)));
+      var fwd = pr[1], fromD = Math.max(firstDay, t0 - pr[0]), toD = Math.min(lastDay, t0 + fwd + Math.max(6, Math.round(fwd * (tgtDay ? 0.11 : 0.06))));
       lastApply = Date.now();
       try { chart.timeScale().setVisibleRange({ from: isoOf(snapDay(fromD, 1)), to: isoOf(snapDay(toD, -1)) }); } catch (e) {}
       setTimeout(updateEnds, 80);
@@ -633,6 +652,7 @@
       }
       tog("Earlier forecasts", "chartGhosts", true);
       tog("Events", "chartEvents", true);
+      if (streetOk) tog("Street target", "chartStreet", false);
       tog("Candles", "chartCandles", false, function (v, redraw) {
         if (!v || state.ohlc) { redraw(); return; }
         load("data/ohlc.json").then(function (d) { state.ohlc = d; redraw(); }).catch(function () { state.chartCandles = false; legend.textContent = "Candle data is not published yet. It appears after the next scheduled update."; });
@@ -651,6 +671,7 @@
       else if (mAiHi[t] !== undefined) out += " · AI " + rangeTxt(mAiLo[t], mAiHi[t]) + " (" + signed((mAiLo[t] / refPx - 1) * 100) + " to " + signed((mAiHi[t] / refPx - 1) * 100) + ") · baseline " + rangeTxt(mBLo[t], mBHi[t]) + (mHist[t] !== undefined ? " · actual $" + mHist[t].toFixed(2) : "");
       if (candleMap && candleMap[t]) { var r = candleMap[t]; out += " · O " + r[1].toFixed(2) + " H " + r[2].toFixed(2) + " L " + r[3].toFixed(2) + " C " + r[4].toFixed(2); }
       if (evByDay[t]) out += " · " + evByDay[t].map(function (e) { return e.title; }).join("; ");
+      if (tgtDay && t === tgtDay) out += " · " + tgtTxt;
       legend.textContent = out;
     }
     setLegend(null);
