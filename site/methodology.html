@@ -86,7 +86,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outlin
 <div class="card">
 
 <h2>What a prediction is</h2>
-<p>For each ETF and large stock (23 symbols) and each horizon (1 week, 1 month, 6 months, 1 year, 5 years) the model writes an <strong>80% range</strong>: a low and high price it expects the close to land between, plus the <strong>chance the price finishes above where it started</strong>. An honest 80% range should hold about 80% of the time. Ranges that hold far less are overconfident; ranges that hold far more are too wide to be useful.</p>
+<p>For each ETF and large stock (51 symbols) and each horizon (1 week, 1 month, 3 months, 6 months, 1 year, 5 years) the model writes an <strong>80% range</strong>: a low and high price it expects the close to land between, plus the <strong>chance the price finishes above where it started</strong>. An honest 80% range should hold about 80% of the time. Ranges that hold far less are overconfident; ranges that hold far more are too wide to be useful.</p>
 <p>Each prediction also lists bull, base and bear catalysts with source links. The catalysts explain the model's reasoning; they are not scored on their own.</p>
 
 <h2>What it is scored against</h2>
@@ -127,7 +127,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outlin
 </ul>
 
 <h2>What this cannot tell you</h2>
-<div class="warn"><strong>Not investment advice.</strong> These are an AI model's judgments, kept for evaluation. One week of data, or even a few months, cannot separate skill from luck. Forecasts for different symbols on the same date are strongly correlated (a market-wide drop misses many ranges at once), so a hundred predictions are far fewer than 85 independent tests.</div>
+<div class="warn"><strong>Not investment advice.</strong> These are an AI model's judgments, kept for evaluation. One week of data, or even a few months, cannot separate skill from luck. Forecasts for different symbols on the same date are strongly correlated (a market-wide drop misses many ranges at once), so a hundred predictions are far fewer than a hundred independent tests.</div>
 <ul>
 <li>Several of the sector ranges were made intraday, not at a close, and the notes state the time.</li>
 <li>The model's forecasts are subjective and unrepeatable: asking again could give different ranges.</li>

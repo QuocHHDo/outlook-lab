@@ -34,7 +34,8 @@ Running cost: $0. The model step is run by you inside Claude on your own subscri
 - **Overview:** a treemap of every symbol (color is the AI chance of finishing up; size is range width, market value, or equal), a card view with sorting and filters, what changed since the last update, and a calibration panel.
 - **Scorecard (`#scorecard`):** progress toward the 10-resolved unlock, AI vs three baselines, coverage by horizon, a reliability diagram for the chance-up number, blind vs not blind, and when predictions come due.
 - **Symbol pages:** a TradingView-style chart (self-hosted Lightweight Charts) with the forecast cone, zoom from 1 month to 5 years, log scale, optional layers (earlier forecasts, events, resolved outcomes, candles), plus ranges, catalysts with sources, events and past predictions.
-- `site/methodology.html` explains the method and its limits.
+- **Watchlist (`#watchlist`):** symbols you star with the Watch button on any symbol page, shown as cards with a horizon picker and last close. Saved in your browser's localStorage only.
+- **Methodology (`#methodology`):** the content of `site/methodology.html` shown inside the app; the standalone page still works.
 
 Three baselines are scored: zero-drift implied-vol, a drift baseline (6% a year), and a realized-vol baseline (60-day history, no options). Predictions marked blind were locked in `data/locks.json` before any baseline was computed; `scripts/verify_lock_published.py` confirms the lock is public before option data is pulled, and `validate.py` requires the lock to predate the IV read.
 
@@ -65,7 +66,7 @@ Three baselines are scored: zero-drift implied-vol, a drift baseline (6% a year)
 | `data/events.json`, `data/locks.json` | Dated events; blind-prediction locks |
 | `docs/example_prediction.json` | Shape of one prediction (illustrative numbers, not a real forecast) |
 | `scripts/` | `baseline.py`, `fetch_prices.py`, `validate.py`, `score.py`, `verify_lock_published.py` |
-| `site/index.html`, `site/lightweight-charts.js` | The public page and its self-hosted chart library |
+| `site/index.html`, `site/style.css`, `site/app.js`, `site/lightweight-charts.js` | The public page, its styles and script, and the self-hosted chart library |
 | `tests/test_score.py` | `python -m pytest tests` |
 
 ## Known limits
